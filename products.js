@@ -5,13 +5,13 @@ const products = [
         type: "promo",
         seller: {
             name: "Ardiwillis Farm",
-            link: "https://lenterakarya.github.io/umkm-online/"
+            link: "https://anekamarket.my.id"
         },
         badge: {
             text: "Promosi",
             type: "promo"
         },
-        mainImage: "https://github.com/anekamarket/my.id/blob/main/assets/produk/ardiwilis/ayam4-Ardiwilis%20Farm.jpeg",
+        mainImage: "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ayam2%20-%20Ardiwilis%20Farm.jpeg",
         title: "Paket Lengkap Ternak Ayam Ardiwilis",
         code: "AWF-2025-2575",
         price: 8000,
@@ -27,10 +27,10 @@ const products = [
         details: {
             description: "Ardiwillis Farm menyediakan produk unggulan peternakan ayam berkualitas tinggi. Kami menyediakan telur tetas fertil dengan daya tetas tinggi, DOC (Day Old Chicken) berbagai strain unggul, ayam karkas segar, dan ayam bakar siap saji dengan bumbu khas. Semua produk dihasilkan dari peternakan yang dikelola secara profesional dengan standar kesehatan dan kebersihan tinggi. (Note: Harga tersebut bukan harga tetap, & bisa berubah)",
             images: [
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/ardiwilis/telur2-Ardiwilis%20Farm.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/ardiwilis/ayam1-Ardiwilis%20Farm.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/ardiwilis/ayam2-Ardiwilis%20Farm.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/ardiwilis/ayam3-Ardiwilis%20Farm.jpeg"
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/telur2%20-%20Ardiwilis%20Farm.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ayam1%20-%20Ardiwilis%20Farm.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ayam4%20-%20Ardiwilis%20Farm.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ayam3%20-%20Ardiwilis%20Farm.jpeg"
             ],
             specs: [
                 { label: "Kode Produk", value: "AWF-2025-2575" },
@@ -60,7 +60,7 @@ const products = [
             text: "Promo Spesial",
             type: "promo"
         },
-        mainImage: "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/nikisae/NUGGET-IKAN-AYAM-YULIANA-LKS.jpeg",
+        mainImage: "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/NIKI-SAE/NUGGET-IKAN-AYAM-YULIANA-LKS.jpeg",
         title: "Promo Frozen Food Homemade Niki Sae",
         code: "NS-2025-3348",
         price: 12000,
@@ -78,10 +78,10 @@ const products = [
         details: {
             description: "<strong>PROMO SPESIAL!</strong> Niki Sae dari Dapur Yunna menghadirkan promo frozen food homemade dengan kualitas terbaik. Semua produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Produk kami termasuk Pempek, Tahu Walik, Otak-Otak Ikan, Nugget Ikan dan Ayam, serta Dragon Stick. Setiap produk dibuat dengan standar kebersihan tinggi dan rasa yang konsisten. Nikmati diskon spesial untuk pembelian selama periode promo!",
             images: [
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/nikisae/PEMPEK-YULIANA-LKS.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/nikisae/TAHUWALIK-YULIANA-LKS.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/nikisae/DRAGONSTICK-YULIANA-LKS.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/nikisae/OTAK-OTAK-IKAN-YULIANA-LKS.jpeg"
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/NIKI-SAE/PEMPEK-YULIANA-LKS.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/NIKI-SAE/TAHUWALIK-YULIANA-LKS.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/NIKI-SAE/DRAGONSTICK-YULIANA-LKS.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/NIKI-SAE/OTAK-OTAK-IKAN-YULIANA-LKS.jpeg"
             ],
             specs: [
                 { label: "Kode Promo", value: "NS-2025-3348" },
@@ -106,13 +106,13 @@ const products = [
         type: "promo",
         seller: {
             name: "PRADIPA",
-            link: "https://lenterakarya.github.io/umkm-online/"
+            link: "https://anekamarket.my.id"
         },
         badge: {
             text: "Promosi",
             type: "promo"
         },
-        mainImage: "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/pradipa/ikan%20mangla%20swangi.jpeg",
+        mainImage: "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/cholis-pradipa/ikan%20mangla%20swangi.jpeg",
         title: "Produk Hasil Laut Segar Pradipa",
         code: "PRD-2025-2688",
         price: 30000,
@@ -128,9 +128,9 @@ const products = [
         details: {
             description: "PRADIPA menghadirkan hasil laut segar langsung dari perairan Panarukan. Kami menyediakan berbagai jenis ikan berkualitas tinggi yang ditangkap dengan metode ramah lingkungan. Setiap produk kami melalui proses seleksi ketat untuk memastikan kesegaran dan kualitas terbaik untuk pelanggan. Dengan pengalaman bertahun-tahun di bidang hasil laut, kami berkomitmen memberikan produk terbaik dengan harga kompetitif.",
             images: [
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/pradipa/ikan%20bogek%20%20mendut.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/pradipa/ikan%20sulfis%20sebelah.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/pradipa/manglaku.jpeg"
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/cholis-pradipa/ikan%20bogek%20%20mendut.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/cholis-pradipa/ikan%20sulfis%20sebelah.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/cholis-pradipa/manglaku.jpeg"
             ],
             specs: [
                 { label: "Kode Produk", value: "PRD-2025-2688" },
@@ -153,13 +153,13 @@ const products = [
         type: "promo",
         seller: {
             name: "Mochi UMA",
-            link: "https://lenterakarya.github.io/umkm-online/"
+            link: "https://anekamarket.my.id"
         },
         badge: {
             text: "Promo Spesial",
             type: "promo"
         },
-        mainImage: "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/mochiuma/kue-ulink.jpeg",
+        mainImage: "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/mochi-uma/kue-ulink.jpeg",
         title: "Promo Aneka Kue Lezat Mochi Uma",
         code: "MCU-2025-2830",
         price: 10000,
@@ -176,9 +176,9 @@ const products = [
         details: {
             description: "<strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Jangan lewatkan kesempatan ini untuk menikmati kue berkualitas dengan harga terjangkau!",
             images: [
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/mochiuma/pancake-durian.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/mochiuma/mochi.jpeg.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/mochiuma/cireng.jpeg"
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/mochi-uma/pancake-durian.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/mochi-uma/mochi.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/mochi-uma/cireng.jpeg"
             ],
             specs: [
                 { label: "Kode Promo", value: "MCU-2025-2830" },
@@ -203,13 +203,13 @@ const products = [
         type: "all",
         seller: {
             name: "UD Jaya Makmur",
-            link: "https://lenterakarya.github.io/umkm-online/"
+            link: "https://anekamarket.my.id"
         },
         badge: {
             text: "Grosir",
             type: "rental"
         },
-        mainImage: "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/jayamakmur/garam1.jpeg",
+        mainImage: "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ud-jaya-makmur/garam1.jpeg",
         title: "Garam Krosok Geo Membran Premium",
         code: "UDJ-2025-3038",
         price: 2500,
@@ -224,9 +224,9 @@ const products = [
         details: {
             description: "<strong>UD Jaya Makmur</strong> menghadirkan garam krosok geo membran premium berkualitas tinggi dari Panarukan. Garam kami diproduksi dengan metode geo membran yang menghasilkan garam dengan kadar NaCl tinggi (minimal 95%) dan rendah pengotor. Kami menyediakan garam dengan kualitas konsumsi dan industri, dikemas secara higienis dan siap dikirim ke seluruh Indonesia. Minimal pembelian 3.500 kg dengan layanan pengantaran langsung ke lokasi Anda. Garam kami cocok untuk berbagai kebutuhan mulai dari industri, rumah tangga, hingga pengolahan makanan. Anda juga bisa order ke Nomor Whatsapp : 082244014323",
             images: [
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/jayamakmur/garam4.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/jayamakmur/garam3.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/jayamakmur/garam2.jpeg"
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ud-jaya-makmur/garam4.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ud-jaya-makmur/garam3.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/ud-jaya-makmur/garam2.jpeg"
             ],
             specs: [
                 { label: "Kode Produk", value: "UDJ-2025-3038" },
@@ -251,13 +251,13 @@ const products = [
         type: "all",
         seller: {
             name: "Bu Nju",
-            link: "https://lenterakarya.github.io/umkm-online/"
+            link: "https://anekamarket.my.id"
         },
         badge: {
             text: "Produk Lokal",
             type: "promo"
         },
-        mainImage: "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/bunju/Ikan-kering-kapasan-1kg-70k-sudah-bumbu-siap-goreng.jpeg",
+        mainImage: "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/bu-nju/Ikan-kering-kapasan-1kg-70k-sudah-bumbu-siap-goreng.jpeg",
         title: "Ikan Kering & Terasi Puger Premium",
         code: "BNJ-2025-3184",
         price: 4000,
@@ -275,9 +275,9 @@ const products = [
         details: {
             description: "<strong>Bu Nju</strong> menghadirkan produk ikan kering dan terasi Puger berkualitas premium dari Panarukan. Terasi kami diproduksi secara tradisional dengan kualitas terbaik, memiliki aroma khas dan rasa gurih autentik. Ikan kering kami diproses secara higienis dengan dua varian: siap goreng (sudah berbumbu) dan polos (tanpa bumbu). Semua produk dibuat dengan bahan pilihan dan pengolahan yang menjaga cita rasa asli. Cocok untuk berbagai masakan rumahan hingga usaha kuliner.",
             images: [
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/bunju/Ikan-kapasan-1kg-60k-tanpa-bumbu.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/bunju/Terasi-puger-1ons-utuh-8k.jpeg",
-                "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/assets/produk/bunju/Terasi-puger-1ons8k-potongan-12biji.jpeg"
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/bu-nju/Ikan-kapasan-1kg-60k-tanpa-bumbu.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/bu-nju/Terasi-puger-1ons-utuh-8k.jpeg",
+                "https://raw.githubusercontent.com/LKS-88/anekamarket/main/assets/produk/bu-nju/Terasi-puger-1ons8k-potongan-12biji.jpeg"
             ],
             specs: [
                 { label: "Kode Produk", value: "BNJ-2025-3184" },
