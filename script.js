@@ -11,6 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function renderProducts() {
+        // Pengecekan jika variabel products ada dan galleryGrid ada
+        if (typeof products === 'undefined' || !Array.isArray(products)) {
+            if(galleryGrid) {
+                galleryGrid.innerHTML = '<p style="text-align: center; color: var(--accent);">Gagal memuat data produk. Pastikan file products.js terhubung.</p>';
+            }
+            console.error("Variabel 'products' tidak ditemukan. Pastikan file products.js dimuat dengan benar sebelum script.js.");
+            return;
+        }
+
         if (!galleryGrid) return;
         galleryGrid.innerHTML = ''; // Clear existing products
         
@@ -133,7 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Call render function
+    // PANGGIL FUNGSI UNTUK MERENDER PRODUK
     renderProducts();
 
 
@@ -141,139 +150,156 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
 
     // Gallery Actions
-    galleryGrid.addEventListener('click', e => {
-        const target = e.target;
-        const detailsContainer = target.closest('.gallery-details');
+    if (galleryGrid) {
+        galleryGrid.addEventListener('click', e => {
+            const target = e.target;
+            const detailsContainer = target.closest('.gallery-details');
+            if (!detailsContainer) return;
+            
+            // Update total price function
+            const updateTotalPrice = (container) => {
+                const activeVariation = container.querySelector('.price-variation.active');
+                const quantityInput = container.querySelector('.quantity-input');
+                if (activeVariation && quantityInput) {
+                    const price = parseFloat(activeVariation.dataset.price);
+                    const quantity = parseInt(quantityInput.value);
+                    const totalPrice = price * quantity;
+                    const totalPriceElement = container.querySelector('.total-price-value');
+                    if (totalPriceElement) {
+                        totalPriceElement.textContent = formatPrice(totalPrice);
+                    }
+                }
+            };
+
+            // Toggle Details
+            if (target.closest('.btn-detail')) {
+                const btn = target.closest('.btn-detail');
+                const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded');
+                expandedContent.classList.toggle('active');
+                btn.classList.toggle('active');
+                btn.innerHTML = expandedContent.classList.contains('active') 
+                    ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' 
+                    : '<i class="fas fa-chevron-down"></i> Detail Produk';
+                if (expandedContent.classList.contains('active')) {
+                    expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+                playButtonSound();
+            }
+
+            // Change Price Variation
+            if (target.closest('.price-variation')) {
+                const variation = target.closest('.price-variation');
+                variation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
+                variation.classList.add('active');
+                updateTotalPrice(detailsContainer);
+                playButtonSound();
+            }
+
+            // Quantity Buttons
+            if (target.closest('.quantity-btn')) {
+                const btn = target.closest('.quantity-btn');
+                const input = btn.parentElement.querySelector('.quantity-input');
+                let value = parseInt(input.value);
+                if (btn.classList.contains('plus')) value++;
+                else if (btn.classList.contains('minus') && value > 1) value--;
+                input.value = value;
+                updateTotalPrice(detailsContainer);
+                playButtonSound();
+            }
+
+            // Thumbnail Click
+            if (target.classList.contains('thumbnail')) {
+                const mainImage = target.closest('.gallery-carousel').querySelector('.gallery-main-image');
+                mainImage.src = target.src;
+                target.parentElement.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                target.classList.add('active');
+                playButtonSound();
+            }
+
+            // Image Zoom
+            if(target.classList.contains('gallery-main-image')) {
+                const zoomedImage = document.getElementById('zoomedImage');
+                zoomedImage.src = target.src;
+                document.getElementById('imageModal').classList.add('show');
+                body.style.overflow = 'hidden';
+                playButtonSound();
+            }
+
+            // Toggle Pre-order Form
+            if (target.closest('.btn-preorder-toggle')) {
+                const btn = target.closest('.btn-preorder-toggle');
+                const preorderForm = detailsContainer.querySelector('.preorder-form');
+                preorderForm.classList.toggle('active');
+                btn.classList.toggle('active');
+                btn.innerHTML = preorderForm.classList.contains('active')
+                    ? '<i class="fas fa-times"></i> Batal Pre-Order'
+                    : '<i class="fas fa-calendar-check"></i> Pre-Order';
+                playButtonSound();
+            }
+            
+            // Order and Pre-order buttons
+            const galleryItem = target.closest('.gallery-item');
+            if (!galleryItem) return;
+            
+            const productId = galleryItem.dataset.id;
+            const productData = products.find(p => p.id === productId);
+
+            if (target.closest('.btn-order')) {
+                const quantity = detailsContainer.querySelector('.quantity-input').value;
+                const unit = detailsContainer.querySelector('.unit-select').value;
+                const totalPrice = detailsContainer.querySelector('.total-price-value').textContent;
+                
+                const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${quantity} ${unit}\nTotal Harga: ${totalPrice}\n\nMohon info lebih lanjut mengenai cara pembayaran dan pengiriman. Terima kasih.`;
+                window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                playButtonSound();
+            }
+            
+            if (target.closest('.btn-preorder')) {
+                const dpInput = detailsContainer.querySelector('.preorder-input');
+                const dpValue = parseFloat(dpInput.value);
+                
+                if (isNaN(dpValue) || dpValue <= 0) {
+                    alert('Mohon masukkan nominal DP yang valid');
+                    return;
+                }
+
+                const totalPriceText = detailsContainer.querySelector('.total-price-value').textContent;
+                const totalPrice = parseFloat(totalPriceText.replace(/[^0-9]/g, ''));
+                
+                if (dpValue < (totalPrice * 0.4)) {
+                    alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalPrice * 0.4)})`);
+                    return;
+                }
+
+                const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: ${totalPriceText}\nUang Muka: ${formatPrice(dpValue)}\n\nMohon info lebih lanjut. Terima kasih.`;
+                window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                playButtonSound();
+            }
+
+        });
         
-        // Update total price function
-        const updateTotalPrice = (container) => {
-            const activeVariation = container.querySelector('.price-variation.active');
-            const quantityInput = container.querySelector('.quantity-input');
-            if (activeVariation && quantityInput) {
-                const price = parseFloat(activeVariation.dataset.price);
-                const quantity = parseInt(quantityInput.value);
-                const totalPrice = price * quantity;
-                const totalPriceElement = container.querySelector('.total-price-value');
-                if (totalPriceElement) {
-                    totalPriceElement.textContent = formatPrice(totalPrice);
+        // Quantity input direct change
+        galleryGrid.addEventListener('change', e => {
+            if(e.target.classList.contains('quantity-input')) {
+                if (e.target.value < 1) e.target.value = 1;
+                const detailsContainer = e.target.closest('.gallery-details');
+                if (detailsContainer) {
+                    // Re-use the updateTotalPrice function declared in the click listener's scope
+                    const activeVariation = detailsContainer.querySelector('.price-variation.active');
+                    const quantityInput = detailsContainer.querySelector('.quantity-input');
+                    if (activeVariation && quantityInput) {
+                        const price = parseFloat(activeVariation.dataset.price);
+                        const quantity = parseInt(quantityInput.value);
+                        const totalPrice = price * quantity;
+                        const totalPriceElement = detailsContainer.querySelector('.total-price-value');
+                        if (totalPriceElement) {
+                            totalPriceElement.textContent = formatPrice(totalPrice);
+                        }
+                    }
                 }
             }
-        };
-
-        // Toggle Details
-        if (target.closest('.btn-detail')) {
-            const btn = target.closest('.btn-detail');
-            const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded');
-            expandedContent.classList.toggle('active');
-            btn.classList.toggle('active');
-            btn.innerHTML = expandedContent.classList.contains('active') 
-                ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' 
-                : '<i class="fas fa-chevron-down"></i> Detail Produk';
-            if (expandedContent.classList.contains('active')) {
-                expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }
-            playButtonSound();
-        }
-
-        // Change Price Variation
-        if (target.closest('.price-variation')) {
-            const variation = target.closest('.price-variation');
-            variation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
-            variation.classList.add('active');
-            updateTotalPrice(detailsContainer);
-            playButtonSound();
-        }
-
-        // Quantity Buttons
-        if (target.closest('.quantity-btn')) {
-            const btn = target.closest('.quantity-btn');
-            const input = btn.parentElement.querySelector('.quantity-input');
-            let value = parseInt(input.value);
-            if (btn.classList.contains('plus')) value++;
-            else if (btn.classList.contains('minus') && value > 1) value--;
-            input.value = value;
-            updateTotalPrice(detailsContainer);
-            playButtonSound();
-        }
-
-        // Thumbnail Click
-        if (target.classList.contains('thumbnail')) {
-            const mainImage = target.closest('.gallery-carousel').querySelector('.gallery-main-image');
-            mainImage.src = target.src;
-            target.parentElement.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-            target.classList.add('active');
-            playButtonSound();
-        }
-
-        // Image Zoom
-        if(target.classList.contains('gallery-main-image')) {
-            const zoomedImage = document.getElementById('zoomedImage');
-            zoomedImage.src = target.src;
-            document.getElementById('imageModal').classList.add('show');
-            body.style.overflow = 'hidden';
-            playButtonSound();
-        }
-
-        // Toggle Pre-order Form
-        if (target.closest('.btn-preorder-toggle')) {
-            const btn = target.closest('.btn-preorder-toggle');
-            const preorderForm = detailsContainer.querySelector('.preorder-form');
-            preorderForm.classList.toggle('active');
-            btn.classList.toggle('active');
-            btn.innerHTML = preorderForm.classList.contains('active')
-                ? '<i class="fas fa-times"></i> Batal Pre-Order'
-                : '<i class="fas fa-calendar-check"></i> Pre-Order';
-            playButtonSound();
-        }
-        
-        // Order and Pre-order buttons
-        const galleryItem = target.closest('.gallery-item');
-        if (!galleryItem) return;
-        
-        const productId = galleryItem.dataset.id;
-        const productData = products.find(p => p.id === productId);
-
-        if (target.closest('.btn-order')) {
-            const quantity = detailsContainer.querySelector('.quantity-input').value;
-            const unit = detailsContainer.querySelector('.unit-select').value;
-            const totalPrice = detailsContainer.querySelector('.total-price-value').textContent;
-            
-            const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${quantity} ${unit}\nTotal Harga: ${totalPrice}\n\nMohon info lebih lanjut mengenai cara pembayaran dan pengiriman. Terima kasih.`;
-            window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-            playButtonSound();
-        }
-        
-        if (target.closest('.btn-preorder')) {
-            const dpInput = detailsContainer.querySelector('.preorder-input');
-            const dpValue = parseFloat(dpInput.value);
-            
-            if (isNaN(dpValue) || dpValue <= 0) {
-                alert('Mohon masukkan nominal DP yang valid');
-                return;
-            }
-
-            const totalPriceText = detailsContainer.querySelector('.total-price-value').textContent;
-            const totalPrice = parseFloat(totalPriceText.replace(/[^0-9]/g, ''));
-            
-            if (dpValue < (totalPrice * 0.4)) {
-                alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalPrice * 0.4)})`);
-                return;
-            }
-
-            const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: ${totalPriceText}\nUang Muka: ${formatPrice(dpValue)}\n\nMohon info lebih lanjut. Terima kasih.`;
-            window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-            playButtonSound();
-        }
-
-    });
-    
-    // Quantity input direct change
-    galleryGrid.addEventListener('change', e => {
-        if(e.target.classList.contains('quantity-input')) {
-            if (e.target.value < 1) e.target.value = 1;
-            updateTotalPrice(e.target.closest('.gallery-details'));
-        }
-    });
+        });
+    }
 
 
     // --- GENERAL PAGE SCRIPT ---
@@ -282,9 +308,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const bgMusic = document.getElementById('bgMusic');
     if (bgMusic) {
         bgMusic.volume = 0.3;
-        bgMusic.play().catch(() => {
-            document.addEventListener('click', () => bgMusic.play(), { once: true });
-        });
+        let played = false;
+        const playMusic = () => {
+            if (!played) {
+                bgMusic.play().then(() => {
+                    played = true;
+                }).catch(() => {});
+            }
+        };
+        playMusic();
+        document.body.addEventListener('click', playMusic, { once: true });
+        document.body.addEventListener('touchstart', playMusic, { once: true });
     }
 
     // Particles
@@ -306,72 +340,104 @@ document.addEventListener('DOMContentLoaded', () => {
     // Navbar Scroll Effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
+        if (navbar) {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        }
     });
 
     // Mobile Menu
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const navLinks = document.getElementById('navLinks');
-    mobileMenuToggle.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        playButtonSound();
-    });
-    navLinks.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
-            navLinks.classList.remove('active');
-            mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        }
-    });
+    if (mobileMenuToggle && navLinks) {
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            playButtonSound();
+        });
+        navLinks.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                navLinks.classList.remove('active');
+                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+    }
 
     // Mobile Search Toggle
     const searchToggle = document.getElementById('searchToggle');
     const navSearch = document.getElementById('navSearch');
-    searchToggle.addEventListener('click', () => {
-        navSearch.classList.toggle('active');
-        playButtonSound();
-    });
+    if(searchToggle && navSearch) {
+        searchToggle.addEventListener('click', () => {
+            navSearch.classList.toggle('active');
+            playButtonSound();
+        });
+    }
     
-    // Category Filtering
-    document.querySelector('.product-categories')?.addEventListener('click', e => {
-        if (e.target.classList.contains('product-category-btn')) {
-            document.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            const category = e.target.dataset.category;
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.style.display = (category === 'all' || item.dataset.category === category) ? 'block' : 'none';
-            });
-            playButtonSound();
-        }
-    });
+    // --- LOGIKA FILTER YANG DISEMPURNAKAN ---
+    const productCategories = document.querySelector('.product-categories');
+    const categoryTabs = document.querySelector('.category-tabs');
+    let activeCategory = 'all';
+    let activeType = 'all';
 
-    document.querySelector('.category-tabs')?.addEventListener('click', e => {
-        if (e.target.classList.contains('category-btn')) {
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            const type = e.target.dataset.type;
-            document.querySelectorAll('.gallery-item').forEach(item => {
-                item.style.display = (type === 'all' || item.dataset.type === type) ? 'block' : 'none';
-            });
-            playButtonSound();
-        }
-    });
+    function applyFilters() {
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            const itemCategory = item.dataset.category;
+            const itemType = item.dataset.type;
+            
+            const categoryMatch = activeCategory === 'all' || itemCategory === activeCategory;
+            const typeMatch = activeType === 'all' || itemType === activeType;
+            
+            if (categoryMatch && typeMatch) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    if (productCategories) {
+        productCategories.addEventListener('click', e => {
+            if (e.target.classList.contains('product-category-btn')) {
+                productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                activeCategory = e.target.dataset.category;
+                applyFilters();
+                playButtonSound();
+            }
+        });
+    }
+
+    if (categoryTabs) {
+        categoryTabs.addEventListener('click', e => {
+            if (e.target.classList.contains('category-btn')) {
+                categoryTabs.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                activeType = e.target.dataset.type;
+                applyFilters();
+                playButtonSound();
+            }
+        });
+    }
     
     // Contact Form
-    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-        e.preventDefault();
-        // Add form submission logic here (e.g., using Fetch API or AJAX)
-        alert('Fitur ini sedang dalam pengembangan.');
-        playButtonSound();
-    });
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Fitur ini sedang dalam pengembangan.');
+            playButtonSound();
+        });
+    }
     
     // Quick Order Modal
     const orderModal = document.getElementById('orderModal');
-    document.getElementById('quick-order').addEventListener('click', () => {
-        orderModal.classList.add('show');
-        body.style.overflow = 'hidden';
-        playButtonSound();
-    });
+    const quickOrderBtn = document.getElementById('quick-order');
+    if (orderModal && quickOrderBtn) {
+        quickOrderBtn.addEventListener('click', () => {
+            orderModal.classList.add('show');
+            body.style.overflow = 'hidden';
+            playButtonSound();
+        });
+    }
     
     // All Modals Close Logic
     document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => {
