@@ -294,5 +294,97 @@ const products = [
             whatsapp: "6282327600708",
             phone: "+6282327600708"
         }
+    },
+    {
+        id: "LDW-2025-8001",
+        category: "software",
+        type: "promo",
+        seller: {
+            name: "Lentera Karya Situbondo",
+            link: "https://lks-88.github.io/transaksi/"
+        },
+        badge: {
+            text: "Super Deal",
+            type: "promo"
+        },
+        mainImage: "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/Aplikasi%20Elegan%20%26%20Profesional.png",
+        title: "Paket Lengkap Aplikasi Web HTML",
+        code: "LDW-2025-8001",
+        price: 599000,
+        originalPrice: 899000,
+        discount: "33% OFF",
+        priceVariations: [
+            { name: "Paket Komplit (7 Aplikasi)", price: 599000, original: 899000 },
+            { name: "Aplikasi Kasir Web", price: 350000, original: 450000 },
+            { name: "Sistem Pembukuan Web", price: 400000, original: 550000 }
+        ],
+        units: ["paket", "lisensi", "unit"],
+        defaultUnit: "paket",
+        details: {
+            description: "<strong>SOLUSI APLIKASI WEB TERBAIK UNTUK BISNIS ANDA!</strong> Paket lengkap aplikasi web HTML kami dirancang khusus untuk bekerja sempurna di semua perangkat tanpa perlu instalasi. Cukup buka browser dan aplikasi siap digunakan! Setiap aplikasi memiliki antarmuka modern yang responsif, beradaptasi otomatis dengan layar desktop, tablet, maupun smartphone. Sistem kami mencakup fitur-fitur canggih seperti penyimpanan data di perangkat pengguna, backup/restore, laporan transaksi, dan cetak struk - semuanya dalam platform web yang ringan dan cepat.",
+            images: [
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/produk-1b.png",
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/produk-1a.png",
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/produk-1.png",
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/Aplikasi%20Elegan%20%26%20Profesional.png"
+            ],
+            specs: [
+                { label: "Kode Produk", value: "LDW-2025-8001" },
+                { label: "Developer", value: "Lentera Karya Situbondo" },
+                { label: "Daftar Aplikasi", value: "• Aplikasi Kasir Web - Sistem kasir lengkap dengan cetak struk<br>• Sistem Pembukuan Web - Pencatatan keuangan profesional<br>• Aplikasi Absensi Web - Manajemen kehadiran karyawan<br>• Sistem Manajemen Restoran - Pesanan, meja, dan kitchen display<br>• Website Profesional Instan - Website bisnis siap pakai<br>• Aplikasi Tiket/Karcis - Sistem tiket elektronik<br>• Sistem Penginapan Web - Manajemen kamar dan tamu" },
+                { label: "Fitur Unggulan", value: "• Akses dari perangkat apapun dengan browser modern<br>• Tampilan responsif otomatis menyesuaikan layar<br>• Tanpa perlu instalasi - langsung buka file<br>• Penyimpanan data aman di perangkat pengguna<br>• Backup & restore data dengan satu klik<br>• Laporan keuangan lengkap dengan grafik<br>• Multi-user support dengan level akses berbeda<br>• Offline capable (PWA) - bisa digunakan tanpa internet" },
+                { label: "Kompatibilitas", value: "• Browser: Chrome, Firefox, Edge, Safari versi terbaru<br>• Sistem Operasi: Windows 10/11, macOS, Linux, Android, iOS<br>• Perangkat: Desktop, Laptop, Tablet, Smartphone<br>• Resolusi: Mendukung dari 320px hingga 4K" },
+                { label: "Cara Penggunaan", value: "1. Terima file HTML via email setelah pembelian<br>2. Buka file di browser favorit Anda (Chrome direkomendasikan)<br>3. Aplikasi siap digunakan segera!<br>4. Simpan sebagai PWA (Add to Home Screen) untuk pengalaman seperti aplikasi native<br>5. Untuk backup, cukup simpan file data yang dihasilkan aplikasi" }
+            ]
+        },
+        contact: {
+            whatsapp: "6285647709114",
+            phone: "+6285647709114"
+        }
+    },
+    {
+        id: "LDW-2025-8002",
+        category: "software",
+        type: "promo",
+        seller: {
+            name: "Lentera Karya Situbondo",
+            link: "https://lks-88.github.io/transaksi/"
+        },
+        badge: {
+            text: "Baru!",
+            type: "new"
+        },
+        mainImage: "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/produk-1.png",
+        title: "Aplikasi Kasir Web HTML",
+        code: "LDW-2025-8002",
+        price: 350000,
+        originalPrice: 450000,
+        discount: "22% OFF",
+        priceVariations: [
+            { name: "Lisensi Tunggal", price: 350000, original: 450000 }
+        ],
+        units: ["lisensi", "pcs", "unit"],
+        defaultUnit: "lisensi",
+        details: {
+            description: "<strong>APLIKASI KASIR MODERN TANPA INSTALASI!</strong> Aplikasi Kasir Web HTML dari Lentera Karya Situbondo adalah solusi sempurna untuk bisnis retail, toko, atau usaha kecil. Cukup buka file HTML di browser dan aplikasi siap digunakan! Dirancang khusus untuk bekerja optimal di semua perangkat - dari desktop PC hingga smartphone. Fitur termasuk manajemen produk, transaksi cepat, cetak struk, laporan penjualan, dan penyimpanan data langsung di perangkat Anda. Tidak perlu server mahal atau koneksi internet terus-menerus!",
+            images: [
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/produk-2a.png",
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/Aplikasi%20Elegan%20%26%20Profesional.png",
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/produk-1b.png",
+                "https://raw.githubusercontent.com/LKS-88/promo-anekamarket/main/assets/images/produk2.png"
+            ],
+            specs: [
+                { label: "Kode Produk", value: "LDW-2025-8002" },
+                { label: "Developer", value: "Lentera Karya Situbondo" },
+                { label: "Fitur Inti", value: "• Input transaksi cepat dengan antarmuka modern<br>• Manajemen produk & kategori<br>• Pencarian produk instan dengan autocomplete<br>• Cetak struk pdf dengan header custom<br>• Laporan harian/mingguan/bulanan dengan grafik<br>• Backup & restore data dengan enkripsi<br>• Manajemen diskon dan promo produk<br>• Hitung kembalian & Stok otomatis berkurang saat transaksi" },
+                { label: "Keunggulan", value: "• Buka langsung di browser tanpa proses instalasi<br>• Tampilan responsif semua device (desktop, tablet, HP)<br>• Bisa digunakan offline setelah pertama kali dibuka<br>• Penyimpanan data aman di perangkat pengguna<br>• Tidak perlu server/hosting yang mahal<br>• Ringan dan cepat bahkan di spesifikasi rendah<br>• Update mudah dengan mengganti file HTML<br>• Tidak ada biaya bulanan/tahunan" },
+                { label: "Cara Implementasi", value: "1. Dapatkan file HTML aplikasi setelah pembelian<br>2. Buka file di browser favorit (Chrome direkomendasikan)<br>3. Mulai gunakan aplikasi kasir langsung<br>4. (Opsional) Simpan sebagai PWA untuk pengalaman seperti app native<br>5. Data otomatis tersimpan aman di perangkat<br>6. Backup rutin dengan menyimpan file data yang dihasilkan" },
+                { label: "Bonus Pembelian", value: "• Panduan penggunaan video step-by-step<br>• Template struk profesional yang bisa dicustom<br>• File contoh database produk siap pakai<br>• Support via WhatsApp  gratis<br>• Voucher diskon 15% untuk pembelian produk lain" }
+            ]
+        },
+        contact: {
+            whatsapp: "6285647709114",
+            phone: "+6285647709114"
+        }
     }
 ];
