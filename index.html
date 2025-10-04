@@ -314,6 +314,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- RENDER PRODUCTS ---
             const galleryGrid = document.getElementById('gallery-grid');
+            const body = document.body;
 
             function formatPrice(amount) {
                 return new Intl.NumberFormat('id-ID', {
@@ -324,7 +325,6 @@
             }
             
             function renderProducts() {
-                // Pengecekan jika variabel products ada dan galleryGrid ada
                 if (typeof products === 'undefined' || !Array.isArray(products)) {
                     if(galleryGrid) {
                         galleryGrid.innerHTML = '<p style="text-align: center; color: var(--accent);">Gagal memuat data produk. Pastikan file products.js terhubung.</p>';
@@ -334,8 +334,12 @@
                 }
 
                 if (!galleryGrid) return;
-                galleryGrid.innerHTML = ''; // Clear existing products
+                galleryGrid.innerHTML = '';
                 
+                // Variabel untuk placeholder jika gambar error
+                const placeholderImg = "https://via.placeholder.com/400x300.png?text=Gambar+Tidak+Tersedia";
+                const placeholderThumb = "https://via.placeholder.com/100x100.png?text=Error";
+
                 products.forEach(product => {
                     const productCard = document.createElement('div');
                     productCard.className = 'gallery-item';
@@ -354,8 +358,9 @@
                         <option value="${unit}" ${unit === product.defaultUnit ? 'selected' : ''}>${unit}</option>
                     `).join('');
 
+                    // PERBAIKAN: Menambahkan onerror untuk menangani gambar yang rusak
                     const detailImagesHTML = product.details.images.map((img, index) => `
-                        <img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail lazy" loading="lazy">
+                        <img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy" onerror="this.onerror=null;this.src='${placeholderThumb}';">
                     `).join('');
 
                     const detailSpecsHTML = product.details.specs.map(spec => `
@@ -364,12 +369,13 @@
                             <span class="spec-value">${spec.value}</span>
                         </div>
                     `).join('');
-
+                    
+                    // PERBAIKAN: Menghapus kelas 'lazy' dari tag <img> dan menambahkan 'onerror'
                     productCard.innerHTML = `
                         <a href="${product.seller.link}" target="_blank" class="gallery-badge seller">Gerai: ${product.seller.name}</a>
                         <span class="gallery-badge ${product.badge.type}">${product.badge.text}</span>
                         <div class="gallery-image-container">
-                            <img src="${product.mainImage}" alt="${product.title}" class="gallery-image lazy" loading="lazy">
+                            <img src="${product.mainImage}" alt="${product.title}" class="gallery-image" loading="lazy" onerror="this.onerror=null;this.src='${placeholderImg}';">
                         </div>
                         <div class="gallery-details">
                             <h3 class="gallery-title">${product.title}</h3>
@@ -431,7 +437,7 @@
                             
                             <div class="gallery-detail-expanded">
                                 <div class="gallery-carousel">
-                                    <img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image lazy" loading="lazy">
+                                    <img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image" loading="lazy" onerror="this.onerror=null;this.src='${placeholderImg}';">
                                     <div class="gallery-thumbnails">
                                         ${detailImagesHTML}
                                     </div>
@@ -455,34 +461,29 @@
                 });
             }
 
-            // PANGGIL FUNGSI UNTUK MERENDER PRODUK
             renderProducts();
 
-
             // --- EVENT LISTENERS (using event delegation) ---
-            const body = document.body;
-
-            // Gallery Actions
             if (galleryGrid) {
+                // PENYEMPURNAAN: Fungsi update total harga dipindahkan keluar agar tidak dibuat ulang terus-menerus
+                const updateTotalPrice = (container) => {
+                    const activeVariation = container.querySelector('.price-variation.active');
+                    const quantityInput = container.querySelector('.quantity-input');
+                    if (activeVariation && quantityInput) {
+                        const price = parseFloat(activeVariation.dataset.price);
+                        const quantity = parseInt(quantityInput.value, 10) || 1;
+                        const totalPrice = price * quantity;
+                        const totalPriceElement = container.querySelector('.total-price-value');
+                        if (totalPriceElement) {
+                            totalPriceElement.textContent = formatPrice(totalPrice);
+                        }
+                    }
+                };
+                
                 galleryGrid.addEventListener('click', e => {
                     const target = e.target;
                     const detailsContainer = target.closest('.gallery-details');
                     if (!detailsContainer) return;
-                    
-                    // Update total price function
-                    const updateTotalPrice = (container) => {
-                        const activeVariation = container.querySelector('.price-variation.active');
-                        const quantityInput = container.querySelector('.quantity-input');
-                        if (activeVariation && quantityInput) {
-                            const price = parseFloat(activeVariation.dataset.price);
-                            const quantity = parseInt(quantityInput.value);
-                            const totalPrice = price * quantity;
-                            const totalPriceElement = container.querySelector('.total-price-value');
-                            if (totalPriceElement) {
-                                totalPriceElement.textContent = formatPrice(totalPrice);
-                            }
-                        }
-                    };
 
                     // Toggle Details
                     if (target.closest('.btn-detail')) {
@@ -512,7 +513,7 @@
                     if (target.closest('.quantity-btn')) {
                         const btn = target.closest('.quantity-btn');
                         const input = btn.parentElement.querySelector('.quantity-input');
-                        let value = parseInt(input.value);
+                        let value = parseInt(input.value, 10);
                         if (btn.classList.contains('plus')) value++;
                         else if (btn.classList.contains('minus') && value > 1) value--;
                         input.value = value;
@@ -550,7 +551,6 @@
                         playButtonSound();
                     }
                     
-                    // Order and Pre-order buttons
                     const galleryItem = target.closest('.gallery-item');
                     if (!galleryItem) return;
                     
@@ -588,27 +588,15 @@
                         window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
                         playButtonSound();
                     }
-
                 });
                 
-                // Quantity input direct change
+                // PENYEMPURNAAN: Menggunakan fungsi 'updateTotalPrice' yang sudah ada
                 galleryGrid.addEventListener('change', e => {
                     if(e.target.classList.contains('quantity-input')) {
                         if (e.target.value < 1) e.target.value = 1;
                         const detailsContainer = e.target.closest('.gallery-details');
                         if (detailsContainer) {
-                            // Re-use the updateTotalPrice function declared in the click listener's scope
-                            const activeVariation = detailsContainer.querySelector('.price-variation.active');
-                            const quantityInput = detailsContainer.querySelector('.quantity-input');
-                            if (activeVariation && quantityInput) {
-                                const price = parseFloat(activeVariation.dataset.price);
-                                const quantity = parseInt(quantityInput.value);
-                                const totalPrice = price * quantity;
-                                const totalPriceElement = detailsContainer.querySelector('.total-price-value');
-                                if (totalPriceElement) {
-                                    totalPriceElement.textContent = formatPrice(totalPrice);
-                                }
-                            }
+                            updateTotalPrice(detailsContainer);
                         }
                     }
                 });
@@ -616,17 +604,13 @@
 
 
             // --- GENERAL PAGE SCRIPT ---
-
-            // Background Music
             const bgMusic = document.getElementById('bgMusic');
             if (bgMusic) {
                 bgMusic.volume = 0.3;
                 let played = false;
                 const playMusic = () => {
                     if (!played) {
-                        bgMusic.play().then(() => {
-                            played = true;
-                        }).catch(() => {});
+                        bgMusic.play().then(() => { played = true; }).catch(() => {});
                     }
                 };
                 playMusic();
@@ -634,7 +618,6 @@
                 document.body.addEventListener('touchstart', playMusic, { once: true });
             }
 
-            // Particles
             const particlesContainer = document.getElementById('particles');
             if (particlesContainer) {
                 for (let i = 0; i < 40; i++) {
@@ -650,7 +633,6 @@
                 }
             }
             
-            // Navbar Scroll Effect
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
                 if (navbar) {
@@ -658,7 +640,6 @@
                 }
             });
 
-            // Mobile Menu
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const navLinks = document.getElementById('navLinks');
             if (mobileMenuToggle && navLinks) {
@@ -675,7 +656,6 @@
                 });
             }
 
-            // Mobile Search Toggle
             const searchToggle = document.getElementById('searchToggle');
             const navSearch = document.getElementById('navSearch');
             if(searchToggle && navSearch) {
@@ -685,7 +665,6 @@
                 });
             }
             
-            // --- LOGIKA FILTER YANG DISEMPURNAKAN ---
             const productCategories = document.querySelector('.product-categories');
             const categoryTabs = document.querySelector('.category-tabs');
             let activeCategory = 'all';
@@ -695,15 +674,9 @@
                 document.querySelectorAll('.gallery-item').forEach(item => {
                     const itemCategory = item.dataset.category;
                     const itemType = item.dataset.type;
-                    
                     const categoryMatch = activeCategory === 'all' || itemCategory === activeCategory;
                     const typeMatch = activeType === 'all' || itemType === activeType;
-                    
-                    if (categoryMatch && typeMatch) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
+                    item.style.display = (categoryMatch && typeMatch) ? 'block' : 'none';
                 });
             }
 
@@ -731,7 +704,6 @@
                 });
             }
             
-            // Contact Form
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
@@ -741,7 +713,6 @@
                 });
             }
             
-            // Quick Order Modal
             const orderModal = document.getElementById('orderModal');
             const quickOrderBtn = document.getElementById('quick-order');
             if (orderModal && quickOrderBtn) {
@@ -752,7 +723,6 @@
                 });
             }
             
-            // All Modals Close Logic
             document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => {
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal || e.target.classList.contains('close-modal') || e.target.classList.contains('close-image-modal') || e.target.classList.contains('close-search-modal')) {
@@ -762,7 +732,6 @@
                 });
             });
 
-            // Button Sound
             const buttonSound = document.getElementById('buttonSound');
             function playButtonSound() {
                 if(buttonSound) {
@@ -771,7 +740,6 @@
                 }
             }
 
-            // Smooth Scrolling
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     if (this.getAttribute('href') !== '#') {
@@ -779,7 +747,7 @@
                         const target = document.querySelector(this.getAttribute('href'));
                         if (target) {
                             window.scrollTo({
-                                top: target.offsetTop - 80, // Offset for sticky nav
+                                top: target.offsetTop - 80,
                                 behavior: 'smooth'
                             });
                         }
