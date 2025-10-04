@@ -100,7 +100,6 @@ const products = [
             phone: "+6285731247566"
         }
     },
-    // DATA BARU DIMULAI DARI SINI
     {
         id: "PRD-2025-2688",
         category: "fishery",
@@ -127,7 +126,7 @@ const products = [
         units: ["kg", "ekor", "pack"],
         defaultUnit: "kg",
         details: {
-            [cite_start]description: "PRADIPA menghadirkan hasil laut segar langsung dari perairan Panarukan. [cite: 29] [cite_start]Kami menyediakan berbagai jenis ikan berkualitas tinggi yang ditangkap dengan metode ramah lingkungan. [cite: 30] [cite_start]Setiap produk kami melalui proses seleksi ketat untuk memastikan kesegaran dan kualitas terbaik untuk pelanggan. [cite: 31] [cite_start]Dengan pengalaman bertahun-tahun di bidang hasil laut, kami berkomitmen memberikan produk terbaik dengan harga kompetitif. [cite: 32]",
+            description: "PRADIPA menghadirkan hasil laut segar langsung dari perairan Panarukan. Kami menyediakan berbagai jenis ikan berkualitas tinggi yang ditangkap dengan metode ramah lingkungan. Setiap produk kami melalui proses seleksi ketat untuk memastikan kesegaran dan kualitas terbaik untuk pelanggan. Dengan pengalaman bertahun-tahun di bidang hasil laut, kami berkomitmen memberikan produk terbaik dengan harga kompetitif.",
             images: [
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/cholis-pradipa/ikan%20bogek%20%20mendut.jpeg",
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/cholis-pradipa/ikan%20sulfis%20sebelah.jpeg",
@@ -175,7 +174,7 @@ const products = [
         units: ["pcs", "pack", "set", "lusin"],
         defaultUnit: "pcs",
         details: {
-            [cite_start]description: "<strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. [cite: 77] [cite_start]Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. [cite: 78] [cite_start]Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. [cite: 79] [cite_start]Jangan lewatkan kesempatan ini untuk menikmati kue berkualitas dengan harga terjangkau! [cite: 80]",
+            description: "<strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Jangan lewatkan kesempatan ini untuk menikmati kue berkualitas dengan harga terjangkau!",
             images: [
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/mochi-uma/pancake-durian.jpeg",
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/mochi-uma/mochi.jpeg",
@@ -223,7 +222,7 @@ const products = [
         units: ["kg", "ton"],
         defaultUnit: "kg",
         details: {
-            [cite_start]description: "<strong>UD Jaya Makmur</strong> menghadirkan garam krosok geo membran premium berkualitas tinggi dari Panarukan. [cite: 129] [cite_start]Garam kami diproduksi dengan metode geo membran yang menghasilkan garam dengan kadar NaCl tinggi (minimal 95%) dan rendah pengotor. [cite: 130] [cite_start]Kami menyediakan garam dengan kualitas konsumsi dan industri, dikemas secara higienis dan siap dikirim ke seluruh Indonesia. [cite: 131] [cite_start]Minimal pembelian 3.500 kg dengan layanan pengantaran langsung ke lokasi Anda. [cite: 132] [cite_start]Garam kami cocok untuk berbagai kebutuhan mulai dari industri, rumah tangga, hingga pengolahan makanan. [cite: 133] [cite_start]Anda juga bisa order ke Nomor Whatsapp : 082244014323 [cite: 134]",
+            description: "<strong>UD Jaya Makmur</strong> menghadirkan garam krosok geo membran premium berkualitas tinggi dari Panarukan. Garam kami diproduksi dengan metode geo membran yang menghasilkan garam dengan kadar NaCl tinggi (minimal 95%) dan rendah pengotor. Kami menyediakan garam dengan kualitas konsumsi dan industri, dikemas secara higienis dan siap dikirim ke seluruh Indonesia. Minimal pembelian 3.500 kg dengan layanan pengantaran langsung ke lokasi Anda. Garam kami cocok untuk berbagai kebutuhan mulai dari industri, rumah tangga, hingga pengolahan makanan. Anda juga bisa order ke Nomor Whatsapp : 082244014323",
             images: [
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/ud-jaya-makmur/garam4.jpeg",
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/ud-jaya-makmur/garam3.jpeg",
@@ -274,7 +273,7 @@ const products = [
         units: ["pcs", "kg", "ons", "pack"],
         defaultUnit: "pcs",
         details: {
-            [cite_start]description: "<strong>Bu Nju</strong> menghadirkan produk ikan kering dan terasi Puger berkualitas premium dari Panarukan. [cite: 183] [cite_start]Terasi kami diproduksi secara tradisional dengan kualitas terbaik, memiliki aroma khas dan rasa gurih autentik. [cite: 184] [cite_start]Ikan kering kami diproses secara higienis dengan dua varian: siap goreng (sudah berbumbu) dan polos (tanpa bumbu). [cite: 185] [cite_start]Semua produk dibuat dengan bahan pilihan dan pengolahan yang menjaga cita rasa asli. [cite: 186] [cite_start]Cocok untuk berbagai masakan rumahan hingga usaha kuliner. [cite: 187]",
+            description: "<strong>Bu Nju</strong> menghadirkan produk ikan kering dan terasi Puger berkualitas premium dari Panarukan. Terasi kami diproduksi secara tradisional dengan kualitas terbaik, memiliki aroma khas dan rasa gurih autentik. Ikan kering kami diproses secara higienis dengan dua varian: siap goreng (sudah berbumbu) dan polos (tanpa bumbu). Semua produk dibuat dengan bahan pilihan dan pengolahan yang menjaga cita rasa asli. Cocok untuk berbagai masakan rumahan hingga usaha kuliner.",
             images: [
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/bu-nju/Ikan-kapasan-1kg-60k-tanpa-bumbu.jpeg",
                 "https://raw.githubusercontent.com/LenteraKarya/jualan-kita/refs/heads/main/assets/produk/bu-nju/Terasi-puger-1ons-utuh-8k.jpeg",
