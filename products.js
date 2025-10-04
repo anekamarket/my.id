@@ -79,7 +79,7 @@ const products = [
             description: "<strong>PROMO SPESIAL!</strong> Niki Sae dari Dapur Yunna menghadirkan promo frozen food homemade dengan kualitas terbaik. Semua produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Produk kami termasuk Pempek, Tahu Walik, Otak-Otak Ikan, Nugget Ikan dan Ayam, serta Dragon Stick. Setiap produk dibuat dengan standar kebersihan tinggi dan rasa yang konsisten. Nikmati diskon spesial untuk pembelian selama periode promo!",
             images: [
                 "https://i.imgur.com/RP8HTMb.jpeg",
-                "https://i.imgur.com/GWXfEGJ.jpeg,
+                "https://i.imgur.com/GWXfEGJ.jpeg",
                 "https://i.imgur.com/WSB6cXr.jpeg",
                 "https://i.imgur.com/ubU63gJ.jpeg" 
             ],
