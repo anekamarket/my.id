@@ -79,6 +79,81 @@
             color: #888;
             padding: 20px;
         }
+        
+        /* --- CSS Notifikasi Penawaran --- */
+        .offer-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            width: 320px;
+            z-index: 1001;
+            transform: translateY(200%);
+            opacity: 0;
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            font-family: 'Poppins', sans-serif;
+        }
+        .offer-notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .offer-notification .notification-content {
+            display: none;
+        }
+        .offer-notification .notification-content.active {
+            display: block;
+        }
+        .offer-notification h4 {
+            margin: 0 0 10px 0;
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        .offer-notification .notification-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .offer-notification .notification-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .offer-notification .btn-yes {
+            background-color: #007bff;
+            color: white;
+        }
+        .offer-notification .btn-yes:hover {
+            background-color: #0056b3;
+        }
+        .offer-notification .btn-no {
+            background-color: #f1f1f1;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        .offer-notification .btn-no:hover {
+            background-color: #e0e0e0;
+        }
+        .offer-notification .close-notification {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 20px;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .offer-notification .close-notification:hover {
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -365,6 +440,26 @@
         <div class="image-modal-content">
             <span class="close-image-modal">&times;</span>
             <img id="zoomedImage" src="" alt="Zoomed Image">
+        </div>
+    </div>
+
+    <div class="offer-notification" id="offerNotification">
+        <span class="close-notification" id="closeNotification">&times;</span>
+        
+        <div class="notification-content active" id="notificationStep1">
+            <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
+            <div class="notification-buttons">
+                <button class="notification-btn btn-no" data-action="close">Tidak</button>
+                <button class="notification-btn btn-yes" data-action="next">Iya, Tentu</button>
+            </div>
+        </div>
+        
+        <div class="notification-content" id="notificationStep2">
+            <h4>Tertarik mendaftarkan usaha Anda di Anekamarket secara GRATIS dan tanpa komisi?</h4>
+            <div class="notification-buttons">
+                <button class="notification-btn btn-no" data-action="close">Lain Kali</button>
+                <button class="notification-btn btn-yes" data-action="register">Iya, Saya Mau</button>
+            </div>
         </div>
     </div>
     
@@ -1306,6 +1401,51 @@
                         }
                     }
                 });
+            });
+            
+            // --- LOGIKA NOTIFIKASI PENAWARAN ---
+            const offerNotification = document.getElementById('offerNotification');
+            const step1 = document.getElementById('notificationStep1');
+            const step2 = document.getElementById('notificationStep2');
+
+            // Fungsi untuk menampilkan notifikasi
+            const showNotification = () => {
+                if (!sessionStorage.getItem('offerDismissed')) {
+                    offerNotification.classList.add('show');
+                }
+            };
+            
+            // Fungsi untuk menyembunyikan notifikasi
+            const hideNotification = () => {
+                offerNotification.classList.remove('show');
+                sessionStorage.setItem('offerDismissed', 'true'); // Simpan status agar tidak muncul lagi di sesi ini
+            };
+            
+            // Tampilkan notifikasi setelah 5 detik
+            setTimeout(showNotification, 5000);
+
+            offerNotification.addEventListener('click', (e) => {
+                const target = e.target;
+
+                // Tombol close utama
+                if (target.id === 'closeNotification') {
+                    hideNotification();
+                }
+
+                // Tombol di dalam notifikasi
+                if (target.matches('.notification-btn')) {
+                    const action = target.dataset.action;
+                    
+                    if (action === 'close') {
+                        hideNotification();
+                    } else if (action === 'next') {
+                        step1.classList.remove('active');
+                        step2.classList.add('active');
+                    } else if (action === 'register') {
+                        window.open('https://anekamarket.github.io/formulir/', '_blank');
+                        hideNotification();
+                    }
+                }
             });
         });
     </script>
