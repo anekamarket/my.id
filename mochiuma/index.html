@@ -775,11 +775,23 @@
         <div class="modal-content">
             <span class="close-modal">&times;</span>
             <h2>Pesan Cepat</h2>
-            <form id="quickOrderForm" action="https://formsubmit.co/admin@anekamarket.my.id" method="POST">
-                <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
-                <input type="hidden" name="_captcha" value="false">
-                 <p>Fitur ini sedang dalam pengembangan. Silakan hubungi kami melalui WhatsApp untuk pemesanan.</p>
-                <button type="submit" class="btn btn-primary" disabled>Kirim Permintaan</button>
+            <form id="quickOrderForm">
+                 <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
+                 <input type="hidden" name="_captcha" value="false">
+
+                <div id="quickOrderProductList" style="max-height: 45vh; overflow-y: auto; padding-right: 15px; margin-bottom: 20px;">
+                    </div>
+
+                <div class="order-summary" style="margin-top: 20px; padding-top: 20px;">
+                    <div class="total-price">
+                        <span>Total Pesanan:</span>
+                        <span id="quickOrderTotalPrice" class="total-price-value">Rp 0</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;">
+                    <i class="fab fa-whatsapp"></i> Kirim Pesanan
+                </button>
             </form>
         </div>
     </div>
@@ -990,6 +1002,51 @@
                 card.querySelector('.total-price-value').textContent = formatPrice(total);
             }
             
+            // --- FUNGSI BARU: Mengisi Modal Pesan Cepat ---
+            function populateQuickOrderModal() {
+                const productListContainer = document.getElementById('quickOrderProductList');
+                if (!productListContainer) return;
+
+                let content = '';
+                products.forEach(product => {
+                    content += `<h4 style="margin-bottom: 10px; margin-top: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px;">${product.seller.name}</h4>`;
+                    product.priceVariations.forEach(v => {
+                        content += `
+                        <div class="price-variation-item" data-price="${v.price}" data-name="${v.name}">
+                            <div class="price-variation-info">
+                                <span class="price-variation-name">${v.name}</span>
+                                <div class="price-variation-value">${formatPrice(v.price)}</div>
+                            </div>
+                            <div class="quantity-controls">
+                                <button type="button" class="quantity-btn minus" aria-label="Kurangi jumlah ${v.name}">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0" readonly aria-label="Jumlah ${v.name}">
+                                <button type="button" class="quantity-btn plus" aria-label="Tambah jumlah ${v.name}">+</button>
+                            </div>
+                        </div>`;
+                    });
+                });
+
+                productListContainer.innerHTML = content;
+                updateQuickOrderTotal();
+            }
+
+            // --- FUNGSI BARU: Memperbarui Total Harga di Modal Pesan Cepat ---
+            function updateQuickOrderTotal() {
+                const modal = document.getElementById('orderModal');
+                if (!modal) return;
+
+                const total = Array.from(modal.querySelectorAll('.price-variation-item')).reduce((acc, item) => {
+                    const price = parseFloat(item.dataset.price);
+                    const quantity = parseInt(item.querySelector('.quantity-input').value, 10);
+                    return acc + (price * quantity);
+                }, 0);
+
+                const totalPriceEl = document.getElementById('quickOrderTotalPrice');
+                if (totalPriceEl) {
+                    totalPriceEl.textContent = formatPrice(total);
+                }
+            }
+
             function handleGalleryClick(e) {
                 const card = e.target.closest('.gallery-item');
                 if (!card) return;
@@ -1117,11 +1174,54 @@
                     if(closeButton) closeButton.addEventListener('click', () => modal.classList.remove('show'));
                 });
 
-                // --- Quick Order Modal ---
+                // --- Quick Order Modal Logic ---
+                const orderModal = document.getElementById('orderModal');
                 document.getElementById('quickOrderBtn').addEventListener('click', () => {
                     playSound();
-                    document.getElementById('orderModal').classList.add('show');
+                    populateQuickOrderModal();
+                    orderModal.classList.add('show');
                 });
+
+                // Event listener untuk quantity buttons di dalam Quick Order Modal
+                orderModal.addEventListener('click', (e) => {
+                    if (e.target.matches('.quantity-btn')) {
+                        const input = e.target.parentElement.querySelector('.quantity-input');
+                        let value = parseInt(input.value, 10);
+                        if (e.target.matches('.plus')) {
+                            value++;
+                        } else if (e.target.matches('.minus') && value > 0) {
+                            value--;
+                        }
+                        input.value = value;
+                        updateQuickOrderTotal();
+                    }
+                });
+
+                // Event listener untuk form submission di Quick Order Modal
+                document.getElementById('quickOrderForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    playSound();
+
+                    const items = Array.from(orderModal.querySelectorAll('.price-variation-item'))
+                        .map(item => ({ name: item.dataset.name, price: parseFloat(item.dataset.price), quantity: parseInt(item.querySelector('.quantity-input').value, 10) }))
+                        .filter(item => item.quantity > 0);
+
+                    if (items.length > 0) {
+                        const totalOrderPrice = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                        const orderDetails = items.map(item => `- *${item.name}* (x${item.quantity}) = ${formatPrice(item.price * item.quantity)}`).join('\n');
+                        // Ambil nomor kontak dari data produk pertama sebagai tujuan
+                        const contactNumber = products.length > 0 ? products[0].contact.whatsapp : '6289679013099';
+                        const message = `Halo, saya ingin melakukan *Pesan Cepat*:\n\n*Rincian Pesanan:*\n${orderDetails}\n\n*TOTAL PESANAN: ${formatPrice(totalOrderPrice)}*\n\nMohon konfirmasi ketersediaan dan proses selanjutnya. Terima kasih.`;
+                        
+                        window.open(`https://wa.me/${contactNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                        orderModal.classList.remove('show');
+                    } else {
+                        const submitButton = e.target.querySelector('button[type="submit"]');
+                        submitButton.classList.add('shake-animation');
+                        setTimeout(() => submitButton.classList.remove('shake-animation'), 500);
+                    }
+                });
+
 
                 // --- Offer Notification ---
                 const offerNotification = document.getElementById('offerNotification');
