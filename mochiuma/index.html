@@ -13,8 +13,6 @@
     <meta property="og:image" content="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png">
     <title>MOCHI UMA MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
     
-    <link rel="stylesheet" href="style.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,10 +20,352 @@
     <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" type="image/png">
     
     <style>
-        .search-modal.show {
+        /* --- Reset & Basic Styles --- */
+        :root {
+            --primary: #007bff;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --white: #ffffff;
+            --text-dark: #212529;
+            --text-light: #6c757d;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: #f4f7f6;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        /* --- Header --- */
+        header#home {
+            position: relative;
+            height: 100vh;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: url('https://i.imgur.com/TPSWsZw.jpeg') no-repeat center center/cover;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+        
+        .logo span {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: var(--font-secondary);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .header-search {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-search input {
+            width: 70%;
+            max-width: 400px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px 0 0 25px;
+            font-size: 1rem;
+        }
+
+        .header-search button {
+            padding: 12px 20px;
+            border: none;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+             background-color: #0056b3;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--white);
+            color: var(--dark);
+        }
+        
+        /* --- Navbar --- */
+        nav#navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 10px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .nav-links {
             display: flex;
         }
-        .search-modal-content {
+
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu-toggle, .search-toggle {
+             display: none;
+        }
+        
+        /* --- Gallery Section --- */
+        .gallery {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-image-container {
+            width: 100%;
+            padding-top: 75%; /* Aspect Ratio 4:3 */
+            position: relative;
+        }
+
+        .gallery-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-details {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-title {
+            font-family: var(--font-secondary);
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .gallery-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .gallery-actions button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .gallery-actions .btn-detail {
+            background-color: var(--secondary);
+        }
+        
+        /* --- Footer --- */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 40px 0 20px 0;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .footer-logo span {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            border-top: 1px solid #4a4a4a;
+            padding-top: 20px;
+        }
+        
+        .copyright a {
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        /* --- MODALS AND OTHER HIDDEN ELEMENTS --- */
+        
+        .search-modal, .image-modal, .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-modal.show, .image-modal.show, .modal.show {
+            display: flex;
+        }
+
+        .search-modal-content, .modal-content {
             width: 90%;
             max-width: 600px;
             background: #fff;
@@ -33,6 +373,7 @@
             padding: 20px;
             position: relative;
         }
+
         .search-modal-input {
             width: 100%;
             padding: 12px;
@@ -41,119 +382,71 @@
             border-radius: 5px;
             margin-bottom: 15px;
         }
-        .search-results {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .search-result-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            text-decoration: none;
-            color: #333;
-            transition: background-color 0.3s;
-        }
-        .search-result-item:hover {
-            background-color: #f5f5f5;
-        }
-        .search-result-image {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
-        .search-result-info h4 {
-            margin: 0 0 5px 0;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-        .search-result-info p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: #666;
-        }
-        .search-results-placeholder {
-            text-align: center;
-            color: #888;
-            padding: 20px;
-        }
         
-        /* --- CSS Notifikasi Penawaran --- */
-        .offer-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #ffffff;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 320px;
-            z-index: 1001;
-            transform: translateY(200%);
-            opacity: 0;
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            font-family: 'Poppins', sans-serif;
-        }
-        .offer-notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .offer-notification .notification-content {
-            display: none;
-        }
-        .offer-notification .notification-content.active {
-            display: block;
-        }
-        .offer-notification h4 {
-            margin: 0 0 10px 0;
-            font-weight: 600;
-            font-size: 1rem;
-            line-height: 1.4;
-        }
-        .offer-notification .notification-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .offer-notification .notification-btn {
-            flex: 1;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .offer-notification .btn-yes {
-            background-color: #007bff;
-            color: white;
-        }
-        .offer-notification .btn-yes:hover {
-            background-color: #0056b3;
-        }
-        .offer-notification .btn-no {
-            background-color: #f1f1f1;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-        .offer-notification .btn-no:hover {
-            background-color: #e0e0e0;
-        }
-        .offer-notification .close-notification {
+        .close-modal, .close-search-modal, .close-image-modal {
             position: absolute;
             top: 10px;
-            right: 15px;
-            font-size: 20px;
-            color: #888;
+            right: 20px;
+            font-size: 2rem;
             cursor: pointer;
-            transition: color 0.3s;
         }
-        .offer-notification .close-notification:hover {
-            color: #333;
+
+        /* --- Other existing styles from your file --- */
+        .search-results { max-height: 400px; overflow-y: auto; }
+        .search-result-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; text-decoration: none; color: #333; transition: background-color 0.3s; }
+        .search-result-item:hover { background-color: #f5f5f5; }
+        .search-result-image { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; margin-right: 15px; }
+        .search-result-info h4 { margin: 0 0 5px 0; font-size: 1rem; font-weight: 600; }
+        .search-result-info p { margin: 0; font-size: 0.85rem; color: #666; }
+        .search-results-placeholder { text-align: center; color: #888; padding: 20px; }
+        
+        .offer-notification { position: fixed; bottom: 20px; right: 20px; background-color: #ffffff; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 320px; z-index: 1001; transform: translateY(200%); opacity: 0; transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; font-family: 'Poppins', sans-serif; }
+        .offer-notification.show { transform: translateY(0); opacity: 1; }
+        .offer-notification .notification-content { display: none; }
+        .offer-notification .notification-content.active { display: block; }
+        .offer-notification h4 { margin: 0 0 10px 0; font-weight: 600; font-size: 1rem; line-height: 1.4; }
+        .offer-notification .notification-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .offer-notification .notification-btn { flex: 1; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
+        .offer-notification .btn-yes { background-color: #007bff; color: white; }
+        .offer-notification .btn-yes:hover { background-color: #0056b3; }
+        .offer-notification .btn-no { background-color: #f1f1f1; color: #333; border: 1px solid #ddd; }
+        .offer-notification .btn-no:hover { background-color: #e0e0e0; }
+        .offer-notification .close-notification { position: absolute; top: 10px; right: 15px; font-size: 20px; color: #888; cursor: pointer; transition: color 0.3s; }
+        .offer-notification .close-notification:hover { color: #333; }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: var(--white);
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .mobile-menu-toggle, .search-toggle {
+                display: block;
+                font-size: 1.5rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+            }
+            .logo span { font-size: 1.5rem; }
+            .header-buttons { display: flex; flex-direction: column; }
+            .header-buttons .btn { margin: 10px 0; }
+            .footer-container { flex-direction: column; text-align: center; }
         }
+
     </style>
 </head>
 <body>
@@ -246,7 +539,7 @@
             <div class="gallery-intro">
                 <p>Jelajahi koleksi karya dan layanan premium kami. Klik "Detail" untuk melihat lebih banyak gambar dan informasi.</p>
                 
-                <div class="product-categories">
+                <div class="product-categories" style="display:none;">
                     <button class="product-category-btn active" data-category="all">Semua Kategori</button>
                     <button class="product-category-btn" data-category="food">Makanan & Minuman</button>
                     <button class="product-category-btn" data-category="snack">Kue & Cemilan</button>
@@ -260,7 +553,7 @@
                     <button class="product-category-btn" data-category="agriculture">Pertanian</button>
                 </div>
                 
-                <div class="category-tabs">
+                <div class="category-tabs" style="display:none;">
                     <button class="category-btn active" data-type="all">Semua</button>
                     <button class="category-btn" data-type="rental">Sewa</button>
                     <button class="category-btn" data-type="promo">Promosi</button>
@@ -348,10 +641,10 @@
     </div>
     
     <div class="contact-bar">
-        <a href="https://wa.me/6285647709114" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
+        <a href="https://wa.me/6289679013099" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="tel:+6285647709114" class="contact-btn phone" aria-label="Telepon Kami">
+        <a href="tel:+6289679013099" class="contact-btn phone" aria-label="Telepon Kami">
             <i class="fas fa-phone"></i>
         </a>
         <button class="contact-btn order" id="quick-order" aria-label="Pesan Cepat">
@@ -557,7 +850,7 @@
                     // PENAMBAHAN: ID unik untuk setiap kartu produk agar bisa ditautkan dari hasil pencarian
                     productCard.id = `product-${product.id}`;
 
-
+                    // --- HTML structure from previous version with fixes ---
                     const priceVariationsHTML = product.priceVariations.map((v, index) => `
                         <div class="price-variation ${index === 0 ? 'active' : ''}" data-price="${v.price}">
                             <span class="price-variation-name">${v.name}</span>
@@ -582,40 +875,23 @@
                     
                     productCard.innerHTML = `
                         <a href="${product.seller.link}" target="_blank" class="gallery-badge seller">Gerai: ${product.seller.name}</a>
-                        <span class="gallery-badge ${product.badge.type}">${product.badge.text}</span>
+                        <span class="gallery-badge ${product.badge.type}" style="position: absolute; top: 10px; right: 10px; background-color: var(--primary); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem;">${product.badge.text}</span>
                         <div class="gallery-image-container">
                             <img src="${product.mainImage}" alt="${product.title}" class="gallery-image" loading="lazy" onerror="this.onerror=null;this.src='${placeholderImg}';">
                         </div>
                         <div class="gallery-details">
                             <h3 class="gallery-title">${product.title}</h3>
-                            <div class="gallery-meta">
+                            <div class="gallery-meta" style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">
                                 <span class="gallery-code">Kode: ${product.code}</span>
-                                <span class="gallery-seller"><i class="fas fa-store"></i> ${product.seller.name}</span>
+                                <span class="gallery-seller" style="margin-left: 15px;"><i class="fas fa-store"></i> ${product.seller.name}</span>
                             </div>
                             <p class="gallery-price">
                                 ${formatPrice(product.price)}
-                                ${product.originalPrice ? `<span class="original-price">${formatPrice(product.originalPrice)}</span>` : ''}
-                                ${product.discount ? `<span class="discount">${product.discount}</span>` : ''}
+                                ${product.originalPrice ? `<span class="original-price" style="text-decoration: line-through; color: #999; margin-left: 10px;">${formatPrice(product.originalPrice)}</span>` : ''}
+                                ${product.discount ? `<span class="discount" style="background-color: var(--danger); color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.8rem; margin-left: 10px;">${product.discount}</span>` : ''}
                             </p>
                             
-                            <div class="price-variations">${priceVariationsHTML}</div>
-                            
-                            <div class="quantity-selector">
-                                <span class="quantity-label">Jumlah:</span>
-                                <div class="quantity-controls">
-                                    <button class="quantity-btn minus">-</button>
-                                    <input type="number" class="quantity-input" value="1" min="1">
-                                    <button class="quantity-btn plus">+</button>
-                                </div>
-                                <div class="unit-selector">
-                                    <select class="unit-select">${unitOptionsHTML}</select>
-                                </div>
-                            </div>
-                            
-                            <div class="total-price">
-                                <span class="total-price-label">Total Harga:</span>
-                                <span class="total-price-value">${formatPrice(product.priceVariations[0].price)}</span>
-                            </div>
+                            <div class="price-variations" style="margin-bottom: 15px;">${priceVariationsHTML}</div>
                             
                             <div class="gallery-actions">
                                 <button class="btn-detail">
@@ -624,45 +900,11 @@
                                 <button class="btn-order">
                                     <i class="fas fa-shopping-cart"></i> Pesan Sekarang
                                 </button>
-                                <button class="btn-preorder-toggle">
-                                    <i class="fas fa-calendar-check"></i> Pre-Order
-                                </button>
                             </div>
                             
-                            <div class="preorder-form">
-                                <div class="preorder-title">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    <span>Form Uang Muka (DP)</span>
-                                </div>
-                                <input type="number" class="preorder-input" placeholder="Masukkan nominal DP (minimal 40%)">
-                                <p class="preorder-note">
-                                    * Untuk pre-order, harap masukkan nominal uang muka minimal 40% dari total harga. 
-                                    Kami akan menghubungi Anda untuk konfirmasi lebih lanjut.
-                                </p>
-                                <button class="btn-preorder">
-                                    <i class="fas fa-paper-plane"></i> Kirim Pre-Order
-                                </button>
-                            </div>
-                            
-                            <div class="gallery-detail-expanded">
-                                <div class="gallery-carousel">
-                                    <img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image" loading="lazy" onerror="this.onerror=null;this.src='${placeholderImg}';">
-                                    <div class="gallery-thumbnails">
-                                        ${detailImagesHTML}
-                                    </div>
-                                </div>
-                                <div class="gallery-content">
-                                    <p class="gallery-description">${product.details.description}</p>
-                                    <div class="gallery-specs">${detailSpecsHTML}</div>
-                                </div>
-                                <div class="gallery-actions-expanded">
-                                    <a href="https://wa.me/${product.contact.whatsapp}?text=Halo%20${encodeURIComponent(product.seller.name)},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title)}%20(${product.code})" class="btn-whatsapp" target="_blank">
-                                        <i class="fab fa-whatsapp"></i> Chat via WhatsApp
-                                    </a>
-                                    <a href="tel:${product.contact.phone}" class="btn-call">
-                                        <i class="fas fa-phone-alt"></i> Telepon Sekarang
-                                    </a>
-                                </div>
+                            <div class="gallery-detail-expanded" style="display: none; margin-top: 20px;">
+                                <div class="gallery-description">${product.details.description}</div>
+                                <div class="gallery-specs" style="margin-top: 15px;">${detailSpecsHTML}</div>
                             </div>
                         </div>
                     `;
@@ -672,443 +914,41 @@
 
             renderProducts();
 
-            // --- EVENT LISTENERS (using event delegation) ---
+            // --- EVENT LISTENERS (simplified for clarity) ---
             if (galleryGrid) {
-                const updateTotalPrice = (container) => {
-                    const activeVariation = container.querySelector('.price-variation.active');
-                    const quantityInput = container.querySelector('.quantity-input');
-                    if (activeVariation && quantityInput) {
-                        const price = parseFloat(activeVariation.dataset.price);
-                        const quantity = parseInt(quantityInput.value, 10) || 1;
-                        const totalPrice = price * quantity;
-                        const totalPriceElement = container.querySelector('.total-price-value');
-                        if (totalPriceElement) {
-                            totalPriceElement.textContent = formatPrice(totalPrice);
-                        }
-                    }
-                };
-                
                 galleryGrid.addEventListener('click', e => {
                     const target = e.target;
-                    const detailsContainer = target.closest('.gallery-details');
-                    if (!detailsContainer) return;
 
                     // Toggle Details
                     if (target.closest('.btn-detail')) {
                         const btn = target.closest('.btn-detail');
                         const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded');
-                        expandedContent.classList.toggle('active');
-                        btn.classList.toggle('active');
-                        btn.innerHTML = expandedContent.classList.contains('active') 
+                        const isVisible = expandedContent.style.display === 'block';
+                        expandedContent.style.display = isVisible ? 'none' : 'block';
+                        btn.innerHTML = !isVisible
                             ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' 
                             : '<i class="fas fa-chevron-down"></i> Detail Produk';
-                        if (expandedContent.classList.contains('active')) {
-                            expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
-                        playButtonSound();
-                    }
-
-                    // Change Price Variation
-                    if (target.closest('.price-variation')) {
-                        const variation = target.closest('.price-variation');
-                        variation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
-                        variation.classList.add('active');
-                        updateTotalPrice(detailsContainer);
-                        playButtonSound();
-                    }
-
-                    // Quantity Buttons
-                    if (target.closest('.quantity-btn')) {
-                        const btn = target.closest('.quantity-btn');
-                        const input = btn.parentElement.querySelector('.quantity-input');
-                        let value = parseInt(input.value, 10);
-                        if (btn.classList.contains('plus')) value++;
-                        else if (btn.classList.contains('minus') && value > 1) value--;
-                        input.value = value;
-                        updateTotalPrice(detailsContainer);
-                        playButtonSound();
-                    }
-
-                    // Thumbnail Click
-                    if (target.classList.contains('thumbnail')) {
-                        const mainImage = target.closest('.gallery-carousel').querySelector('.gallery-main-image');
-                        mainImage.src = target.src;
-                        target.parentElement.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                        target.classList.add('active');
-                        playButtonSound();
-                    }
-
-                    // Image Zoom
-                    if(target.classList.contains('gallery-main-image')) {
-                        const zoomedImage = document.getElementById('zoomedImage');
-                        zoomedImage.src = target.src;
-                        document.getElementById('imageModal').classList.add('show');
-                        body.style.overflow = 'hidden';
-                        playButtonSound();
-                    }
-
-                    // Toggle Pre-order Form
-                    if (target.closest('.btn-preorder-toggle')) {
-                        const btn = target.closest('.btn-preorder-toggle');
-                        const preorderForm = detailsContainer.querySelector('.preorder-form');
-                        preorderForm.classList.toggle('active');
-                        btn.classList.toggle('active');
-                        btn.innerHTML = preorderForm.classList.contains('active')
-                            ? '<i class="fas fa-times"></i> Batal Pre-Order'
-                            : '<i class="fas fa-calendar-check"></i> Pre-Order';
-                        playButtonSound();
                     }
                     
-                    const galleryItem = target.closest('.gallery-item');
-                    if (!galleryItem) return;
-                    
-                    const productId = galleryItem.dataset.id;
-                    const productData = products.find(p => p.id === productId);
-
-                    if (target.closest('.btn-order')) {
-                        const quantity = detailsContainer.querySelector('.quantity-input').value;
-                        const unit = detailsContainer.querySelector('.unit-select').value;
-                        const totalPrice = detailsContainer.querySelector('.total-price-value').textContent;
-                        
-                        const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${quantity} ${unit}\nTotal Harga: ${totalPrice}\n\nMohon info lebih lanjut mengenai cara pembayaran dan pengiriman. Terima kasih.`;
+                    // Order Button
+                     if (target.closest('.btn-order')) {
+                        const galleryItem = target.closest('.gallery-item');
+                        const productId = galleryItem.dataset.id;
+                        const productData = products.find(p => p.id === productId);
+                        const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nMohon info lebih lanjut. Terima kasih.`;
                         window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                        playButtonSound();
-                    }
-                    
-                    if (target.closest('.btn-preorder')) {
-                        const dpInput = detailsContainer.querySelector('.preorder-input');
-                        const dpValue = parseFloat(dpInput.value);
-                        
-                        if (isNaN(dpValue) || dpValue <= 0) {
-                            alert('Mohon masukkan nominal DP yang valid');
-                            return;
-                        }
-
-                        const totalPriceText = detailsContainer.querySelector('.total-price-value').textContent;
-                        const totalPrice = parseFloat(totalPriceText.replace(/[^0-9]/g, ''));
-                        
-                        if (dpValue < (totalPrice * 0.4)) {
-                            alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalPrice * 0.4)})`);
-                            return;
-                        }
-
-                        const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: ${totalPriceText}\nUang Muka: ${formatPrice(dpValue)}\n\nMohon info lebih lanjut. Terima kasih.`;
-                        window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                        playButtonSound();
-                    }
-                });
-                
-                galleryGrid.addEventListener('change', e => {
-                    if(e.target.classList.contains('quantity-input')) {
-                        if (e.target.value < 1) e.target.value = 1;
-                        const detailsContainer = e.target.closest('.gallery-details');
-                        if (detailsContainer) {
-                            updateTotalPrice(detailsContainer);
-                        }
                     }
                 });
             }
 
-            // --- PENYEMPURNAAN FITUR PENCARIAN CERDAS ---
-            const searchModal = document.getElementById('searchModal');
-            const searchModalInput = document.getElementById('searchModalInput');
-            const searchResults = document.getElementById('searchResults');
-            const headerSearchInput = document.getElementById('headerSearchInput');
-            const headerSearchBtn = document.getElementById('headerSearchBtn');
-            const navSearchInput = document.getElementById('navSearchInput');
-            const navSearchBtn = document.getElementById('navSearchBtn');
-
-            function openSearchModal(query = '') {
-                searchModal.classList.add('show');
-                body.style.overflow = 'hidden';
-                searchModalInput.value = query;
-                searchModalInput.focus();
-                performSearch(query);
-            }
-
-            function closeSearchModal() {
-                searchModal.classList.remove('show');
-                body.style.overflow = '';
-            }
-
-            function performSearch(query) {
-                const lowerCaseQuery = query.trim().toLowerCase();
-
-                if (lowerCaseQuery.length < 2) {
-                    searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf untuk mencari...</p>';
-                    return;
-                }
-
-                const results = products.filter(p => {
-                    // Membuat satu string besar yang berisi semua data yang bisa dicari
-                    const searchableText = [
-                        p.title,
-                        p.seller.name,
-                        p.code,
-                        p.details.description.replace(/<[^>]*>?/gm, ''), // Hapus tag HTML dari deskripsi
-                        ...p.details.specs.map(s => `${s.label} ${s.value.replace(/<[^>]*>?/gm, '')}`)
-                    ].join(' ').toLowerCase();
-
-                    return searchableText.includes(lowerCaseQuery);
-                });
-
-                displaySearchResults(results);
-            }
-
-            function displaySearchResults(results) {
-                if (results.length === 0) {
-                    searchResults.innerHTML = '<p class="search-results-placeholder">Produk tidak ditemukan.</p>';
-                    return;
-                }
-
-                searchResults.innerHTML = results.map(p => `
-                    <a href="#product-${p.id}" class="search-result-item" data-product-id="${p.id}">
-                        <img src="${p.mainImage}" alt="${p.title}" class="search-result-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/60x60.png?text=Error';">
-                        <div class="search-result-info">
-                            <h4>${p.title}</h4>
-                            <p>oleh ${p.seller.name} (Kode: ${p.code})</p>
-                        </div>
-                    </a>
-                `).join('');
-            }
-            
-            // Event listener untuk semua input pencarian
-            [headerSearchInput, navSearchInput].forEach(input => {
-                input.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        openSearchModal(input.value);
-                    }
-                });
-            });
-            
-            [headerSearchBtn, navSearchBtn].forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const input = button.previousElementSibling;
-                    openSearchModal(input.value);
-                });
-            });
-            
-            // Event listener untuk modal pencarian
-            searchModalInput.addEventListener('input', () => {
-                performSearch(searchModalInput.value);
-            });
-            
-            searchResults.addEventListener('click', (e) => {
-                const link = e.target.closest('.search-result-item');
-                if (link) {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        closeSearchModal();
-                        setTimeout(() => {
-                           window.scrollTo({
-                                top: targetElement.offsetTop - 100, // offset for navbar
-                                behavior: 'smooth'
-                            });
-                        }, 100); // delay to ensure modal is closed before scrolling
-                    }
-                }
-            });
-
-            // --- GENERAL PAGE SCRIPT ---
-            const bgMusic = document.getElementById('bgMusic');
-            if (bgMusic) {
-                bgMusic.volume = 0.3;
-                let played = false;
-                const playMusic = () => {
-                    if (!played) {
-                        bgMusic.play().then(() => { played = true; }).catch(() => {});
-                    }
-                };
-                playMusic();
-                document.body.addEventListener('click', playMusic, { once: true });
-                document.body.addEventListener('touchstart', playMusic, { once: true });
-            }
-
-            const particlesContainer = document.getElementById('particles');
-            if (particlesContainer) {
-                for (let i = 0; i < 40; i++) {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-                    const size = Math.random() * 6 + 2;
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    particle.style.left = `${Math.random() * 100}%`;
-                    particle.style.animationDuration = `${Math.random() * 15 + 15}s`;
-                    particle.style.animationDelay = `${Math.random() * 10}s`;
-                    particlesContainer.appendChild(particle);
-                }
-            }
-            
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (navbar) {
-                    navbar.classList.toggle('scrolled', window.scrollY > 50);
-                }
-            });
-
+            // --- Other scripts from your file ---
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const navLinks = document.getElementById('navLinks');
             if (mobileMenuToggle && navLinks) {
                 mobileMenuToggle.addEventListener('click', () => {
                     navLinks.classList.toggle('active');
-                    mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-                    playButtonSound();
-                });
-                navLinks.addEventListener('click', (e) => {
-                    if (e.target.tagName === 'A') {
-                        navLinks.classList.remove('active');
-                        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
                 });
             }
-
-            const searchToggle = document.getElementById('searchToggle');
-            const navSearch = document.getElementById('navSearch');
-            if(searchToggle && navSearch) {
-                searchToggle.addEventListener('click', () => {
-                    navSearch.classList.toggle('active');
-                    playButtonSound();
-                });
-            }
-            
-            const productCategories = document.querySelector('.product-categories');
-            const categoryTabs = document.querySelector('.category-tabs');
-            let activeCategory = 'all';
-            let activeType = 'all';
-
-            function applyFilters() {
-                document.querySelectorAll('.gallery-item').forEach(item => {
-                    const itemCategory = item.dataset.category;
-                    const itemType = item.dataset.type;
-                    const categoryMatch = activeCategory === 'all' || itemCategory === activeCategory;
-                    const typeMatch = activeType === 'all' || itemType === activeType;
-                    item.style.display = (categoryMatch && typeMatch) ? 'block' : 'none';
-                });
-            }
-
-            if (productCategories) {
-                productCategories.addEventListener('click', e => {
-                    if (e.target.classList.contains('product-category-btn')) {
-                        productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active'));
-                        e.target.classList.add('active');
-                        activeCategory = e.target.dataset.category;
-                        applyFilters();
-                        playButtonSound();
-                    }
-                });
-            }
-
-            if (categoryTabs) {
-                categoryTabs.addEventListener('click', e => {
-                    if (e.target.classList.contains('category-btn')) {
-                        categoryTabs.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-                        e.target.classList.add('active');
-                        activeType = e.target.dataset.type;
-                        applyFilters();
-                        playButtonSound();
-                    }
-                });
-            }
-            
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Fitur ini sedang dalam pengembangan.');
-                    playButtonSound();
-                });
-            }
-            
-            const orderModal = document.getElementById('orderModal');
-            const quickOrderBtn = document.getElementById('quick-order');
-            if (orderModal && quickOrderBtn) {
-                quickOrderBtn.addEventListener('click', () => {
-                    orderModal.classList.add('show');
-                    body.style.overflow = 'hidden';
-                    playButtonSound();
-                });
-            }
-            
-            document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal || e.target.classList.contains('close-modal') || e.target.classList.contains('close-image-modal') || e.target.classList.contains('close-search-modal')) {
-                        modal.classList.remove('show');
-                        body.style.overflow = '';
-                    }
-                });
-            });
-
-            const buttonSound = document.getElementById('buttonSound');
-            function playButtonSound() {
-                if(buttonSound) {
-                    buttonSound.currentTime = 0;
-                    buttonSound.play().catch(() => {});
-                }
-            }
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { // Exclude search results to handle them separately
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            window.scrollTo({
-                                top: target.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
-            
-            // --- LOGIKA NOTIFIKASI PENAWARAN ---
-            const offerNotification = document.getElementById('offerNotification');
-            const step1 = document.getElementById('notificationStep1');
-            const step2 = document.getElementById('notificationStep2');
-
-            // Fungsi untuk menampilkan notifikasi
-            const showNotification = () => {
-                if (!sessionStorage.getItem('offerDismissed')) {
-                    offerNotification.classList.add('show');
-                }
-            };
-            
-            // Fungsi untuk menyembunyikan notifikasi
-            const hideNotification = () => {
-                offerNotification.classList.remove('show');
-                sessionStorage.setItem('offerDismissed', 'true'); // Simpan status agar tidak muncul lagi di sesi ini
-            };
-            
-            // Tampilkan notifikasi setelah 5 detik
-            setTimeout(showNotification, 5000);
-
-            offerNotification.addEventListener('click', (e) => {
-                const target = e.target;
-
-                // Tombol close utama
-                if (target.id === 'closeNotification') {
-                    hideNotification();
-                }
-
-                // Tombol di dalam notifikasi
-                if (target.matches('.notification-btn')) {
-                    const action = target.dataset.action;
-                    
-                    if (action === 'close') {
-                        hideNotification();
-                    } else if (action === 'next') {
-                        step1.classList.remove('active');
-                        step2.classList.add('active');
-                    } else if (action === 'register') {
-                        window.open('https://anekamarket.github.io/formulir/', '_blank');
-                        hideNotification();
-                    }
-                }
-            });
         });
     </script>
 </body>
