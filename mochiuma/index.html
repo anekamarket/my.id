@@ -2,9 +2,9 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
-    <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas.">
-    <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas di Situbondo.">
+    <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir, umkm">
     <meta name="author" content="ANEKAMARKET">
     <meta property="og:title" content="ANEKAMARKET | Platform Jual Beli Online Terpercaya">
     <meta property="og:description" content="Semua Bisa Jualan & Semua Bisa Pesan - Platform lengkap untuk kebutuhan jual beli online Anda">
@@ -16,445 +16,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" type="image/png">
     
-    <style>
-        /* --- Reset & Basic Styles --- */
-        :root {
-            --primary: #007bff;
-            --secondary: #6c757d;
-            --success: #28a745;
-            --danger: #dc3545;
-            --warning: #ffc107;
-            --info: #17a2b8;
-            --light: #f8f9fa;
-            --dark: #343a40;
-            --white: #ffffff;
-            --text-dark: #212529;
-            --text-light: #6c757d;
-            --font-primary: 'Poppins', sans-serif;
-            --font-secondary: 'Playfair Display', serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-primary);
-            background-color: #f4f7f6;
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        /* --- Header --- */
-        header#home {
-            position: relative;
-            height: 100vh;
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: url('https://i.imgur.com/TPSWsZw.jpeg') no-repeat center center/cover;
-        }
-
-        .header-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-
-        .logo img {
-            width: 80px;
-            height: 80px;
-            margin-right: 15px;
-        }
-        
-        .logo span {
-            font-size: 2.5rem;
-            font-weight: 700;
-            font-family: var(--font-secondary);
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-
-        .header-search {
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .header-search input {
-            width: 70%;
-            max-width: 400px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 25px 0 0 25px;
-            font-size: 1rem;
-        }
-
-        .header-search button {
-            padding: 12px 20px;
-            border: none;
-            background-color: var(--primary);
-            color: var(--white);
-            border-radius: 0 25px 25px 0;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .btn {
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 0 10px;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: var(--white);
-        }
-        
-        .btn-primary:hover {
-             background-color: #0056b3;
-        }
-
-        .btn-outline {
-            border: 2px solid var(--white);
-            color: var(--white);
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--white);
-            color: var(--dark);
-        }
-        
-        /* --- Navbar --- */
-        nav#navbar {
-            position: sticky;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 10px 0;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-
-        .nav-logo img {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-        }
-
-        .nav-links {
-            display: flex;
-        }
-
-        .nav-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        .mobile-menu-toggle, .search-toggle {
-             display: none;
-        }
-        
-        /* --- Gallery Section --- */
-        .gallery {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-            font-family: var(--font-secondary);
-            font-size: 2.5rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .gallery-item {
-            background: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .gallery-image-container {
-            width: 100%;
-            padding-top: 75%; /* Aspect Ratio 4:3 */
-            position: relative;
-        }
-
-        .gallery-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .gallery-details {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .gallery-title {
-            font-family: var(--font-secondary);
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        .gallery-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .gallery-actions button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            background-color: var(--primary);
-            color: white;
-        }
-        
-        .gallery-actions .btn-detail {
-            background-color: var(--secondary);
-        }
-        
-        /* --- Footer --- */
-        footer {
-            background-color: var(--dark);
-            color: var(--light);
-            padding: 40px 0 20px 0;
-        }
-
-        .footer-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 20px;
-        }
-
-        .footer-col {
-            flex: 1;
-            min-width: 250px;
-            margin: 20px;
-        }
-
-        .footer-logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .footer-logo img {
-            width: 50px;
-            margin-right: 10px;
-        }
-
-        .footer-logo span {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 30px;
-            border-top: 1px solid #4a4a4a;
-            padding-top: 20px;
-        }
-        
-        .copyright a {
-            color: var(--light);
-            text-decoration: none;
-        }
-
-        /* --- MODALS AND OTHER HIDDEN ELEMENTS --- */
-        
-        .search-modal, .image-modal, .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .search-modal.show, .image-modal.show, .modal.show {
-            display: flex;
-        }
-
-        .search-modal-content, .modal-content {
-            width: 90%;
-            max-width: 600px;
-            background: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-        }
-
-        .search-modal-input {
-            width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .close-modal, .close-search-modal, .close-image-modal {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        /* --- Other existing styles from your file --- */
-        .search-results { max-height: 400px; overflow-y: auto; }
-        .search-result-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; text-decoration: none; color: #333; transition: background-color 0.3s; }
-        .search-result-item:hover { background-color: #f5f5f5; }
-        .search-result-image { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; margin-right: 15px; }
-        .search-result-info h4 { margin: 0 0 5px 0; font-size: 1rem; font-weight: 600; }
-        .search-result-info p { margin: 0; font-size: 0.85rem; color: #666; }
-        .search-results-placeholder { text-align: center; color: #888; padding: 20px; }
-        
-        .offer-notification { position: fixed; bottom: 20px; right: 20px; background-color: #ffffff; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 320px; z-index: 1001; transform: translateY(200%); opacity: 0; transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; font-family: 'Poppins', sans-serif; }
-        .offer-notification.show { transform: translateY(0); opacity: 1; }
-        .offer-notification .notification-content { display: none; }
-        .offer-notification .notification-content.active { display: block; }
-        .offer-notification h4 { margin: 0 0 10px 0; font-weight: 600; font-size: 1rem; line-height: 1.4; }
-        .offer-notification .notification-buttons { display: flex; gap: 10px; margin-top: 15px; }
-        .offer-notification .notification-btn { flex: 1; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
-        .offer-notification .btn-yes { background-color: #007bff; color: white; }
-        .offer-notification .btn-yes:hover { background-color: #0056b3; }
-        .offer-notification .btn-no { background-color: #f1f1f1; color: #333; border: 1px solid #ddd; }
-        .offer-notification .btn-no:hover { background-color: #e0e0e0; }
-        .offer-notification .close-notification { position: absolute; top: 10px; right: 15px; font-size: 20px; color: #888; cursor: pointer; transition: color 0.3s; }
-        .offer-notification .close-notification:hover { color: #333; }
-
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background-color: var(--white);
-                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .nav-links a {
-                padding: 15px;
-                text-align: center;
-                border-bottom: 1px solid #f0f0f0;
-            }
-            .mobile-menu-toggle, .search-toggle {
-                display: block;
-                font-size: 1.5rem;
-                background: none;
-                border: none;
-                cursor: pointer;
-            }
-            .logo span { font-size: 1.5rem; }
-            .header-buttons { display: flex; flex-direction: column; }
-            .header-buttons .btn { margin: 10px 0; }
-            .footer-container { flex-direction: column; text-align: center; }
-        }
-
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <audio id="bgMusic" loop autoplay>
-        <source src="https://raw.githubusercontent.com/Musikwebsite.mp3" type="audio/mpeg">
+    <audio id="bgMusic" loop>
+        <source src="https://raw.githubusercontent.com/LenteraKarya/Lentera-Karya/main/assets/audio/audiotombol.mp3" type="audio/mpeg">
     </audio>
-    
-    <div class="particles" id="particles"></div>
+    <audio id="buttonSound" src="https://raw.githubusercontent.com/LenteraKarya/Lentera-Karya/main/assets/audio/audiotombol.mp3"></audio>
     
     <header id="home">
         <div class="header-overlay"></div>
@@ -467,20 +38,13 @@
             
             <div class="header-search">
                 <input type="text" id="headerSearchInput" placeholder="Cari produk, UMKM, kode...">
-                <button id="headerSearchBtn"><i class="fas fa-search"></i></button>
+                <button id="headerSearchBtn" aria-label="Cari"><i class="fas fa-search"></i></button>
             </div>
             
             <div class="header-buttons">
-                <a href="#gallery" class="btn btn-primary">
-                    <i class="fas fa-images"></i> Lihat Karya & Jualan Kami
-                </a>
-                <a href="#contact" class="btn btn-outline">
-                    <i class="fas fa-envelope"></i> Hubungi Kami
-                </a>
+                <a href="#gallery" class="btn btn-primary"><i class="fas fa-images"></i> Lihat Karya & Jualan Kami</a>
+                <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Hubungi Kami</a>
             </div>
-            <a href="#services" class="scroll-down">
-                <i class="fas fa-chevron-down"></i>
-            </a>
         </div>
     </header>
     
@@ -490,20 +54,12 @@
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
                 <span>ANEKAMARKET</span>
             </a>
-            
-            <div class="nav-search" id="navSearch">
-                <input type="text" id="navSearchInput" placeholder="Cari produk atau layanan...">
-                <button id="navSearchBtn"><i class="fas fa-search"></i></button>
-            </div>
-            
-            <button class="search-toggle" id="searchToggle">
+            <button class="search-toggle" id="searchToggle" aria-label="Buka Pencarian">
                 <i class="fas fa-search"></i>
             </button>
-            
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Buka Menu">
                 <i class="fas fa-bars"></i>
             </button>
-            
             <div class="nav-links" id="navLinks">
                 <a href="#home">Beranda</a>
                 <a href="#services">Layanan</a>
@@ -513,21 +69,17 @@
         </div>
     </nav>
     
-    <div class="container">
-        <section class="services" id="services" style="display: none;">
+    <main class="container">
+        <section class="services" id="services">
             <h2 class="section-title">Layanan Kami</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
                     <h3 class="service-title">Jasa Sewa</h3>
                     <p>Pilihan sewa fleksibel untuk dekorasi, peralatan, dan berbagai kebutuhan acara Anda.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
+                    <div class="service-icon"><i class="fas fa-bullhorn"></i></div>
                     <h3 class="service-title">Solusi Promosi</h3>
                     <p>Material pemasaran kreatif dan strategi untuk meningkatkan visibilitas merek produk Anda.</p>
                 </div>
@@ -537,117 +89,53 @@
         <section class="gallery" id="gallery">
             <h2 class="section-title">Galeri Kami</h2>
             <div class="gallery-intro">
-                <p>Jelajahi koleksi karya dan layanan premium kami. Klik "Detail" untuk melihat lebih banyak gambar dan informasi.</p>
+                <p>Jelajahi koleksi karya dan layanan premium kami. Klik "Detail" untuk melihat lebih banyak informasi.</p>
                 
-                <div class="product-categories" style="display:none;">
-                    <button class="product-category-btn active" data-category="all">Semua Kategori</button>
-                    <button class="product-category-btn" data-category="food">Makanan & Minuman</button>
+                <div class="product-categories">
+                    <button class="product-category-btn active" data-category="all">Semua</button>
                     <button class="product-category-btn" data-category="snack">Kue & Cemilan</button>
-                    <button class="product-category-btn" data-category="construction">Alat Konstruksi</button>
-                    <button class="product-category-btn" data-category="office">Alat Kantor</button>
-                    <button class="product-category-btn" data-category="household">Alat Rumah Tangga</button>
-                    <button class="product-category-btn" data-category="software">Software Aplikasi</button>
-                    <button class="product-category-btn" data-category="electronics">Elektronik</button>
-                    <button class="product-category-btn" data-category="fishery">Perikanan</button>
-                    <button class="product-category-btn" data-category="livestock">Peternakan</button>
-                    <button class="product-category-btn" data-category="agriculture">Pertanian</button>
-                </div>
-                
-                <div class="category-tabs" style="display:none;">
-                    <button class="category-btn active" data-type="all">Semua</button>
-                    <button class="category-btn" data-type="rental">Sewa</button>
-                    <button class="category-btn" data-type="promo">Promosi</button>
+                    <button class="product-category-btn" data-category="food">Makanan</button>
                 </div>
             </div>
-            
-            <div class="gallery-grid" id="gallery-grid"></div>   
+            <div class="gallery-grid" id="gallery-grid">
+                </div>   
         </section>
 
-        <section class="contact" id="contact" style="display: none;">
+        <section class="contact" id="contact">
             <h2 class="section-title">Hubungi Kami</h2>
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Informasi Kontak</h3>
-                    <div class="contact-detail">
-                        <i class="fas fa-map-marker-alt contact-icon"></i>
-                        <div class="contact-text">
-                            <h4>Alamat</h4>
-                            <p>Jl. PB Sudirman, Desa Wringin Anom<br>Kec. Panarukan, Kab. Situbondo (68351)<br>Provinsi Jawa Timur</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-phone-alt contact-icon"></i>
-                        <div class="contact-text">
-                            <h4>Telepon</h4>
-                            <p>+6285647709114</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-envelope contact-icon"></i>
-                        <div class="contact-text">
-                            <h4>Email</h4>
-                            <p>admin@anekamarket.my.id</p>
-                        </div>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-clock contact-icon"></i>
-                        <div class="contact-text">
-                            <h4>Jam Operasional Admin</h4>
-                            <p>Senin - Jumat: 09.00 - 16.00<br>Sabtu & Minggu: 07.00 - 19.00</p>
-                        </div>
-                    </div>
+                    <p><strong>Alamat:</strong> Jl. PB Sudirman, Wringin Anom, Panarukan, Situbondo (68351), Jawa Timur</p>
+                    <p><strong>Telepon:</strong> +6285647709114</p>
+                    <p><strong>Email:</strong> admin@anekamarket.my.id</p>
+                    <p><strong>Jam Operasional Admin:</strong><br>Senin - Jumat: 09.00 - 16.00<br>Sabtu & Minggu: 07.00 - 19.00</p>
                 </div>
                 <div class="contact-form">
                     <h3>Kirim Pesan</h3>
                     <div id="formStatus" class="form-status" style="display: none;"></div>
                     <form id="contactForm" action="https://formsubmit.co/admin@anekamarket.my.id" method="POST">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
-                        <input type="hidden" name="_template" value="table">
-                        <div class="form-group">
-                            <label for="name">Nama Anda</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Alamat Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Nomor Telepon</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subjek</label>
-                            <select id="subject" name="subject" required>
-                                <option value="" disabled selected>Pilih subjek</option>
-                                <option value="general">Pertanyaan Umum</option>
-                                <option value="order">Pemesanan Produk</option>
-                                <option value="rental">Pertanyaan Sewa</option>
-                                <option value="promo">Layanan Promosi</option>
-                                <option value="other">Lainnya</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Pesan</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" id="submitBtn">
-                            <i class="fas fa-paper-plane"></i> Kirim Pesan
-                        </button>
+                        <input type="hidden" name="_next" value="https://s.id/anekamarket"> <input type="hidden" name="_template" value="table">
+                        <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+                        <input type="email" id="email" name="email" placeholder="Alamat Email" required>
+                        <input type="tel" id="phone" name="phone" placeholder="Nomor Telepon" required>
+                        <textarea id="message" name="message" placeholder="Pesan Anda" required></textarea>
+                        <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
                     </form>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
     
-    <div class="contact-bar">
-        <a href="https://wa.me/6289679013099" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
+    <div class="floating-actions">
+        <button id="musicToggleBtn" class="action-btn" aria-label="Putar Musik">
+            <i class="fas fa-play"></i>
+        </button>
+        <a href="https://wa.me/6289679013099" class="action-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="tel:+6289679013099" class="contact-btn phone" aria-label="Telepon Kami">
-            <i class="fas fa-phone"></i>
-        </a>
-        <button class="contact-btn order" id="quick-order" aria-label="Pesan Cepat">
+        <button class="action-btn order" id="quickOrderBtn" aria-label="Pesan Cepat">
             <i class="fas fa-shopping-cart"></i>
         </button>
     </div>
@@ -659,9 +147,8 @@
                     <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
                     <span>ANEKAMARKET</span>
                 </div>
-                <p>Menyediakan pelayanan publikasi dan promosi produk UMKM, jasa sewa dan pembuatan aplikasi usaha sejak tahun 2025. Komitmen kami adalah memberikan pengalaman berbelanja online yang menyenangkan dan memuaskan.</p>
+                <p>Menyediakan pelayanan publikasi dan promosi produk UMKM sejak tahun 2025. Komitmen kami adalah memberikan pengalaman berbelanja online yang menyenangkan.</p>
             </div>
-            
             <div class="footer-col">
                 <h3>Tautan Cepat</h3>
                 <ul class="footer-links">
@@ -671,74 +158,46 @@
                     <li><a href="#contact">Kontak</a></li>
                 </ul>
             </div>
-            
             <div class="footer-col">
                 <h3>Newsletter</h3>
-                <p>Berlangganan newsletter kami untuk mendapatkan update produk terbaru dan penawaran spesial.</p>
+                <p>Dapatkan update produk terbaru dan penawaran spesial.</p>
                 <form class="newsletter-form">
                     <input type="email" placeholder="Alamat email Anda" required>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-envelope"></i> Berlangganan
-                    </button>
+                    <button type="submit" class="btn btn-primary" aria-label="Berlangganan"><i class="fas fa-envelope"></i></button>
                 </form>
             </div>
         </div>
-        
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            &copy; 2025 ANEKAMARKET. Semua hak dilindungi.
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <button class="close-modal" aria-label="Tutup">&times;</button>
             <h2>Pesan Cepat</h2>
-            <form id="quickOrderForm" action="https://formsubmit.co/admin@anekamarket.my.id" method="POST">
-                <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
-                <input type="hidden" name="_captcha" value="false">
-                <div class="form-group">
-                    <label for="quick-name">Nama Anda</label>
-                    <input type="text" id="quick-name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="quick-phone">Nomor Telepon</label>
-                    <input type="tel" id="quick-phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="quick-item">Produk yang Diminati</label>
-                    <input type="text" id="quick-item" name="product" required>
-                </div>
-                <div class="form-group">
-                    <label for="quick-message">Detail Tambahan</label>
-                    <textarea id="quick-message" name="message"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-paper-plane"></i> Kirim Permintaan
-                </button>
+            <form id="quickOrderForm">
+                <input type="text" name="name" placeholder="Nama Anda" required>
+                <input type="tel" name="phone" placeholder="Nomor Telepon (WhatsApp)" required>
+                <input type="text" name="product" placeholder="Produk yang Diminati (Contoh: Mochi)" required>
+                <textarea name="message" placeholder="Detail Tambahan (opsional)"></textarea>
+                <button type="submit" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Kirim via WhatsApp</button>
             </form>
         </div>
     </div>
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
+            <button class="close-modal" aria-label="Tutup">&times;</button>
             <input type="text" class="search-modal-input" placeholder="Cari produk, UMKM, kode..." id="searchModalInput">
             <div class="search-results" id="searchResults">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari produk...</p>
             </div>
         </div>
     </div>
-    
-    <div class="image-modal" id="imageModal">
-        <div class="image-modal-content">
-            <span class="close-image-modal">&times;</span>
-            <img id="zoomedImage" src="" alt="Zoomed Image">
-        </div>
-    </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
-        
+        <button class="close-notification" id="closeNotification" aria-label="Tutup Notifikasi">&times;</button>
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
@@ -746,9 +205,8 @@
                 <button class="notification-btn btn-yes" data-action="next">Iya, Tentu</button>
             </div>
         </div>
-        
         <div class="notification-content" id="notificationStep2">
-            <h4>Tertarik mendaftarkan usaha Anda di Anekamarket secara GRATIS dan tanpa komisi?</h4>
+            <h4>Tertarik mendaftarkan usaha Anda di Anekamarket secara GRATIS?</h4>
             <div class="notification-buttons">
                 <button class="notification-btn btn-no" data-action="close">Lain Kali</button>
                 <button class="notification-btn btn-yes" data-action="register">Iya, Saya Mau</button>
@@ -756,200 +214,7 @@
         </div>
     </div>
     
-    <audio id="buttonSound" src="https://raw.githubusercontent.com/LenteraKarya/Lentera-Karya/main/assets/audio/audiotombol.mp3"></audio>
-    
-    <script>
-        // --- DATA PRODUK (DIAMBIL DARI products.js) ---
-        const products = [
-                {
-                id: "MCU-2025-2830",
-                category: "snack",
-                type: "promo",
-                seller: {
-                    name: "Mochi UMA",
-                    link: "https://anekamarket.my.id"
-                },
-                badge: {
-                    text: "Promo Spesial",
-                    type: "promo"
-                },
-                mainImage: "https://i.imgur.com/TPSWsZw.jpeg",
-                title: "Promo Aneka Kue Lezat Mochi Uma",
-                code: "MCU-2025-2830",
-                price: 10000,
-                originalPrice: null,
-                discount: null,
-                priceVariations: [
-                    { name: "Pancake Durian", price: 10000 },
-                    { name: "Mochi (3pcs)", price: 10000 },
-                    { name: "Cireng Ayam Suwir", price: 10000 },
-                    { name: "Corndog Coklat (isi 3)", price: 10000 }
-                ],
-                units: ["pcs", "pack", "set", "lusin"],
-                defaultUnit: "pcs",
-                details: {
-                    description: "<strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Jangan lewatkan kesempatan ini untuk menikmati kue berkualitas dengan harga terjangkau!",
-                    images: [
-                        "https://i.imgur.com/dlK9kfP.jpeg",
-                        "https://i.imgur.com/JsXOHCO.jpeg",
-                        "https://i.imgur.com/kJDDUy4.jpeg"
-                    ],
-                    specs: [
-                        { label: "Kode Promo", value: "MCU-2025-2830" },
-                        { label: "Nama UMKM", value: "Mochi UMA" },
-                        { label: "Pemilik", value: "ULink" },
-                        { label: "Alamat", value: "Jl. Wijaya Kusuma Samping Bidan Ika" },
-                        { label: "Kontak", value: "089679013099 | nurilaneeh@gmail.com" },
-                        { label: "Media Sosial", value: "TikTok @mochi.uma3" },
-                        { label: "Daftar Promo", value: "• Pancake Durian hanya Rp10.000<br>• Mochi 3pcs Rp10.000<br>• Cireng Ayam Suwir Rp10.000<br>• Corndog Coklat isi 3 Rp10.000" },
-                        { label: "Periode Promo", value: "Sampai 31 Agustus 2025" },
-                        { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
-                    ]
-                },
-                contact: {
-                    whatsapp: "6289679013099",
-                    phone: "+6289679013099"
-                }
-            }
-        ];
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- RENDER PRODUCTS ---
-            const galleryGrid = document.getElementById('gallery-grid');
-            const body = document.body;
-
-            function formatPrice(amount) {
-                return new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                    minimumFractionDigits: 0
-                }).format(amount).replace(/\s?IDR/g, 'Rp ');
-            }
-            
-            function renderProducts() {
-                if (typeof products === 'undefined' || !Array.isArray(products)) {
-                    if(galleryGrid) {
-                        galleryGrid.innerHTML = '<p style="text-align: center; color: var(--accent);">Gagal memuat data produk.</p>';
-                    }
-                    console.error("Variabel 'products' tidak ditemukan.");
-                    return;
-                }
-
-                if (!galleryGrid) return;
-                galleryGrid.innerHTML = '';
-                
-                const placeholderImg = "https://via.placeholder.com/400x300.png?text=Gambar+Tidak+Tersedia";
-                const placeholderThumb = "https://via.placeholder.com/100x100.png?text=Error";
-
-                products.forEach(product => {
-                    const productCard = document.createElement('div');
-                    productCard.className = 'gallery-item';
-                    productCard.setAttribute('data-category', product.category);
-                    productCard.setAttribute('data-type', product.type);
-                    productCard.setAttribute('data-id', product.id);
-                    // PENAMBAHAN: ID unik untuk setiap kartu produk agar bisa ditautkan dari hasil pencarian
-                    productCard.id = `product-${product.id}`;
-
-                    // --- HTML structure from previous version with fixes ---
-                    const priceVariationsHTML = product.priceVariations.map((v, index) => `
-                        <div class="price-variation ${index === 0 ? 'active' : ''}" data-price="${v.price}">
-                            <span class="price-variation-name">${v.name}</span>
-                            <span class="price-variation-value">${formatPrice(v.price)}</span>
-                        </div>
-                    `).join('');
-
-                    const unitOptionsHTML = product.units.map(unit => `
-                        <option value="${unit}" ${unit === product.defaultUnit ? 'selected' : ''}>${unit}</option>
-                    `).join('');
-
-                    const detailImagesHTML = product.details.images.map((img, index) => `
-                        <img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy" onerror="this.onerror=null;this.src='${placeholderThumb}';">
-                    `).join('');
-
-                    const detailSpecsHTML = product.details.specs.map(spec => `
-                        <div class="spec-item">
-                            <span class="spec-label">${spec.label}:</span>
-                            <span class="spec-value">${spec.value}</span>
-                        </div>
-                    `).join('');
-                    
-                    productCard.innerHTML = `
-                        <a href="${product.seller.link}" target="_blank" class="gallery-badge seller">Gerai: ${product.seller.name}</a>
-                        <span class="gallery-badge ${product.badge.type}" style="position: absolute; top: 10px; right: 10px; background-color: var(--primary); color: white; padding: 5px 10px; border-radius: 5px; font-size: 0.8rem;">${product.badge.text}</span>
-                        <div class="gallery-image-container">
-                            <img src="${product.mainImage}" alt="${product.title}" class="gallery-image" loading="lazy" onerror="this.onerror=null;this.src='${placeholderImg}';">
-                        </div>
-                        <div class="gallery-details">
-                            <h3 class="gallery-title">${product.title}</h3>
-                            <div class="gallery-meta" style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">
-                                <span class="gallery-code">Kode: ${product.code}</span>
-                                <span class="gallery-seller" style="margin-left: 15px;"><i class="fas fa-store"></i> ${product.seller.name}</span>
-                            </div>
-                            <p class="gallery-price">
-                                ${formatPrice(product.price)}
-                                ${product.originalPrice ? `<span class="original-price" style="text-decoration: line-through; color: #999; margin-left: 10px;">${formatPrice(product.originalPrice)}</span>` : ''}
-                                ${product.discount ? `<span class="discount" style="background-color: var(--danger); color: white; padding: 2px 8px; border-radius: 5px; font-size: 0.8rem; margin-left: 10px;">${product.discount}</span>` : ''}
-                            </p>
-                            
-                            <div class="price-variations" style="margin-bottom: 15px;">${priceVariationsHTML}</div>
-                            
-                            <div class="gallery-actions">
-                                <button class="btn-detail">
-                                    <i class="fas fa-chevron-down"></i> Detail Produk
-                                </button>
-                                <button class="btn-order">
-                                    <i class="fas fa-shopping-cart"></i> Pesan Sekarang
-                                </button>
-                            </div>
-                            
-                            <div class="gallery-detail-expanded" style="display: none; margin-top: 20px;">
-                                <div class="gallery-description">${product.details.description}</div>
-                                <div class="gallery-specs" style="margin-top: 15px;">${detailSpecsHTML}</div>
-                            </div>
-                        </div>
-                    `;
-                    galleryGrid.appendChild(productCard);
-                });
-            }
-
-            renderProducts();
-
-            // --- EVENT LISTENERS (simplified for clarity) ---
-            if (galleryGrid) {
-                galleryGrid.addEventListener('click', e => {
-                    const target = e.target;
-
-                    // Toggle Details
-                    if (target.closest('.btn-detail')) {
-                        const btn = target.closest('.btn-detail');
-                        const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded');
-                        const isVisible = expandedContent.style.display === 'block';
-                        expandedContent.style.display = isVisible ? 'none' : 'block';
-                        btn.innerHTML = !isVisible
-                            ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' 
-                            : '<i class="fas fa-chevron-down"></i> Detail Produk';
-                    }
-                    
-                    // Order Button
-                     if (target.closest('.btn-order')) {
-                        const galleryItem = target.closest('.gallery-item');
-                        const productId = galleryItem.dataset.id;
-                        const productData = products.find(p => p.id === productId);
-                        const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nMohon info lebih lanjut. Terima kasih.`;
-                        window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                    }
-                });
-            }
-
-            // --- Other scripts from your file ---
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const navLinks = document.getElementById('navLinks');
-            if (mobileMenuToggle && navLinks) {
-                mobileMenuToggle.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                });
-            }
-        });
-    </script>
+    <script src="products.js"></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
