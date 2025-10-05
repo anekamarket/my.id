@@ -54,6 +54,13 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        
+        /* REFINEMENT: Improved focus visibility for accessibility */
+        :focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
 
         .container { max-width: 1200px; margin: auto; padding: 0 20px; }
 
@@ -68,6 +75,19 @@
             text-align: center;
             background: url('https://i.imgur.com/TPSWsZw.jpeg') no-repeat center center/cover;
             overflow: hidden;
+        }
+        
+        /* REFINEMENT: Ken Burns effect for a dynamic background */
+        header#home::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://i.imgur.com/TPSWsZw.jpeg') no-repeat center center/cover;
+            animation: kenburns 20s ease-in-out infinite alternate;
+        }
+        @keyframes kenburns {
+            from { transform: scale(1.05) rotate(0.5deg); }
+            to { transform: scale(1.15) rotate(-0.5deg); }
         }
 
         .header-overlay {
@@ -104,7 +124,7 @@
             box-shadow: 0 0 30px rgba(255,255,255,0.3);
             transition: transform 0.5s ease;
         }
-        .logo:hover img { transform: rotate(360deg); }
+        .logo:hover img { transform: rotate(360deg) scale(1.1); } /* REFINEMENT: Added scale on hover */
 
         .logo span {
             font-size: 3rem;
@@ -138,7 +158,10 @@
             background: rgba(255, 255, 255, 0.95);
             color: var(--text-dark);
         }
-        .header-search input:focus { box-shadow: 0 0 0 4px rgba(255,255,255,0.6); }
+        .header-search input:focus { 
+            box-shadow: 0 0 0 4px rgba(255,255,255,0.6); 
+            transform: scale(1.02); /* REFINEMENT: Subtle focus effect */
+        }
 
         .header-search button {
             padding: 18px 30px;
@@ -199,6 +222,12 @@
             transition: all var(--transition-smooth);
         }
         
+        /* REFINEMENT: Navbar becomes more opaque on scroll */
+        nav#navbar.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: var(--shadow-medium);
+        }
+        
         .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 20px; }
         .nav-logo { display: flex; align-items: center; text-decoration: none; color: var(--dark); font-weight: 700; font-size: 1.6rem; font-family: var(--font-secondary); }
         .nav-logo img { width: 45px; height: 45px; margin-right: 12px; transition: transform var(--transition-smooth); }
@@ -237,8 +266,9 @@
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
             gap: 40px;
         }
-
+        
         .gallery-item {
+            position: relative; /* REFINEMENT: For positioning the badge */
             background: var(--white);
             border-radius: var(--border-radius-lg);
             box-shadow: var(--shadow-medium);
@@ -251,6 +281,23 @@
         .gallery-item:hover {
             transform: translateY(-12px);
             box-shadow: var(--shadow-strong);
+        }
+        
+        /* REFINEMENT: Product Badge Styling */
+        .product-badge {
+            position: absolute;
+            top: 20px;
+            left: -1px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 6px 15px 6px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .gallery-details { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
@@ -299,6 +346,17 @@
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
         }
+        /* REFINEMENT: Shake animation for empty order attempt */
+        .shake-animation {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes shake {
+          10%, 90% { transform: translate3d(-1px, 0, 0); }
+          20%, 80% { transform: translate3d(2px, 0, 0); }
+          30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+          40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+        
         .gallery-actions .btn-order {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white; box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
@@ -310,13 +368,20 @@
         }
         .gallery-actions .btn-detail:hover { background-color: #eaf0f6; transform: translateY(-3px); }
 
-        /* --- IMPROVED Detail View --- */
+        /* --- IMPROVED Detail View with smooth transition --- */
         .gallery-detail-expanded {
-            margin: 25px -30px -30px -30px; padding: 30px;
+            margin: 25px -30px -30px -30px; padding: 0 30px; /* REFINEMENT: Adjust padding for transition */
             background-color: var(--light);
             border-top: 1px solid var(--border-color);
-            display: none; /* Initially hidden */
+            max-height: 0; /* REFINEMENT: Key for smooth transition */
+            overflow: hidden; /* REFINEMENT: Key for smooth transition */
+            transition: max-height 0.7s ease-in-out, padding 0.7s ease-in-out; /* REFINEMENT: Animate max-height */
         }
+        .gallery-detail-expanded.visible {
+             max-height: 1000px; /* REFINEMENT: A large value to allow content to expand */
+             padding: 30px; /* REFINEMENT: Add padding back when visible */
+        }
+        
         .gallery-description { font-size: 1rem; margin-bottom: 20px; }
         .spec-item {
             display: flex; align-items: flex-start;
@@ -330,11 +395,9 @@
         /* --- Swiper Slider Styles (REVISED FOR PERFECT IMAGE DISPLAY) --- */
         .product-slider-main {
             width: 100%;
-            /* Using aspect-ratio for a responsive, consistent shape without a fixed height */
             aspect-ratio: 4 / 3;
             margin-bottom: 15px;
             border-radius: var(--border-radius-md);
-            /* Add a background color that shows if images have different aspect ratios */
             background-color: #f0f0f0; 
         }
         .product-slider-main .swiper-slide {
@@ -346,9 +409,12 @@
         .product-slider-main .swiper-slide img {
             width: 100%;
             height: 100%;
-            /* This is the key change: 'contain' ensures the whole image is visible without distortion */
             object-fit: contain;
             cursor: pointer;
+            transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
+        }
+        .product-slider-main .swiper-slide:hover img {
+            transform: scale(1.05);
         }
 
         .product-slider-thumbs {
@@ -370,7 +436,6 @@
         .product-slider-thumbs .swiper-slide img {
             width: 100%;
             height: 100%;
-            /* Use 'cover' for thumbnails as small cropping is acceptable here */
             object-fit: cover;
             cursor: pointer;
             border-radius: calc(var(--border-radius-md) - 2px);
@@ -459,7 +524,7 @@
              padding: 0; background: transparent; box-shadow: none;
              width: 100%; height: 100%; max-width: 100vw; max-height: 100vh;
         }
-         .lightbox-modal .close-lightbox-modal { color: var(--white); top: 20px; right: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); font-size: 3rem; }
+        .lightbox-modal .close-lightbox-modal { color: var(--white); top: 20px; right: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); font-size: 3rem; }
 
         /* Search Modal */
         .search-modal-input {
@@ -477,26 +542,10 @@
         .search-results-placeholder { text-align: center; color: #888; padding: 20px; }
         
         /* Lightbox Swiper styles */
-        #lightbox-swiper {
-            width: 100%;
-            height: 100%;
-        }
-        #lightbox-swiper .swiper-slide {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        #lightbox-swiper img {
-            max-width: 90vw;
-            max-height: 85vh;
-            width: auto;
-            height: auto;
-            object-fit: contain; /* Ensure no distortion in lightbox either */
-        }
-        #lightbox-swiper .swiper-button-next,
-        #lightbox-swiper .swiper-button-prev {
-            color: var(--white);
-        }
+        #lightbox-swiper { width: 100%; height: 100%; }
+        #lightbox-swiper .swiper-slide { display: flex; justify-content: center; align-items: center; }
+        #lightbox-swiper img { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
+        #lightbox-swiper .swiper-button-next, #lightbox-swiper .swiper-button-prev { color: var(--white); }
 
         /* Offer Notification */
         .offer-notification { position: fixed; bottom: 20px; right: 20px; background-color: var(--white); color: var(--text-dark); padding: 25px; border-radius: var(--border-radius-md); box-shadow: var(--shadow-strong); width: 360px; z-index: 1001; transform: translateX(calc(100% + 20px)); opacity: 0; transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.6s ease; font-family: var(--font-primary); border-top: 4px solid var(--primary); }
@@ -526,6 +575,39 @@
         .contact-btn.whatsapp { background-color: #25D366; }
         .contact-btn.phone { background-color: #34B7F1; }
         .contact-btn.order { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; cursor: pointer; }
+        
+        /* NEW: Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-medium);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.1);
+        }
 
         /* --- Responsive Styles --- */
         @media (max-width: 992px) {
@@ -555,6 +637,7 @@
             .gallery-grid { grid-template-columns: 1fr; }
             .footer-container { text-align: center; }
             .footer-col h3::after { left: 50%; transform: translateX(-50%); }
+            .back-to-top { width: 45px; height: 45px; font-size: 1.3rem; }
         }
         
         @media (max-width: 480px) {
@@ -647,6 +730,10 @@
             <i class="fas fa-shopping-cart"></i>
         </button>
     </div>
+
+    <a href="#home" class="back-to-top" aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </a>
     
     <footer>
         <div class="footer-container">
@@ -700,8 +787,8 @@
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
             <span class="close-search-modal">&times;</span>
-            <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput">
-            <div class="search-results" id="searchResults">
+            <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput" aria-label="Input Pencarian Produk">
+            <div class="search-results" id="searchResults" aria-live="polite">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari...</p>
             </div>
         </div>
@@ -741,6 +828,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            
             // --- DATA PRODUK ---
             const products = [
                 {
@@ -811,6 +899,8 @@
                     productCard.dataset.id = product.id;
                     productCard.id = `product-${product.id}`;
 
+                    const badgeHTML = product.badge ? `<div class="product-badge">${product.badge.text}</div>` : '';
+
                     const priceVariationsHTML = product.priceVariations.map(v => `
                         <div class="price-variation-item" data-price="${v.price}" data-name="${v.name}">
                             <div class="price-variation-info">
@@ -818,9 +908,9 @@
                                 <div class="price-variation-value">${formatPrice(v.price)}</div>
                             </div>
                             <div class="quantity-controls">
-                                <button class="quantity-btn minus" aria-label="Kurangi jumlah">-</button>
-                                <input type="number" class="quantity-input" value="0" min="0" readonly aria-label="Jumlah">
-                                <button class="quantity-btn plus" aria-label="Tambah jumlah">+</button>
+                                <button class="quantity-btn minus" aria-label="Kurangi jumlah ${v.name}">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0" readonly aria-label="Jumlah ${v.name}">
+                                <button class="quantity-btn plus" aria-label="Tambah jumlah ${v.name}">+</button>
                             </div>
                         </div>`).join('');
                     
@@ -841,6 +931,7 @@
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
                     productCard.innerHTML = `
+                        ${badgeHTML}
                         <div class="swiper product-slider-main">
                             <div class="swiper-wrapper">${mainSliderHTML}</div>
                             <div class="swiper-button-next"></div>
@@ -869,37 +960,23 @@
                         </div>`;
                     galleryGrid.appendChild(productCard);
                 });
-
-                // Initialize all sliders after they are in the DOM
                 initializeSliders();
             }
 
             function initializeSliders() {
                 const productCards = document.querySelectorAll('.gallery-item');
                 productCards.forEach(card => {
-                    // Check if sliders are already initialized to avoid re-initialization errors
                     if (card.querySelector('.product-slider-main').swiper) return;
 
                     const thumbsSwiper = new Swiper(card.querySelector('.product-slider-thumbs'), {
-                        spaceBetween: 10,
-                        slidesPerView: 4,
-                        freeMode: true,
-                        watchSlidesProgress: true,
+                        spaceBetween: 10, slidesPerView: 4, freeMode: true, watchSlidesProgress: true,
                     });
 
                     new Swiper(card.querySelector('.product-slider-main'), {
                         spaceBetween: 10,
-                        navigation: {
-                            nextEl: card.querySelector('.swiper-button-next'),
-                            prevEl: card.querySelector('.swiper-button-prev'),
-                        },
-                        thumbs: {
-                            swiper: thumbsSwiper,
-                        },
-                        autoplay: {
-                            delay: 3500,
-                            disableOnInteraction: false,
-                        },
+                        navigation: { nextEl: card.querySelector('.swiper-button-next'), prevEl: card.querySelector('.swiper-button-prev'), },
+                        thumbs: { swiper: thumbsSwiper, },
+                        autoplay: { delay: 3500, disableOnInteraction: false, },
                     });
                 });
             }
@@ -913,191 +990,174 @@
                 card.querySelector('.total-price-value').textContent = formatPrice(total);
             }
             
-            renderProducts(products);
-            
-            // --- EVENT LISTENERS ---
-            if (galleryGrid) {
-                galleryGrid.addEventListener('click', e => {
-                    const card = e.target.closest('.gallery-item');
-                    if (!card) return;
-                    
-                    if (e.target.matches('.quantity-btn')) {
-                        const input = e.target.parentElement.querySelector('.quantity-input');
-                        let value = parseInt(input.value, 10);
-                        if (e.target.matches('.plus')) {
-                            value++;
-                        } else if (e.target.matches('.minus') && value > 0) {
-                            value--;
-                        }
-                        input.value = value;
-                        updateCardTotal(card);
-                    }
-
-                    if (e.target.closest('.btn-detail')) {
-                        playSound();
-                        const btn = e.target.closest('.btn-detail');
-                        const expandedContent = card.querySelector('.gallery-detail-expanded');
-                        const isVisible = expandedContent.style.display === 'block';
-                        
-                        expandedContent.style.display = isVisible ? 'none' : 'block';
-                        btn.innerHTML = isVisible ? '<i class="fas fa-info-circle"></i> Detail' : '<i class="fas fa-chevron-up"></i> Sembunyikan';
-                    }
-                    
-                    if (e.target.closest('.product-slider-main .swiper-slide')) {
-                        const clickedSlide = e.target.closest('.swiper-slide');
-                        const product = products.find(p => p.id === card.dataset.id);
-                        const initialIndex = parseInt(clickedSlide.dataset.index, 10);
-                        
-                        const lightboxWrapper = document.getElementById('lightbox-swiper-wrapper');
-                        lightboxWrapper.innerHTML = product.details.images.map(img => `
-                            <div class="swiper-slide"><img src="${img}" alt="Gambar diperbesar"></div>
-                        `).join('');
-
-                        lightboxModal.classList.add('show');
-
-                        if (lightboxSwiper) {
-                            lightboxSwiper.destroy(true, true);
-                        }
-                        
-                        lightboxSwiper = new Swiper('#lightbox-swiper', {
-                            initialSlide: initialIndex,
-                            navigation: {
-                                nextEl: '#lightbox-swiper .swiper-button-next',
-                                prevEl: '#lightbox-swiper .swiper-button-prev',
-                            },
-                            keyboard: {
-                                enabled: true,
-                            },
-                        });
-                    }
-                    
-                    if (e.target.closest('.btn-order')) {
-                        playSound();
-                        const product = products.find(p => p.id === card.dataset.id);
-                        const items = Array.from(card.querySelectorAll('.price-variation-item'))
-                            .map(item => ({
-                                name: item.dataset.name,
-                                price: parseFloat(item.dataset.price),
-                                quantity: parseInt(item.querySelector('.quantity-input').value, 10)
-                            }))
-                            .filter(item => item.quantity > 0);
-
-                        if (items.length > 0) {
-                            const totalOrderPrice = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-                            const orderDetails = items.map(item => `- *${item.name}* (x${item.quantity}) = ${formatPrice(item.price * item.quantity)}`).join('\n');
-                            const message = `Halo, saya tertarik untuk memesan dari *${product.seller.name}*:\n\n*${product.title}* (Kode: ${product.code})\n\n*Rincian Pesanan:*\n${orderDetails}\n\n*TOTAL PESANAN: ${formatPrice(totalOrderPrice)}*\n\nMohon konfirmasi ketersediaan dan proses selanjutnya. Terima kasih.`;
-                            window.open(`https://wa.me/${product.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                        } else {
-                            alert("Mohon maaf, silakan tentukan jumlah produk yang ingin Anda pesan terlebih dahulu dengan menekan tombol (+).");
-                        }
-                    }
-                });
-            }
-            
-            // --- Mobile Menu ---
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const navLinks = document.getElementById('navLinks');
-            mobileMenuToggle.addEventListener('click', () => {
-                playSound();
-                navLinks.classList.toggle('active');
-            });
-
-            // --- Search Modal Logic ---
-            const searchModal = document.getElementById('searchModal');
-            const searchModalInput = document.getElementById('searchModalInput');
-            const searchResults = document.getElementById('searchResults');
-            const openSearchTriggers = document.querySelectorAll('#searchToggle, #headerSearchBtn, #headerSearchInput');
-
-            const openSearchModal = (e) => {
-                e.preventDefault();
-                searchModal.classList.add('show');
-                searchModalInput.focus();
-            };
-
-            openSearchTriggers.forEach(trigger => {
-                 if (trigger.id === 'headerSearchInput') {
-                    trigger.addEventListener('focus', openSearchModal);
-                 } else {
-                    trigger.addEventListener('click', openSearchModal);
-                 }
-            });
-
-            searchModal.querySelector('.close-search-modal').addEventListener('click', () => searchModal.classList.remove('show'));
-
-            searchModalInput.addEventListener('keyup', () => {
-                const query = searchModalInput.value.toLowerCase().trim();
-                if (query.length < 2) {
-                    searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf untuk memulai pencarian...</p>';
-                    return;
-                }
-                const filteredProducts = products.filter(p => 
-                    p.title.toLowerCase().includes(query) || 
-                    p.code.toLowerCase().includes(query) || 
-                    p.seller.name.toLowerCase().includes(query)
-                );
+            function handleGalleryClick(e) {
+                const card = e.target.closest('.gallery-item');
+                if (!card) return;
                 
-                if (filteredProducts.length > 0) {
-                    const mainImage = (p) => (p.details.images && p.details.images.length > 0) ? p.details.images[0] : '';
-                    searchResults.innerHTML = filteredProducts.map(p => `
-                        <a href="#product-${p.id}" class="search-result-item">
-                            <img src="${mainImage(p)}" class="search-result-image" alt="${p.title}" loading="lazy">
-                            <div class="search-result-info">
-                                <h4>${p.title}</h4>
-                                <p>Oleh ${p.seller.name} - Kode: ${p.code}</p>
-                            </div>
-                        </a>
-                    `).join('');
-                    searchResults.querySelectorAll('.search-result-item').forEach(item => {
-                        item.addEventListener('click', () => searchModal.classList.remove('show'));
+                // --- Quantity Controls ---
+                if (e.target.matches('.quantity-btn')) {
+                    const input = e.target.parentElement.querySelector('.quantity-input');
+                    let value = parseInt(input.value, 10);
+                    if (e.target.matches('.plus')) {
+                        value++;
+                    } else if (e.target.matches('.minus') && value > 0) {
+                        value--;
+                    }
+                    input.value = value;
+                    updateCardTotal(card);
+                }
+
+                // --- Detail Toggle ---
+                if (e.target.closest('.btn-detail')) {
+                    playSound();
+                    const btn = e.target.closest('.btn-detail');
+                    const expandedContent = card.querySelector('.gallery-detail-expanded');
+                    const isVisible = expandedContent.classList.toggle('visible');
+                    btn.innerHTML = isVisible ? '<i class="fas fa-chevron-up"></i> Sembunyikan' : '<i class="fas fa-info-circle"></i> Detail';
+                }
+                
+                // --- Open Lightbox ---
+                if (e.target.closest('.product-slider-main .swiper-slide')) {
+                    const clickedSlide = e.target.closest('.swiper-slide');
+                    const product = products.find(p => p.id === card.dataset.id);
+                    const initialIndex = parseInt(clickedSlide.dataset.index, 10);
+                    
+                    const lightboxWrapper = document.getElementById('lightbox-swiper-wrapper');
+                    lightboxWrapper.innerHTML = product.details.images.map(img => `
+                        <div class="swiper-slide"><img src="${img}" alt="Gambar diperbesar"></div>`).join('');
+
+                    lightboxModal.classList.add('show');
+
+                    if (lightboxSwiper) lightboxSwiper.destroy(true, true);
+                    
+                    lightboxSwiper = new Swiper('#lightbox-swiper', {
+                        initialSlide: initialIndex,
+                        navigation: { nextEl: '#lightbox-swiper .swiper-button-next', prevEl: '#lightbox-swiper .swiper-button-prev', },
+                        keyboard: { enabled: true },
                     });
-                } else {
-                    searchResults.innerHTML = '<p class="search-results-placeholder">Maaf, produk tidak ditemukan.</p>';
                 }
-            });
+                
+                // --- Order Button ---
+                if (e.target.closest('.btn-order')) {
+                    playSound();
+                    const product = products.find(p => p.id === card.dataset.id);
+                    const items = Array.from(card.querySelectorAll('.price-variation-item'))
+                        .map(item => ({ name: item.dataset.name, price: parseFloat(item.dataset.price), quantity: parseInt(item.querySelector('.quantity-input').value, 10) }))
+                        .filter(item => item.quantity > 0);
 
-            // --- Modals General Close Logic ---
-            const allModals = document.querySelectorAll('.modal, .search-modal, .lightbox-modal');
-            allModals.forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.remove('show');
+                    if (items.length > 0) {
+                        const totalOrderPrice = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                        const orderDetails = items.map(item => `- *${item.name}* (x${item.quantity}) = ${formatPrice(item.price * item.quantity)}`).join('\n');
+                        const message = `Halo, saya tertarik untuk memesan dari *${product.seller.name}*:\n\n*${product.title}* (Kode: ${product.code})\n\n*Rincian Pesanan:*\n${orderDetails}\n\n*TOTAL PESANAN: ${formatPrice(totalOrderPrice)}*\n\nMohon konfirmasi ketersediaan dan proses selanjutnya. Terima kasih.`;
+                        window.open(`https://wa.me/${product.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                    } else {
+                        // REFINEMENT: Replaced alert with shake animation
+                        const orderButton = e.target.closest('.btn-order');
+                        orderButton.classList.add('shake-animation');
+                        setTimeout(() => orderButton.classList.remove('shake-animation'), 500);
                     }
-                });
-                const closeButton = modal.querySelector('.close-modal, .close-search-modal, .close-lightbox-modal');
-                if(closeButton) {
-                    closeButton.addEventListener('click', () => modal.classList.remove('show'));
                 }
-            });
-
-            // Quick Order Modal
-            document.getElementById('quickOrderBtn').addEventListener('click', () => {
-                playSound();
-                document.getElementById('orderModal').classList.add('show');
-            });
-
-            // --- Offer Notification Logic ---
-            const offerNotification = document.getElementById('offerNotification');
-            const closeNotification = document.getElementById('closeNotification');
-            
-            setTimeout(() => {
-                if (offerNotification) offerNotification.classList.add('show');
-            }, 5000); // Show after 5 seconds
-
-            if (offerNotification) {
-                offerNotification.addEventListener('click', (e) => {
-                    const action = e.target.dataset.action;
-                    if (action === 'close') {
-                        offerNotification.classList.remove('show');
-                    } else if (action === 'next') {
-                        document.getElementById('notificationStep1').classList.remove('active');
-                        document.getElementById('notificationStep2').classList.add('active');
-                    } else if (action === 'register') {
-                        window.open('https://wa.me/6289679013099?text=Halo%2C%20saya%20tertarik%20mendaftarkan%20usaha%20saya%20di%20Anekamarket.', '_blank');
-                        offerNotification.classList.remove('show');
-                    }
-                });
-                closeNotification.addEventListener('click', () => offerNotification.classList.remove('show'));
             }
+
+            function setupEventListeners() {
+                if (galleryGrid) {
+                    galleryGrid.addEventListener('click', handleGalleryClick);
+                }
+
+                // --- Mobile Menu ---
+                document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+                    playSound();
+                    document.getElementById('navLinks').classList.toggle('active');
+                });
+
+                // --- Search Modal ---
+                const searchModal = document.getElementById('searchModal');
+                const searchModalInput = document.getElementById('searchModalInput');
+                const searchResults = document.getElementById('searchResults');
+                const openSearchTriggers = document.querySelectorAll('#searchToggle, #headerSearchBtn, #headerSearchInput');
+
+                const openSearchModal = (e) => {
+                    e.preventDefault();
+                    searchModal.classList.add('show');
+                    searchModalInput.focus();
+                };
+
+                openSearchTriggers.forEach(trigger => {
+                    if (trigger.id === 'headerSearchInput') trigger.addEventListener('focus', openSearchModal);
+                    else trigger.addEventListener('click', openSearchModal);
+                });
+
+                searchModalInput.addEventListener('keyup', () => {
+                    const query = searchModalInput.value.toLowerCase().trim();
+                    if (query.length < 2) {
+                        searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf untuk memulai pencarian...</p>';
+                        return;
+                    }
+                    const filteredProducts = products.filter(p => p.title.toLowerCase().includes(query) || p.code.toLowerCase().includes(query) || p.seller.name.toLowerCase().includes(query));
+                    
+                    if (filteredProducts.length > 0) {
+                        const mainImage = (p) => (p.details.images && p.details.images.length > 0) ? p.details.images[0] : '';
+                        searchResults.innerHTML = filteredProducts.map(p => `
+                            <a href="#product-${p.id}" class="search-result-item">
+                                <img src="${mainImage(p)}" class="search-result-image" alt="${p.title}" loading="lazy">
+                                <div class="search-result-info"> <h4>${p.title}</h4> <p>Oleh ${p.seller.name} - Kode: ${p.code}</p> </div>
+                            </a>`).join('');
+                        searchResults.querySelectorAll('.search-result-item').forEach(item => {
+                            item.addEventListener('click', () => searchModal.classList.remove('show'));
+                        });
+                    } else {
+                        searchResults.innerHTML = '<p class="search-results-placeholder">Maaf, produk tidak ditemukan.</p>';
+                    }
+                });
+
+                // --- General Modal Close Logic ---
+                document.querySelectorAll('.modal, .search-modal, .lightbox-modal').forEach(modal => {
+                    modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('show'); });
+                    const closeButton = modal.querySelector('.close-modal, .close-search-modal, .close-lightbox-modal');
+                    if(closeButton) closeButton.addEventListener('click', () => modal.classList.remove('show'));
+                });
+
+                // --- Quick Order Modal ---
+                document.getElementById('quickOrderBtn').addEventListener('click', () => {
+                    playSound();
+                    document.getElementById('orderModal').classList.add('show');
+                });
+
+                // --- Offer Notification ---
+                const offerNotification = document.getElementById('offerNotification');
+                if (offerNotification) {
+                    setTimeout(() => offerNotification.classList.add('show'), 5000);
+                    offerNotification.addEventListener('click', (e) => {
+                        const action = e.target.dataset.action;
+                        if (action === 'close') offerNotification.classList.remove('show');
+                        else if (action === 'next') {
+                            document.getElementById('notificationStep1').classList.remove('active');
+                            document.getElementById('notificationStep2').classList.add('active');
+                        } else if (action === 'register') {
+                            window.open('https://wa.me/6289679013099?text=Halo%2C%20saya%20tertarik%20mendaftarkan%20usaha%20saya%20di%20Anekamarket.', '_blank');
+                            offerNotification.classList.remove('show');
+                        }
+                    });
+                    document.getElementById('closeNotification').addEventListener('click', () => offerNotification.classList.remove('show'));
+                }
+                
+                // --- Navbar Scroll & Back to Top Button Logic ---
+                const navbar = document.getElementById('navbar');
+                const backToTopBtn = document.querySelector('.back-to-top');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                        if(backToTopBtn) backToTopBtn.classList.add('visible');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                        if(backToTopBtn) backToTopBtn.classList.remove('visible');
+                    }
+                });
+            }
+            
+            // --- INITIATE ---
+            renderProducts(products);
+            setupEventListeners();
         });
     </script>
 </body>
