@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas di Situbondo.">
-    <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir, umkm">
+    <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas.">
+    <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir">
     <meta name="author" content="ANEKAMARKET">
     <meta property="og:title" content="ANEKAMARKET | Platform Jual Beli Online Terpercaya">
     <meta property="og:description" content="Semua Bisa Jualan & Semua Bisa Pesan - Platform lengkap untuk kebutuhan jual beli online Anda">
@@ -16,10 +16,202 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" type="image/png">
     
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- VARIABEL & RESET DASAR --- */
+        :root {
+            --primary: #007bff; --secondary: #6c757d; --success: #28a745;
+            --danger: #dc3545; --light: #f8f9fa; --dark: #343a40;
+            --white: #ffffff; --text-dark: #212529; --text-light: #6c757d;
+            --font-primary: 'Poppins', sans-serif; --font-secondary: 'Playfair Display', serif;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-primary); background-color: #f4f7f6;
+            color: var(--text-dark); line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: auto; padding: 0 20px; }
+        section { padding: 60px 0; }
+        .section-title {
+            text-align: center; margin-bottom: 40px; font-family: var(--font-secondary);
+            font-size: 2.5rem; color: var(--dark);
+        }
+
+        /* --- HEADER --- */
+        header#home {
+            position: relative; height: 100vh; color: var(--white);
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            background: url('https://i.imgur.com/TPSWsZw.jpeg') no-repeat center center/cover;
+        }
+        .header-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); }
+        .header-content { position: relative; z-index: 2; padding: 20px; }
+        .logo { display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
+        .logo img { width: 80px; height: auto; margin-right: 15px; }
+        .logo span { font-size: 2.5rem; font-weight: 700; font-family: var(--font-secondary); }
+        .tagline { font-size: 1.2rem; margin-bottom: 2rem; }
+        .header-search { margin-bottom: 2rem; display: flex; justify-content: center; }
+        .header-search input {
+            width: 70%; max-width: 400px; padding: 12px 20px; border: none;
+            border-radius: 25px 0 0 25px; font-size: 1rem;
+        }
+        .header-search button {
+            padding: 12px 20px; border: none; background-color: var(--primary);
+            color: var(--white); border-radius: 0 25px 25px 0; cursor: pointer; font-size: 1rem;
+        }
+        .btn {
+            padding: 12px 25px; border-radius: 25px; text-decoration: none;
+            font-weight: 600; margin: 5px; transition: all 0.3s ease; border: none; cursor: pointer;
+        }
+        .btn-primary { background-color: var(--primary); color: var(--white); }
+        .btn-primary:hover { background-color: #0056b3; transform: translateY(-2px); }
+        .btn-outline { border: 2px solid var(--white); color: var(--white); background: transparent; }
+        .btn-outline:hover { background-color: var(--white); color: var(--dark); transform: translateY(-2px); }
+
+        /* --- NAVBAR --- */
+        nav#navbar {
+            position: sticky; top: 0; width: 100%; z-index: 1000;
+            background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 10px 0;
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: auto; padding: 0 20px; }
+        .nav-logo { display: flex; align-items: center; text-decoration: none; color: var(--dark); font-weight: 700; font-size: 1.2rem; }
+        .nav-logo img { width: 40px; height: auto; margin-right: 10px; }
+        .nav-links { display: flex; }
+        .nav-links a { color: var(--text-dark); text-decoration: none; margin: 0 15px; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .mobile-menu-toggle, .search-toggle { display: none; font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--dark); }
+
+        /* --- LAYANAN, GALERI, KONTAK --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .service-card { text-align: center; padding: 30px; background: var(--white); border-radius: 10px; box-shadow: var(--shadow); transition: transform 0.3s; }
+        .service-card:hover { transform: translateY(-5px); }
+        .service-icon { font-size: 3rem; color: var(--primary); margin-bottom: 15px; }
+        .gallery-intro { text-align: center; margin-bottom: 30px; }
+        .product-categories { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .product-category-btn {
+            background: #e9ecef; border: none; padding: 10px 20px; border-radius: 20px;
+            cursor: pointer; font-weight: 500; transition: all 0.3s;
+        }
+        .product-category-btn.active, .product-category-btn:hover { background: var(--primary); color: var(--white); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .gallery-item {
+            background: var(--white); border-radius: 10px; box-shadow: var(--shadow);
+            overflow: hidden; display: flex; flex-direction: column;
+        }
+        .gallery-image-container { width: 100%; padding-top: 75%; position: relative; }
+        .gallery-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .gallery-item:hover .gallery-image { transform: scale(1.05); }
+        .gallery-details { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .gallery-title { font-family: var(--font-secondary); font-size: 1.3rem; margin-bottom: 10px; }
+        .gallery-price { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 15px; }
+        .gallery-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; }
+        .gallery-actions button {
+            width: 100%; padding: 12px; border: none; border-radius: 5px; cursor: pointer;
+            font-weight: 600; transition: background-color 0.3s;
+        }
+        .gallery-actions .btn-order { background-color: var(--primary); color: white; }
+        .gallery-actions .btn-detail { background-color: var(--secondary); color: white; }
+        .gallery-detail-expanded {
+            display: none; margin-top: 20px; font-size: 0.9rem;
+            border-top: 1px solid #eee; padding-top: 15px;
+        }
+        .spec-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #f0f0f0; }
+        .spec-label { font-weight: 600; }
+        .contact-container { display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; align-items: center; }
+        .contact-detail { display: flex; align-items: flex-start; margin-bottom: 15px; }
+        .contact-detail i { font-size: 1.2rem; color: var(--primary); margin-right: 15px; margin-top: 5px; }
+        .contact-form-wrapper form { display: flex; flex-direction: column; gap: 15px; }
+        .contact-form-wrapper input, .contact-form-wrapper textarea {
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; font-family: var(--font-primary);
+        }
+        #formStatus { padding: 10px; border-radius: 5px; margin-bottom: 15px; text-align: center; }
+        #formStatus.success { background: #d4edda; color: #155724; }
+        #formStatus.error { background: #f8d7da; color: #721c24; }
+
+        /* --- FOOTER & TOMBOL MELAYANG --- */
+        .contact-bar { position: fixed; bottom: 20px; right: 20px; z-index: 1001; display: flex; flex-direction: column; gap: 10px; }
+        .contact-btn {
+            width: 50px; height: 50px; border-radius: 50%; border: none; color: white;
+            display: flex; align-items: center; justify-content: center; font-size: 1.5rem;
+            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); text-decoration: none; transition: transform 0.3s;
+        }
+        .contact-btn:hover { transform: scale(1.1); }
+        .contact-btn.music { background-color: var(--secondary); }
+        .contact-btn.whatsapp { background-color: #25D366; }
+        .contact-btn.order { background-color: var(--primary); }
+        footer { background-color: var(--dark); color: var(--light); padding: 40px 0 20px 0; }
+        .footer-container { display: flex; justify-content: space-between; flex-wrap: wrap; max-width: 1200px; margin: auto; padding: 0 20px; }
+        .footer-col { flex: 1; min-width: 250px; margin: 20px; }
+        .footer-logo { display: flex; align-items: center; margin-bottom: 15px; }
+        .footer-logo img { width: 50px; margin-right: 10px; }
+        .footer-logo span { font-size: 1.5rem; font-weight: 700; }
+        .footer-links { list-style: none; }
+        .footer-links a { color: var(--light); text-decoration: none; display: block; padding: 5px 0; }
+        .newsletter-form { display: flex; margin-top: 10px; }
+        .newsletter-form input { flex-grow: 1; padding: 10px; border: none; border-radius: 5px 0 0 5px; }
+        .newsletter-form button { border-radius: 0 5px 5px 0; padding: 10px 15px; }
+        .copyright { text-align: center; margin-top: 30px; border-top: 1px solid #4a4a4a; padding-top: 20px; font-size: 0.9rem; }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);
+            z-index: 2000; display: none; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .modal-overlay.show { display: flex; opacity: 1; }
+        .modal-content {
+            width: 90%; max-width: 500px; background: #fff; border-radius: 8px;
+            padding: 30px; position: relative; transform: scale(0.9); transition: transform 0.3s;
+        }
+        .modal-overlay.show .modal-content { transform: scale(1); }
+        .close-modal {
+            position: absolute; top: 10px; right: 20px; font-size: 2.5rem; cursor: pointer;
+            background: none; border: none; color: #888;
+        }
+        .search-modal-content { max-width: 600px; }
+        .search-modal-input { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; }
+        .search-results { max-height: 400px; overflow-y: auto; }
+        .search-result-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; text-decoration: none; color: #333; }
+        .search-result-item:hover { background-color: #f5f5f5; }
+        .search-result-image { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; margin-right: 15px; }
+        #orderModal form { display: flex; flex-direction: column; gap: 15px; }
+        #orderModal input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+
+        /* --- NOTIFIKASI PENAWARAN --- */
+        .offer-notification {
+            position: fixed; bottom: 20px; left: 20px; background-color: #ffffff; padding: 20px;
+            border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 320px; z-index: 1001;
+            transform: translateY(200%); opacity: 0; transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .offer-notification.show { transform: translateY(0); opacity: 1; }
+        .offer-notification .notification-content { display: none; }
+        .offer-notification .notification-content.active { display: block; }
+        .offer-notification .notification-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .offer-notification .notification-btn { flex: 1; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; }
+        .offer-notification .btn-yes { background-color: var(--primary); color: white; }
+        .offer-notification .btn-no { background-color: #f1f1f1; border: 1px solid #ddd; }
+        .close-notification { position: absolute; top: 10px; right: 15px; font-size: 20px; color: #888; cursor: pointer; background: none; border: none; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; flex-direction: column; position: absolute; top: 60px;
+                left: 0; width: 100%; background-color: var(--white); box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { padding: 15px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+            .mobile-menu-toggle, .search-toggle { display: block; }
+            .logo span { font-size: 1.5rem; }
+            .header-buttons { display: flex; flex-direction: column; }
+            .header-buttons .btn { margin: 10px 0; }
+            .footer-container, .contact-container { grid-template-columns: 1fr; text-align: center; }
+            .contact-detail { justify-content: center; }
+            .offer-notification { width: calc(100% - 40px); left: 20px; }
+        }
+    </style>
 </head>
 <body>
     <audio id="bgMusic" loop>
@@ -35,12 +227,10 @@
                 <span>MOCHI UMA MITRA ANEKAMARKET</span>
             </div>
             <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
-            
             <div class="header-search">
                 <input type="text" id="headerSearchInput" placeholder="Cari produk, UMKM, kode...">
                 <button id="headerSearchBtn" aria-label="Cari"><i class="fas fa-search"></i></button>
             </div>
-            
             <div class="header-buttons">
                 <a href="#gallery" class="btn btn-primary"><i class="fas fa-images"></i> Lihat Karya & Jualan Kami</a>
                 <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Hubungi Kami</a>
@@ -50,7 +240,7 @@
     
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-logo">
+            <a href="#home" class="nav-logo">
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
                 <span>ANEKAMARKET</span>
             </a>
@@ -89,8 +279,7 @@
         <section class="gallery" id="gallery">
             <h2 class="section-title">Galeri Kami</h2>
             <div class="gallery-intro">
-                <p>Jelajahi koleksi karya dan layanan premium kami. Klik "Detail" untuk melihat lebih banyak informasi.</p>
-                
+                <p>Jelajahi koleksi karya dan layanan premium kami. Klik "Detail" untuk melihat informasi lebih lanjut.</p>
                 <div class="product-categories">
                     <button class="product-category-btn active" data-category="all">Semua</button>
                     <button class="product-category-btn" data-category="snack">Kue & Cemilan</button>
@@ -106,20 +295,19 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Informasi Kontak</h3>
-                    <p><strong>Alamat:</strong> Jl. PB Sudirman, Wringin Anom, Panarukan, Situbondo (68351), Jawa Timur</p>
-                    <p><strong>Telepon:</strong> +6285647709114</p>
-                    <p><strong>Email:</strong> admin@anekamarket.my.id</p>
-                    <p><strong>Jam Operasional Admin:</strong><br>Senin - Jumat: 09.00 - 16.00<br>Sabtu & Minggu: 07.00 - 19.00</p>
+                    <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><p>Jl. PB Sudirman, Wringin Anom, Panarukan, Situbondo (68351)</p></div>
+                    <div class="contact-detail"><i class="fas fa-phone-alt"></i><p>+62 856 4770 9114</p></div>
+                    <div class="contact-detail"><i class="fas fa-envelope"></i><p>admin@anekamarket.my.id</p></div>
+                    <div class="contact-detail"><i class="fas fa-clock"></i><p><strong>Admin:</strong> Sen-Jum: 09.00-16.00 | Sab-Min: 07.00-19.00</p></div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form-wrapper">
                     <h3>Kirim Pesan</h3>
-                    <div id="formStatus" class="form-status" style="display: none;"></div>
+                    <div id="formStatus" style="display: none;"></div>
                     <form id="contactForm" action="https://formsubmit.co/admin@anekamarket.my.id" method="POST">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://s.id/anekamarket"> <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_next" value="https://s.id/anekamarket">
                         <input type="text" id="name" name="name" placeholder="Nama Anda" required>
                         <input type="email" id="email" name="email" placeholder="Alamat Email" required>
-                        <input type="tel" id="phone" name="phone" placeholder="Nomor Telepon" required>
                         <textarea id="message" name="message" placeholder="Pesan Anda" required></textarea>
                         <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> Kirim Pesan</button>
                     </form>
@@ -128,16 +316,10 @@
         </section>
     </main>
     
-    <div class="floating-actions">
-        <button id="musicToggleBtn" class="action-btn" aria-label="Putar Musik">
-            <i class="fas fa-play"></i>
-        </button>
-        <a href="https://wa.me/6289679013099" class="action-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
-        <button class="action-btn order" id="quickOrderBtn" aria-label="Pesan Cepat">
-            <i class="fas fa-shopping-cart"></i>
-        </button>
+    <div class="contact-bar">
+        <button id="musicToggleBtn" class="contact-btn music" aria-label="Putar Musik"><i class="fas fa-play"></i></button>
+        <a href="https://wa.me/6289679013099" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        <button class="contact-btn order" id="quickOrderBtn" aria-label="Pesan Cepat"><i class="fas fa-shopping-cart"></i></button>
     </div>
     
     <footer>
@@ -147,7 +329,7 @@
                     <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
                     <span>ANEKAMARKET</span>
                 </div>
-                <p>Menyediakan pelayanan publikasi dan promosi produk UMKM sejak tahun 2025. Komitmen kami adalah memberikan pengalaman berbelanja online yang menyenangkan.</p>
+                <p>Menyediakan pelayanan publikasi dan promosi produk UMKM sejak tahun 2025.</p>
             </div>
             <div class="footer-col">
                 <h3>Tautan Cepat</h3>
@@ -160,34 +342,31 @@
             </div>
             <div class="footer-col">
                 <h3>Newsletter</h3>
-                <p>Dapatkan update produk terbaru dan penawaran spesial.</p>
+                <p>Dapatkan update & penawaran spesial.</p>
                 <form class="newsletter-form">
                     <input type="email" placeholder="Alamat email Anda" required>
                     <button type="submit" class="btn btn-primary" aria-label="Berlangganan"><i class="fas fa-envelope"></i></button>
                 </form>
             </div>
         </div>
-        <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi.
-        </div>
+        <div class="copyright">&copy; 2025 ANEKAMARKET. Semua hak dilindungi.</div>
     </footer>
     
-    <div class="modal" id="orderModal">
+    <div class="modal-overlay" id="orderModal">
         <div class="modal-content">
             <button class="close-modal" aria-label="Tutup">&times;</button>
-            <h2>Pesan Cepat</h2>
+            <h2>Pesan Cepat via WhatsApp</h2>
             <form id="quickOrderForm">
                 <input type="text" name="name" placeholder="Nama Anda" required>
-                <input type="tel" name="phone" placeholder="Nomor Telepon (WhatsApp)" required>
+                <input type="tel" name="phone" placeholder="Nomor WhatsApp Anda" required>
                 <input type="text" name="product" placeholder="Produk yang Diminati (Contoh: Mochi)" required>
-                <textarea name="message" placeholder="Detail Tambahan (opsional)"></textarea>
-                <button type="submit" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Kirim via WhatsApp</button>
+                <button type="submit" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Kirim ke Admin</button>
             </form>
         </div>
     </div>
     
-    <div class="search-modal" id="searchModal">
-        <div class="search-modal-content">
+    <div class="modal-overlay" id="searchModal">
+        <div class="modal-content search-modal-content">
             <button class="close-modal" aria-label="Tutup">&times;</button>
             <input type="text" class="search-modal-input" placeholder="Cari produk, UMKM, kode..." id="searchModalInput">
             <div class="search-results" id="searchResults">
@@ -214,7 +393,272 @@
         </div>
     </div>
     
-    <script src="products.js"></script>
-    <script src="script.js" defer></script>
+    <script>
+        // --- DATA PRODUK ---
+        const products = [
+            {
+                id: "MCU-2025-2830",
+                category: "snack",
+                type: "promo",
+                seller: {
+                    name: "Mochi UMA",
+                    link: "https://anekamarket.my.id"
+                },
+                badge: {
+                    text: "Promo Spesial",
+                    type: "promo"
+                },
+                mainImage: "https://i.imgur.com/TPSWsZw.jpeg",
+                title: "Promo Aneka Kue Lezat Mochi Uma",
+                code: "MCU-2025-2830",
+                price: 10000,
+                originalPrice: null,
+                discount: null,
+                priceVariations: [
+                    { name: "Pancake Durian", price: 10000 },
+                    { name: "Mochi (3pcs)", price: 10000 },
+                    { name: "Cireng Ayam Suwir", price: 10000 },
+                    { name: "Corndog Coklat (isi 3)", price: 10000 }
+                ],
+                details: {
+                    description: "<strong>PROMO SPESIAL!</strong> Nikmati berbagai pilihan kue premium dengan diskon menarik. Setiap produk dibuat dengan bahan pilihan untuk menjamin cita rasa autentik.",
+                    specs: [
+                        { label: "Kode Promo", value: "MCU-2025-2830" },
+                        { label: "Nama UMKM", value: "Mochi UMA" },
+                        { label: "Pemilik", value: "ULink" },
+                        { label: "Alamat", value: "Jl. Wijaya Kusuma Samping Bidan Ika" },
+                        { label: "Kontak", value: "089679013099" },
+                        { label: "Media Sosial", value: "TikTok @mochi.uma3" },
+                        { label: "Periode Promo", value: "Sampai 31 Agustus 2025" }
+                    ]
+                },
+                contact: {
+                    whatsapp: "6289679013099"
+                }
+            }
+            // Anda bisa menambahkan data produk lainnya di sini
+        ];
+
+        // --- SCRIPT UTAMA APLIKASI ---
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- PEMILIH ELEMEN DOM ---
+            const galleryGrid = document.getElementById('gallery-grid');
+            const body = document.body;
+            const searchModal = document.getElementById('searchModal');
+            const orderModal = document.getElementById('orderModal');
+            const searchModalInput = document.getElementById('searchModalInput');
+            const headerSearchInput = document.getElementById('headerSearchInput');
+            const searchResultsContainer = document.getElementById('searchResults');
+            const offerNotification = document.getElementById('offerNotification');
+            const quickOrderForm = document.getElementById('quickOrderForm');
+            const bgMusic = document.getElementById('bgMusic');
+            const musicToggleBtn = document.getElementById('musicToggleBtn');
+            
+            // --- FUNGSI UTILITAS ---
+            const formatPrice = (amount) => new Intl.NumberFormat('id-ID', {
+                style: 'currency', currency: 'IDR', minimumFractionDigits: 0
+            }).format(amount);
+
+            // --- RENDER PRODUK ---
+            function renderProducts(filter = 'all') {
+                if (!galleryGrid || typeof products === 'undefined') return;
+
+                galleryGrid.innerHTML = '';
+                const filteredProducts = products.filter(p => filter === 'all' || p.category === filter);
+
+                if (filteredProducts.length === 0) {
+                    galleryGrid.innerHTML = '<p>Tidak ada produk dalam kategori ini.</p>';
+                    return;
+                }
+
+                filteredProducts.forEach(product => {
+                    const productCard = document.createElement('div');
+                    productCard.className = 'gallery-item';
+                    productCard.id = `product-${product.id}`;
+                    productCard.dataset.id = product.id;
+
+                    const detailSpecsHTML = product.details.specs.map(spec => `
+                        <div class="spec-item">
+                            <span class="spec-label">${spec.label}</span>
+                            <span class="spec-value">${spec.value}</span>
+                        </div>
+                    `).join('');
+
+                    productCard.innerHTML = `
+                        <div class="gallery-image-container">
+                            <img src="${product.mainImage}" alt="${product.title}" class="gallery-image" loading="lazy">
+                        </div>
+                        <div class="gallery-details">
+                            <h3 class="gallery-title">${product.title}</h3>
+                            <p class="gallery-price">${formatPrice(product.price)}</p>
+                            <div class="gallery-actions">
+                                <button class="btn-detail" aria-expanded="false"><i class="fas fa-info-circle"></i> Detail</button>
+                                <button class="btn-order"><i class="fab fa-whatsapp"></i> Pesan</button>
+                            </div>
+                            <div class="gallery-detail-expanded">
+                                <p>${product.details.description}</p>
+                                <div class="gallery-specs">${detailSpecsHTML}</div>
+                            </div>
+                        </div>
+                    `;
+                    galleryGrid.appendChild(productCard);
+                });
+            }
+
+            // --- FUNGSI MODAL ---
+            function openModal(modal) {
+                if (modal) {
+                    modal.classList.add('show');
+                    body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeModal(modal) {
+                if (modal) {
+                    modal.classList.remove('show');
+                    body.style.overflow = 'auto';
+                }
+            }
+            
+            // --- FUNGSI PENCARIAN ---
+            function performSearch(query) {
+                if (query.length < 2) {
+                    searchResultsContainer.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf...</p>';
+                    return;
+                }
+                
+                const results = products.filter(p => 
+                    p.title.toLowerCase().includes(query) ||
+                    p.code.toLowerCase().includes(query) ||
+                    p.seller.name.toLowerCase().includes(query)
+                );
+
+                searchResultsContainer.innerHTML = '';
+                if (results.length > 0) {
+                    results.forEach(product => {
+                        const item = document.createElement('a');
+                        item.href = `#product-${product.id}`;
+                        item.className = 'search-result-item';
+                        item.innerHTML = `
+                            <img src="${product.mainImage}" alt="${product.title}" class="search-result-image">
+                            <div><h4>${product.title}</h4><p>${product.seller.name} - ${formatPrice(product.price)}</p></div>`;
+                        item.addEventListener('click', () => closeModal(searchModal));
+                        searchResultsContainer.appendChild(item);
+                    });
+                } else {
+                    searchResultsContainer.innerHTML = '<p class="search-results-placeholder">Produk tidak ditemukan.</p>';
+                }
+            }
+
+            // --- EVENT LISTENERS ---
+            
+            // Pencarian
+            [searchModalInput, headerSearchInput].forEach(input => {
+                input.addEventListener('keyup', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    if(e.key === 'Enter' || query.length >= 2) {
+                        openModal(searchModal);
+                        performSearch(query);
+                    }
+                });
+            });
+            document.getElementById('headerSearchBtn').addEventListener('click', () => {
+                openModal(searchModal);
+                performSearch(headerSearchInput.value.toLowerCase());
+            });
+            
+            // Aksi di Galeri (Detail & Pesan)
+            galleryGrid.addEventListener('click', e => {
+                const productCard = e.target.closest('.gallery-item');
+                if (!productCard) return;
+
+                const productId = productCard.dataset.id;
+                const productData = products.find(p => p.id === productId);
+
+                if (e.target.closest('.btn-detail')) {
+                    const detailButton = e.target.closest('.btn-detail');
+                    const detailContent = productCard.querySelector('.gallery-detail-expanded');
+                    const isExpanded = detailButton.getAttribute('aria-expanded') === 'true';
+                    detailContent.style.display = isExpanded ? 'none' : 'block';
+                    detailButton.setAttribute('aria-expanded', !isExpanded);
+                    detailButton.innerHTML = isExpanded ? '<i class="fas fa-info-circle"></i> Detail' : '<i class="fas fa-chevron-up"></i> Sembunyikan';
+                }
+
+                if (e.target.closest('.btn-order')) {
+                    const message = `Halo, saya tertarik dengan produk:\n*${productData.title}* (${productData.code})\nMohon informasinya. Terima kasih.`;
+                    window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                }
+            });
+
+            // Filter Kategori
+            document.querySelector('.product-categories').addEventListener('click', e => {
+                if (e.target.tagName === 'BUTTON') {
+                    document.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    renderProducts(e.target.dataset.category);
+                }
+            });
+
+            // Kontrol Modal
+            document.addEventListener('click', e => {
+                if (e.target.matches('.close-modal') || e.target.matches('.modal-overlay')) {
+                    closeModal(e.target.closest('.modal-overlay'));
+                }
+                if (e.target.matches('#searchToggle') || e.target.closest('#searchToggle')) {
+                    openModal(searchModal);
+                    searchModalInput.focus();
+                }
+                if (e.target.matches('#quickOrderBtn') || e.target.closest('#quickOrderBtn')) {
+                    openModal(orderModal);
+                }
+            });
+            
+            // Notifikasi Penawaran
+            setTimeout(() => offerNotification.classList.add('show'), 5000);
+            offerNotification.addEventListener('click', e => {
+                const action = e.target.dataset.action;
+                if (action === 'close') offerNotification.classList.remove('show');
+                else if (action === 'next') {
+                    document.getElementById('notificationStep1').classList.remove('active');
+                    document.getElementById('notificationStep2').classList.add('active');
+                } else if (action === 'register') {
+                    window.open('https://wa.me/6289679013099?text=Halo, saya tertarik mendaftarkan usaha di Anekamarket.', '_blank');
+                    offerNotification.classList.remove('show');
+                }
+            });
+            document.getElementById('closeNotification').addEventListener('click', () => offerNotification.classList.remove('show'));
+
+            // Form Pesan Cepat
+            quickOrderForm.addEventListener('submit', e => {
+                e.preventDefault();
+                const formData = new FormData(quickOrderForm);
+                const name = formData.get('name');
+                const product = formData.get('product');
+                const fullMessage = `Halo, nama saya ${name}. Saya ingin memesan *${product}*. Mohon info ketersediaannya.`;
+                window.open(`https://wa.me/6289679013099?text=${encodeURIComponent(fullMessage)}`, '_blank');
+                closeModal(orderModal);
+            });
+            
+            // Kontrol Musik
+            musicToggleBtn.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    musicToggleBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    bgMusic.pause();
+                    musicToggleBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+
+            // Navigasi Mobile
+            document.getElementById('mobileMenuToggle').addEventListener('click', () => {
+                document.getElementById('navLinks').classList.toggle('active');
+            });
+
+            // --- INISIALISASI ---
+            renderProducts();
+        });
+    </script>
 </body>
 </html>
