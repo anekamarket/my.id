@@ -327,12 +327,15 @@
         .spec-label { font-weight: 600; width: 120px; flex-shrink: 0; color: var(--dark); }
         .spec-value { color: var(--text-light); }
         
-        /* --- Swiper Slider Styles --- */
+        /* --- Swiper Slider Styles (REVISED FOR PERFECT IMAGE DISPLAY) --- */
         .product-slider-main {
             width: 100%;
-            height: 300px;
+            /* Using aspect-ratio for a responsive, consistent shape without a fixed height */
+            aspect-ratio: 4 / 3;
             margin-bottom: 15px;
             border-radius: var(--border-radius-md);
+            /* Add a background color that shows if images have different aspect ratios */
+            background-color: #f0f0f0; 
         }
         .product-slider-main .swiper-slide {
             display: flex;
@@ -343,12 +346,9 @@
         .product-slider-main .swiper-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            /* This is the key change: 'contain' ensures the whole image is visible without distortion */
+            object-fit: contain;
             cursor: pointer;
-            transition: transform 0.4s ease;
-        }
-        .product-slider-main .swiper-slide:hover img {
-            transform: scale(1.1);
         }
 
         .product-slider-thumbs {
@@ -370,6 +370,7 @@
         .product-slider-thumbs .swiper-slide img {
             width: 100%;
             height: 100%;
+            /* Use 'cover' for thumbnails as small cropping is acceptable here */
             object-fit: cover;
             cursor: pointer;
             border-radius: calc(var(--border-radius-md) - 2px);
@@ -458,7 +459,6 @@
              padding: 0; background: transparent; box-shadow: none;
              width: 100%; height: 100%; max-width: 100vw; max-height: 100vh;
         }
-         #zoomedImage { max-width: 100%; max-height: 90vh; border-radius: var(--border-radius-lg); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
          .lightbox-modal .close-lightbox-modal { color: var(--white); top: 20px; right: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.5); font-size: 3rem; }
 
         /* Search Modal */
@@ -491,6 +491,7 @@
             max-height: 85vh;
             width: auto;
             height: auto;
+            object-fit: contain; /* Ensure no distortion in lightbox either */
         }
         #lightbox-swiper .swiper-button-next,
         #lightbox-swiper .swiper-button-prev {
@@ -876,6 +877,9 @@
             function initializeSliders() {
                 const productCards = document.querySelectorAll('.gallery-item');
                 productCards.forEach(card => {
+                    // Check if sliders are already initialized to avoid re-initialization errors
+                    if (card.querySelector('.product-slider-main').swiper) return;
+
                     const thumbsSwiper = new Swiper(card.querySelector('.product-slider-thumbs'), {
                         spaceBetween: 10,
                         slidesPerView: 4,
@@ -883,7 +887,7 @@
                         watchSlidesProgress: true,
                     });
 
-                    const mainSwiper = new Swiper(card.querySelector('.product-slider-main'), {
+                    new Swiper(card.querySelector('.product-slider-main'), {
                         spaceBetween: 10,
                         navigation: {
                             nextEl: card.querySelector('.swiper-button-next'),
@@ -961,6 +965,9 @@
                                 nextEl: '#lightbox-swiper .swiper-button-next',
                                 prevEl: '#lightbox-swiper .swiper-button-prev',
                             },
+                            keyboard: {
+                                enabled: true,
+                            },
                         });
                     }
                     
@@ -1030,7 +1037,7 @@
                 );
                 
                 if (filteredProducts.length > 0) {
-                    const mainImage = (p) => p.details.images[0] || '';
+                    const mainImage = (p) => (p.details.images && p.details.images.length > 0) ? p.details.images[0] : '';
                     searchResults.innerHTML = filteredProducts.map(p => `
                         <a href="#product-${p.id}" class="search-result-item">
                             <img src="${mainImage(p)}" class="search-result-image" alt="${p.title}" loading="lazy">
