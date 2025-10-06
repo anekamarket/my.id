@@ -2,6 +2,10 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
+    
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas.">
     <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir">
@@ -11,7 +15,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://s.id/anekamarket">
     <meta property="og:image" content="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png">
-    <title>NIKI SAE MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
+    <title>MOCHI UMA MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,7 +77,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: url('https://i.imgur.com/y8r14Z3.jpeg') no-repeat center center/cover;
+            background: url('https://i.imgur.com/TPSWsZw.jpeg') no-repeat center center/cover;
             overflow: hidden;
         }
         
@@ -82,7 +86,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://i.imgur.com/y8r14Z3.jpeg') no-repeat center center/cover;
+            background: url('https://i.imgur.com/TPSWsZw.jpeg') no-repeat center center/cover;
             animation: kenburns 20s ease-in-out infinite alternate;
         }
         @keyframes kenburns {
@@ -701,7 +705,7 @@
         <div class="header-content">
             <div class="logo">
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
-                <span>NIKI SAE MITRA ANEKAMARKET</span>
+                <span>MOCHI UMA MITRA ANEKAMARKET</span>
             </div>
             <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
             
@@ -714,7 +718,7 @@
                 <a href="#gallery" class="btn btn-primary">
                     <i class="fas fa-images"></i> Lihat Karya & Jualan Kami
                 </a>
-                <a href="https://wa.me/6285731247566" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                <a href="https://wa.me/6289679013099" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
                     <i class="fab fa-whatsapp"></i> Hubungi Kami
                 </a>
             </div>
@@ -731,7 +735,7 @@
             <div class="nav-links" id="navLinks">
                 <a href="#home">Beranda</a>
                 <a href="#gallery">Galeri</a>
-                <a href="https://wa.me/6285731247566">Kontak</a>
+                <a href="https://wa.me/6289679013099">Kontak</a>
             </div>
 
             <div>
@@ -759,10 +763,10 @@
         <a href="https://www.aplikasiusaha.com/notagratis" class="contact-btn register-btn" target="_blank" rel="noopener noreferrer" aria-label="Daftar Sekarang Juga">
             <i class="fas fa-cash-register"></i>
         </a>
-        <a href="https://wa.me/6285731247566" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
+        <a href="https://wa.me/6289679013099" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="tel:+6285731247566" class="contact-btn phone" aria-label="Telepon Kami">
+        <a href="tel:+6289679013099" class="contact-btn phone" aria-label="Telepon Kami">
             <i class="fas fa-phone"></i>
         </a>
         <button class="contact-btn order" id="quickOrderBtn" aria-label="Pesan Cepat">
@@ -789,7 +793,7 @@
                 <ul class="footer-links">
                     <li><a href="#home">Beranda</a></li>
                     <li><a href="#gallery">Galeri</a></li>
-                    <li><a href="https://wa.me/6285731247566">Kontak</a></li>
+                    <li><a href="https://wa.me/6289679013099">Kontak</a></li>
                 </ul>
             </div>
             
@@ -883,46 +887,55 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- [PERBAIKAN] FITUR BARU: Refresh Otomatis & Hapus Cache ---
+            // Fungsi untuk me-refresh halaman pada interval tertentu
+            function autoRefreshPage() {
+                // Refresh halaman setelah 30 menit (1800000 milidetik)
+                setTimeout(() => {
+                    // Menggunakan location.replace() untuk menghapus halaman lama dari riwayat sesi
+                    // Ini memastikan pengguna selalu melihat konten yang paling baru.
+                    location.replace(location.href);
+                }, 1800000); 
+            }
+            // --- [AKHIR PERBAIKAN] ---
             
-            // --- DATA PRODUK (TELAH DIPERBARUI) ---
+            // --- DATA PRODUK ---
             const products = [
                 {
-                    id: "NS-2025-3348",
-                    category: "food",
-                    type: "promo",
-                    seller: { name: "Niki Sae", link: "https://www.anekamarket.my.id/nikisae" },
+                    id: "MCU-2025-2830",
+                    category: "snack", type: "promo",
+                    seller: { name: "Mochi UMA", link: "https://anekamarket.my.id" },
                     badge: { text: "Promo Spesial", type: "promo" },
-                    title: "Promo Frozen Food Homemade Niki Sae",
-                    code: "NS-2025-3348",
+                    title: "Promo Aneka Kue Lezat Mochi Uma",
+                    code: "MCU-2025-2830",
                     priceVariations: [
-                        { name: "Pempek", price: 12000 },
-                        { name: "Tahu Walik", price: 11000 },
-                        { name: "Nugget Ikan/Ayam", price: 12000 },
-                        { name: "Dragon Stick", price: 12000 },
-                        { name: "Otak-Otak Ikan", price: 12000 }
+                        { name: "Pancake Durian", price: 10000 },
+                        { name: "Mochi (3pcs)", price: 10000 },
+                        { name: "Cireng Ayam Suwir", price: 10000 },
+                        { name: "Corndog Coklat (isi 3)", price: 10000 }
                     ],
                     details: {
-                        description: "<strong>PROMO SPESIAL!</strong> Niki Sae dari Dapur Yunna menghadirkan promo frozen food homemade dengan kualitas terbaik. Semua produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Produk kami termasuk Pempek, Tahu Walik, Otak-Otak Ikan, Nugget Ikan dan Ayam, serta Dragon Stick. Setiap produk dibuat dengan standar kebersihan tinggi dan rasa yang konsisten. Nikmati diskon spesial untuk pembelian selama periode promo!",
+                        description: "<strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik.",
                         images: [
-                            "https://i.imgur.com/y8r14Z3.jpeg",
-                            "https://i.imgur.com/RP8HTMb.jpeg",
-                            "https://i.imgur.com/GWXfEGJ.jpeg",
-                            "https://i.imgur.com/WSB6cXr.jpeg",
-                            "https://i.imgur.com/ubU63gJ.jpeg"
+                            "https://i.imgur.com/TPSWsZw.jpeg",
+                            "https://i.imgur.com/dlK9kfP.jpeg",
+                            "https://i.imgur.com/JsXOHCO.jpeg",
+                            "https://i.imgur.com/kJDDUy4.jpeg"
                         ],
                         specs: [
-                            { label: "Kode Promo", value: "NS-2025-3348" },
-                            { label: "Nama UMKM", value: "Niki Sae Pempek dan Tahu walik" },
-                            { label: "Pemilik", value: "Yuliana Mulyaningtyas" },
-                            { label: "Alamat", value: "Perum Graha Sultan Raya 1 blok G. 61, Panji" },
-                            { label: "Kontak", value: "085731247566" },
-                            { label: "Media Sosial", value: "Belum tersedia" },
-                            { label: "Daftar Promo", value: "• Pempek <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Tahu Walik <s>Rp13.750</s> <strong>Rp11.000</strong> (20% OFF)<br>• Nugget Ikan/Ayam <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Dragon Stick <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Otak-Otak Ikan <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)" },
-                            { label: "Periode Promo", value: "Periode Promo sewaktu-waktu tidak berlaku" },
-                            { label: "Catatan", value: "• Harga normal berlaku setelah periode promo berakhir<br>• Minimal pembelian 5 pcs per item<br>• Free ongkir untuk pembelian di atas Rp100.000 (area tertentu)" }
+                            { label: "Kode Promo", value: "MCU-2025-2830" },
+                            { label: "Nama UMKM", value: "Mochi UMA" },
+                            { label: "Pemilik", value: "ULink" },
+                            { label: "Alamat", value: "Jl. Wijaya Kusuma Samping Bidan Ika" },
+                            { label: "Kontak", value: "089679013099 | nurilaneeh@gmail.com" },
+                            { label: "Media Sosial", value: "TikTok @mochi.uma3" },
+                            { label: "Daftar Promo", value: "• Pancake Durian Rp10.000<br>• Mochi 3pcs Rp10.000<br>• Cireng Ayam Suwir Rp10.000<br>• Corndog Coklat isi 3 Rp10.000" },
+                            { label: "Periode Promo", value: "Sampai 31 Agustus 2025" },
+                            { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
                         ]
                     },
-                    contact: { whatsapp: "6285731247566", phone: "+6285731247566" }
+                    contact: { whatsapp: "6289679013099", phone: "+6289679013099" }
                 }
             ];
 
@@ -1424,7 +1437,7 @@
                         .map(item => ({ name: item.dataset.name, price: parseFloat(item.dataset.price), quantity: parseInt(item.querySelector('.quantity-input').value, 10) }))
                         .filter(item => item.quantity > 0);
 
-                    const defaultProductInfo = products.length > 0 ? products[0] : { code: 'QUICK-ORDER', seller: { name: 'ANEKAMARKET' }, contact: { whatsapp: '6285731247566' } };
+                    const defaultProductInfo = products.length > 0 ? products[0] : { code: 'QUICK-ORDER', seller: { name: 'ANEKAMARKET' }, contact: { whatsapp: '6289679013099' } };
                     
                     if(processOrder(defaultProductInfo, items)) {
                         orderModal.classList.remove('show');
@@ -1469,6 +1482,7 @@
             // --- INITIATE ---
             renderProducts(products);
             setupEventListeners();
+            autoRefreshPage(); // Panggil fungsi refresh otomatis saat semua sudah siap
         });
     </script>
 </body>
