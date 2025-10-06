@@ -955,7 +955,7 @@
                 }, 100);
             }
 
-            // --- FUNGSI BARU (DITINGKATKAN): Membuat dan mengunduh PDF ---
+            // --- FUNGSI BARU (DISEMPURNAKAN): Membuat dan mengunduh PDF ---
             async function generateAndDownloadPdf(orderData) {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
@@ -968,26 +968,37 @@
                     const pageHeight = doc.internal.pageSize.getHeight();
                     const pageWidth = doc.internal.pageSize.getWidth();
 
-                    // Header
+                    // === HEADER BARU YANG DISEMPURNAKAN ===
                     if (logoBase64) {
-                        doc.addImage(logoBase64, 'PNG', 14, 12, 25, 25);
+                        doc.addImage(logoBase64, 'PNG', 14, 15, 25, 25);
                     }
-                    doc.setFontSize(22);
+                    doc.setFontSize(10);
+                    doc.setFont(undefined, 'normal');
+                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.text("MARKETPLACE", 45, 22);
+                    
+                    doc.setFontSize(16);
                     doc.setFont(undefined, 'bold');
                     doc.setTextColor('#1A2533'); // var(--dark)
-                    doc.text("INVOICE", 45, 22);
+                    doc.text("ANEKAMARKET", 45, 30);
                     
-                    doc.setFontSize(9);
-                    doc.setFont(undefined, 'normal');
-                    doc.setTextColor('#2c3e50'); // var(--text-dark)
-                    doc.text(`Kode Transaksi: ${transactionCode}`, pageWidth - 14, 18, { align: 'right' });
-                    doc.text(`Tanggal: ${formattedDate}`, pageWidth - 14, 24, { align: 'right' });
-                    doc.text(`Penjual: ${orderData.product.seller.name}`, pageWidth - 14, 30, { align: 'right' });
-
-                    // Info Toko
                     doc.setDrawColor('#EAEFF5'); // var(--border-color)
-                    doc.line(14, 42, pageWidth - 14, 42);
+                    doc.line(14, 45, pageWidth - 14, 45);
+                    
+                    // Info Penjual dan Transaksi
+                    doc.setFontSize(8);
+                    doc.setFont(undefined, 'bold');
+                    doc.setTextColor('#7f8c8d');
+                    doc.text("DITERBITKAN OLEH:", 14, 52);
+                    doc.text("DETAIL TRANSAKSI:", pageWidth / 2, 52);
 
+                    doc.setFontSize(10);
+                    doc.setFont(undefined, 'normal');
+                    doc.setTextColor('#1A2533');
+                    doc.text(orderData.product.seller.name, 14, 58);
+                    doc.text(`No. Transaksi: ${transactionCode}`, pageWidth / 2, 58);
+                    doc.text(`Tanggal: ${formattedDate}`, pageWidth / 2, 64);
+                    
                     // Tabel Rincian Pesanan
                     const tableColumn = ["No.", "Nama Produk", "Harga Satuan", "Jumlah", "Subtotal"];
                     const tableRows = [];
@@ -1006,7 +1017,7 @@
                     doc.autoTable({
                         head: [tableColumn],
                         body: tableRows,
-                        startY: 50,
+                        startY: 75,
                         theme: 'grid',
                         headStyles: { 
                             fillColor: '#4A90E2', // var(--primary)
@@ -1015,7 +1026,7 @@
                         },
                         styles: {
                             halign: 'center',
-                            font: 'Poppins' // Gunakan font yang konsisten jika memungkinkan
+                            font: 'Poppins'
                         },
                         columnStyles: {
                            1: { halign: 'left' }
