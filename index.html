@@ -484,7 +484,45 @@
                 }).format(amount);
             }
 
-            // --- [REVISI TOTAL] FUNGSI GENERATE STRUK DENGAN DESAIN PROFESIONAL ---
+            // --- [BARU] FUNGSI BANTUAN UNTUK MEWARNAI KODE QR ---
+            async function colorizeQrCode(qrDataUrl, newColor = {r: 0, g: 123, b: 255}) {
+                return new Promise((resolve, reject) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+                    const img = new Image();
+                    img.onload = () => {
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        try {
+                            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                            const data = imageData.data;
+                            for (let i = 0; i < data.length; i += 4) {
+                                // Jika piksel berwarna hitam (atau mendekati hitam) dan tidak transparan
+                                if (data[i] < 50 && data[i+1] < 50 && data[i+2] < 50 && data[i+3] > 200) {
+                                    data[i] = newColor.r;     // merah
+                                    data[i+1] = newColor.g; // hijau
+                                    data[i+2] = newColor.b; // biru
+                                }
+                            }
+                            ctx.putImageData(imageData, 0, 0);
+                            resolve(canvas.toDataURL());
+                        } catch (error) {
+                            console.error("Gagal memproses gambar QR:", error);
+                            // Kembali ke gambar asli jika pemrosesan gagal
+                            resolve(qrDataUrl);
+                        }
+                    };
+                    img.onerror = (err) => {
+                        console.error("Gagal memuat gambar QR:", err);
+                        reject(err);
+                    };
+                    img.crossOrigin = "anonymous";
+                    img.src = qrDataUrl;
+                });
+            }
+
+            // --- [REVISI & PERBAIKAN] FUNGSI GENERATE STRUK DENGAN DESAIN PROFESIONAL ---
             async function generateAndDownloadReceipt(productData, orderDetails) {
                 const doc = new jsPDF();
                 const transactionId = `TRX-${productData.code}-${Date.now()}`;
@@ -632,26 +670,27 @@
                     doc.setTextColor(brandColor);
                     doc.text(finalAmount, pageW - margin, y + 8, { align: 'right' });
 
-                    // --- FOOTER ---
+                    // --- [PERBAIKAN] FOOTER ---
                     y = pageH - 40;
                     doc.setDrawColor(borderColor);
                     doc.line(margin, y, pageW - margin, y);
                     y += 8;
                     
                     doc.setFontSize(8).setFont(undefined, 'italic').setTextColor(grayColor);
-                    const noteText = doc.splitTextToSize('Struk ini merupakan bukti pemesanan yang sah dan dibuat secara otomatis oleh sistem. Harap simpan struk ini untuk proses konfirmasi pembayaran dengan penjual.', pageW - margin*2 - 30);
+                    const noteText = doc.splitTextToSize('Struk ini merupakan bukti pemesanan yang sah dan dibuat secara otomatis oleh sistem. Harap simpan struk ini untuk proses konfirmasi pembayaran dengan penjual.', pageW - margin * 2 - 30);
                     doc.text(noteText, margin, y);
 
                     const qr = qrcode(0, 'M');
-                    qr.addData('https://www.aplikasiusaha.com');
+                    qr.addData('https://s.id/anekamarket');
                     qr.make();
-                    const qrCodeImage = qr.createDataURL(4);
-                    doc.addImage(qrCodeImage, 'PNG', pageW - margin - 22, y, 22, 22);
+                    const blackQrCodeImage = qr.createDataURL(4);
+                    const blueQrCodeImage = await colorizeQrCode(blackQrCodeImage, {r: 0, g: 123, b: 255}); // Mengubah warna QR
+                    doc.addImage(blueQrCodeImage, 'PNG', pageW - margin - 22, y, 22, 22);
 
-                    y = pageH - 15;
+                    y = pageH - 10; // Posisi y di bagian bawah halaman
                     doc.setFontSize(8).setFont(undefined, 'normal').setTextColor(grayColor);
-                    doc.text(`© ${new Date().getFullYear()} ANEKAMARKET. Terima kasih telah berbelanja!`, margin, y);
-                    doc.text('Developed by: www.anekamarket.my.id', pageW - margin, y, { align: 'right' });
+                    const footerText = `© ${new Date().getFullYear()} ANEKAMARKET | Developed by www.anekamarket.my.id`;
+                    doc.text(footerText, pageW / 2, y, { align: 'center' }); // Teks di tengah
                     
                     doc.save(`Struk-${orderDetails.type}-${productData.code}.pdf`);
 
