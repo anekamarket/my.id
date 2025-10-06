@@ -790,7 +790,7 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px; justify-content: center;">
-                    <i class="fab fa-whatsapp"></i> Kirim Pesanan
+                    <i class="fab fa-whatsapp"></i> Kirim Pesanan & Struk
                 </button>
             </form>
         </div>
@@ -837,6 +837,9 @@
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.1/jspdf.plugin.autotable.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -894,6 +897,78 @@
 
             function formatPrice(amount) {
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
+            }
+
+            // --- FUNGSI BARU: Membuat dan mengunduh PDF ---
+            function generateAndDownloadPdf(orderData) {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+
+                const today = new Date();
+                const formattedDate = today.toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
+
+                // Header
+                doc.setFontSize(20);
+                doc.setFont(undefined, 'bold');
+                doc.text("Struk Pembelian ANEKAMARKET", doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
+
+                doc.setFontSize(10);
+                doc.setFont(undefined, 'normal');
+                doc.text(`Tanggal: ${formattedDate}`, doc.internal.pageSize.getWidth() - 20, 30, { align: 'right' });
+                doc.text(`Kode Pesanan: ${orderData.product.code}`, 20, 30);
+                
+                // Info Toko
+                doc.line(20, 35, doc.internal.pageSize.getWidth() - 20, 35); // separator
+                doc.setFontSize(12);
+                doc.setFont(undefined, 'bold');
+                doc.text("Informasi Penjual:", 20, 45);
+                doc.setFont(undefined, 'normal');
+                doc.text(`Nama Toko: ${orderData.product.seller.name}`, 20, 52);
+                doc.text(`Kontak: ${orderData.product.contact.whatsapp}`, 20, 59);
+                doc.line(20, 65, doc.internal.pageSize.getWidth() - 20, 65); // separator
+
+                // Tabel Rincian Pesanan
+                const tableColumn = ["No.", "Nama Produk", "Harga Satuan", "Jumlah", "Subtotal"];
+                const tableRows = [];
+                
+                orderData.items.forEach((item, index) => {
+                    const itemData = [
+                        index + 1,
+                        item.name,
+                        formatPrice(item.price),
+                        item.quantity,
+                        formatPrice(item.price * item.quantity)
+                    ];
+                    tableRows.push(itemData);
+                });
+
+                doc.autoTable({
+                    head: [tableColumn],
+                    body: tableRows,
+                    startY: 70,
+                    theme: 'grid',
+                    headStyles: { fillColor: [74, 144, 226] }, // Warna --primary
+                    didDrawPage: function (data) {
+                        // Footer Tabel - Total
+                        const tableEndY = data.cursor.y;
+                        doc.setFontSize(14);
+                        doc.setFont(undefined, 'bold');
+                        doc.text("Total Pesanan:", data.settings.margin.left, tableEndY + 10);
+                        doc.text(formatPrice(orderData.total), doc.internal.pageSize.getWidth() - data.settings.margin.right, tableEndY + 10, { align: 'right' });
+                    }
+                });
+
+                const finalY = doc.previousAutoTable.finalY;
+
+                // Footer Dokumen
+                doc.setFontSize(10);
+                doc.setTextColor(150);
+                doc.text("Terima kasih telah berbelanja!", doc.internal.pageSize.getWidth() / 2, finalY + 30, { align: 'center' });
+                doc.text("Struk ini dibuat secara otomatis oleh sistem ANEKAMARKET.", doc.internal.pageSize.getWidth() / 2, finalY + 35, { align: 'center' });
+
+                // Simpan PDF
+                const fileName = `Struk-ANEKAMARKET-${orderData.product.code}-${today.getTime()}.pdf`;
+                doc.save(fileName);
             }
 
             function renderProducts(productsToRender) {
@@ -959,7 +1034,7 @@
                                 </div>
                             </div>
                             <div class="gallery-actions">
-                                <button class="btn-order"><i class="fab fa-whatsapp"></i> Pesan Sekarang</button>
+                                <button class="btn-order"><i class="fab fa-whatsapp"></i> Pesan & Unduh Struk</button>
                                 <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
                             </div>
                             <div class="gallery-detail-expanded">
@@ -1002,7 +1077,6 @@
                 card.querySelector('.total-price-value').textContent = formatPrice(total);
             }
             
-            // --- FUNGSI BARU: Mengisi Modal Pesan Cepat ---
             function populateQuickOrderModal() {
                 const productListContainer = document.getElementById('quickOrderProductList');
                 if (!productListContainer) return;
@@ -1030,7 +1104,6 @@
                 updateQuickOrderTotal();
             }
 
-            // --- FUNGSI BARU: Memperbarui Total Harga di Modal Pesan Cepat ---
             function updateQuickOrderTotal() {
                 const modal = document.getElementById('orderModal');
                 if (!modal) return;
@@ -1051,7 +1124,6 @@
                 const card = e.target.closest('.gallery-item');
                 if (!card) return;
                 
-                // --- Quantity Controls ---
                 if (e.target.matches('.quantity-btn')) {
                     const input = e.target.parentElement.querySelector('.quantity-input');
                     let value = parseInt(input.value, 10);
@@ -1064,7 +1136,6 @@
                     updateCardTotal(card);
                 }
 
-                // --- Detail Toggle ---
                 if (e.target.closest('.btn-detail')) {
                     playSound();
                     const btn = e.target.closest('.btn-detail');
@@ -1073,7 +1144,6 @@
                     btn.innerHTML = isVisible ? '<i class="fas fa-chevron-up"></i> Sembunyikan' : '<i class="fas fa-info-circle"></i> Detail';
                 }
                 
-                // --- Open Lightbox ---
                 if (e.target.closest('.product-slider-main .swiper-slide')) {
                     const clickedSlide = e.target.closest('.swiper-slide');
                     const product = products.find(p => p.id === card.dataset.id);
@@ -1094,7 +1164,7 @@
                     });
                 }
                 
-                // --- Order Button ---
+                // --- Logika Tombol Pesan yang Diperbarui ---
                 if (e.target.closest('.btn-order')) {
                     playSound();
                     const product = products.find(p => p.id === card.dataset.id);
@@ -1104,11 +1174,21 @@
 
                     if (items.length > 0) {
                         const totalOrderPrice = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                        
+                        // Buat data untuk PDF
+                        const orderDataForPdf = {
+                            product: product,
+                            items: items,
+                            total: totalOrderPrice
+                        };
+                        // Panggil fungsi untuk buat & unduh PDF
+                        generateAndDownloadPdf(orderDataForPdf);
+                        
+                        // Lanjutkan ke WhatsApp
                         const orderDetails = items.map(item => `- *${item.name}* (x${item.quantity}) = ${formatPrice(item.price * item.quantity)}`).join('\n');
-                        const message = `Halo, saya tertarik untuk memesan dari *${product.seller.name}*:\n\n*${product.title}* (Kode: ${product.code})\n\n*Rincian Pesanan:*\n${orderDetails}\n\n*TOTAL PESANAN: ${formatPrice(totalOrderPrice)}*\n\nMohon konfirmasi ketersediaan dan proses selanjutnya. Terima kasih.`;
+                        const message = `Halo, saya tertarik untuk memesan dari *${product.seller.name}*:\n\n*${product.title}* (Kode: ${product.code})\n\n*Rincian Pesanan:*\n${orderDetails}\n\n*TOTAL PESANAN: ${formatPrice(totalOrderPrice)}*\n\nStruk pembelian PDF telah saya unduh dan akan saya kirimkan sebagai lampiran.\n\nMohon konfirmasi ketersediaan dan proses selanjutnya. Terima kasih.`;
                         window.open(`https://wa.me/${product.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
                     } else {
-                        // REFINEMENT: Replaced alert with shake animation
                         const orderButton = e.target.closest('.btn-order');
                         orderButton.classList.add('shake-animation');
                         setTimeout(() => orderButton.classList.remove('shake-animation'), 500);
@@ -1121,13 +1201,11 @@
                     galleryGrid.addEventListener('click', handleGalleryClick);
                 }
 
-                // --- Mobile Menu ---
                 document.getElementById('mobileMenuToggle').addEventListener('click', () => {
                     playSound();
                     document.getElementById('navLinks').classList.toggle('active');
                 });
 
-                // --- Search Modal ---
                 const searchModal = document.getElementById('searchModal');
                 const searchModalInput = document.getElementById('searchModalInput');
                 const searchResults = document.getElementById('searchResults');
@@ -1167,14 +1245,12 @@
                     }
                 });
 
-                // --- General Modal Close Logic ---
                 document.querySelectorAll('.modal, .search-modal, .lightbox-modal').forEach(modal => {
                     modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('show'); });
                     const closeButton = modal.querySelector('.close-modal, .close-search-modal, .close-lightbox-modal');
                     if(closeButton) closeButton.addEventListener('click', () => modal.classList.remove('show'));
                 });
 
-                // --- Quick Order Modal Logic ---
                 const orderModal = document.getElementById('orderModal');
                 document.getElementById('quickOrderBtn').addEventListener('click', () => {
                     playSound();
@@ -1182,7 +1258,6 @@
                     orderModal.classList.add('show');
                 });
 
-                // Event listener untuk quantity buttons di dalam Quick Order Modal
                 orderModal.addEventListener('click', (e) => {
                     if (e.target.matches('.quantity-btn')) {
                         const input = e.target.parentElement.querySelector('.quantity-input');
@@ -1196,8 +1271,8 @@
                         updateQuickOrderTotal();
                     }
                 });
-
-                // Event listener untuk form submission di Quick Order Modal
+                
+                // --- Logika Form Pesan Cepat yang Diperbarui ---
                 document.getElementById('quickOrderForm').addEventListener('submit', (e) => {
                     e.preventDefault();
                     playSound();
@@ -1208,10 +1283,20 @@
 
                     if (items.length > 0) {
                         const totalOrderPrice = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                        
+                        // Menggunakan data produk pertama sebagai referensi untuk info penjual & kode
+                        const defaultProductInfo = products.length > 0 ? products[0] : { code: 'QUICK-ORDER', seller: { name: 'ANEKAMARKET' }, contact: { whatsapp: '6289679013099' } };
+                        
+                        const orderDataForPdf = {
+                            product: defaultProductInfo,
+                            items: items,
+                            total: totalOrderPrice
+                        };
+                        generateAndDownloadPdf(orderDataForPdf);
+
                         const orderDetails = items.map(item => `- *${item.name}* (x${item.quantity}) = ${formatPrice(item.price * item.quantity)}`).join('\n');
-                        // Ambil nomor kontak dari data produk pertama sebagai tujuan
-                        const contactNumber = products.length > 0 ? products[0].contact.whatsapp : '6289679013099';
-                        const message = `Halo, saya ingin melakukan *Pesan Cepat*:\n\n*Rincian Pesanan:*\n${orderDetails}\n\n*TOTAL PESANAN: ${formatPrice(totalOrderPrice)}*\n\nMohon konfirmasi ketersediaan dan proses selanjutnya. Terima kasih.`;
+                        const contactNumber = defaultProductInfo.contact.whatsapp;
+                        const message = `Halo, saya ingin melakukan *Pesan Cepat*:\n\n*Rincian Pesanan:*\n${orderDetails}\n\n*TOTAL PESANAN: ${formatPrice(totalOrderPrice)}*\n\nStruk pembelian PDF telah saya unduh dan akan saya kirimkan sebagai lampiran.\n\nMohon konfirmasi ketersediaan dan proses selanjutnya. Terima kasih.`;
                         
                         window.open(`https://wa.me/${contactNumber}?text=${encodeURIComponent(message)}`, '_blank');
                         orderModal.classList.remove('show');
@@ -1223,7 +1308,6 @@
                 });
 
 
-                // --- Offer Notification ---
                 const offerNotification = document.getElementById('offerNotification');
                 if (offerNotification) {
                     setTimeout(() => offerNotification.classList.add('show'), 5000);
@@ -1241,7 +1325,6 @@
                     document.getElementById('closeNotification').addEventListener('click', () => offerNotification.classList.remove('show'));
                 }
                 
-                // --- Navbar Scroll & Back to Top Button Logic ---
                 const navbar = document.getElementById('navbar');
                 const backToTopBtn = document.querySelector('.back-to-top');
                 window.addEventListener('scroll', () => {
