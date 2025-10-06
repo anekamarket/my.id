@@ -609,6 +609,67 @@
             transform: scale(1.1);
         }
 
+        /* --- NEW: Floating Register Button (PENAMBAHAN BARU) --- */
+        .register-float-btn {
+            position: fixed;
+            bottom: 85px; /* Posisikan di atas tombol Back to Top */
+            right: 20px;
+            z-index: 998; /* Di bawah back-to-top dan contact-bar */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(45deg, #ff4757, #ff6348); /* Warna gradasi merah-oranye yang menarik */
+            color: var(--white);
+            border-radius: 50%;
+            border: none;
+            box-shadow: var(--shadow-strong);
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .register-float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .register-float-btn .btn-icon {
+            font-size: 2rem; /* Ukuran ikon kasir */
+        }
+        
+        /* Animasi Gelombang Sinyal/Radar */
+        .register-float-btn::before,
+        .register-float-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 71, 87, 0.5);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            opacity: 0;
+            animation: pulse 2.5s infinite;
+        }
+        
+        .register-float-btn::after {
+            animation-delay: 1.25s; /* Mulai animasi kedua setengah jalan */
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.5);
+                opacity: 0;
+            }
+        }
+
         /* --- Responsive Styles --- */
         @media (max-width: 992px) {
             .logo span { font-size: 2.4rem; }
@@ -638,6 +699,8 @@
             .footer-container { text-align: center; }
             .footer-col h3::after { left: 50%; transform: translateX(-50%); }
             .back-to-top { width: 45px; height: 45px; font-size: 1.3rem; }
+            .register-float-btn { width: 60px; height: 60px; bottom: 80px; }
+            .register-float-btn .btn-icon { font-size: 1.8rem; }
         }
         
         @media (max-width: 480px) {
@@ -651,6 +714,7 @@
             .offer-notification { width: calc(100% - 20px); bottom: 10px; right: 10px; }
              .contact-bar { left: 10px; bottom: 10px; }
              .contact-btn { width: 50px; height: 50px; font-size: 1.5rem; }
+             .register-float-btn { bottom: 75px; right: 10px; }
         }
     </style>
 </head>
@@ -735,6 +799,10 @@
 
     <a href="#home" class="back-to-top" aria-label="Kembali ke atas">
         <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <a href="https://www.aplikasiusaha.com/notagratis" target="_blank" rel="noopener noreferrer" class="register-float-btn" title="Daftar Sekarang Juga">
+        <i class="fas fa-cash-register btn-icon"></i>
     </a>
     
     <footer>
