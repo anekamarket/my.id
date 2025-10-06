@@ -25,172 +25,115 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.js"></script>
     
     <style>
-        .search-modal.show {
-            display: flex;
-        }
-        .search-modal-content {
-            width: 90%;
-            max-width: 600px;
-            background: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            position: relative;
-        }
-        .search-modal-input {
-            width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        .search-results {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        .search-result-item {
+        /* CSS yang sudah ada tetap dipertahankan */
+        .search-modal.show { display: flex; }
+        .search-modal-content { width: 90%; max-width: 600px; background: #fff; border-radius: 8px; padding: 20px; position: relative; }
+        .search-modal-input { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; }
+        .search-results { max-height: 400px; overflow-y: auto; }
+        .search-result-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; text-decoration: none; color: #333; transition: background-color 0.3s; }
+        .search-result-item:hover { background-color: #f5f5f5; }
+        .search-result-image { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; margin-right: 15px; }
+        .search-result-info h4 { margin: 0 0 5px 0; font-size: 1rem; font-weight: 600; }
+        .search-result-info p { margin: 0; font-size: 0.85rem; color: #666; }
+        .search-results-placeholder { text-align: center; color: #888; padding: 20px; }
+        
+        .offer-notification { position: fixed; bottom: 20px; right: 20px; background-color: #ffffff; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 320px; z-index: 1001; transform: translateY(200%); opacity: 0; transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; font-family: 'Poppins', sans-serif; }
+        .offer-notification.show { transform: translateY(0); opacity: 1; }
+        .offer-notification .notification-content { display: none; }
+        .offer-notification .notification-content.active { display: block; }
+        .offer-notification h4 { margin: 0 0 10px 0; font-weight: 600; font-size: 1rem; line-height: 1.4; }
+        .offer-notification .notification-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .offer-notification .notification-btn { flex: 1; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
+        .offer-notification .btn-yes { background-color: #007bff; color: white; }
+        .offer-notification .btn-yes:hover { background-color: #0056b3; }
+        .offer-notification .btn-no { background-color: #f1f1f1; color: #333; border: 1px solid #ddd; }
+        .offer-notification .btn-no:hover { background-color: #e0e0e0; }
+        .offer-notification .close-notification { position: absolute; top: 10px; right: 15px; font-size: 20px; color: #888; cursor: pointer; transition: color 0.3s; }
+        .offer-notification .close-notification:hover { color: #333; }
+        
+        .btn-visit { display: flex; align-items: center; justify-content: center; background-color: #28a745; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: 500; font-size: 0.85rem; transition: background-color 0.3s; flex: 1; text-align: center; }
+        .btn-visit:hover { background-color: #218838; }
+        .btn-visit i { margin-right: 8px; }
+        .gallery-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .gallery-actions .btn-detail, .gallery-actions .btn-order, .gallery-actions .btn-preorder-toggle, .gallery-actions .btn-visit { flex-grow: 1; min-width: 120px; }
+
+        /* --- CSS BARU UNTUK KONTROL JUMLAH & TOTAL HARGA --- */
+        .quantity-selector {
             display: flex;
             align-items: center;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            text-decoration: none;
-            color: #333;
-            transition: background-color 0.3s;
-        }
-        .search-result-item:hover {
-            background-color: #f5f5f5;
-        }
-        .search-result-image {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 8px;
+            background-color: #f9f9f9;
             border-radius: 5px;
-            margin-right: 15px;
+            border: 1px solid #eee;
         }
-        .search-result-info h4 {
-            margin: 0 0 5px 0;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-        .search-result-info p {
-            margin: 0;
-            font-size: 0.85rem;
-            color: #666;
-        }
-        .search-results-placeholder {
-            text-align: center;
-            color: #888;
-            padding: 20px;
-        }
-        
-        /* --- CSS Notifikasi Penawaran --- */
-        .offer-notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #ffffff;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 320px;
-            z-index: 1001;
-            transform: translateY(200%);
-            opacity: 0;
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-            font-family: 'Poppins', sans-serif;
-        }
-        .offer-notification.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .offer-notification .notification-content {
-            display: none;
-        }
-        .offer-notification .notification-content.active {
-            display: block;
-        }
-        .offer-notification h4 {
-            margin: 0 0 10px 0;
-            font-weight: 600;
-            font-size: 1rem;
-            line-height: 1.4;
-        }
-        .offer-notification .notification-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .offer-notification .notification-btn {
-            flex: 1;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+        .quantity-label {
             font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
+            font-size: 0.9rem;
+            margin-right: 10px;
         }
-        .offer-notification .btn-yes {
-            background-color: #007bff;
-            color: white;
+        .quantity-controls {
+            display: flex;
+            align-items: center;
         }
-        .offer-notification .btn-yes:hover {
-            background-color: #0056b3;
-        }
-        .offer-notification .btn-no {
-            background-color: #f1f1f1;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-        .offer-notification .btn-no:hover {
+        .quantity-btn {
             background-color: #e0e0e0;
-        }
-        .offer-notification .close-notification {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            font-size: 20px;
-            color: #888;
+            border: none;
+            width: 30px;
+            height: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
             cursor: pointer;
-            transition: color 0.3s;
-        }
-        .offer-notification .close-notification:hover {
-            color: #333;
-        }
-        
-        /* CSS untuk Tombol Kunjungi Gerai */
-        .btn-visit {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #28a745;
-            color: white;
-            padding: 8px 12px;
             border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: background-color 0.3s;
-            flex: 1;
+            transition: background-color 0.2s;
+        }
+        .quantity-btn:hover {
+            background-color: #ccc;
+        }
+        .quantity-input {
+            width: 50px;
             text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            height: 30px;
+            font-size: 1rem;
+            -moz-appearance: textfield;
         }
-        .btn-visit:hover {
-            background-color: #218838;
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
-        .btn-visit i {
-            margin-right: 8px;
+        .unit-selector {
+            margin-left: 10px;
         }
-        .gallery-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap; /* Memastikan tombol tidak berantakan di layar kecil */
+        .unit-select {
+            padding: 5px 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
         }
-        .gallery-actions .btn-detail,
-        .gallery-actions .btn-order,
-        .gallery-actions .btn-preorder-toggle,
-        .gallery-actions .btn-visit {
-            flex-grow: 1;
-            min-width: 120px; /* Lebar minimum untuk setiap tombol */
+
+        .total-price {
+            margin: 15px 0;
+            padding: 12px;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #4dd0e1;
+        }
+        .total-price-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #00796b;
+            font-weight: 500;
+        }
+        .total-price-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #004d40;
         }
     </style>
 </head>
@@ -506,217 +449,29 @@
     <script>
         // --- DATA PRODUK (DIAMBIL DARI products.js) ---
         const products = [
-            {
-                id: "AWF-2025-2575",
-                category: "livestock",
-                type: "promo",
-                seller: {
-                    name: "Ardiwillis Farm",
-                    link: "https://www.anekamarket.my.id/ardiwillisfarm" // URL Diperbarui
-                },
-                badge: {
-                    text: "Promosi",
-                    type: "promo"
-                },
-                mainImage: "https://i.imgur.com/pKLE9EY.jpeg",
-                title: "Paket Lengkap Ternak Ayam Ardiwilis",
-                code: "AWF-2025-2575",
-                price: 8000,
-                originalPrice: 10000,
-                discount: "10%",
-                priceVariations: [
-                    { name: "Ecer (per ekor)", price: 8000 },
-                    { name: "10 ekor", price: 75000 },
-                    { name: "100 ekor", price: 700000 }
-                ],
-                units: ["pcs", "kg", "biji", "ekor"],
-                defaultUnit: "ekor",
-                details: {
-                    description: "Ardiwillis Farm menyediakan produk unggulan peternakan ayam berkualitas tinggi. Kami menyediakan telur tetas fertil dengan daya tetas tinggi, DOC (Day Old Chicken) berbagai strain unggul, ayam karkas segar, dan ayam bakar siap saji dengan bumbu khas. Semua produk dihasilkan dari peternakan yang dikelola secara profesional dengan standar kesehatan dan kebersihan tinggi. (Note: Harga tersebut bukan harga tetap, & bisa berubah)",
-                    images: [
-                        "https://i.imgur.com/pAygjAZ.jpeg",
-                        "https://i.imgur.com/XRMPBhw.jpeg",
-                        "https://i.imgur.com/K5m75Rq.jpeg",
-                        "https://i.imgur.com/coJadaj.jpeg"
-                    ],
-                    specs: [
-                        { label: "Kode Produk", value: "AWF-2025-2575" },
-                        { label: "Gerai", value: "Ardiwillis Farm" },
-                        { label: "Jenis", value: "Ayam Pedaging" },
-                        { label: "Usia", value: "DOC (1 hari)" },
-                        { label: "Strain", value: "Cobb 500" },
-                        { label: "Garansi", value: "Hidup sampai diterima" },
-                        { label: "Minimal Order", value: "10 ekor" },
-                        { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
-                    ]
-                },
-                contact: {
-                    whatsapp: "6285258544543",
-                    phone: "+6285258544543"
-                }
-            },
-            {
-                id: "NS-2025-3348",
-                category: "food",
-                type: "promo",
-                seller: {
-                    name: "Niki Sae",
-                    link: "https://www.anekamarket.my.id/nikisae" // URL Diperbarui
-                },
-                badge: {
-                    text: "Promo Spesial",
-                    type: "promo"
-                },
-                mainImage: "https://i.imgur.com/y8r14Z3.jpeg",
-                title: "Promo Frozen Food Homemade Niki Sae",
-                code: "NS-2025-3348",
-                price: 12000,
-                originalPrice: 15000,
-                discount: "20% OFF",
-                priceVariations: [
-                    { name: "Pempek", price: 12000, original: 15000 },
-                    { name: "Tahu Walik", price: 11000, original: 13750 },
-                    { name: "Nugget Ikan/Ayam", price: 12000, original: 15000 },
-                    { name: "Dragon Stick", price: 12000, original: 15000 },
-                    { name: "Otak-Otak Ikan", price: 12000, original: 15000 }
-                ],
-                units: ["pcs", "pack", "set", "lusin"],
-                defaultUnit: "pcs",
-                details: {
-                    description: "<strong>PROMO SPESIAL!</strong> Niki Sae dari Dapur Yunna menghadirkan promo frozen food homemade dengan kualitas terbaik. Semua produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Produk kami termasuk Pempek, Tahu Walik, Otak-Otak Ikan, Nugget Ikan dan Ayam, serta Dragon Stick. Setiap produk dibuat dengan standar kebersihan tinggi dan rasa yang konsisten. Nikmati diskon spesial untuk pembelian selama periode promo!",
-                    images: [
-                        "https://i.imgur.com/RP8HTMb.jpeg",
-                        "https://i.imgur.com/GWXfEGJ.jpeg",
-                        "https://i.imgur.com/WSB6cXr.jpeg",
-                        "https://i.imgur.com/ubU63gJ.jpeg" 
-                    ],
-                    specs: [
-                        { label: "Kode Promo", value: "NS-2025-3348" },
-                        { label: "Nama UMKM", value: "Niki Sae Pempek dan Tahu walik" },
-                        { label: "Pemilik", value: "Yuliana Mulyaningtyas" },
-                        { label: "Alamat", value: "Perum Graha Sultan Raya 1 blok G. 61, Panji" },
-                        { label: "Kontak", value: "085731247566" },
-                        { label: "Media Sosial", value: "Belum tersedia" },
-                        { label: "Daftar Promo", value: "• Pempek <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Tahu Walik <s>Rp13.750</s> <strong>Rp11.000</strong> (20% OFF)<br>• Nugget Ikan/Ayam <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Dragon Stick <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Otak-Otak Ikan <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)" },
-                        { label: "Periode Promo", value: "Periode Promo sewaktu-waktu tidak berlaku" },
-                        { label: "Catatan", value: "• Harga normal berlaku setelah periode promo berakhir<br>• Minimal pembelian 5 pcs per item<br>• Free ongkir untuk pembelian di atas Rp100.000 (area tertentu)" }
-                    ]
-                },
-                contact: {
-                    whatsapp: "6285731247566",
-                    phone: "+6285731247566"
-                }
-            },
-            {
-                id: "PRD-2025-2688",
-                category: "fishery",
-                type: "promo",
-                seller: {
-                    name: "PRADIPA",
-                    link: "https://www.anekamarket.my.id/pradipa" // URL Diperbarui
-                },
-                badge: {
-                    text: "Promosi",
-                    type: "promo"
-                },
-                mainImage: "https://i.imgur.com/ru1FKXW.jpeg",
-                title: "Produk Hasil Laut Segar Pradipa",
-                code: "PRD-2025-2688",
-                price: 30000,
-                originalPrice: null,
-                discount: null,
-                priceVariations: [
-                    { name: "Ikan Bogek/Mendut", price: 35000 },
-                    { name: "Ikan Mangla/Swangi", price: 30000 },
-                    { name: "Ikan Sebelah/Sulfis", price: 35000 }
-                ],
-                units: ["kg", "ekor", "pack"],
-                defaultUnit: "kg",
-                details: {
-                    description: "PRADIPA menghadirkan hasil laut segar langsung dari perairan Panarukan. Kami menyediakan berbagai jenis ikan berkualitas tinggi yang ditangkap dengan metode ramah lingkungan. Setiap produk kami melalui proses seleksi ketat untuk memastikan kesegaran dan kualitas terbaik untuk pelanggan. Dengan pengalaman bertahun-tahun di bidang hasil laut, kami berkomitmen memberikan produk terbaik dengan harga kompetitif.",
-                    images: [
-                       "https://i.imgur.com/n2AkesD.jpeg",
-                        "https://i.imgur.com/tupfVCl.jpeg",
-                        "https://i.imgur.com/VhfoAsv.png"
-                    ],
-                    specs: [
-                        { label: "Kode Produk", value: "PRD-2025-2688" },
-                        { label: "Gerai", value: "PRADIPA" },
-                        { label: "Pemilik", value: "Fajar Nur Cholis" },
-                        { label: "Alamat", value: "Tanah Anyar RT 3 RW 02 Desa Kilensari, Panarukan" },
-                        { label: "Kontak", value: "082334393922 | quenie89@gmail.com" },
-                        { label: "Produk Unggulan", value: "Ikan Bogek/Mendut (Rp35.000/kg), Ikan Mangla/Swangi (Rp30.000/kg), Ikan Sebelah/Sulfis (Rp35.000/kg)" },
-                        { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
-                    ]
-                },
-                contact: {
-                    whatsapp: "6282334393922",
-                    phone: "+6282334393922"
-                }
-            },
-            {
-                id: "MCU-2025-2830",
-                category: "snack",
-                type: "promo",
-                seller: {
-                    name: "Mochi UMA",
-                    link: "https://www.anekamarket.my.id/mochiuma" // URL Diperbarui
-                },
-                badge: {
-                    text: "Promo Spesial",
-                    type: "promo"
-                },
-                mainImage: "https://i.imgur.com/TPSWsZw.jpeg",
-                title: "Promo Aneka Kue Lezat Mochi Uma",
-                code: "MCU-2025-2830",
-                price: 10000,
-                originalPrice: null,
-                discount: null,
-                priceVariations: [
-                    { name: "Pancake Durian", price: 10000 },
-                    { name: "Mochi (3pcs)", price: 10000 },
-                    { name: "Cireng Ayam Suwir", price: 10000 },
-                    { name: "Corndog Coklat (isi 3)", price: 10000 }
-                ],
-                units: ["pcs", "pack", "set", "lusin"],
-                defaultUnit: "pcs",
-                details: {
-                    description: "<strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Jangan lewatkan kesempatan ini untuk menikmati kue berkualitas dengan harga terjangkau!",
-                    images: [
-                        "https://i.imgur.com/dlK9kfP.jpeg",
-                        "https://i.imgur.com/JsXOHCO.jpeg",
-                        "https://i.imgur.com/kJDDUy4.jpeg"
-                    ],
-                    specs: [
-                        { label: "Kode Promo", value: "MCU-2025-2830" },
-                        { label: "Nama UMKM", value: "Mochi UMA" },
-                        { label: "Pemilik", value: "ULink" },
-                        { label: "Alamat", value: "Jl. Wijaya Kusuma Samping Bidan Ika" },
-                        { label: "Kontak", value: "089679013099 | nurilaneeh@gmail.com" },
-                        { label: "Media Sosial", value: "TikTok @mochi.uma3" },
-                        { label: "Daftar Promo", value: "• Pancake Durian hanya Rp10.000<br>• Mochi 3pcs Rp10.000<br>• Cireng Ayam Suwir Rp10.000<br>• Corndog Coklat isi 3 Rp10.000" },
-                        { label: "Periode Promo", value: "Sampai 31 Agustus 2025" },
-                        { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
-                    ]
-                },
-                contact: {
-                    whatsapp: "6289679013099",
-                    phone: "+6289679013099"
-                }
-            }  
+            { id: "AWF-2025-2575", category: "livestock", type: "promo", seller: { name: "Ardiwillis Farm", link: "https://www.anekamarket.my.id/ardiwillisfarm" }, badge: { text: "Promosi", type: "promo" }, mainImage: "https://i.imgur.com/pKLE9EY.jpeg", title: "Paket Lengkap Ternak Ayam Ardiwilis", code: "AWF-2025-2575", price: 8000, originalPrice: 10000, discount: "10%", priceVariations: [ { name: "Ecer (per ekor)", price: 8000 }, { name: "10 ekor", price: 75000 }, { name: "100 ekor", price: 700000 } ], units: ["pcs", "kg", "biji", "ekor"], defaultUnit: "ekor", details: { description: "Ardiwillis Farm menyediakan produk unggulan peternakan ayam berkualitas tinggi. Kami menyediakan telur tetas fertil dengan daya tetas tinggi, DOC (Day Old Chicken) berbagai strain unggul, ayam karkas segar, dan ayam bakar siap saji dengan bumbu khas. Semua produk dihasilkan dari peternakan yang dikelola secara profesional dengan standar kesehatan dan kebersihan tinggi. (Note: Harga tersebut bukan harga tetap, & bisa berubah)", images: [ "https://i.imgur.com/pAygjAZ.jpeg", "https://i.imgur.com/XRMPBhw.jpeg", "https://i.imgur.com/K5m75Rq.jpeg", "https://i.imgur.com/coJadaj.jpeg" ], specs: [ { label: "Kode Produk", value: "AWF-2025-2575" }, { label: "Gerai", value: "Ardiwillis Farm" }, { label: "Jenis", value: "Ayam Pedaging" }, { label: "Usia", value: "DOC (1 hari)" }, { label: "Strain", value: "Cobb 500" }, { label: "Garansi", value: "Hidup sampai diterima" }, { label: "Minimal Order", value: "10 ekor" }, { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" } ] }, contact: { whatsapp: "6285258544543", phone: "+6285258544543" } },
+            { id: "NS-2025-3348", category: "food", type: "promo", seller: { name: "Niki Sae", link: "https://www.anekamarket.my.id/nikisae" }, badge: { text: "Promo Spesial", type: "promo" }, mainImage: "https://i.imgur.com/y8r14Z3.jpeg", title: "Promo Frozen Food Homemade Niki Sae", code: "NS-2025-3348", price: 12000, originalPrice: 15000, discount: "20% OFF", priceVariations: [ { name: "Pempek", price: 12000, original: 15000 }, { name: "Tahu Walik", price: 11000, original: 13750 }, { name: "Nugget Ikan/Ayam", price: 12000, original: 15000 }, { name: "Dragon Stick", price: 12000, original: 15000 }, { name: "Otak-Otak Ikan", price: 12000, original: 15000 } ], units: ["pcs", "pack", "set", "lusin"], defaultUnit: "pcs", details: { description: "<strong>PROMO SPESIAL!</strong> Niki Sae dari Dapur Yunna menghadirkan promo frozen food homemade dengan kualitas terbaik. Semua produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Produk kami termasuk Pempek, Tahu Walik, Otak-Otak Ikan, Nugget Ikan dan Ayam, serta Dragon Stick. Setiap produk dibuat dengan standar kebersihan tinggi dan rasa yang konsisten. Nikmati diskon spesial untuk pembelian selama periode promo!", images: [ "https://i.imgur.com/RP8HTMb.jpeg", "https://i.imgur.com/GWXfEGJ.jpeg", "https://i.imgur.com/WSB6cXr.jpeg", "https://i.imgur.com/ubU63gJ.jpeg" ], specs: [ { label: "Kode Promo", value: "NS-2025-3348" }, { label: "Nama UMKM", value: "Niki Sae Pempek dan Tahu walik" }, { label: "Pemilik", value: "Yuliana Mulyaningtyas" }, { label: "Alamat", value: "Perum Graha Sultan Raya 1 blok G. 61, Panji" }, { label: "Kontak", value: "085731247566" }, { label: "Media Sosial", value: "Belum tersedia" }, { label: "Daftar Promo", value: "• Pempek <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Tahu Walik <s>Rp13.750</s> <strong>Rp11.000</strong> (20% OFF)<br>• Nugget Ikan/Ayam <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Dragon Stick <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)<br>• Otak-Otak Ikan <s>Rp15.000</s> <strong>Rp12.000</strong> (20% OFF)" }, { label: "Periode Promo", value: "Periode Promo sewaktu-waktu tidak berlaku" }, { label: "Catatan", value: "• Harga normal berlaku setelah periode promo berakhir<br>• Minimal pembelian 5 pcs per item<br>• Free ongkir untuk pembelian di atas Rp100.000 (area tertentu)" } ] }, contact: { whatsapp: "6285731247566", phone: "+6285731247566" } },
+            { id: "PRD-2025-2688", category: "fishery", type: "promo", seller: { name: "PRADIPA", link: "https://www.anekamarket.my.id/pradipa" }, badge: { text: "Promosi", type: "promo" }, mainImage: "https://i.imgur.com/ru1FKXW.jpeg", title: "Produk Hasil Laut Segar Pradipa", code: "PRD-2025-2688", price: 30000, originalPrice: null, discount: null, priceVariations: [ { name: "Ikan Bogek/Mendut", price: 35000 }, { name: "Ikan Mangla/Swangi", price: 30000 }, { name: "Ikan Sebelah/Sulfis", price: 35000 } ], units: ["kg", "ekor", "pack"], defaultUnit: "kg", details: { description: "PRADIPA menghadirkan hasil laut segar langsung dari perairan Panarukan. Kami menyediakan berbagai jenis ikan berkualitas tinggi yang ditangkap dengan metode ramah lingkungan. Setiap produk kami melalui proses seleksi ketat untuk memastikan kesegaran dan kualitas terbaik untuk pelanggan. Dengan pengalaman bertahun-tahun di bidang hasil laut, kami berkomitmen memberikan produk terbaik dengan harga kompetitif.", images: [ "https://i.imgur.com/n2AkesD.jpeg", "https://i.imgur.com/tupfVCl.jpeg", "https://i.imgur.com/VhfoAsv.png" ], specs: [ { label: "Kode Produk", value: "PRD-2025-2688" }, { label: "Gerai", value: "PRADIPA" }, { label: "Pemilik", value: "Fajar Nur Cholis" }, { label: "Alamat", value: "Tanah Anyar RT 3 RW 02 Desa Kilensari, Panarukan" }, { label: "Kontak", value: "082334393922 | quenie89@gmail.com" }, { label: "Produk Unggulan", value: "Ikan Bogek/Mendut (Rp35.000/kg), Ikan Mangla/Swangi (Rp30.000/kg), Ikan Sebelah/Sulfis (Rp35.000/kg)" }, { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" } ] }, contact: { whatsapp: "6282334393922", phone: "+6282334393922" } },
+            { id: "MCU-2025-2830", category: "snack", type: "promo", seller: { name: "Mochi UMA", link: "https://www.anekamarket.my.id/mochiuma" }, badge: { text: "Promo Spesial", type: "promo" }, mainImage: "https://i.imgur.com/TPSWsZw.jpeg", title: "Promo Aneka Kue Lezat Mochi Uma", code: "MCU-2025-2830", price: 10000, originalPrice: null, discount: null, priceVariations: [ { name: "Pancake Durian", price: 10000 }, { name: "Mochi (3pcs)", price: 10000 }, { name: "Cireng Ayam Suwir", price: 10000 }, { name: "Corndog Coklat (isi 3)", price: 10000 } ], units: ["pcs", "pack", "set", "lusin"], defaultUnit: "pcs", details: { description: "<strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Jangan lewatkan kesempatan ini untuk menikmati kue berkualitas dengan harga terjangkau!", images: [ "https://i.imgur.com/dlK9kfP.jpeg", "https://i.imgur.com/JsXOHCO.jpeg", "https://i.imgur.com/kJDDUy4.jpeg" ], specs: [ { label: "Kode Promo", value: "MCU-2025-2830" }, { label: "Nama UMKM", value: "Mochi UMA" }, { label: "Pemilik", value: "ULink" }, { label: "Alamat", value: "Jl. Wijaya Kusuma Samping Bidan Ika" }, { label: "Kontak", value: "089679013099 | nurilaneeh@gmail.com" }, { label: "Media Sosial", value: "TikTok @mochi.uma3" }, { label: "Daftar Promo", value: "• Pancake Durian hanya Rp10.000<br>• Mochi 3pcs Rp10.000<br>• Cireng Ayam Suwir Rp10.000<br>• Corndog Coklat isi 3 Rp10.000" }, { label: "Periode Promo", value: "Sampai 31 Agustus 2025" }, { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" } ] }, contact: { whatsapp: "6289679013099", phone: "+6289679013099" } }  
         ];
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Inisialisasi jsPDF
             const { jsPDF } = window.jspdf;
             
-            // --- FUNGSI BARU: GENERATE STRUK PDF ---
+            function formatPrice(amount) {
+                return new Intl.NumberFormat('id-ID', {
+                    style: 'currency',
+                    currency: 'IDR',
+                    minimumFractionDigits: 0
+                }).format(amount);
+            }
+
+            // --- FUNGSI GENERATE STRUK PDF (VERSI DISEMPURNAKAN) ---
             async function generateAndDownloadReceipt(productData, orderDetails) {
                 const doc = new jsPDF();
-                const transactionId = `TRX-${productData.seller.name.replace(/\s/g, '')}-${Date.now()}`;
+                const transactionId = `TRX-${productData.code}-${Date.now()}`;
                 const logoUrl = 'https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png';
 
-                // Fungsi untuk memuat gambar sebagai Base64
                 const toDataURL = url => fetch(url)
                     .then(response => response.blob())
                     .then(blob => new Promise((resolve, reject) => {
@@ -728,57 +483,125 @@
 
                 try {
                     const logoBase64 = await toDataURL(logoUrl);
-                    
+                    const pageW = doc.internal.pageSize.getWidth();
+                    const margin = 15;
+                    let y = 20;
+
                     // --- HEADER ---
-                    doc.addImage(logoBase64, 'PNG', 15, 12, 25, 25);
-                    doc.setFontSize(16).setFont(undefined, 'bold');
-                    doc.text('MARKETPLACE', 200, 20, null, null, 'right');
+                    doc.addImage(logoBase64, 'PNG', margin, y, 25, 25);
                     doc.setFontSize(22).setFont(undefined, 'bold');
-                    doc.text('ANEKAMARKET', 200, 30, null, null, 'right');
-                    doc.setLineWidth(0.5);
-                    doc.line(10, 45, 200, 45);
+                    doc.text('ANEKAMARKET', pageW - margin, y + 8, { align: 'right' });
+                    doc.setFontSize(10).setFont(undefined, 'normal');
+                    doc.text('Jl. PB Sudirman, Wringin Anom', pageW - margin, y + 14, { align: 'right' });
+                    doc.text('Situbondo, Jawa Timur, 68351', pageW - margin, y + 19, { align: 'right' });
+                    doc.text('admin@anekamarket.my.id', pageW - margin, y + 24, { align: 'right' });
 
-                    // --- DETAIL TRANSAKSI ---
-                    doc.setFontSize(12).setFont(undefined, 'normal');
-                    doc.text(`Gerai: ${productData.seller.name}`, 15, 60);
-                    doc.text(`ID Transaksi: ${transactionId}`, 15, 67);
-                    doc.text(`Tanggal: ${new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })}`, 200, 60, null, null, 'right');
-                    doc.setLineWidth(0.2);
-                    doc.line(10, 75, 200, 75);
-
-                    doc.setFontSize(14).setFont(undefined, 'bold');
-                    doc.text(orderDetails.type, 105, 85, null, null, 'center');
+                    // --- JUDUL DOKUMEN ---
+                    y += 40;
+                    doc.setLineWidth(1.5);
+                    doc.line(margin, y, pageW - margin, y);
+                    y += 10;
+                    doc.setFontSize(18).setFont(undefined, 'bold');
+                    const docTitle = orderDetails.type === 'PRE-ORDER' ? 'BUKTI PRE-ORDER' : 'INVOICE PEMESANAN';
+                    doc.text(docTitle, pageW / 2, y, { align: 'center' });
                     
-                    doc.setFontSize(11).setFont(undefined, 'normal');
-                    doc.text(`Produk: ${productData.title}`, 15, 95);
-                    doc.text(`Kode Produk: ${productData.code}`, 15, 102);
-                    doc.text(`Jumlah: ${orderDetails.quantity} ${orderDetails.unit}`, 15, 109);
+                    // --- INFO TRANSAKSI ---
+                    y += 15;
+                    doc.setFontSize(10).setFont(undefined, 'bold');
+                    doc.text('Diterbitkan Untuk:', margin, y);
+                    doc.text('Detail Transaksi:', pageW / 2, y);
+                    doc.setFont(undefined, 'normal');
+                    doc.text('Pelanggan Anekamarket', margin, y + 5);
+                    
+                    doc.text(`ID Transaksi:`, pageW / 2, y + 5);
+                    doc.text(`${transactionId}`, pageW - margin, y + 5, { align: 'right' });
+                    
+                    doc.text(`Tanggal:`, pageW / 2, y + 10);
+                    doc.text(`${new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })}`, pageW - margin, y + 10, { align: 'right' });
+                    
+                    doc.text(`Gerai Penjual:`, pageW / 2, y + 15);
+                    doc.text(`${productData.seller.name}`, pageW - margin, y + 15, { align: 'right' });
 
-                    doc.setFontSize(14).setFont(undefined, 'bold');
-                    doc.text(`Total Harga: ${orderDetails.totalPrice}`, 15, 120);
 
+                    // --- TABEL PRODUK ---
+                    y += 30;
+                    doc.setFillColor(230, 230, 230); // Latar belakang header tabel
+                    doc.setDrawColor(200, 200, 200); // Warna border
+                    doc.setLineWidth(0.3);
+                    doc.rect(margin, y, pageW - (margin * 2), 10, 'FD'); // Gambar kotak header
+                    
+                    doc.setFontSize(10).setFont(undefined, 'bold');
+                    doc.text('Deskripsi Produk', margin + 2, y + 7);
+                    doc.text('Harga Satuan', pageW / 2 + 20, y + 7);
+                    doc.text('Jumlah', pageW / 2 + 50, y + 7);
+                    doc.text('Total', pageW - margin - 2, y + 7, { align: 'right' });
+                    y += 10;
+                    
+                    doc.setFont(undefined, 'normal');
+                    const itemY = y;
+                    doc.line(margin, itemY, pageW - margin, itemY); // Garis atas item
+                    
+                    // Deskripsi Produk (dengan word wrapping)
+                    const productTitleLines = doc.splitTextToSize(`${productData.title} (${productData.code})`, (pageW / 2));
+                    doc.text(productTitleLines, margin + 2, itemY + 7);
+
+                    doc.text(formatPrice(orderDetails.unitPrice), pageW / 2 + 20, itemY + 7);
+                    doc.text(`${orderDetails.quantity} ${orderDetails.unit}`, pageW / 2 + 50, itemY + 7);
+                    doc.text(orderDetails.totalPrice, pageW - margin - 2, itemY + 7, { align: 'right' });
+
+                    const itemHeight = Math.max(12, productTitleLines.length * 5 + 2); // Tinggi baris dinamis
+                    y += itemHeight;
+
+                    doc.line(margin, itemY, margin, y); // Border kiri
+                    doc.line(pageW - margin, itemY, pageW - margin, y); // Border kanan
+                    doc.line(margin, y, pageW - margin, y); // Garis bawah item
+
+
+                    // --- TOTAL ---
+                    y += 10;
+                    const totalX = pageW - margin;
+                    doc.setFontSize(11).setFont(undefined, 'bold');
+                    
                     if (orderDetails.type === 'PRE-ORDER') {
-                        doc.text(`Uang Muka (DP): ${orderDetails.dpAmount}`, 15, 127);
+                        doc.text('Subtotal:', totalX - 40, y, { align: 'right' });
+                        doc.text(orderDetails.totalPrice, totalX, y, { align: 'right' });
+                        y += 7;
+                        
+                        doc.text('Uang Muka (DP):', totalX - 40, y, { align: 'right' });
+                        doc.text(orderDetails.dpAmount, totalX, y, { align: 'right' });
+                        y += 7;
+                        
+                        const sisa = parseFloat(orderDetails.totalPrice.replace(/[^0-9]/g, '')) - parseFloat(orderDetails.dpAmount.replace(/[^0-9]/g, ''));
+                        doc.text('Sisa Pembayaran:', totalX - 40, y, { align: 'right' });
+                        doc.text(formatPrice(sisa), totalX, y, { align: 'right' });
                     }
                     
-                    // --- QR CODE ---
-                    const qr = qrcode(0, 'L');
-                    qr.addData('https://www.aplikasiusaha.com');
-                    qr.make();
-                    const qrImgData = qr.createDataURL(4);
-                    doc.addImage(qrImgData, 'PNG', 85, 140, 40, 40);
-                    doc.setFontSize(10).setFont(undefined, 'italic');
-                    doc.text('Scan untuk Info Aplikasi Usaha', 105, 185, null, null, 'center');
+                    y += 10;
+                    doc.setFillColor(230, 230, 230);
+                    doc.rect(totalX - 80, y, 80, 10, 'F');
+                    doc.setFontSize(12).setFont(undefined, 'bold');
+                    doc.text(orderDetails.type === 'PRE-ORDER' ? 'TOTAL DP:' : 'TOTAL BAYAR:', totalX - 40, y + 7, { align: 'right' });
+                    const finalAmount = orderDetails.type === 'PRE-ORDER' ? orderDetails.dpAmount : orderDetails.totalPrice;
+                    doc.text(finalAmount, totalX, y + 7, { align: 'right' });
+
 
                     // --- FOOTER ---
+                    y = doc.internal.pageSize.getHeight() - 40;
+                    doc.setFontSize(9).setFont(undefined, 'italic');
+                    doc.text('Catatan: Struk ini merupakan bukti pemesanan yang sah dan dibuat secara otomatis oleh sistem.\nHarap simpan struk ini untuk proses konfirmasi pembayaran dengan penjual.', pageW / 2, y, { align: 'center' });
+                    
+                    y += 20;
                     doc.setLineWidth(0.5);
-                    doc.line(10, 260, 200, 260);
-                    doc.setFontSize(10).setFont(undefined, 'normal');
-                    doc.text('Struk ini merupakan bukti pemesanan yang sah.', 105, 268, null, null, 'center');
-                    doc.text('Developed by: www.anekamarket.my.id', 105, 275, null, null, 'center');
+                    doc.line(margin, y, pageW - margin, y);
+                    y += 7;
+                    doc.setFontSize(10).setFont(undefined, 'bold');
+                    doc.text('Terima Kasih Telah Berbelanja!', pageW / 2, y, { align: 'center' });
+                    y += 5;
+                    doc.setFontSize(9).setFont(undefined, 'normal');
+                    doc.text('www.anekamarket.my.id', pageW / 2, y, { align: 'center' });
 
                     // --- SIMPAN PDF ---
-                    doc.save(`Struk-${orderDetails.type === 'PRE-ORDER' ? 'PreOrder' : 'Pemesanan'}-${productData.code}.pdf`);
+                    doc.save(`Struk-${orderDetails.type}-${productData.code}.pdf`);
 
                 } catch (error) {
                     console.error("Gagal membuat PDF:", error);
@@ -790,30 +613,15 @@
             // --- RENDER PRODUCTS ---
             const galleryGrid = document.getElementById('gallery-grid');
             const body = document.body;
-
-            function formatPrice(amount) {
-                return new Intl.NumberFormat('id-ID', {
-                    style: 'currency',
-                    currency: 'IDR',
-                    minimumFractionDigits: 0
-                }).format(amount).replace(/\s?IDR/g, 'Rp ');
-            }
             
             function renderProducts() {
                 if (typeof products === 'undefined' || !Array.isArray(products)) {
-                    if(galleryGrid) {
-                        galleryGrid.innerHTML = '<p style="text-align: center; color: var(--accent);">Gagal memuat data produk.</p>';
-                    }
-                    console.error("Variabel 'products' tidak ditemukan.");
+                    if(galleryGrid) galleryGrid.innerHTML = '<p>Gagal memuat data produk.</p>';
                     return;
                 }
-
                 if (!galleryGrid) return;
                 galleryGrid.innerHTML = '';
                 
-                const placeholderImg = "https://via.placeholder.com/400x300.png?text=Gambar+Tidak+Tersedia";
-                const placeholderThumb = "https://via.placeholder.com/100x100.png?text=Error";
-
                 products.forEach(product => {
                     const productCard = document.createElement('div');
                     productCard.className = 'gallery-item';
@@ -822,7 +630,6 @@
                     productCard.setAttribute('data-id', product.id);
                     productCard.id = `product-${product.id}`;
 
-
                     const priceVariationsHTML = product.priceVariations.map((v, index) => `
                         <div class="price-variation ${index === 0 ? 'active' : ''}" data-price="${v.price}">
                             <span class="price-variation-name">${v.name}</span>
@@ -830,33 +637,17 @@
                         </div>
                     `).join('');
 
-                    const unitOptionsHTML = product.units.map(unit => `
-                        <option value="${unit}" ${unit === product.defaultUnit ? 'selected' : ''}>${unit}</option>
-                    `).join('');
-
-                    const detailImagesHTML = product.details.images.map((img, index) => `
-                        <img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy" onerror="this.onerror=null;this.src='${placeholderThumb}';">
-                    `).join('');
-
-                    const detailSpecsHTML = product.details.specs.map(spec => `
-                        <div class="spec-item">
-                            <span class="spec-label">${spec.label}:</span>
-                            <span class="spec-value">${spec.value}</span>
-                        </div>
-                    `).join('');
+                    const unitOptionsHTML = product.units.map(unit => `<option value="${unit}" ${unit === product.defaultUnit ? 'selected' : ''}>${unit}</option>`).join('');
+                    const detailImagesHTML = product.details.images.map((img, index) => `<img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy">`).join('');
+                    const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}:</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
                     productCard.innerHTML = `
                         <a href="${product.seller.link}" target="_blank" class="gallery-badge seller">Gerai: ${product.seller.name}</a>
                         <span class="gallery-badge ${product.badge.type}">${product.badge.text}</span>
-                        <div class="gallery-image-container">
-                            <img src="${product.mainImage}" alt="${product.title}" class="gallery-image" loading="lazy" onerror="this.onerror=null;this.src='${placeholderImg}';">
-                        </div>
+                        <div class="gallery-image-container"><img src="${product.mainImage}" alt="${product.title}" class="gallery-image" loading="lazy"></div>
                         <div class="gallery-details">
                             <h3 class="gallery-title">${product.title}</h3>
-                            <div class="gallery-meta">
-                                <span class="gallery-code">Kode: ${product.code}</span>
-                                <span class="gallery-seller"><i class="fas fa-store"></i> ${product.seller.name}</span>
-                            </div>
+                            <div class="gallery-meta"><span class="gallery-code">Kode: ${product.code}</span><span class="gallery-seller"><i class="fas fa-store"></i> ${product.seller.name}</span></div>
                             <p class="gallery-price">
                                 ${formatPrice(product.price)}
                                 ${product.originalPrice ? `<span class="original-price">${formatPrice(product.originalPrice)}</span>` : ''}
@@ -868,13 +659,11 @@
                             <div class="quantity-selector">
                                 <span class="quantity-label">Jumlah:</span>
                                 <div class="quantity-controls">
-                                    <button class="quantity-btn minus">-</button>
-                                    <input type="number" class="quantity-input" value="1" min="1">
-                                    <button class="quantity-btn plus">+</button>
+                                    <button class="quantity-btn minus" aria-label="Kurangi jumlah">-</button>
+                                    <input type="number" class="quantity-input" value="1" min="1" aria-label="Jumlah produk">
+                                    <button class="quantity-btn plus" aria-label="Tambah jumlah">+</button>
                                 </div>
-                                <div class="unit-selector">
-                                    <select class="unit-select">${unitOptionsHTML}</select>
-                                </div>
+                                <div class="unit-selector"><select class="unit-select">${unitOptionsHTML}</select></div>
                             </div>
                             
                             <div class="total-price">
@@ -883,53 +672,31 @@
                             </div>
                             
                             <div class="gallery-actions">
-                                <button class="btn-detail">
-                                    <i class="fas fa-chevron-down"></i> Detail
-                                </button>
-                                <a href="${product.seller.link}" target="_blank" class="btn-visit">
-                                    <i class="fas fa-store-alt"></i> Kunjungi Gerai
-                                </a>
-                                <button class="btn-order">
-                                    <i class="fas fa-shopping-cart"></i> Pesan
-                                </button>
-                                <button class="btn-preorder-toggle">
-                                    <i class="fas fa-calendar-check"></i> Pre-Order
-                                </button>
+                                <button class="btn-detail"><i class="fas fa-chevron-down"></i> Detail</button>
+                                <a href="${product.seller.link}" target="_blank" class="btn-visit"><i class="fas fa-store-alt"></i> Kunjungi Gerai</a>
+                                <button class="btn-order"><i class="fas fa-shopping-cart"></i> Pesan</button>
+                                <button class="btn-preorder-toggle"><i class="fas fa-calendar-check"></i> Pre-Order</button>
                             </div>
                             
                             <div class="preorder-form">
-                                <div class="preorder-title">
-                                    <i class="fas fa-money-bill-wave"></i>
-                                    <span>Form Uang Muka (DP)</span>
-                                </div>
+                                <div class="preorder-title"><i class="fas fa-money-bill-wave"></i><span>Form Uang Muka (DP)</span></div>
                                 <input type="number" class="preorder-input" placeholder="Masukkan nominal DP (minimal 40%)">
-                                <p class="preorder-note">
-                                    * Untuk pre-order, harap masukkan nominal uang muka minimal 40% dari total harga. 
-                                    Kami akan menghubungi Anda untuk konfirmasi lebih lanjut.
-                                </p>
-                                <button class="btn-preorder">
-                                    <i class="fas fa-paper-plane"></i> Kirim Pre-Order
-                                </button>
+                                <p class="preorder-note">* Untuk pre-order, harap masukkan nominal uang muka minimal 40% dari total harga. Kami akan menghubungi Anda untuk konfirmasi lebih lanjut.</p>
+                                <button class="btn-preorder"><i class="fas fa-paper-plane"></i> Kirim Pre-Order</button>
                             </div>
                             
                             <div class="gallery-detail-expanded">
                                 <div class="gallery-carousel">
-                                    <img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image" loading="lazy" onerror="this.onerror=null;this.src='${placeholderImg}';">
-                                    <div class="gallery-thumbnails">
-                                        ${detailImagesHTML}
-                                    </div>
+                                    <img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image" loading="lazy">
+                                    <div class="gallery-thumbnails">${detailImagesHTML}</div>
                                 </div>
                                 <div class="gallery-content">
                                     <p class="gallery-description">${product.details.description}</p>
                                     <div class="gallery-specs">${detailSpecsHTML}</div>
                                 </div>
                                 <div class="gallery-actions-expanded">
-                                    <a href="https://wa.me/${product.contact.whatsapp}?text=Halo%20${encodeURIComponent(product.seller.name)},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title)}%20(${product.code})" class="btn-whatsapp" target="_blank">
-                                        <i class="fab fa-whatsapp"></i> Chat via WhatsApp
-                                    </a>
-                                    <a href="tel:${product.contact.phone}" class="btn-call">
-                                        <i class="fas fa-phone-alt"></i> Telepon Sekarang
-                                    </a>
+                                    <a href="https://wa.me/${product.contact.whatsapp}?text=Halo%20${encodeURIComponent(product.seller.name)},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title)}%20(${product.code})" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat via WhatsApp</a>
+                                    <a href="tel:${product.contact.phone}" class="btn-call"><i class="fas fa-phone-alt"></i> Telepon Sekarang</a>
                                 </div>
                             </div>
                         </div>
@@ -940,7 +707,7 @@
 
             renderProducts();
 
-            // --- EVENT LISTENERS (using event delegation) ---
+            // --- EVENT LISTENERS (DENGAN DELEGASI) ---
             if (galleryGrid) {
                 const updateTotalPrice = (container) => {
                     const activeVariation = container.querySelector('.price-variation.active');
@@ -950,9 +717,7 @@
                         const quantity = parseInt(quantityInput.value, 10) || 1;
                         const totalPrice = price * quantity;
                         const totalPriceElement = container.querySelector('.total-price-value');
-                        if (totalPriceElement) {
-                            totalPriceElement.textContent = formatPrice(totalPrice);
-                        }
+                        if (totalPriceElement) totalPriceElement.textContent = formatPrice(totalPrice);
                     }
                 };
                 
@@ -961,22 +726,16 @@
                     const detailsContainer = target.closest('.gallery-details');
                     if (!detailsContainer) return;
 
-                    // Toggle Details
                     if (target.closest('.btn-detail')) {
                         const btn = target.closest('.btn-detail');
                         const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded');
                         expandedContent.classList.toggle('active');
                         btn.classList.toggle('active');
-                        btn.innerHTML = expandedContent.classList.contains('active') 
-                            ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' 
-                            : '<i class="fas fa-chevron-down"></i> Detail Produk';
-                        if (expandedContent.classList.contains('active')) {
-                            expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        }
+                        btn.innerHTML = expandedContent.classList.contains('active') ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' : '<i class="fas fa-chevron-down"></i> Detail Produk';
+                        if (expandedContent.classList.contains('active')) expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                         playButtonSound();
                     }
 
-                    // Change Price Variation
                     if (target.closest('.price-variation')) {
                         const variation = target.closest('.price-variation');
                         variation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
@@ -985,7 +744,6 @@
                         playButtonSound();
                     }
 
-                    // Quantity Buttons
                     if (target.closest('.quantity-btn')) {
                         const btn = target.closest('.quantity-btn');
                         const input = btn.parentElement.querySelector('.quantity-input');
@@ -997,7 +755,6 @@
                         playButtonSound();
                     }
 
-                    // Thumbnail Click
                     if (target.classList.contains('thumbnail')) {
                         const mainImage = target.closest('.gallery-carousel').querySelector('.gallery-main-image');
                         mainImage.src = target.src;
@@ -1006,24 +763,19 @@
                         playButtonSound();
                     }
 
-                    // Image Zoom
                     if(target.classList.contains('gallery-main-image')) {
-                        const zoomedImage = document.getElementById('zoomedImage');
-                        zoomedImage.src = target.src;
+                        document.getElementById('zoomedImage').src = target.src;
                         document.getElementById('imageModal').classList.add('show');
                         body.style.overflow = 'hidden';
                         playButtonSound();
                     }
 
-                    // Toggle Pre-order Form
                     if (target.closest('.btn-preorder-toggle')) {
                         const btn = target.closest('.btn-preorder-toggle');
                         const preorderForm = detailsContainer.querySelector('.preorder-form');
                         preorderForm.classList.toggle('active');
                         btn.classList.toggle('active');
-                        btn.innerHTML = preorderForm.classList.contains('active')
-                            ? '<i class="fas fa-times"></i> Batal Pre-Order'
-                            : '<i class="fas fa-calendar-check"></i> Pre-Order';
+                        btn.innerHTML = preorderForm.classList.contains('active') ? '<i class="fas fa-times"></i> Batal Pre-Order' : '<i class="fas fa-calendar-check"></i> Pre-Order';
                         playButtonSound();
                     }
                     
@@ -1033,77 +785,70 @@
                     const productId = galleryItem.dataset.id;
                     const productData = products.find(p => p.id === productId);
 
-                    // --- TOMBOL PESAN SEKARANG (dengan generate PDF) ---
-                    if (target.closest('.btn-order')) {
+                    const gatherOrderDetails = (type = 'PEMESANAN LANGSUNG') => {
                         const quantity = detailsContainer.querySelector('.quantity-input').value;
                         const unit = detailsContainer.querySelector('.unit-select').value;
                         const totalPrice = detailsContainer.querySelector('.total-price-value').textContent;
+                        const activeVariation = detailsContainer.querySelector('.price-variation.active');
+                        const unitPrice = activeVariation ? parseFloat(activeVariation.dataset.price) : 0;
+                        let dpAmount = 'N/A';
                         
-                        const orderDetails = {
-                            type: 'PEMESANAN LANGSUNG',
-                            quantity: quantity,
-                            unit: unit,
-                            totalPrice: totalPrice,
-                            dpAmount: 'N/A'
-                        };
+                        if (type === 'PRE-ORDER') {
+                             const dpInput = detailsContainer.querySelector('.preorder-input');
+                             const dpValue = parseFloat(dpInput.value);
+                             const totalValue = parseFloat(totalPrice.replace(/[^0-9]/g, ''));
 
-                        // Generate dan unduh struk
-                        generateAndDownloadReceipt(productData, orderDetails);
-                        
-                        // Buka WhatsApp
-                        const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${quantity} ${unit}\nTotal Harga: ${totalPrice}\n\nStruk pemesanan sudah saya unduh dan akan saya kirimkan. Mohon info lebih lanjut mengenai cara pembayaran dan pengiriman. Terima kasih.`;
-                        window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                        playButtonSound();
+                             if (isNaN(dpValue) || dpValue <= 0) {
+                                alert('Mohon masukkan nominal DP yang valid');
+                                return null;
+                             }
+                             if (dpValue < (totalValue * 0.4)) {
+                                alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalValue * 0.4)})`);
+                                return null;
+                             }
+                             dpAmount = formatPrice(dpValue);
+                        }
+
+                        return { type, quantity, unit, totalPrice, dpAmount, unitPrice };
+                    };
+
+                    if (target.closest('.btn-order')) {
+                        const orderDetails = gatherOrderDetails('PEMESANAN LANGSUNG');
+                        if (orderDetails) {
+                            generateAndDownloadReceipt(productData, orderDetails);
+                            const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${orderDetails.quantity} ${orderDetails.unit}\nTotal Harga: *${orderDetails.totalPrice}*\n\nStruk pemesanan sudah saya unduh dan akan saya kirimkan. Mohon info lebih lanjut. Terima kasih.`;
+                            window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                            playButtonSound();
+                        }
                     }
                     
-                    // --- TOMBOL PRE-ORDER (dengan generate PDF) ---
                     if (target.closest('.btn-preorder')) {
-                        const dpInput = detailsContainer.querySelector('.preorder-input');
-                        const dpValue = parseFloat(dpInput.value);
-                        
-                        if (isNaN(dpValue) || dpValue <= 0) {
-                            alert('Mohon masukkan nominal DP yang valid');
-                            return;
+                        const orderDetails = gatherOrderDetails('PRE-ORDER');
+                        if (orderDetails) {
+                           generateAndDownloadReceipt(productData, orderDetails);
+                           const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: *${orderDetails.totalPrice}*\nUang Muka: *${orderDetails.dpAmount}*\n\nStruk pre-order sudah saya unduh. Mohon info lebih lanjut. Terima kasih.`;
+                           window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                           playButtonSound();
                         }
-
-                        const totalPriceText = detailsContainer.querySelector('.total-price-value').textContent;
-                        const totalPrice = parseFloat(totalPriceText.replace(/[^0-9]/g, ''));
-                        
-                        if (dpValue < (totalPrice * 0.4)) {
-                            alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalPrice * 0.4)})`);
-                            return;
-                        }
-                        
-                        const orderDetails = {
-                            type: 'PRE-ORDER',
-                            quantity: detailsContainer.querySelector('.quantity-input').value,
-                            unit: detailsContainer.querySelector('.unit-select').value,
-                            totalPrice: totalPriceText,
-                            dpAmount: formatPrice(dpValue)
-                        };
-
-                        // Generate dan unduh struk
-                        generateAndDownloadReceipt(productData, orderDetails);
-
-                        // Buka WhatsApp
-                        const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: ${totalPriceText}\nUang Muka: ${formatPrice(dpValue)}\n\nStruk pre-order sudah saya unduh dan akan saya kirimkan. Mohon info lebih lanjut. Terima kasih.`;
-                        window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                        playButtonSound();
                     }
                 });
                 
                 galleryGrid.addEventListener('change', e => {
-                    if(e.target.classList.contains('quantity-input')) {
-                        if (e.target.value < 1) e.target.value = 1;
+                    if(e.target.classList.contains('quantity-input') || e.target.classList.contains('unit-select')) {
+                        if (e.target.classList.contains('quantity-input') && e.target.value < 1) e.target.value = 1;
                         const detailsContainer = e.target.closest('.gallery-details');
-                        if (detailsContainer) {
-                            updateTotalPrice(detailsContainer);
-                        }
+                        if (detailsContainer) updateTotalPrice(detailsContainer);
+                    }
+                });
+                 galleryGrid.addEventListener('input', e => {
+                    if(e.target.classList.contains('quantity-input')) {
+                        const detailsContainer = e.target.closest('.gallery-details');
+                        if (detailsContainer) updateTotalPrice(detailsContainer);
                     }
                 });
             }
 
-            // --- PENYEMPURNAAN FITUR PENCARIAN CERDAS ---
+            // --- FITUR PENCARIAN & SKRIP HALAMAN LAINNYA (TIDAK BERUBAH) ---
             const searchModal = document.getElementById('searchModal');
             const searchModalInput = document.getElementById('searchModalInput');
             const searchResults = document.getElementById('searchResults');
@@ -1112,289 +857,40 @@
             const navSearchInput = document.getElementById('navSearchInput');
             const navSearchBtn = document.getElementById('navSearchBtn');
 
-            function openSearchModal(query = '') {
-                searchModal.classList.add('show');
-                body.style.overflow = 'hidden';
-                searchModalInput.value = query;
-                searchModalInput.focus();
-                performSearch(query);
-            }
-
-            function closeSearchModal() {
-                searchModal.classList.remove('show');
-                body.style.overflow = '';
-            }
-
+            function openSearchModal(query = '') { searchModal.classList.add('show'); body.style.overflow = 'hidden'; searchModalInput.value = query; searchModalInput.focus(); performSearch(query); }
+            function closeSearchModal() { searchModal.classList.remove('show'); body.style.overflow = ''; }
             function performSearch(query) {
                 const lowerCaseQuery = query.trim().toLowerCase();
-
-                if (lowerCaseQuery.length < 2) {
-                    searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf untuk mencari...</p>';
-                    return;
-                }
-
-                const results = products.filter(p => {
-                    const searchableText = [
-                        p.title,
-                        p.seller.name,
-                        p.code,
-                        p.details.description.replace(/<[^>]*>?/gm, ''),
-                        ...p.details.specs.map(s => `${s.label} ${s.value.replace(/<[^>]*>?/gm, '')}`)
-                    ].join(' ').toLowerCase();
-
-                    return searchableText.includes(lowerCaseQuery);
-                });
-
+                if (lowerCaseQuery.length < 2) { searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf untuk mencari...</p>'; return; }
+                const results = products.filter(p => [p.title, p.seller.name, p.code, p.details.description.replace(/<[^>]*>?/gm, ''), ...p.details.specs.map(s => `${s.label} ${s.value.replace(/<[^>]*>?/gm, '')}`)].join(' ').toLowerCase().includes(lowerCaseQuery));
                 displaySearchResults(results);
             }
-
             function displaySearchResults(results) {
-                if (results.length === 0) {
-                    searchResults.innerHTML = '<p class="search-results-placeholder">Produk tidak ditemukan.</p>';
-                    return;
-                }
-
-                searchResults.innerHTML = results.map(p => `
-                    <a href="#product-${p.id}" class="search-result-item" data-product-id="${p.id}">
-                        <img src="${p.mainImage}" alt="${p.title}" class="search-result-image" onerror="this.onerror=null;this.src='https://via.placeholder.com/60x60.png?text=Error';">
-                        <div class="search-result-info">
-                            <h4>${p.title}</h4>
-                            <p>oleh ${p.seller.name} (Kode: ${p.code})</p>
-                        </div>
-                    </a>
-                `).join('');
+                if (results.length === 0) { searchResults.innerHTML = '<p class="search-results-placeholder">Produk tidak ditemukan.</p>'; return; }
+                searchResults.innerHTML = results.map(p => `<a href="#product-${p.id}" class="search-result-item" data-product-id="${p.id}"><img src="${p.mainImage}" alt="${p.title}" class="search-result-image"><div class="search-result-info"><h4>${p.title}</h4><p>oleh ${p.seller.name} (Kode: ${p.code})</p></div></a>`).join('');
             }
-            
-            [headerSearchInput, navSearchInput].forEach(input => {
-                input.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        openSearchModal(input.value);
-                    }
-                });
-            });
-            
-            [headerSearchBtn, navSearchBtn].forEach(button => {
-                button.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const input = button.previousElementSibling;
-                    openSearchModal(input.value);
-                });
-            });
-            
-            searchModalInput.addEventListener('input', () => {
-                performSearch(searchModalInput.value);
-            });
-            
+            [headerSearchInput, navSearchInput].forEach(input => { input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); openSearchModal(input.value); } }); });
+            [headerSearchBtn, navSearchBtn].forEach(button => { button.addEventListener('click', (e) => { e.preventDefault(); const input = button.previousElementSibling; openSearchModal(input.value); }); });
+            searchModalInput.addEventListener('input', () => { performSearch(searchModalInput.value); });
             searchResults.addEventListener('click', (e) => {
                 const link = e.target.closest('.search-result-item');
-                if (link) {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        closeSearchModal();
-                        setTimeout(() => {
-                           window.scrollTo({
-                                top: targetElement.offsetTop - 100,
-                                behavior: 'smooth'
-                            });
-                        }, 100); 
-                    }
-                }
+                if (link) { e.preventDefault(); const targetId = link.getAttribute('href'); const targetElement = document.querySelector(targetId); if (targetElement) { closeSearchModal(); setTimeout(() => { window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' }); }, 100); } }
             });
-
-            // --- GENERAL PAGE SCRIPT ---
-            const bgMusic = document.getElementById('bgMusic');
-            if (bgMusic) {
-                bgMusic.volume = 0.3;
-                let played = false;
-                const playMusic = () => {
-                    if (!played) {
-                        bgMusic.play().then(() => { played = true; }).catch(() => {});
-                    }
-                };
-                playMusic();
-                document.body.addEventListener('click', playMusic, { once: true });
-                document.body.addEventListener('touchstart', playMusic, { once: true });
-            }
-
-            const particlesContainer = document.getElementById('particles');
-            if (particlesContainer) {
-                for (let i = 0; i < 40; i++) {
-                    const particle = document.createElement('div');
-                    particle.classList.add('particle');
-                    const size = Math.random() * 6 + 2;
-                    particle.style.width = `${size}px`;
-                    particle.style.height = `${size}px`;
-                    particle.style.left = `${Math.random() * 100}%`;
-                    particle.style.animationDuration = `${Math.random() * 15 + 15}s`;
-                    particle.style.animationDelay = `${Math.random() * 10}s`;
-                    particlesContainer.appendChild(particle);
-                }
-            }
-            
-            const navbar = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                if (navbar) {
-                    navbar.classList.toggle('scrolled', window.scrollY > 50);
-                }
-            });
-
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const navLinks = document.getElementById('navLinks');
-            if (mobileMenuToggle && navLinks) {
-                mobileMenuToggle.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-                    playButtonSound();
-                });
-                navLinks.addEventListener('click', (e) => {
-                    if (e.target.tagName === 'A') {
-                        navLinks.classList.remove('active');
-                        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-                    }
-                });
-            }
-
-            const searchToggle = document.getElementById('searchToggle');
-            const navSearch = document.getElementById('navSearch');
-            if(searchToggle && navSearch) {
-                searchToggle.addEventListener('click', () => {
-                    navSearch.classList.toggle('active');
-                    playButtonSound();
-                });
-            }
-            
-            const productCategories = document.querySelector('.product-categories');
-            const categoryTabs = document.querySelector('.category-tabs');
-            let activeCategory = 'all';
-            let activeType = 'all';
-
-            function applyFilters() {
-                document.querySelectorAll('.gallery-item').forEach(item => {
-                    const itemCategory = item.dataset.category;
-                    const itemType = item.dataset.type;
-                    const categoryMatch = activeCategory === 'all' || itemCategory === activeCategory;
-                    const typeMatch = activeType === 'all' || itemType === activeType;
-                    item.style.display = (categoryMatch && typeMatch) ? 'block' : 'none';
-                });
-            }
-
-            if (productCategories) {
-                productCategories.addEventListener('click', e => {
-                    if (e.target.classList.contains('product-category-btn')) {
-                        productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active'));
-                        e.target.classList.add('active');
-                        activeCategory = e.target.dataset.category;
-                        applyFilters();
-                        playButtonSound();
-                    }
-                });
-            }
-
-            if (categoryTabs) {
-                categoryTabs.addEventListener('click', e => {
-                    if (e.target.classList.contains('category-btn')) {
-                        categoryTabs.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-                        e.target.classList.add('active');
-                        activeType = e.target.dataset.type;
-                        applyFilters();
-                        playButtonSound();
-                    }
-                });
-            }
-            
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    alert('Fitur ini sedang dalam pengembangan.');
-                    playButtonSound();
-                });
-            }
-            
-            const orderModal = document.getElementById('orderModal');
-            const quickOrderBtn = document.getElementById('quick-order');
-            if (orderModal && quickOrderBtn) {
-                quickOrderBtn.addEventListener('click', () => {
-                    orderModal.classList.add('show');
-                    body.style.overflow = 'hidden';
-                    playButtonSound();
-                });
-            }
-            
-            document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal || e.target.classList.contains('close-modal') || e.target.classList.contains('close-image-modal') || e.target.classList.contains('close-search-modal')) {
-                        modal.classList.remove('show');
-                        body.style.overflow = '';
-                    }
-                });
-            });
-
-            const buttonSound = document.getElementById('buttonSound');
-            function playButtonSound() {
-                if(buttonSound) {
-                    buttonSound.currentTime = 0;
-                    buttonSound.play().catch(() => {});
-                }
-            }
-
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { 
-                        e.preventDefault();
-                        const target = document.querySelector(this.getAttribute('href'));
-                        if (target) {
-                            window.scrollTo({
-                                top: target.offsetTop - 80,
-                                behavior: 'smooth'
-                            });
-                        }
-                    }
-                });
-            });
-            
-            // --- LOGIKA NOTIFIKASI PENAWARAN ---
-            const offerNotification = document.getElementById('offerNotification');
-            const step1 = document.getElementById('notificationStep1');
-            const step2 = document.getElementById('notificationStep2');
-
-            const showNotification = () => {
-                if (!sessionStorage.getItem('offerDismissed')) {
-                    offerNotification.classList.add('show');
-                }
-            };
-            
-            const hideNotification = () => {
-                offerNotification.classList.remove('show');
-                sessionStorage.setItem('offerDismissed', 'true');
-            };
-            
-            setTimeout(showNotification, 5000);
-
-            offerNotification.addEventListener('click', (e) => {
-                const target = e.target;
-
-                if (target.id === 'closeNotification') {
-                    hideNotification();
-                }
-
-                if (target.matches('.notification-btn')) {
-                    const action = target.dataset.action;
-                    
-                    if (action === 'close') {
-                        hideNotification();
-                    } else if (action === 'next') {
-                        step1.classList.remove('active');
-                        step2.classList.add('active');
-                    } else if (action === 'register') {
-                        window.open('https://anekamarket.github.io/formulir/', '_blank');
-                        hideNotification();
-                    }
-                }
-            });
+            const bgMusic = document.getElementById('bgMusic'); if (bgMusic) { bgMusic.volume = 0.3; let played = false; const playMusic = () => { if (!played) { bgMusic.play().then(() => { played = true; }).catch(() => {}); } }; playMusic(); document.body.addEventListener('click', playMusic, { once: true }); document.body.addEventListener('touchstart', playMusic, { once: true }); }
+            const particlesContainer = document.getElementById('particles'); if (particlesContainer) { for (let i = 0; i < 40; i++) { const particle = document.createElement('div'); particle.classList.add('particle'); const size = Math.random() * 6 + 2; particle.style.width = `${size}px`; particle.style.height = `${size}px`; particle.style.left = `${Math.random() * 100}%`; particle.style.animationDuration = `${Math.random() * 15 + 15}s`; particle.style.animationDelay = `${Math.random() * 10}s`; particlesContainer.appendChild(particle); } }
+            const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { if (navbar) { navbar.classList.toggle('scrolled', window.scrollY > 50); } });
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle'); const navLinks = document.getElementById('navLinks'); if (mobileMenuToggle && navLinks) { mobileMenuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; playButtonSound(); }); navLinks.addEventListener('click', (e) => { if (e.target.tagName === 'A') { navLinks.classList.remove('active'); mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>'; } }); }
+            const searchToggle = document.getElementById('searchToggle'); const navSearch = document.getElementById('navSearch'); if(searchToggle && navSearch) { searchToggle.addEventListener('click', () => { navSearch.classList.toggle('active'); playButtonSound(); }); }
+            const productCategories = document.querySelector('.product-categories'); const categoryTabs = document.querySelector('.category-tabs'); let activeCategory = 'all'; let activeType = 'all';
+            function applyFilters() { document.querySelectorAll('.gallery-item').forEach(item => { const itemCategory = item.dataset.category; const itemType = item.dataset.type; const categoryMatch = activeCategory === 'all' || itemCategory === activeCategory; const typeMatch = activeType === 'all' || itemType === activeType; item.style.display = (categoryMatch && typeMatch) ? 'block' : 'none'; }); }
+            if (productCategories) { productCategories.addEventListener('click', e => { if (e.target.classList.contains('product-category-btn')) { productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeCategory = e.target.dataset.category; applyFilters(); playButtonSound(); } }); }
+            if (categoryTabs) { categoryTabs.addEventListener('click', e => { if (e.target.classList.contains('category-btn')) { categoryTabs.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeType = e.target.dataset.type; applyFilters(); playButtonSound(); } }); }
+            const contactForm = document.getElementById('contactForm'); if (contactForm) { contactForm.addEventListener('submit', function(e) { e.preventDefault(); alert('Fitur ini sedang dalam pengembangan.'); playButtonSound(); }); }
+            const orderModal = document.getElementById('orderModal'); const quickOrderBtn = document.getElementById('quick-order'); if (orderModal && quickOrderBtn) { quickOrderBtn.addEventListener('click', () => { orderModal.classList.add('show'); body.style.overflow = 'hidden'; playButtonSound(); }); }
+            document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => { modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('close-modal') || e.target.classList.contains('close-image-modal') || e.target.classList.contains('close-search-modal')) { modal.classList.remove('show'); body.style.overflow = ''; } }); });
+            const buttonSound = document.getElementById('buttonSound'); function playButtonSound() { if(buttonSound) { buttonSound.currentTime = 0; buttonSound.play().catch(() => {}); } }
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); } } }); });
+            const offerNotification = document.getElementById('offerNotification'); const step1 = document.getElementById('notificationStep1'); const step2 = document.getElementById('notificationStep2'); const showNotification = () => { if (!sessionStorage.getItem('offerDismissed')) { offerNotification.classList.add('show'); } }; const hideNotification = () => { offerNotification.classList.remove('show'); sessionStorage.setItem('offerDismissed', 'true'); }; setTimeout(showNotification, 5000); offerNotification.addEventListener('click', (e) => { const target = e.target; if (target.id === 'closeNotification') hideNotification(); if (target.matches('.notification-btn')) { const action = target.dataset.action; if (action === 'close') hideNotification(); else if (action === 'next') { step1.classList.remove('active'); step2.classList.add('active'); } else if (action === 'register') { window.open('https://anekamarket.github.io/formulir/', '_blank'); hideNotification(); } } });
         });
     </script>
 </body>
