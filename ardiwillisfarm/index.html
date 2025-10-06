@@ -608,6 +608,51 @@
             background-color: var(--primary-dark);
             transform: scale(1.1);
         }
+        
+        /* --- [PERBAIKAN] NEW: Floating Register Button --- */
+        .floating-register-btn {
+            position: fixed;
+            bottom: 85px; /* Diposisikan di atas tombol back-to-top */
+            right: 20px;
+            z-index: 999;
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(45deg, #ff4757, #ff6b81); /* Warna gradien merah yang mencolok */
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.5);
+            text-decoration: none;
+            animation: pulse-effect 2s infinite;
+            transition: all 0.3s ease;
+        }
+
+        .floating-register-btn:hover {
+            transform: scale(1.1);
+            animation-play-state: paused; /* Jeda animasi saat hover agar mudah diklik */
+        }
+        
+        /* Animasi denyut/gelombang sinyal */
+        @keyframes pulse-effect {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 20px rgba(255, 71, 87, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
+            }
+        }
+
 
         /* --- Responsive Styles --- */
         @media (max-width: 992px) {
@@ -638,6 +683,14 @@
             .footer-container { text-align: center; }
             .footer-col h3::after { left: 50%; transform: translateX(-50%); }
             .back-to-top { width: 45px; height: 45px; font-size: 1.3rem; }
+            /* [PERBAIKAN] Penyesuaian posisi tombol mengambang */
+            .floating-register-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
+                bottom: 75px; 
+                right: 20px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -651,6 +704,14 @@
             .offer-notification { width: calc(100% - 20px); bottom: 10px; right: 10px; }
              .contact-bar { left: 10px; bottom: 10px; }
              .contact-btn { width: 50px; height: 50px; font-size: 1.5rem; }
+             /* [PERBAIKAN] Penyesuaian posisi tombol mengambang */
+             .floating-register-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+                bottom: 70px; 
+                right: 10px;
+             }
         }
     </style>
 </head>
@@ -735,6 +796,10 @@
 
     <a href="#home" class="back-to-top" aria-label="Kembali ke atas">
         <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <a href="https://www.aplikasiusaha.com/notagratis" target="_blank" class="floating-register-btn" aria-label="Daftar Sekarang">
+        <i class="fas fa-cash-register"></i>
     </a>
     
     <footer>
@@ -1395,7 +1460,12 @@
                     }
                 });
 
-
+                // --- [PERBAIKAN] Event Listener untuk Tombol Mengambang Baru ---
+                const registerBtn = document.querySelector('.floating-register-btn');
+                if(registerBtn) {
+                    registerBtn.addEventListener('click', playSound);
+                }
+                
                 const offerNotification = document.getElementById('offerNotification');
                 if (offerNotification) {
                     setTimeout(() => offerNotification.classList.add('show'), 5000);
