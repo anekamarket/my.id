@@ -57,7 +57,7 @@
         .gallery-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .gallery-actions .btn-detail, .gallery-actions .btn-order, .gallery-actions .btn-preorder-toggle, .gallery-actions .btn-visit { flex-grow: 1; min-width: 120px; }
 
-        /* --- CSS BARU UNTUK KONTROL JUMLAH & TOTAL HARGA --- */
+        /* --- [PERBAIKAN] CSS DISEMPURNAKAN UNTUK KONTROL JUMLAH & TOTAL HARGA --- */
         .quantity-selector {
             display: flex;
             align-items: center;
@@ -65,40 +65,48 @@
             margin: 15px 0;
             padding: 8px;
             background-color: #f9f9f9;
-            border-radius: 5px;
-            border: 1px solid #eee;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
         }
         .quantity-label {
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.9rem;
             margin-right: 10px;
+            color: #333;
         }
         .quantity-controls {
             display: flex;
             align-items: center;
         }
         .quantity-btn {
-            background-color: #e0e0e0;
+            background-color: #007bff;
+            color: white;
             border: none;
-            width: 30px;
-            height: 30px;
-            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            font-size: 1.4rem;
+            line-height: 32px;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.2s;
+            border-radius: 50%;
+            transition: background-color 0.2s, transform 0.1s;
         }
         .quantity-btn:hover {
-            background-color: #ccc;
+            background-color: #0056b3;
+        }
+        .quantity-btn:active {
+            transform: scale(0.95);
         }
         .quantity-input {
-            width: 50px;
+            width: 55px;
             text-align: center;
             border: 1px solid #ddd;
             border-radius: 5px;
-            margin: 0 5px;
-            height: 30px;
-            font-size: 1rem;
+            margin: 0 8px;
+            height: 32px;
+            font-size: 1.1rem;
+            font-weight: 500;
             -moz-appearance: textfield;
         }
         .quantity-input::-webkit-outer-spin-button,
@@ -114,6 +122,7 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #fff;
+            font-family: 'Poppins', sans-serif;
         }
 
         .total-price {
@@ -466,20 +475,13 @@
                 }).format(amount);
             }
 
-            // --- FUNGSI GENERATE STRUK PDF (VERSI DISEMPURNAKAN) ---
+            // --- FUNGSI GENERATE STRUK PDF (VERSI PROFESIONAL) ---
             async function generateAndDownloadReceipt(productData, orderDetails) {
                 const doc = new jsPDF();
                 const transactionId = `TRX-${productData.code}-${Date.now()}`;
                 const logoUrl = 'https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png';
 
-                const toDataURL = url => fetch(url)
-                    .then(response => response.blob())
-                    .then(blob => new Promise((resolve, reject) => {
-                        const reader = new FileReader();
-                        reader.onloadend = () => resolve(reader.result);
-                        reader.onerror = reject;
-                        reader.readAsDataURL(blob);
-                    }));
+                const toDataURL = url => fetch(url).then(response => response.blob()).then(blob => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onloadend = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(blob); }));
 
                 try {
                     const logoBase64 = await toDataURL(logoUrl);
@@ -512,101 +514,65 @@
                     doc.text('Detail Transaksi:', pageW / 2, y);
                     doc.setFont(undefined, 'normal');
                     doc.text('Pelanggan Anekamarket', margin, y + 5);
-                    
                     doc.text(`ID Transaksi:`, pageW / 2, y + 5);
                     doc.text(`${transactionId}`, pageW - margin, y + 5, { align: 'right' });
-                    
                     doc.text(`Tanggal:`, pageW / 2, y + 10);
                     doc.text(`${new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' })}`, pageW - margin, y + 10, { align: 'right' });
-                    
                     doc.text(`Gerai Penjual:`, pageW / 2, y + 15);
                     doc.text(`${productData.seller.name}`, pageW - margin, y + 15, { align: 'right' });
 
-
                     // --- TABEL PRODUK ---
                     y += 30;
-                    doc.setFillColor(230, 230, 230); // Latar belakang header tabel
-                    doc.setDrawColor(200, 200, 200); // Warna border
-                    doc.setLineWidth(0.3);
-                    doc.rect(margin, y, pageW - (margin * 2), 10, 'FD'); // Gambar kotak header
-                    
+                    doc.setFillColor(230, 230, 230); doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.3);
+                    doc.rect(margin, y, pageW - (margin * 2), 10, 'FD'); 
                     doc.setFontSize(10).setFont(undefined, 'bold');
                     doc.text('Deskripsi Produk', margin + 2, y + 7);
                     doc.text('Harga Satuan', pageW / 2 + 20, y + 7);
                     doc.text('Jumlah', pageW / 2 + 50, y + 7);
                     doc.text('Total', pageW - margin - 2, y + 7, { align: 'right' });
                     y += 10;
-                    
                     doc.setFont(undefined, 'normal');
                     const itemY = y;
-                    doc.line(margin, itemY, pageW - margin, itemY); // Garis atas item
-                    
-                    // Deskripsi Produk (dengan word wrapping)
+                    doc.line(margin, itemY, pageW - margin, itemY);
                     const productTitleLines = doc.splitTextToSize(`${productData.title} (${productData.code})`, (pageW / 2));
                     doc.text(productTitleLines, margin + 2, itemY + 7);
-
                     doc.text(formatPrice(orderDetails.unitPrice), pageW / 2 + 20, itemY + 7);
                     doc.text(`${orderDetails.quantity} ${orderDetails.unit}`, pageW / 2 + 50, itemY + 7);
                     doc.text(orderDetails.totalPrice, pageW - margin - 2, itemY + 7, { align: 'right' });
-
-                    const itemHeight = Math.max(12, productTitleLines.length * 5 + 2); // Tinggi baris dinamis
+                    const itemHeight = Math.max(12, productTitleLines.length * 5 + 2);
                     y += itemHeight;
-
-                    doc.line(margin, itemY, margin, y); // Border kiri
-                    doc.line(pageW - margin, itemY, pageW - margin, y); // Border kanan
-                    doc.line(margin, y, pageW - margin, y); // Garis bawah item
-
+                    doc.line(margin, itemY, margin, y); doc.line(pageW - margin, itemY, pageW - margin, y); doc.line(margin, y, pageW - margin, y);
 
                     // --- TOTAL ---
                     y += 10;
                     const totalX = pageW - margin;
                     doc.setFontSize(11).setFont(undefined, 'bold');
-                    
                     if (orderDetails.type === 'PRE-ORDER') {
-                        doc.text('Subtotal:', totalX - 40, y, { align: 'right' });
-                        doc.text(orderDetails.totalPrice, totalX, y, { align: 'right' });
-                        y += 7;
-                        
-                        doc.text('Uang Muka (DP):', totalX - 40, y, { align: 'right' });
-                        doc.text(orderDetails.dpAmount, totalX, y, { align: 'right' });
-                        y += 7;
-                        
+                        doc.text('Subtotal:', totalX - 40, y, { align: 'right' }); doc.text(orderDetails.totalPrice, totalX, y, { align: 'right' }); y += 7;
+                        doc.text('Uang Muka (DP):', totalX - 40, y, { align: 'right' }); doc.text(orderDetails.dpAmount, totalX, y, { align: 'right' }); y += 7;
                         const sisa = parseFloat(orderDetails.totalPrice.replace(/[^0-9]/g, '')) - parseFloat(orderDetails.dpAmount.replace(/[^0-9]/g, ''));
-                        doc.text('Sisa Pembayaran:', totalX - 40, y, { align: 'right' });
-                        doc.text(formatPrice(sisa), totalX, y, { align: 'right' });
+                        doc.text('Sisa Pembayaran:', totalX - 40, y, { align: 'right' }); doc.text(formatPrice(sisa), totalX, y, { align: 'right' });
                     }
-                    
                     y += 10;
                     doc.setFillColor(230, 230, 230);
                     doc.rect(totalX - 80, y, 80, 10, 'F');
                     doc.setFontSize(12).setFont(undefined, 'bold');
-                    doc.text(orderDetails.type === 'PRE-ORDER' ? 'TOTAL DP:' : 'TOTAL BAYAR:', totalX - 40, y + 7, { align: 'right' });
                     const finalAmount = orderDetails.type === 'PRE-ORDER' ? orderDetails.dpAmount : orderDetails.totalPrice;
+                    doc.text(orderDetails.type === 'PRE-ORDER' ? 'TOTAL DP:' : 'TOTAL BAYAR:', totalX - 40, y + 7, { align: 'right' });
                     doc.text(finalAmount, totalX, y + 7, { align: 'right' });
-
 
                     // --- FOOTER ---
                     y = doc.internal.pageSize.getHeight() - 40;
                     doc.setFontSize(9).setFont(undefined, 'italic');
                     doc.text('Catatan: Struk ini merupakan bukti pemesanan yang sah dan dibuat secara otomatis oleh sistem.\nHarap simpan struk ini untuk proses konfirmasi pembayaran dengan penjual.', pageW / 2, y, { align: 'center' });
-                    
                     y += 20;
-                    doc.setLineWidth(0.5);
-                    doc.line(margin, y, pageW - margin, y);
-                    y += 7;
-                    doc.setFontSize(10).setFont(undefined, 'bold');
-                    doc.text('Terima Kasih Telah Berbelanja!', pageW / 2, y, { align: 'center' });
-                    y += 5;
-                    doc.setFontSize(9).setFont(undefined, 'normal');
-                    doc.text('www.anekamarket.my.id', pageW / 2, y, { align: 'center' });
+                    doc.setLineWidth(0.5); doc.line(margin, y, pageW - margin, y); y += 7;
+                    doc.setFontSize(10).setFont(undefined, 'bold'); doc.text('Terima Kasih Telah Berbelanja!', pageW / 2, y, { align: 'center' }); y += 5;
+                    doc.setFontSize(9).setFont(undefined, 'normal'); doc.text('www.anekamarket.my.id', pageW / 2, y, { align: 'center' });
 
-                    // --- SIMPAN PDF ---
                     doc.save(`Struk-${orderDetails.type}-${productData.code}.pdf`);
 
-                } catch (error) {
-                    console.error("Gagal membuat PDF:", error);
-                    alert("Maaf, terjadi kesalahan saat membuat struk PDF. Silakan coba lagi.");
-                }
+                } catch (error) { console.error("Gagal membuat PDF:", error); alert("Maaf, terjadi kesalahan saat membuat struk PDF. Silakan coba lagi."); }
             }
 
 
@@ -615,10 +581,6 @@
             const body = document.body;
             
             function renderProducts() {
-                if (typeof products === 'undefined' || !Array.isArray(products)) {
-                    if(galleryGrid) galleryGrid.innerHTML = '<p>Gagal memuat data produk.</p>';
-                    return;
-                }
                 if (!galleryGrid) return;
                 galleryGrid.innerHTML = '';
                 
@@ -630,13 +592,7 @@
                     productCard.setAttribute('data-id', product.id);
                     productCard.id = `product-${product.id}`;
 
-                    const priceVariationsHTML = product.priceVariations.map((v, index) => `
-                        <div class="price-variation ${index === 0 ? 'active' : ''}" data-price="${v.price}">
-                            <span class="price-variation-name">${v.name}</span>
-                            <span class="price-variation-value">${formatPrice(v.price)}</span>
-                        </div>
-                    `).join('');
-
+                    const priceVariationsHTML = product.priceVariations.map((v, index) => `<div class="price-variation ${index === 0 ? 'active' : ''}" data-price="${v.price}"><span class="price-variation-name">${v.name}</span><span class="price-variation-value">${formatPrice(v.price)}</span></div>`).join('');
                     const unitOptionsHTML = product.units.map(unit => `<option value="${unit}" ${unit === product.defaultUnit ? 'selected' : ''}>${unit}</option>`).join('');
                     const detailImagesHTML = product.details.images.map((img, index) => `<img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy">`).join('');
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}:</span><span class="spec-value">${spec.value}</span></div>`).join('');
@@ -657,7 +613,7 @@
                             <div class="price-variations">${priceVariationsHTML}</div>
                             
                             <div class="quantity-selector">
-                                <span class="quantity-label">Jumlah:</span>
+                                <span class="quantity-label">Jumlah Beli:</span>
                                 <div class="quantity-controls">
                                     <button class="quantity-btn minus" aria-label="Kurangi jumlah">-</button>
                                     <input type="number" class="quantity-input" value="1" min="1" aria-label="Jumlah produk">
@@ -686,18 +642,9 @@
                             </div>
                             
                             <div class="gallery-detail-expanded">
-                                <div class="gallery-carousel">
-                                    <img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image" loading="lazy">
-                                    <div class="gallery-thumbnails">${detailImagesHTML}</div>
-                                </div>
-                                <div class="gallery-content">
-                                    <p class="gallery-description">${product.details.description}</p>
-                                    <div class="gallery-specs">${detailSpecsHTML}</div>
-                                </div>
-                                <div class="gallery-actions-expanded">
-                                    <a href="https://wa.me/${product.contact.whatsapp}?text=Halo%20${encodeURIComponent(product.seller.name)},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title)}%20(${product.code})" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat via WhatsApp</a>
-                                    <a href="tel:${product.contact.phone}" class="btn-call"><i class="fas fa-phone-alt"></i> Telepon Sekarang</a>
-                                </div>
+                                <div class="gallery-carousel"><img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image" loading="lazy"><div class="gallery-thumbnails">${detailImagesHTML}</div></div>
+                                <div class="gallery-content"><p class="gallery-description">${product.details.description}</p><div class="gallery-specs">${detailSpecsHTML}</div></div>
+                                <div class="gallery-actions-expanded"><a href="https://wa.me/${product.contact.whatsapp}?text=Halo%20${encodeURIComponent(product.seller.name)},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title)}%20(${product.code})" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat via WhatsApp</a><a href="tel:${product.contact.phone}" class="btn-call"><i class="fas fa-phone-alt"></i> Telepon Sekarang</a></div>
                             </div>
                         </div>
                     `;
@@ -709,6 +656,7 @@
 
             // --- EVENT LISTENERS (DENGAN DELEGASI) ---
             if (galleryGrid) {
+                // Fungsi untuk mengupdate total harga pada satu kartu produk
                 const updateTotalPrice = (container) => {
                     const activeVariation = container.querySelector('.price-variation.active');
                     const quantityInput = container.querySelector('.quantity-input');
@@ -726,16 +674,13 @@
                     const detailsContainer = target.closest('.gallery-details');
                     if (!detailsContainer) return;
 
-                    if (target.closest('.btn-detail')) {
-                        const btn = target.closest('.btn-detail');
-                        const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded');
-                        expandedContent.classList.toggle('active');
-                        btn.classList.toggle('active');
-                        btn.innerHTML = expandedContent.classList.contains('active') ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' : '<i class="fas fa-chevron-down"></i> Detail Produk';
-                        if (expandedContent.classList.contains('active')) expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        playButtonSound();
-                    }
+                    // Logika untuk tombol Detail, Thumbnail, Zoom Gambar, Pre-order (Tidak berubah)
+                    if (target.closest('.btn-detail')) { const btn = target.closest('.btn-detail'); const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded'); expandedContent.classList.toggle('active'); btn.classList.toggle('active'); btn.innerHTML = expandedContent.classList.contains('active') ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' : '<i class="fas fa-chevron-down"></i> Detail Produk'; if (expandedContent.classList.contains('active')) expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); playButtonSound(); }
+                    if (target.classList.contains('thumbnail')) { const mainImage = target.closest('.gallery-carousel').querySelector('.gallery-main-image'); mainImage.src = target.src; target.parentElement.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active')); target.classList.add('active'); playButtonSound(); }
+                    if(target.classList.contains('gallery-main-image')) { document.getElementById('zoomedImage').src = target.src; document.getElementById('imageModal').classList.add('show'); body.style.overflow = 'hidden'; playButtonSound(); }
+                    if (target.closest('.btn-preorder-toggle')) { const btn = target.closest('.btn-preorder-toggle'); const preorderForm = detailsContainer.querySelector('.preorder-form'); preorderForm.classList.toggle('active'); btn.classList.toggle('active'); btn.innerHTML = preorderForm.classList.contains('active') ? '<i class="fas fa-times"></i> Batal Pre-Order' : '<i class="fas fa-calendar-check"></i> Pre-Order'; playButtonSound(); }
 
+                    // [LOGIKA UTAMA] Saat memilih variasi harga, update total harga
                     if (target.closest('.price-variation')) {
                         const variation = target.closest('.price-variation');
                         variation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
@@ -743,7 +688,8 @@
                         updateTotalPrice(detailsContainer);
                         playButtonSound();
                     }
-
+                    
+                    // [LOGIKA UTAMA] Saat menekan tombol + atau -
                     if (target.closest('.quantity-btn')) {
                         const btn = target.closest('.quantity-btn');
                         const input = btn.parentElement.querySelector('.quantity-input');
@@ -754,34 +700,10 @@
                         updateTotalPrice(detailsContainer);
                         playButtonSound();
                     }
-
-                    if (target.classList.contains('thumbnail')) {
-                        const mainImage = target.closest('.gallery-carousel').querySelector('.gallery-main-image');
-                        mainImage.src = target.src;
-                        target.parentElement.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                        target.classList.add('active');
-                        playButtonSound();
-                    }
-
-                    if(target.classList.contains('gallery-main-image')) {
-                        document.getElementById('zoomedImage').src = target.src;
-                        document.getElementById('imageModal').classList.add('show');
-                        body.style.overflow = 'hidden';
-                        playButtonSound();
-                    }
-
-                    if (target.closest('.btn-preorder-toggle')) {
-                        const btn = target.closest('.btn-preorder-toggle');
-                        const preorderForm = detailsContainer.querySelector('.preorder-form');
-                        preorderForm.classList.toggle('active');
-                        btn.classList.toggle('active');
-                        btn.innerHTML = preorderForm.classList.contains('active') ? '<i class="fas fa-times"></i> Batal Pre-Order' : '<i class="fas fa-calendar-check"></i> Pre-Order';
-                        playButtonSound();
-                    }
                     
+                    // Logika Tombol Pesan & Pre-Order
                     const galleryItem = target.closest('.gallery-item');
                     if (!galleryItem) return;
-                    
                     const productId = galleryItem.dataset.id;
                     const productData = products.find(p => p.id === productId);
 
@@ -792,97 +714,67 @@
                         const activeVariation = detailsContainer.querySelector('.price-variation.active');
                         const unitPrice = activeVariation ? parseFloat(activeVariation.dataset.price) : 0;
                         let dpAmount = 'N/A';
-                        
-                        if (type === 'PRE-ORDER') {
-                             const dpInput = detailsContainer.querySelector('.preorder-input');
-                             const dpValue = parseFloat(dpInput.value);
-                             const totalValue = parseFloat(totalPrice.replace(/[^0-9]/g, ''));
-
-                             if (isNaN(dpValue) || dpValue <= 0) {
-                                alert('Mohon masukkan nominal DP yang valid');
-                                return null;
-                             }
-                             if (dpValue < (totalValue * 0.4)) {
-                                alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalValue * 0.4)})`);
-                                return null;
-                             }
-                             dpAmount = formatPrice(dpValue);
-                        }
-
+                        if (type === 'PRE-ORDER') { const dpInput = detailsContainer.querySelector('.preorder-input'); const dpValue = parseFloat(dpInput.value); const totalValue = parseFloat(totalPrice.replace(/[^0-9]/g, '')); if (isNaN(dpValue) || dpValue <= 0) { alert('Mohon masukkan nominal DP yang valid'); return null; } if (dpValue < (totalValue * 0.4)) { alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalValue * 0.4)})`); return null; } dpAmount = formatPrice(dpValue); }
                         return { type, quantity, unit, totalPrice, dpAmount, unitPrice };
                     };
 
                     if (target.closest('.btn-order')) {
                         const orderDetails = gatherOrderDetails('PEMESANAN LANGSUNG');
                         if (orderDetails) {
-                            generateAndDownloadReceipt(productData, orderDetails);
-                            const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${orderDetails.quantity} ${orderDetails.unit}\nTotal Harga: *${orderDetails.totalPrice}*\n\nStruk pemesanan sudah saya unduh dan akan saya kirimkan. Mohon info lebih lanjut. Terima kasih.`;
-                            window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                            playButtonSound();
+                            // [PERBAIKAN] Tambahkan konfirmasi sebelum melanjutkan
+                            const confirmation = confirm(`Anda akan memesan "${productData.title}" sebanyak ${orderDetails.quantity} ${orderDetails.unit} dengan total ${orderDetails.totalPrice}.\n\nLanjutkan?`);
+                            if (confirmation) {
+                                generateAndDownloadReceipt(productData, orderDetails);
+                                const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${orderDetails.quantity} ${orderDetails.unit}\nTotal Harga: *${orderDetails.totalPrice}*\n\nStruk pemesanan sudah saya unduh dan akan saya kirimkan. Mohon info lebih lanjut. Terima kasih.`;
+                                window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                                playButtonSound();
+                            }
                         }
                     }
                     
                     if (target.closest('.btn-preorder')) {
                         const orderDetails = gatherOrderDetails('PRE-ORDER');
                         if (orderDetails) {
-                           generateAndDownloadReceipt(productData, orderDetails);
-                           const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: *${orderDetails.totalPrice}*\nUang Muka: *${orderDetails.dpAmount}*\n\nStruk pre-order sudah saya unduh. Mohon info lebih lanjut. Terima kasih.`;
-                           window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
-                           playButtonSound();
+                            const confirmation = confirm(`Anda akan melakukan Pre-Order "${productData.title}" dengan total ${orderDetails.totalPrice} dan DP ${orderDetails.dpAmount}.\n\nLanjutkan?`);
+                            if(confirmation){
+                                generateAndDownloadReceipt(productData, orderDetails);
+                                const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: *${orderDetails.totalPrice}*\nUang Muka: *${orderDetails.dpAmount}*\n\nStruk pre-order sudah saya unduh. Mohon info lebih lanjut. Terima kasih.`;
+                                window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
+                                playButtonSound();
+                            }
                         }
                     }
                 });
                 
-                galleryGrid.addEventListener('change', e => {
+                // [LOGIKA UTAMA] Event listener jika user mengetik langsung di input jumlah
+                const handleQuantityInput = e => {
                     if(e.target.classList.contains('quantity-input') || e.target.classList.contains('unit-select')) {
                         if (e.target.classList.contains('quantity-input') && e.target.value < 1) e.target.value = 1;
                         const detailsContainer = e.target.closest('.gallery-details');
                         if (detailsContainer) updateTotalPrice(detailsContainer);
                     }
-                });
-                 galleryGrid.addEventListener('input', e => {
-                    if(e.target.classList.contains('quantity-input')) {
-                        const detailsContainer = e.target.closest('.gallery-details');
-                        if (detailsContainer) updateTotalPrice(detailsContainer);
-                    }
-                });
+                };
+                galleryGrid.addEventListener('change', handleQuantityInput);
+                galleryGrid.addEventListener('input', handleQuantityInput);
             }
 
             // --- FITUR PENCARIAN & SKRIP HALAMAN LAINNYA (TIDAK BERUBAH) ---
-            const searchModal = document.getElementById('searchModal');
-            const searchModalInput = document.getElementById('searchModalInput');
-            const searchResults = document.getElementById('searchResults');
-            const headerSearchInput = document.getElementById('headerSearchInput');
-            const headerSearchBtn = document.getElementById('headerSearchBtn');
-            const navSearchInput = document.getElementById('navSearchInput');
-            const navSearchBtn = document.getElementById('navSearchBtn');
-
+            const searchModal = document.getElementById('searchModal'); const searchModalInput = document.getElementById('searchModalInput'); const searchResults = document.getElementById('searchResults'); const headerSearchInput = document.getElementById('headerSearchInput'); const headerSearchBtn = document.getElementById('headerSearchBtn'); const navSearchInput = document.getElementById('navSearchInput'); const navSearchBtn = document.getElementById('navSearchBtn');
             function openSearchModal(query = '') { searchModal.classList.add('show'); body.style.overflow = 'hidden'; searchModalInput.value = query; searchModalInput.focus(); performSearch(query); }
             function closeSearchModal() { searchModal.classList.remove('show'); body.style.overflow = ''; }
-            function performSearch(query) {
-                const lowerCaseQuery = query.trim().toLowerCase();
-                if (lowerCaseQuery.length < 2) { searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf untuk mencari...</p>'; return; }
-                const results = products.filter(p => [p.title, p.seller.name, p.code, p.details.description.replace(/<[^>]*>?/gm, ''), ...p.details.specs.map(s => `${s.label} ${s.value.replace(/<[^>]*>?/gm, '')}`)].join(' ').toLowerCase().includes(lowerCaseQuery));
-                displaySearchResults(results);
-            }
-            function displaySearchResults(results) {
-                if (results.length === 0) { searchResults.innerHTML = '<p class="search-results-placeholder">Produk tidak ditemukan.</p>'; return; }
-                searchResults.innerHTML = results.map(p => `<a href="#product-${p.id}" class="search-result-item" data-product-id="${p.id}"><img src="${p.mainImage}" alt="${p.title}" class="search-result-image"><div class="search-result-info"><h4>${p.title}</h4><p>oleh ${p.seller.name} (Kode: ${p.code})</p></div></a>`).join('');
-            }
+            function performSearch(query) { const lowerCaseQuery = query.trim().toLowerCase(); if (lowerCaseQuery.length < 2) { searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf...</p>'; return; } const results = products.filter(p => [p.title, p.seller.name, p.code, p.details.description.replace(/<[^>]*>?/gm, ''), ...p.details.specs.map(s => `${s.label} ${s.value.replace(/<[^>]*>?/gm, '')}`)].join(' ').toLowerCase().includes(lowerCaseQuery)); displaySearchResults(results); }
+            function displaySearchResults(results) { if (results.length === 0) { searchResults.innerHTML = '<p class="search-results-placeholder">Produk tidak ditemukan.</p>'; return; } searchResults.innerHTML = results.map(p => `<a href="#product-${p.id}" class="search-result-item" data-product-id="${p.id}"><img src="${p.mainImage}" alt="${p.title}" class="search-result-image"><div class="search-result-info"><h4>${p.title}</h4><p>oleh ${p.seller.name} (Kode: ${p.code})</p></div></a>`).join(''); }
             [headerSearchInput, navSearchInput].forEach(input => { input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); openSearchModal(input.value); } }); });
             [headerSearchBtn, navSearchBtn].forEach(button => { button.addEventListener('click', (e) => { e.preventDefault(); const input = button.previousElementSibling; openSearchModal(input.value); }); });
             searchModalInput.addEventListener('input', () => { performSearch(searchModalInput.value); });
-            searchResults.addEventListener('click', (e) => {
-                const link = e.target.closest('.search-result-item');
-                if (link) { e.preventDefault(); const targetId = link.getAttribute('href'); const targetElement = document.querySelector(targetId); if (targetElement) { closeSearchModal(); setTimeout(() => { window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' }); }, 100); } }
-            });
-            const bgMusic = document.getElementById('bgMusic'); if (bgMusic) { bgMusic.volume = 0.3; let played = false; const playMusic = () => { if (!played) { bgMusic.play().then(() => { played = true; }).catch(() => {}); } }; playMusic(); document.body.addEventListener('click', playMusic, { once: true }); document.body.addEventListener('touchstart', playMusic, { once: true }); }
-            const particlesContainer = document.getElementById('particles'); if (particlesContainer) { for (let i = 0; i < 40; i++) { const particle = document.createElement('div'); particle.classList.add('particle'); const size = Math.random() * 6 + 2; particle.style.width = `${size}px`; particle.style.height = `${size}px`; particle.style.left = `${Math.random() * 100}%`; particle.style.animationDuration = `${Math.random() * 15 + 15}s`; particle.style.animationDelay = `${Math.random() * 10}s`; particlesContainer.appendChild(particle); } }
+            searchResults.addEventListener('click', (e) => { const link = e.target.closest('.search-result-item'); if (link) { e.preventDefault(); const targetId = link.getAttribute('href'); const targetElement = document.querySelector(targetId); if (targetElement) { closeSearchModal(); setTimeout(() => { window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' }); }, 100); } } });
+            const bgMusic = document.getElementById('bgMusic'); if (bgMusic) { bgMusic.volume = 0.3; let p = false; const pm = () => { if (!p) { bgMusic.play().then(() => { p = true; }).catch(() => {}); } }; pm(); document.body.addEventListener('click', pm, { once: true }); document.body.addEventListener('touchstart', pm, { once: true }); }
+            const particlesContainer = document.getElementById('particles'); if (particlesContainer) { for (let i = 0; i < 40; i++) { const pr = document.createElement('div'); pr.classList.add('particle'); const s = Math.random() * 6 + 2; pr.style.width = `${s}px`; pr.style.height = `${s}px`; pr.style.left = `${Math.random() * 100}%`; pr.style.animationDuration = `${Math.random() * 15 + 15}s`; pr.style.animationDelay = `${Math.random() * 10}s`; particlesContainer.appendChild(pr); } }
             const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => { if (navbar) { navbar.classList.toggle('scrolled', window.scrollY > 50); } });
             const mobileMenuToggle = document.getElementById('mobileMenuToggle'); const navLinks = document.getElementById('navLinks'); if (mobileMenuToggle && navLinks) { mobileMenuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; playButtonSound(); }); navLinks.addEventListener('click', (e) => { if (e.target.tagName === 'A') { navLinks.classList.remove('active'); mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>'; } }); }
             const searchToggle = document.getElementById('searchToggle'); const navSearch = document.getElementById('navSearch'); if(searchToggle && navSearch) { searchToggle.addEventListener('click', () => { navSearch.classList.toggle('active'); playButtonSound(); }); }
             const productCategories = document.querySelector('.product-categories'); const categoryTabs = document.querySelector('.category-tabs'); let activeCategory = 'all'; let activeType = 'all';
-            function applyFilters() { document.querySelectorAll('.gallery-item').forEach(item => { const itemCategory = item.dataset.category; const itemType = item.dataset.type; const categoryMatch = activeCategory === 'all' || itemCategory === activeCategory; const typeMatch = activeType === 'all' || itemType === activeType; item.style.display = (categoryMatch && typeMatch) ? 'block' : 'none'; }); }
+            function applyFilters() { document.querySelectorAll('.gallery-item').forEach(item => { const iC = item.dataset.category; const iT = item.dataset.type; const cM = activeCategory === 'all' || iC === activeCategory; const tM = activeType === 'all' || iT === activeType; item.style.display = (cM && tM) ? 'block' : 'none'; }); }
             if (productCategories) { productCategories.addEventListener('click', e => { if (e.target.classList.contains('product-category-btn')) { productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeCategory = e.target.dataset.category; applyFilters(); playButtonSound(); } }); }
             if (categoryTabs) { categoryTabs.addEventListener('click', e => { if (e.target.classList.contains('category-btn')) { categoryTabs.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeType = e.target.dataset.type; applyFilters(); playButtonSound(); } }); }
             const contactForm = document.getElementById('contactForm'); if (contactForm) { contactForm.addEventListener('submit', function(e) { e.preventDefault(); alert('Fitur ini sedang dalam pengembangan.'); playButtonSound(); }); }
@@ -890,7 +782,7 @@
             document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => { modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('close-modal') || e.target.classList.contains('close-image-modal') || e.target.classList.contains('close-search-modal')) { modal.classList.remove('show'); body.style.overflow = ''; } }); });
             const buttonSound = document.getElementById('buttonSound'); function playButtonSound() { if(buttonSound) { buttonSound.currentTime = 0; buttonSound.play().catch(() => {}); } }
             document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); } } }); });
-            const offerNotification = document.getElementById('offerNotification'); const step1 = document.getElementById('notificationStep1'); const step2 = document.getElementById('notificationStep2'); const showNotification = () => { if (!sessionStorage.getItem('offerDismissed')) { offerNotification.classList.add('show'); } }; const hideNotification = () => { offerNotification.classList.remove('show'); sessionStorage.setItem('offerDismissed', 'true'); }; setTimeout(showNotification, 5000); offerNotification.addEventListener('click', (e) => { const target = e.target; if (target.id === 'closeNotification') hideNotification(); if (target.matches('.notification-btn')) { const action = target.dataset.action; if (action === 'close') hideNotification(); else if (action === 'next') { step1.classList.remove('active'); step2.classList.add('active'); } else if (action === 'register') { window.open('https://anekamarket.github.io/formulir/', '_blank'); hideNotification(); } } });
+            const offerNotification = document.getElementById('offerNotification'); const step1 = document.getElementById('notificationStep1'); const step2 = document.getElementById('notificationStep2'); const showNotification = () => { if (!sessionStorage.getItem('offerDismissed')) { offerNotification.classList.add('show'); } }; const hideNotification = () => { offerNotification.classList.remove('show'); sessionStorage.setItem('offerDismissed', 'true'); }; setTimeout(showNotification, 5000); offerNotification.addEventListener('click', (e) => { const t = e.target; if (t.id === 'closeNotification') hideNotification(); if (t.matches('.notification-btn')) { const a = t.dataset.action; if (a === 'close') hideNotification(); else if (a === 'next') { step1.classList.remove('active'); step2.classList.add('active'); } else if (a === 'register') { window.open('https://anekamarket.github.io/formulir/', '_blank'); hideNotification(); } } });
         });
     </script>
 </body>
