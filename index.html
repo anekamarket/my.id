@@ -653,26 +653,38 @@
             }
 
             renderProducts();
-
-            // --- EVENT LISTENERS (DENGAN DELEGASI) ---
+            
+            // --- [PENYEMPURNAAN] FUNGSI DAN EVENT LISTENER UNTUK PEMBELIAN PRODUK ---
             if (galleryGrid) {
-                // Fungsi untuk mengupdate total harga pada satu kartu produk
-                const updateTotalPrice = (container) => {
-                    const activeVariation = container.querySelector('.price-variation.active');
-                    const quantityInput = container.querySelector('.quantity-input');
+                // [FUNGSI UTAMA] Fungsi ini bertanggung jawab untuk menghitung dan menampilkan total harga secara dinamis pada sebuah kartu produk.
+                const updateTotalPrice = (productCard) => {
+                    // 1. Temukan variasi harga yang sedang aktif/dipilih oleh pengguna di dalam kartu.
+                    const activeVariation = productCard.querySelector('.price-variation.active');
+                    // 2. Temukan elemen input untuk jumlah barang di dalam kartu.
+                    const quantityInput = productCard.querySelector('.quantity-input');
+                    
+                    // 3. Pastikan kedua elemen di atas (variasi aktif dan input jumlah) ditemukan sebelum melanjutkan kalkulasi.
                     if (activeVariation && quantityInput) {
-                        const price = parseFloat(activeVariation.dataset.price);
+                        // 4. Ambil harga satuan dari variasi yang aktif. Harga disimpan pada atribut 'data-price'.
+                        const pricePerItem = parseFloat(activeVariation.dataset.price);
+                        // 5. Ambil jumlah yang diinput oleh pengguna. Jika kosong atau tidak valid, maka dianggap 1.
                         const quantity = parseInt(quantityInput.value, 10) || 1;
-                        const totalPrice = price * quantity;
-                        const totalPriceElement = container.querySelector('.total-price-value');
-                        if (totalPriceElement) totalPriceElement.textContent = formatPrice(totalPrice);
+                        // 6. Hitung total harga dengan mengalikan harga satuan dengan jumlah.
+                        const totalPrice = pricePerItem * quantity;
+                        // 7. Temukan elemen untuk menampilkan total harga, lalu perbarui isinya dengan nilai yang sudah diformat ke Rupiah.
+                        const totalPriceElement = productCard.querySelector('.total-price-value');
+                        if (totalPriceElement) {
+                            totalPriceElement.textContent = formatPrice(totalPrice);
+                        }
                     }
                 };
                 
+                // Event listener utama yang menangani semua klik di dalam galeri produk.
                 galleryGrid.addEventListener('click', e => {
                     const target = e.target;
+                    // Dapatkan container detail produk (.gallery-details) terdekat dari elemen yang di-klik.
                     const detailsContainer = target.closest('.gallery-details');
-                    if (!detailsContainer) return;
+                    if (!detailsContainer) return; // Keluar dari fungsi jika klik terjadi di luar area detail produk.
 
                     // Logika untuk tombol Detail, Thumbnail, Zoom Gambar, Pre-order (Tidak berubah)
                     if (target.closest('.btn-detail')) { const btn = target.closest('.btn-detail'); const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded'); expandedContent.classList.toggle('active'); btn.classList.toggle('active'); btn.innerHTML = expandedContent.classList.contains('active') ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' : '<i class="fas fa-chevron-down"></i> Detail Produk'; if (expandedContent.classList.contains('active')) expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); playButtonSound(); }
@@ -680,23 +692,31 @@
                     if(target.classList.contains('gallery-main-image')) { document.getElementById('zoomedImage').src = target.src; document.getElementById('imageModal').classList.add('show'); body.style.overflow = 'hidden'; playButtonSound(); }
                     if (target.closest('.btn-preorder-toggle')) { const btn = target.closest('.btn-preorder-toggle'); const preorderForm = detailsContainer.querySelector('.preorder-form'); preorderForm.classList.toggle('active'); btn.classList.toggle('active'); btn.innerHTML = preorderForm.classList.contains('active') ? '<i class="fas fa-times"></i> Batal Pre-Order' : '<i class="fas fa-calendar-check"></i> Pre-Order'; playButtonSound(); }
 
-                    // [LOGIKA UTAMA] Saat memilih variasi harga, update total harga
+                    // [LOGIKA PEMBELIAN] Saat pengguna memilih variasi harga.
                     if (target.closest('.price-variation')) {
-                        const variation = target.closest('.price-variation');
-                        variation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
-                        variation.classList.add('active');
+                        const selectedVariation = target.closest('.price-variation');
+                        // Hapus status 'active' dari semua variasi lain di dalam produk yang sama untuk memastikan hanya satu yang terpilih.
+                        selectedVariation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
+                        // Tambahkan status 'active' ke variasi yang baru saja dipilih.
+                        selectedVariation.classList.add('active');
+                        // Panggil fungsi updateTotalPrice untuk menghitung ulang total berdasarkan harga variasi yang baru.
                         updateTotalPrice(detailsContainer);
                         playButtonSound();
                     }
                     
-                    // [LOGIKA UTAMA] Saat menekan tombol + atau -
+                    // [LOGIKA PEMBELIAN] Saat pengguna menekan tombol '+' atau '-'.
                     if (target.closest('.quantity-btn')) {
                         const btn = target.closest('.quantity-btn');
                         const input = btn.parentElement.querySelector('.quantity-input');
                         let value = parseInt(input.value, 10);
-                        if (btn.classList.contains('plus')) value++;
-                        else if (btn.classList.contains('minus') && value > 1) value--;
-                        input.value = value;
+                        // Tambah atau kurangi nilai, dengan batasan minimal 1.
+                        if (btn.classList.contains('plus')) {
+                            value++;
+                        } else if (btn.classList.contains('minus') && value > 1) {
+                            value--;
+                        }
+                        input.value = value; // Perbarui nilai di dalam kotak input.
+                        // Panggil fungsi updateTotalPrice untuk menghitung ulang total berdasarkan jumlah yang baru.
                         updateTotalPrice(detailsContainer);
                         playButtonSound();
                     }
@@ -721,7 +741,6 @@
                     if (target.closest('.btn-order')) {
                         const orderDetails = gatherOrderDetails('PEMESANAN LANGSUNG');
                         if (orderDetails) {
-                            // [PERBAIKAN] Tambahkan konfirmasi sebelum melanjutkan
                             const confirmation = confirm(`Anda akan memesan "${productData.title}" sebanyak ${orderDetails.quantity} ${orderDetails.unit} dengan total ${orderDetails.totalPrice}.\n\nLanjutkan?`);
                             if (confirmation) {
                                 generateAndDownloadReceipt(productData, orderDetails);
@@ -746,16 +765,25 @@
                     }
                 });
                 
-                // [LOGIKA UTAMA] Event listener jika user mengetik langsung di input jumlah
-                const handleQuantityInput = e => {
-                    if(e.target.classList.contains('quantity-input') || e.target.classList.contains('unit-select')) {
-                        if (e.target.classList.contains('quantity-input') && e.target.value < 1) e.target.value = 1;
-                        const detailsContainer = e.target.closest('.gallery-details');
-                        if (detailsContainer) updateTotalPrice(detailsContainer);
+                // [LOGIKA PEMBELIAN] Event listener jika pengguna mengetik langsung di input jumlah atau mengubah unit.
+                const handleQuantityInputChange = e => {
+                    const changedElement = e.target;
+                    if(changedElement.classList.contains('quantity-input') || changedElement.classList.contains('unit-select')) {
+                        // Jika nilai input jumlah kurang dari 1, otomatis atur kembali ke 1.
+                        if (changedElement.classList.contains('quantity-input') && changedElement.value < 1) {
+                            changedElement.value = 1;
+                        }
+                        // Dapatkan container detail produk terdekat dan panggil fungsi update total harga.
+                        const detailsContainer = changedElement.closest('.gallery-details');
+                        if (detailsContainer) {
+                            updateTotalPrice(detailsContainer);
+                        }
                     }
                 };
-                galleryGrid.addEventListener('change', handleQuantityInput);
-                galleryGrid.addEventListener('input', handleQuantityInput);
+                
+                // Terapkan listener ini untuk event 'change' (saat fokus hilang dari input) dan 'input' (setiap kali ada ketikan).
+                galleryGrid.addEventListener('change', handleQuantityInputChange);
+                galleryGrid.addEventListener('input', handleQuantityInputChange);
             }
 
             // --- FITUR PENCARIAN & SKRIP HALAMAN LAINNYA (TIDAK BERUBAH) ---
