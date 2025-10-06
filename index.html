@@ -17,7 +17,7 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" type="image/png">
     
@@ -57,24 +57,37 @@
         .gallery-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .gallery-actions .btn-detail, .gallery-actions .btn-order, .gallery-actions .btn-preorder-toggle, .gallery-actions .btn-visit { flex-grow: 1; min-width: 120px; }
 
-        /* --- [PERBAIKAN] CSS DISEMPURNAKAN UNTUK KONTROL JUMLAH & TOTAL HARGA --- */
-        .quantity-selector {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin: 15px 0;
-            padding: 8px;
-            background-color: #f9f9f9;
+        /* --- [PERBAIKAN TOTAL] CSS UNTUK PEMBELIAN MULTI-ITEM --- */
+        .price-variations-container {
+            border: 1px solid #eee;
             border-radius: 8px;
-            border: 1px solid #e0e0e0;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            margin-top: 15px;
+            overflow: hidden;
         }
-        .quantity-label {
+        .price-variation-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            gap: 10px;
+        }
+        .price-variation-item:last-child {
+            border-bottom: none;
+        }
+        .price-variation-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .price-variation-name {
             font-weight: 600;
-            font-size: 0.9rem;
-            margin-right: 10px;
             color: #333;
         }
+        .price-variation-value {
+            font-size: 0.9rem;
+            color: #007bff;
+        }
+
         .quantity-controls {
             display: flex;
             align-items: center;
@@ -83,39 +96,31 @@
             background-color: #007bff;
             color: white;
             border: none;
-            width: 32px;
-            height: 32px;
-            font-size: 1.4rem;
-            line-height: 32px;
+            width: 28px;
+            height: 28px;
+            font-size: 1.2rem;
+            line-height: 28px;
             font-weight: bold;
             cursor: pointer;
             border-radius: 50%;
             transition: background-color 0.2s, transform 0.1s;
         }
-        .quantity-btn:hover {
-            background-color: #0056b3;
-        }
-        .quantity-btn:active {
-            transform: scale(0.95);
-        }
+        .quantity-btn:hover { background-color: #0056b3; }
+        .quantity-btn:active { transform: scale(0.95); }
         .quantity-input {
-            width: 55px;
+            width: 45px;
             text-align: center;
             border: 1px solid #ddd;
             border-radius: 5px;
-            margin: 0 8px;
-            height: 32px;
-            font-size: 1.1rem;
+            margin: 0 5px;
+            height: 28px;
+            font-size: 1rem;
             font-weight: 500;
             -moz-appearance: textfield;
         }
         .quantity-input::-webkit-outer-spin-button,
         .quantity-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .unit-selector {
-            margin-left: 10px;
+            -webkit-appearance: none; margin: 0;
         }
         .unit-select {
             padding: 5px 8px;
@@ -126,7 +131,7 @@
         }
 
         .total-price {
-            margin: 15px 0;
+            margin-top: 15px;
             padding: 12px;
             background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
             border-radius: 8px;
@@ -475,7 +480,7 @@
                 }).format(amount);
             }
 
-            // --- FUNGSI GENERATE STRUK PDF (VERSI PROFESIONAL) ---
+            // --- [DIRUBAH] FUNGSI GENERATE STRUK PDF UNTUK MULTI-ITEM ---
             async function generateAndDownloadReceipt(productData, orderDetails) {
                 const doc = new jsPDF();
                 const transactionId = `TRX-${productData.code}-${Date.now()}`;
@@ -489,7 +494,7 @@
                     const margin = 15;
                     let y = 20;
 
-                    // --- HEADER ---
+                    // Header
                     doc.addImage(logoBase64, 'PNG', margin, y, 25, 25);
                     doc.setFontSize(22).setFont(undefined, 'bold');
                     doc.text('ANEKAMARKET', pageW - margin, y + 8, { align: 'right' });
@@ -498,7 +503,7 @@
                     doc.text('Situbondo, Jawa Timur, 68351', pageW - margin, y + 19, { align: 'right' });
                     doc.text('admin@anekamarket.my.id', pageW - margin, y + 24, { align: 'right' });
 
-                    // --- JUDUL DOKUMEN ---
+                    // Judul Dokumen
                     y += 40;
                     doc.setLineWidth(1.5);
                     doc.line(margin, y, pageW - margin, y);
@@ -507,7 +512,7 @@
                     const docTitle = orderDetails.type === 'PRE-ORDER' ? 'BUKTI PRE-ORDER' : 'INVOICE PEMESANAN';
                     doc.text(docTitle, pageW / 2, y, { align: 'center' });
                     
-                    // --- INFO TRANSAKSI ---
+                    // Info Transaksi
                     y += 15;
                     doc.setFontSize(10).setFont(undefined, 'bold');
                     doc.text('Diterbitkan Untuk:', margin, y);
@@ -521,47 +526,59 @@
                     doc.text(`Gerai Penjual:`, pageW / 2, y + 15);
                     doc.text(`${productData.seller.name}`, pageW - margin, y + 15, { align: 'right' });
 
-                    // --- TABEL PRODUK ---
+                    // Tabel Produk (dengan loop untuk multi-item)
                     y += 30;
+                    const tableHeaderY = y;
                     doc.setFillColor(230, 230, 230); doc.setDrawColor(200, 200, 200); doc.setLineWidth(0.3);
-                    doc.rect(margin, y, pageW - (margin * 2), 10, 'FD'); 
+                    doc.rect(margin, tableHeaderY, pageW - (margin * 2), 10, 'FD'); 
                     doc.setFontSize(10).setFont(undefined, 'bold');
-                    doc.text('Deskripsi Produk', margin + 2, y + 7);
-                    doc.text('Harga Satuan', pageW / 2 + 20, y + 7);
-                    doc.text('Jumlah', pageW / 2 + 50, y + 7);
-                    doc.text('Total', pageW - margin - 2, y + 7, { align: 'right' });
+                    doc.text('Deskripsi Produk', margin + 2, tableHeaderY + 7);
+                    doc.text('Harga Satuan', pageW / 2 + 15, tableHeaderY + 7);
+                    doc.text('Jumlah', pageW / 2 + 45, tableHeaderY + 7);
+                    doc.text('Subtotal', pageW - margin - 2, tableHeaderY + 7, { align: 'right' });
                     y += 10;
-                    doc.setFont(undefined, 'normal');
-                    const itemY = y;
-                    doc.line(margin, itemY, pageW - margin, itemY);
-                    const productTitleLines = doc.splitTextToSize(`${productData.title} (${productData.code})`, (pageW / 2));
-                    doc.text(productTitleLines, margin + 2, itemY + 7);
-                    doc.text(formatPrice(orderDetails.unitPrice), pageW / 2 + 20, itemY + 7);
-                    doc.text(`${orderDetails.quantity} ${orderDetails.unit}`, pageW / 2 + 50, itemY + 7);
-                    doc.text(orderDetails.totalPrice, pageW - margin - 2, itemY + 7, { align: 'right' });
-                    const itemHeight = Math.max(12, productTitleLines.length * 5 + 2);
-                    y += itemHeight;
-                    doc.line(margin, itemY, margin, y); doc.line(pageW - margin, itemY, pageW - margin, y); doc.line(margin, y, pageW - margin, y);
 
-                    // --- TOTAL ---
+                    doc.setFont(undefined, 'normal');
+                    orderDetails.items.forEach(item => {
+                        const itemY = y;
+                        doc.line(margin, itemY, pageW - margin, itemY); // Top line
+                        const itemDescription = doc.splitTextToSize(`${item.name} (${productData.code})`, (pageW / 2) - 20);
+                        doc.text(itemDescription, margin + 2, itemY + 7);
+                        doc.text(formatPrice(item.unitPrice), pageW / 2 + 15, itemY + 7);
+                        doc.text(`${item.quantity} ${orderDetails.unit}`, pageW / 2 + 45, itemY + 7);
+                        doc.text(formatPrice(item.subtotal), pageW - margin - 2, itemY + 7, { align: 'right' });
+                        const itemHeight = Math.max(12, itemDescription.length * 5 + 2);
+                        y += itemHeight;
+                        doc.line(margin, itemY, margin, y); // Left line
+                        doc.line(pageW - margin, itemY, pageW - margin, y); // Right line
+                    });
+                    doc.line(margin, y, pageW - margin, y); // Bottom line
+
+                    // Total
                     y += 10;
                     const totalX = pageW - margin;
                     doc.setFontSize(11).setFont(undefined, 'bold');
+                    doc.text('Total Belanja:', totalX - 40, y, { align: 'right' });
+                    doc.text(formatPrice(orderDetails.grandTotal), totalX, y, { align: 'right' });
+                    
                     if (orderDetails.type === 'PRE-ORDER') {
-                        doc.text('Subtotal:', totalX - 40, y, { align: 'right' }); doc.text(orderDetails.totalPrice, totalX, y, { align: 'right' }); y += 7;
-                        doc.text('Uang Muka (DP):', totalX - 40, y, { align: 'right' }); doc.text(orderDetails.dpAmount, totalX, y, { align: 'right' }); y += 7;
-                        const sisa = parseFloat(orderDetails.totalPrice.replace(/[^0-9]/g, '')) - parseFloat(orderDetails.dpAmount.replace(/[^0-9]/g, ''));
-                        doc.text('Sisa Pembayaran:', totalX - 40, y, { align: 'right' }); doc.text(formatPrice(sisa), totalX, y, { align: 'right' });
+                        y += 7;
+                        doc.text('Uang Muka (DP):', totalX - 40, y, { align: 'right' });
+                        doc.text(orderDetails.dpAmount, totalX, y, { align: 'right' });
+                        y += 7;
+                        const sisa = orderDetails.grandTotal - parseFloat(orderDetails.dpAmount.replace(/[^0-9]/g, ''));
+                        doc.text('Sisa Pembayaran:', totalX - 40, y, { align: 'right' });
+                        doc.text(formatPrice(sisa), totalX, y, { align: 'right' });
                     }
                     y += 10;
                     doc.setFillColor(230, 230, 230);
                     doc.rect(totalX - 80, y, 80, 10, 'F');
                     doc.setFontSize(12).setFont(undefined, 'bold');
-                    const finalAmount = orderDetails.type === 'PRE-ORDER' ? orderDetails.dpAmount : orderDetails.totalPrice;
+                    const finalAmount = orderDetails.type === 'PRE-ORDER' ? orderDetails.dpAmount : formatPrice(orderDetails.grandTotal);
                     doc.text(orderDetails.type === 'PRE-ORDER' ? 'TOTAL DP:' : 'TOTAL BAYAR:', totalX - 40, y + 7, { align: 'right' });
                     doc.text(finalAmount, totalX, y + 7, { align: 'right' });
 
-                    // --- FOOTER ---
+                    // Footer
                     y = doc.internal.pageSize.getHeight() - 40;
                     doc.setFontSize(9).setFont(undefined, 'italic');
                     doc.text('Catatan: Struk ini merupakan bukti pemesanan yang sah dan dibuat secara otomatis oleh sistem.\nHarap simpan struk ini untuk proses konfirmasi pembayaran dengan penjual.', pageW / 2, y, { align: 'center' });
@@ -576,7 +593,7 @@
             }
 
 
-            // --- RENDER PRODUCTS ---
+            // --- [DIRUBAH] RENDER PRODUCTS UNTUK MULTI-ITEM ---
             const galleryGrid = document.getElementById('gallery-grid');
             const body = document.body;
             
@@ -592,7 +609,20 @@
                     productCard.setAttribute('data-id', product.id);
                     productCard.id = `product-${product.id}`;
 
-                    const priceVariationsHTML = product.priceVariations.map((v, index) => `<div class="price-variation ${index === 0 ? 'active' : ''}" data-price="${v.price}"><span class="price-variation-name">${v.name}</span><span class="price-variation-value">${formatPrice(v.price)}</span></div>`).join('');
+                    const priceVariationsHTML = product.priceVariations.map(v => `
+                        <div class="price-variation-item" data-price="${v.price}" data-name="${v.name}">
+                            <div class="price-variation-info">
+                                <span class="price-variation-name">${v.name}</span>
+                                <span class="price-variation-value">${formatPrice(v.price)}</span>
+                            </div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus" aria-label="Kurangi jumlah">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0" aria-label="Jumlah item">
+                                <button class="quantity-btn plus" aria-label="Tambah jumlah">+</button>
+                            </div>
+                        </div>
+                    `).join('');
+
                     const unitOptionsHTML = product.units.map(unit => `<option value="${unit}" ${unit === product.defaultUnit ? 'selected' : ''}>${unit}</option>`).join('');
                     const detailImagesHTML = product.details.images.map((img, index) => `<img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy">`).join('');
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}:</span><span class="spec-value">${spec.value}</span></div>`).join('');
@@ -605,26 +635,17 @@
                             <h3 class="gallery-title">${product.title}</h3>
                             <div class="gallery-meta"><span class="gallery-code">Kode: ${product.code}</span><span class="gallery-seller"><i class="fas fa-store"></i> ${product.seller.name}</span></div>
                             <p class="gallery-price">
-                                ${formatPrice(product.price)}
+                                Mulai dari ${formatPrice(product.price)}
                                 ${product.originalPrice ? `<span class="original-price">${formatPrice(product.originalPrice)}</span>` : ''}
                                 ${product.discount ? `<span class="discount">${product.discount}</span>` : ''}
                             </p>
                             
-                            <div class="price-variations">${priceVariationsHTML}</div>
-                            
-                            <div class="quantity-selector">
-                                <span class="quantity-label">Jumlah Beli:</span>
-                                <div class="quantity-controls">
-                                    <button class="quantity-btn minus" aria-label="Kurangi jumlah">-</button>
-                                    <input type="number" class="quantity-input" value="1" min="1" aria-label="Jumlah produk">
-                                    <button class="quantity-btn plus" aria-label="Tambah jumlah">+</button>
-                                </div>
-                                <div class="unit-selector"><select class="unit-select">${unitOptionsHTML}</select></div>
-                            </div>
+                            <div class="price-variations-container">${priceVariationsHTML}</div>
+                             <select class="unit-select" style="width:100%; margin-top:10px; padding: 8px;">${unitOptionsHTML}</select>
                             
                             <div class="total-price">
                                 <span class="total-price-label">Total Harga:</span>
-                                <span class="total-price-value">${formatPrice(product.priceVariations[0].price)}</span>
+                                <span class="total-price-value">${formatPrice(0)}</span>
                             </div>
                             
                             <div class="gallery-actions">
@@ -653,98 +674,127 @@
             }
 
             renderProducts();
-            
-            // --- [PENYEMPURNAAN] FUNGSI DAN EVENT LISTENER UNTUK PEMBELIAN PRODUK ---
+
+            // --- [PEROMBAKAN TOTAL] SCRIPT UNTUK LOGIKA PEMBELIAN MULTI-ITEM ---
             if (galleryGrid) {
-                // [FUNGSI UTAMA] Fungsi ini bertanggung jawab untuk menghitung dan menampilkan total harga secara dinamis pada sebuah kartu produk.
-                const updateTotalPrice = (productCard) => {
-                    // 1. Temukan variasi harga yang sedang aktif/dipilih oleh pengguna di dalam kartu.
-                    const activeVariation = productCard.querySelector('.price-variation.active');
-                    // 2. Temukan elemen input untuk jumlah barang di dalam kartu.
-                    const quantityInput = productCard.querySelector('.quantity-input');
+                // Fungsi untuk menghitung total harga dari SEMUA item di dalam satu kartu produk.
+                const updateGrandTotal = (productCard) => {
+                    let grandTotal = 0;
+                    const variationItems = productCard.querySelectorAll('.price-variation-item');
                     
-                    // 3. Pastikan kedua elemen di atas (variasi aktif dan input jumlah) ditemukan sebelum melanjutkan kalkulasi.
-                    if (activeVariation && quantityInput) {
-                        // 4. Ambil harga satuan dari variasi yang aktif. Harga disimpan pada atribut 'data-price'.
-                        const pricePerItem = parseFloat(activeVariation.dataset.price);
-                        // 5. Ambil jumlah yang diinput oleh pengguna. Jika kosong atau tidak valid, maka dianggap 1.
-                        const quantity = parseInt(quantityInput.value, 10) || 1;
-                        // 6. Hitung total harga dengan mengalikan harga satuan dengan jumlah.
-                        const totalPrice = pricePerItem * quantity;
-                        // 7. Temukan elemen untuk menampilkan total harga, lalu perbarui isinya dengan nilai yang sudah diformat ke Rupiah.
-                        const totalPriceElement = productCard.querySelector('.total-price-value');
-                        if (totalPriceElement) {
-                            totalPriceElement.textContent = formatPrice(totalPrice);
-                        }
+                    variationItems.forEach(item => {
+                        const price = parseFloat(item.dataset.price) || 0;
+                        const quantityInput = item.querySelector('.quantity-input');
+                        const quantity = parseInt(quantityInput.value, 10) || 0;
+                        grandTotal += price * quantity;
+                    });
+                    
+                    const totalPriceElement = productCard.querySelector('.total-price-value');
+                    if (totalPriceElement) {
+                        totalPriceElement.textContent = formatPrice(grandTotal);
                     }
                 };
-                
-                // Event listener utama yang menangani semua klik di dalam galeri produk.
+
+                // Event listener untuk interaksi pada tombol +/-
                 galleryGrid.addEventListener('click', e => {
                     const target = e.target;
-                    // Dapatkan container detail produk (.gallery-details) terdekat dari elemen yang di-klik.
-                    const detailsContainer = target.closest('.gallery-details');
-                    if (!detailsContainer) return; // Keluar dari fungsi jika klik terjadi di luar area detail produk.
+                    if (target.classList.contains('quantity-btn')) {
+                        const btn = target;
+                        const input = btn.parentElement.querySelector('.quantity-input');
+                        let value = parseInt(input.value, 10) || 0;
 
-                    // Logika untuk tombol Detail, Thumbnail, Zoom Gambar, Pre-order (Tidak berubah)
+                        if (btn.classList.contains('plus')) {
+                            value++;
+                        } else if (btn.classList.contains('minus') && value > 0) {
+                            value--;
+                        }
+                        input.value = value;
+                        
+                        // Setelah mengubah nilai, panggil update total
+                        const productCard = target.closest('.gallery-item');
+                        if(productCard) updateGrandTotal(productCard);
+                        playButtonSound();
+                    }
+                });
+                
+                // Event listener untuk input manual pada jumlah
+                galleryGrid.addEventListener('input', e => {
+                    const target = e.target;
+                    if (target.classList.contains('quantity-input')) {
+                        if (target.value < 0) target.value = 0; // Pastikan nilai tidak negatif
+                        const productCard = target.closest('.gallery-item');
+                        if(productCard) updateGrandTotal(productCard);
+                    }
+                });
+
+                // Event listener untuk tombol utama (Detail, Pesan, Pre-Order, dll)
+                galleryGrid.addEventListener('click', e => {
+                    const target = e.target;
+                    const detailsContainer = target.closest('.gallery-details');
+                    if (!detailsContainer) return;
+
+                    // Logika yang tidak berubah: Detail, Thumbnail, Zoom, Toggle Pre-Order
                     if (target.closest('.btn-detail')) { const btn = target.closest('.btn-detail'); const expandedContent = btn.closest('.gallery-details').querySelector('.gallery-detail-expanded'); expandedContent.classList.toggle('active'); btn.classList.toggle('active'); btn.innerHTML = expandedContent.classList.contains('active') ? '<i class="fas fa-chevron-up"></i> Sembunyikan Detail' : '<i class="fas fa-chevron-down"></i> Detail Produk'; if (expandedContent.classList.contains('active')) expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); playButtonSound(); }
                     if (target.classList.contains('thumbnail')) { const mainImage = target.closest('.gallery-carousel').querySelector('.gallery-main-image'); mainImage.src = target.src; target.parentElement.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active')); target.classList.add('active'); playButtonSound(); }
                     if(target.classList.contains('gallery-main-image')) { document.getElementById('zoomedImage').src = target.src; document.getElementById('imageModal').classList.add('show'); body.style.overflow = 'hidden'; playButtonSound(); }
                     if (target.closest('.btn-preorder-toggle')) { const btn = target.closest('.btn-preorder-toggle'); const preorderForm = detailsContainer.querySelector('.preorder-form'); preorderForm.classList.toggle('active'); btn.classList.toggle('active'); btn.innerHTML = preorderForm.classList.contains('active') ? '<i class="fas fa-times"></i> Batal Pre-Order' : '<i class="fas fa-calendar-check"></i> Pre-Order'; playButtonSound(); }
 
-                    // [LOGIKA PEMBELIAN] Saat pengguna memilih variasi harga.
-                    if (target.closest('.price-variation')) {
-                        const selectedVariation = target.closest('.price-variation');
-                        // Hapus status 'active' dari semua variasi lain di dalam produk yang sama untuk memastikan hanya satu yang terpilih.
-                        selectedVariation.parentElement.querySelectorAll('.price-variation').forEach(v => v.classList.remove('active'));
-                        // Tambahkan status 'active' ke variasi yang baru saja dipilih.
-                        selectedVariation.classList.add('active');
-                        // Panggil fungsi updateTotalPrice untuk menghitung ulang total berdasarkan harga variasi yang baru.
-                        updateTotalPrice(detailsContainer);
-                        playButtonSound();
-                    }
-                    
-                    // [LOGIKA PEMBELIAN] Saat pengguna menekan tombol '+' atau '-'.
-                    if (target.closest('.quantity-btn')) {
-                        const btn = target.closest('.quantity-btn');
-                        const input = btn.parentElement.querySelector('.quantity-input');
-                        let value = parseInt(input.value, 10);
-                        // Tambah atau kurangi nilai, dengan batasan minimal 1.
-                        if (btn.classList.contains('plus')) {
-                            value++;
-                        } else if (btn.classList.contains('minus') && value > 1) {
-                            value--;
-                        }
-                        input.value = value; // Perbarui nilai di dalam kotak input.
-                        // Panggil fungsi updateTotalPrice untuk menghitung ulang total berdasarkan jumlah yang baru.
-                        updateTotalPrice(detailsContainer);
-                        playButtonSound();
-                    }
-                    
-                    // Logika Tombol Pesan & Pre-Order
+                    // Logika yang berubah: Mengumpulkan data pesanan dari multi-item
                     const galleryItem = target.closest('.gallery-item');
                     if (!galleryItem) return;
                     const productId = galleryItem.dataset.id;
                     const productData = products.find(p => p.id === productId);
 
                     const gatherOrderDetails = (type = 'PEMESANAN LANGSUNG') => {
-                        const quantity = detailsContainer.querySelector('.quantity-input').value;
+                        const items = [];
+                        let grandTotal = 0;
                         const unit = detailsContainer.querySelector('.unit-select').value;
-                        const totalPrice = detailsContainer.querySelector('.total-price-value').textContent;
-                        const activeVariation = detailsContainer.querySelector('.price-variation.active');
-                        const unitPrice = activeVariation ? parseFloat(activeVariation.dataset.price) : 0;
+                        const variationItems = detailsContainer.querySelectorAll('.price-variation-item');
+                        
+                        variationItems.forEach(item => {
+                            const quantity = parseInt(item.querySelector('.quantity-input').value, 10) || 0;
+                            if (quantity > 0) {
+                                const name = item.dataset.name;
+                                const unitPrice = parseFloat(item.dataset.price);
+                                const subtotal = unitPrice * quantity;
+                                items.push({ name, quantity, unitPrice, subtotal });
+                                grandTotal += subtotal;
+                            }
+                        });
+
+                        if (items.length === 0) {
+                            alert('Anda belum memilih item atau jumlah produk.');
+                            return null;
+                        }
+                        
                         let dpAmount = 'N/A';
-                        if (type === 'PRE-ORDER') { const dpInput = detailsContainer.querySelector('.preorder-input'); const dpValue = parseFloat(dpInput.value); const totalValue = parseFloat(totalPrice.replace(/[^0-9]/g, '')); if (isNaN(dpValue) || dpValue <= 0) { alert('Mohon masukkan nominal DP yang valid'); return null; } if (dpValue < (totalValue * 0.4)) { alert(`Uang muka minimal 40% dari total harga (${formatPrice(totalValue * 0.4)})`); return null; } dpAmount = formatPrice(dpValue); }
-                        return { type, quantity, unit, totalPrice, dpAmount, unitPrice };
+                        if (type === 'PRE-ORDER') { 
+                            const dpInput = detailsContainer.querySelector('.preorder-input'); 
+                            const dpValue = parseFloat(dpInput.value); 
+                            if (isNaN(dpValue) || dpValue <= 0) { alert('Mohon masukkan nominal DP yang valid'); return null; } 
+                            if (dpValue < (grandTotal * 0.4)) { alert(`Uang muka minimal 40% dari total harga (${formatPrice(grandTotal * 0.4)})`); return null; } 
+                            dpAmount = formatPrice(dpValue); 
+                        }
+
+                        return { type, items, grandTotal, unit, dpAmount };
                     };
+                    
+                    const generateWhatsAppMessage = (product, details) => {
+                        let itemsText = details.items.map(item => `   - ${item.name} (x${item.quantity})`).join('\n');
+                        let totalText = `Total Harga: *${formatPrice(details.grandTotal)}*`;
+                        if(details.type === 'PRE-ORDER') {
+                            totalText += `\nUang Muka: *${details.dpAmount}*`;
+                        }
+                        return `Halo, saya ingin memesan produk dari *${product.seller.name}*:\n\n*${product.title}*\n${itemsText}\n\nSatuan: ${details.unit}\n${totalText}\n\nStruk pemesanan sudah saya unduh. Mohon info lebih lanjut. Terima kasih.`;
+                    }
 
                     if (target.closest('.btn-order')) {
                         const orderDetails = gatherOrderDetails('PEMESANAN LANGSUNG');
                         if (orderDetails) {
-                            const confirmation = confirm(`Anda akan memesan "${productData.title}" sebanyak ${orderDetails.quantity} ${orderDetails.unit} dengan total ${orderDetails.totalPrice}.\n\nLanjutkan?`);
+                            const confirmation = confirm(`Anda akan memesan dengan total ${formatPrice(orderDetails.grandTotal)}.\n\nLanjutkan?`);
                             if (confirmation) {
                                 generateAndDownloadReceipt(productData, orderDetails);
-                                const message = `Halo, saya ingin memesan produk:\n\n*${productData.title}* (${productData.code})\n\nJumlah: ${orderDetails.quantity} ${orderDetails.unit}\nTotal Harga: *${orderDetails.totalPrice}*\n\nStruk pemesanan sudah saya unduh dan akan saya kirimkan. Mohon info lebih lanjut. Terima kasih.`;
+                                const message = generateWhatsAppMessage(productData, orderDetails);
                                 window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
                                 playButtonSound();
                             }
@@ -754,36 +804,16 @@
                     if (target.closest('.btn-preorder')) {
                         const orderDetails = gatherOrderDetails('PRE-ORDER');
                         if (orderDetails) {
-                            const confirmation = confirm(`Anda akan melakukan Pre-Order "${productData.title}" dengan total ${orderDetails.totalPrice} dan DP ${orderDetails.dpAmount}.\n\nLanjutkan?`);
+                            const confirmation = confirm(`Anda akan Pre-Order dengan total ${formatPrice(orderDetails.grandTotal)} dan DP ${orderDetails.dpAmount}.\n\nLanjutkan?`);
                             if(confirmation){
                                 generateAndDownloadReceipt(productData, orderDetails);
-                                const message = `Halo, saya ingin melakukan pre-order produk:\n\n*${productData.title}* (${productData.code})\n\nTotal Harga: *${orderDetails.totalPrice}*\nUang Muka: *${orderDetails.dpAmount}*\n\nStruk pre-order sudah saya unduh. Mohon info lebih lanjut. Terima kasih.`;
+                                const message = generateWhatsAppMessage(productData, orderDetails);
                                 window.open(`https://wa.me/${productData.contact.whatsapp}?text=${encodeURIComponent(message)}`, '_blank');
                                 playButtonSound();
                             }
                         }
                     }
                 });
-                
-                // [LOGIKA PEMBELIAN] Event listener jika pengguna mengetik langsung di input jumlah atau mengubah unit.
-                const handleQuantityInputChange = e => {
-                    const changedElement = e.target;
-                    if(changedElement.classList.contains('quantity-input') || changedElement.classList.contains('unit-select')) {
-                        // Jika nilai input jumlah kurang dari 1, otomatis atur kembali ke 1.
-                        if (changedElement.classList.contains('quantity-input') && changedElement.value < 1) {
-                            changedElement.value = 1;
-                        }
-                        // Dapatkan container detail produk terdekat dan panggil fungsi update total harga.
-                        const detailsContainer = changedElement.closest('.gallery-details');
-                        if (detailsContainer) {
-                            updateTotalPrice(detailsContainer);
-                        }
-                    }
-                };
-                
-                // Terapkan listener ini untuk event 'change' (saat fokus hilang dari input) dan 'input' (setiap kali ada ketikan).
-                galleryGrid.addEventListener('change', handleQuantityInputChange);
-                galleryGrid.addEventListener('input', handleQuantityInputChange);
             }
 
             // --- FITUR PENCARIAN & SKRIP HALAMAN LAINNYA (TIDAK BERUBAH) ---
