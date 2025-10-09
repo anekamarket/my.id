@@ -32,42 +32,126 @@
     <style>
         /* CSS yang sudah ada tetap dipertahankan */
         .search-modal.show { display: flex; }
-        .search-modal-content { width: 90%; max-width: 600px; background: #fff; border-radius: 8px; padding: 20px; position: relative; }
-        .search-modal-input { width: 100%; padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 15px; }
-        .search-results { max-height: 400px; overflow-y: auto; }
-        .search-result-item { display: flex; align-items: center; padding: 10px; border-bottom: 1px solid #eee; text-decoration: none; color: #333; transition: background-color 0.3s; }
-        .search-result-item:hover { background-color: #f5f5f5; }
-        .search-result-image { width: 60px; height: 60px; object-fit: cover; border-radius: 5px; margin-right: 15px; }
+        
+        /* --- [PERBAIKAN & PENYEMPURNAAN] DESAIN PENCARIAN CERDAS --- */
+        .search-modal-content { 
+            width: 95%; 
+            max-width: 700px; 
+            background: #fefefe; 
+            border-radius: 12px; 
+            padding: 0; 
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .search-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            border-bottom: 1px solid #e9ecef;
+            background-color: #f8f9fa;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+        .search-modal-header h2 {
+            margin: 0;
+            font-size: 1.3rem;
+            color: #343a40;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        .search-modal-body {
+            padding: 20px 25px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        .search-modal-input { 
+            width: 100%; 
+            padding: 14px 20px; 
+            font-size: 1.1rem; 
+            border: 2px solid #ced4da; 
+            border-radius: 8px; 
+            margin-bottom: 20px; 
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .search-modal-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+            outline: none;
+        }
+        .search-results { max-height: 400px; overflow-y: auto; margin-top: 20px; }
+        .search-result-item { display: flex; align-items: center; padding: 12px; border-bottom: 1px solid #eee; text-decoration: none; color: #333; transition: background-color 0.3s; border-radius: 8px; }
+        .search-result-item:hover { background-color: #f1f1f1; }
+        .search-result-image { width: 60px; height: 60px; object-fit: cover; border-radius: 8px; margin-right: 15px; border: 1px solid #eee; }
         .search-result-info h4 { margin: 0 0 5px 0; font-size: 1rem; font-weight: 600; }
         .search-result-info p { margin: 0; font-size: 0.85rem; color: #666; }
-        .search-results-placeholder { text-align: center; color: #888; padding: 20px; }
+        .search-results-placeholder { text-align: center; color: #888; padding: 25px; font-size: 1rem; }
         
-        /* --- [FITUR BARU] CSS untuk Filter Pencarian Cerdas --- */
         .search-filters {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
         }
         .search-filters label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            display: inline-block;
             font-size: 0.9rem;
-            background-color: #f1f1f1;
-            padding: 5px 10px;
-            border-radius: 20px;
+            background-color: #e9ecef;
+            padding: 8px 16px;
+            border-radius: 50px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
             user-select: none;
+            color: #495057;
+            border: 1px solid #dee2e6;
         }
         .search-filters label:hover {
-            background-color: #e0e0e0;
+            background-color: #d1dce5;
         }
         .search-filters input[type="checkbox"] {
-            accent-color: #007bff;
+            display: none;
+        }
+        .search-filters input[type="checkbox"]:checked + label {
+            background-color: #007bff;
+            color: white;
+            border-color: #0056b3;
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+        }
+        .search-modal-footer {
+            padding: 15px 25px;
+            border-top: 1px solid #e9ecef;
+            text-align: right;
+            background-color: #f8f9fa;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        .btn-close-modal {
+            padding: 10px 20px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn-close-modal:hover {
+            background-color: #5a6268;
+        }
+        
+        .close-search-modal {
+            font-size: 2rem;
+            color: #6c757d;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s;
+            line-height: 1;
+        }
+        .close-search-modal:hover {
+            color: #343a40;
+            transform: rotate(90deg);
         }
         
         /* --- [PERBAIKAN] Posisi notifikasi dinaikkan agar tidak tumpang tindih dengan FAB Generator --- */
@@ -455,6 +539,8 @@
 
         @media (max-width: 768px) {
             #productGeneratorForm { grid-template-columns: 1fr; }
+            .search-modal-header h2 { font-size: 1.1rem; }
+            .search-modal-input { padding: 12px 15px; font-size: 1rem; }
         }
     </style>
 </head>
@@ -738,18 +824,33 @@
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
-            <input type="text" class="search-modal-input" placeholder="Cari produk, UMKM, kode..." id="searchModalInput">
-            
-            <div class="search-filters" id="searchFilters">
-                <label><input type="checkbox" name="search-filter" value="discount"> Potongan Harga</label>
-                <label><input type="checkbox" name="search-filter" value="bonus"> Bonus/Gratis</label>
-                <label><input type="checkbox" name="search-filter" value="negotiable"> Perkiraan Harga/Nego</label>
-                <label><input type="checkbox" name="search-filter" value="sort-cheap"> Urutkan Termurah</label>
+            <div class="search-modal-header">
+                <h2><i class="fas fa-search"></i> Pencarian Cerdas</h2>
+                <span class="close-search-modal" title="Tutup">&times;</span>
             </div>
-            
-            <div class="search-results" id="searchResults">
-                <p class="search-results-placeholder">Mulai ketik untuk mencari produk...</p>
+            <div class="search-modal-body">
+                <input type="text" class="search-modal-input" placeholder="Cari produk, UMKM, kode..." id="searchModalInput">
+                
+                <div class="search-filters" id="searchFilters">
+                    <input type="checkbox" name="search-filter" value="discount" id="filter-discount">
+                    <label for="filter-discount"><i class="fas fa-percent"></i> Potongan Harga</label>
+                    
+                    <input type="checkbox" name="search-filter" value="bonus" id="filter-bonus">
+                    <label for="filter-bonus"><i class="fas fa-gift"></i> Bonus/Gratis</label>
+                    
+                    <input type="checkbox" name="search-filter" value="negotiable" id="filter-negotiable">
+                    <label for="filter-negotiable"><i class="fas fa-handshake"></i> Perkiraan Harga/Nego</label>
+                    
+                    <input type="checkbox" name="search-filter" value="sort-cheap" id="filter-sort-cheap">
+                    <label for="filter-sort-cheap"><i class="fas fa-sort-amount-down"></i> Urutkan Termurah</label>
+                </div>
+                
+                <div class="search-results" id="searchResults">
+                    <p class="search-results-placeholder">Mulai ketik atau pilih filter untuk mencari produk...</p>
+                </div>
+            </div>
+            <div class="search-modal-footer">
+                <button class="btn-close-modal">Tutup</button>
             </div>
         </div>
     </div>
@@ -1328,6 +1429,8 @@
 
             // --- [PENYEMPURNAAN] FITUR PENCARIAN DENGAN FILTER CERDAS ---
             const searchModal = document.getElementById('searchModal'); const searchModalInput = document.getElementById('searchModalInput'); const searchResults = document.getElementById('searchResults'); const headerSearchInput = document.getElementById('headerSearchInput'); const headerSearchBtn = document.getElementById('headerSearchBtn'); const navSearchInput = document.getElementById('navSearchInput'); const navSearchBtn = document.getElementById('navSearchBtn'); const searchFilters = document.getElementById('searchFilters');
+            const btnCloseSearchModal = document.querySelector('.btn-close-modal');
+
             function openSearchModal(query = '') { searchModal.classList.add('show'); body.style.overflow = 'hidden'; searchModalInput.value = query; searchModalInput.focus(); performSearch(query); }
             function closeSearchModal() { searchModal.classList.remove('show'); body.style.overflow = ''; }
             
@@ -1335,20 +1438,21 @@
             function performSearch(query) { 
                 const lowerCaseQuery = query.trim().toLowerCase(); 
                 const filters = {
-                    discount: document.querySelector('input[value="discount"]').checked,
-                    bonus: document.querySelector('input[value="bonus"]').checked,
-                    negotiable: document.querySelector('input[value="negotiable"]').checked,
-                    sortCheap: document.querySelector('input[value="sort-cheap"]').checked
+                    discount: document.getElementById('filter-discount').checked,
+                    bonus: document.getElementById('filter-bonus').checked,
+                    negotiable: document.getElementById('filter-negotiable').checked,
+                    sortCheap: document.getElementById('filter-sort-cheap').checked
                 };
 
                 let results = products;
+                const isAnyFilterActive = Object.values(filters).some(v => v);
 
                 if (lowerCaseQuery.length >= 2) {
                     results = products.filter(p => 
                         [p.title, p.seller.name, p.code, p.details.description.replace(/<[^>]*>?/gm, ''), ...p.details.specs.map(s => `${s.label} ${s.value.replace(/<[^>]*>?/gm, '')}`)].join(' ').toLowerCase().includes(lowerCaseQuery)
                     );
-                } else if (Object.values(filters).every(v => !v)) {
-                    searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf atau pilih filter...</p>'; 
+                } else if (!isAnyFilterActive) {
+                    searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf atau pilih filter untuk mencari produk...</p>'; 
                     return;
                 }
                 
@@ -1374,6 +1478,7 @@
             [headerSearchBtn, navSearchBtn].forEach(button => { button.addEventListener('click', (e) => { e.preventDefault(); const input = button.previousElementSibling; openSearchModal(input.value); }); });
             searchModalInput.addEventListener('input', () => { performSearch(searchModalInput.value); });
             searchFilters.addEventListener('change', () => { performSearch(searchModalInput.value); });
+            if(btnCloseSearchModal) { btnCloseSearchModal.addEventListener('click', closeSearchModal); }
             searchResults.addEventListener('click', (e) => { const link = e.target.closest('.search-result-item'); if (link) { e.preventDefault(); const targetId = link.getAttribute('href'); const targetElement = document.querySelector(targetId); if (targetElement) { closeSearchModal(); setTimeout(() => { window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' }); }, 100); } } });
             
             const bgMusic = document.getElementById('bgMusic'); if (bgMusic) { bgMusic.volume = 0.3; let p = false; const pm = () => { if (!p) { bgMusic.play().then(() => { p = true; }).catch(() => {}); } }; pm(); document.body.addEventListener('click', pm, { once: true }); document.body.addEventListener('touchstart', pm, { once: true }); }
