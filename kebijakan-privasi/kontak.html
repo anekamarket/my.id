@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hubungi AnekaMarket - Platform belanja online terpercaya dengan berbagai produk berkualitas">
+    <meta name="keywords" content="kontak anekamarket, hubungi kami, customer service, belanja online">
+    <title>Kontak - AnekaMarket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset dan gaya dasar */
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #ff6b6b;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --gray-color: #666;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            font-size: 28px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+        
+        /* Contact Page Styles */
+        .page-header {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .page-header h1 {
+            color: var(--primary-color);
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .page-header h1 i {
+            margin-right: 15px;
+        }
+        
+        .page-header p {
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+        
+        .contact-form {
+            flex: 2;
+            min-width: 300px;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            background-color: #f0f4ff;
+            color: var(--primary-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+        
+        .contact-details h3 {
+            margin-bottom: 5px;
+            color: var(--dark-color);
+        }
+        
+        .contact-details p {
+            color: var(--gray-color);
+            margin-bottom: 5px;
+        }
+        
+        .contact-details a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .contact-details a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        .submit-btn i {
+            margin-right: 8px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #3a5bd9;
+            transform: translateY(-2px);
+        }
+        
+        .map-container {
+            margin-top: 30px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-placeholder {
+            background-color: #f0f4ff;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 18px;
+            flex-direction: column;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .map-placeholder:hover {
+            background-color: #e1e9ff;
+        }
+        
+        .map-placeholder i {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            margin: 60px 0;
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+        
+        .faq-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 28px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .faq-item:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .faq-question {
+            background-color: #f8f9fa;
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .faq-question:hover {
+            background-color: #f0f4ff;
+        }
+        
+        .faq-question i {
+            transition: var(--transition);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 15px 20px;
+            max-height: 500px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-section h3 i {
+            margin-right: 8px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: #fff;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 18px;
+            background-color: #444;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Success Message */
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 12px 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+        }
+        
+        .success-message i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .faq-section {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 24px;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 20px;
+            }
+            
+            .faq-section {
+                padding: 15px;
+            }
+            
+            .faq-section h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i>
+                    Aneka<span>Market</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                        <li><a href="produk.html"><i class="fas fa-shopping-bag"></i> Produk</a></li>
+                        <li><a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a></li>
+                        <li><a href="kontak.html" class="active"><i class="fas fa-envelope"></i> Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-envelope"></i> Hubungi Kami</h1>
+            <p>Kami siap membantu Anda! Jangan ragu untuk menghubungi kami melalui berbagai saluran komunikasi yang tersedia. Tim kami akan merespons pertanyaan Anda secepat mungkin.</p>
+        </div>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center;">
+                    <i class="fas fa-info-circle"></i> Informasi Kontak
+                </h2>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>WhatsApp</h3>
+                        <p>Kami siap melayani Anda</p>
+                        <a href="https://wa.me/6285647709114" target="_blank">085647709114</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p>Kirim pertanyaan Anda kapan saja</p>
+                        <a href="mailto:admin@anekamarket.my.id">admin@anekamarket.my.id</a>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Alamat</h3>
+                        <p>Kunjungi lokasi kami</p>
+                        <p>Jl. Pb Sudirman Situbondo (68351)<br>Jawa Timur, Indonesia</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h3>Jam Operasional</h3>
+                        <p>Senin - Jumat: 08.00 - 17.00 WIB</p>
+                        <p>Sabtu: 08.00 - 15.00 WIB</p>
+                        <p>Minggu: Tutup</p>
+                    </div>
+                </div>
+                
+                <div class="map-container">
+                    <div class="map-placeholder" id="openMap">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <p>Peta Lokasi AnekaMarket</p>
+                        <p style="font-size: 14px; margin-top: 5px;">Jl. Pb Sudirman Situbondo</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2 style="color: var(--primary-color); margin-bottom: 20px; display: flex; align-items: center;">
+                    <i class="fas fa-paper-plane"></i> Kirim Pesan
+                </h2>
+                
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Terima kasih! Pesan Anda telah berhasil dikirim. Kami akan menghubungi Anda segera.</span>
+                </div>
+                
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Alamat Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Nomor Telepon/WhatsApp</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subjek Pesan</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Pilih subjek pesan</option>
+                            <option value="pertanyaan">Pertanyaan Produk</option>
+                            <option value="pembayaran">Pembayaran</option>
+                            <option value="pengiriman">Pengiriman</option>
+                            <option value="komplain">Komplain</option>
+                            <option value="kerjasama">Kerjasama</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Pesan</label>
+                        <textarea id="message" name="message" placeholder="Tulis pesan Anda di sini..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Kirim Pesan
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="faq-section">
+            <h2><i class="fas fa-question-circle"></i> Pertanyaan yang Sering Diajukan</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Bagaimana cara melakukan pemesanan?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Anda dapat melakukan pemesanan melalui website kami dengan memilih produk, menambahkannya ke keranjang, dan mengikuti proses checkout. Atau Anda dapat menghubungi kami langsung melalui WhatsApp untuk pemesanan yang lebih cepat.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Apa metode pembayaran yang tersedia?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Kami menerima pembayaran melalui transfer bank (BCA, BRI, Mandiri, BNI), e-wallet (OVO, Gopay, Dana, ShopeePay), dan pembayaran di tempat (COD) untuk area tertentu.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Berapa lama waktu pengiriman?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Waktu pengiriman bervariasi tergantung lokasi tujuan. Untuk wilayah Jawa Timur biasanya 1-3 hari, Jawa lainnya 2-5 hari, dan luar Jawa 3-7 hari kerja setelah pembayaran dikonfirmasi.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Apakah ada garansi untuk produk?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Ya, kami memberikan garansi untuk produk tertentu. Silakan periksa deskripsi produk untuk informasi garansi yang berlaku. Untuk klaim garansi, hubungi kami dengan menyertakan bukti pembelian dan foto/video kerusakan.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Bagaimana cara melacak pesanan saya?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Setelah pesanan dikirim, Anda akan menerima nomor resi melalui email atau WhatsApp. Anda dapat melacak pesanan Anda menggunakan nomor resi tersebut di website jasa pengiriman yang bersangkutan.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Apakah produk bisa dikembalikan?
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    Produk dapat dikembalikan dalam waktu 7 hari setelah diterima dengan syarat produk masih dalam kondisi baru, segel utuh, dan tidak ada kerusakan. Silakan hubungi customer service kami untuk proses pengembalian.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-store"></i> Tentang AnekaMarket</h3>
+                    <p>AnekaMarket adalah platform belanja online terpercaya yang menyediakan berbagai produk berkualitas dengan harga terjangkau.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/6285647709114" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-link"></i> Link Cepat</h3>
+                    <a href="index.html"><i class="fas fa-home"></i> Beranda</a>
+                    <a href="produk.html"><i class="fas fa-shopping-bag"></i> Produk</a>
+                    <a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a>
+                    <a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-headset"></i> Layanan Pelanggan</h3>
+                    <a href="bantuan.html"><i class="fas fa-question-circle"></i> Pusat Bantuan</a>
+                    <a href="pengembalian.html"><i class="fas fa-undo"></i> Kebijakan Pengembalian</a>
+                    <a href="syarat.html"><i class="fas fa-file-contract"></i> Syarat dan Ketentuan</a>
+                    <a href="privasi.html"><i class="fas fa-shield-alt"></i> Kebijakan Privasi</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Hubungi Kami</h3>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:admin@anekamarket.my.id">admin@anekamarket.my.id</a></p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/6285647709114" target="_blank">085647709114</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Pb Sudirman Situbondo (68351) Jawa Timur</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 AnekaMarket. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // FAQ Toggle
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'flex';
+            
+            // Scroll to success message
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // Reset form
+            this.reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 5000);
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Open Map Location
+        document.getElementById('openMap').addEventListener('click', () => {
+            const address = "Jl. Pb Sudirman Situbondo Jawa Timur";
+            const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+            window.open(googleMapsUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
