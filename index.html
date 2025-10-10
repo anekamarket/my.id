@@ -568,7 +568,7 @@
 </head>
 <body>
     <audio id="bgMusic" loop autoplay>
-        <source src="https://raw.githubusercontent.com/Musikwebsite.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/audio/2022/08/04/audio_2dde6b7573.mp3" type="audio/mpeg">
     </audio>
     
     <div class="particles" id="particles"></div>
@@ -720,7 +720,7 @@
                     <div id="formStatus" class="form-status" style="display: none;"></div>
                     <form id="contactForm" action="https://formsubmit.co/admin@anekamarket.my.id" method="POST">
                         <input type="hidden" name="_captcha" value="false">
-                        <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html">
+                        <input type="hidden" name="_next" value="https://anekamarket.my.id/thank-you.html">
                         <input type="hidden" name="_template" value="table">
                         <div class="form-group">
                             <label for="name">Nama Anda</label>
@@ -810,13 +810,13 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            © 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm" action="https://formsubmit.co/admin@anekamarket.my.id" method="POST">
                 <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -848,7 +848,7 @@
         <div class="search-modal-content">
             <div class="search-modal-header">
                 <h2><i class="fas fa-search"></i> Pencarian Cerdas</h2>
-                <span class="close-search-modal" title="Tutup">&times;</span>
+                <span class="close-search-modal" title="Tutup">×</span>
             </div>
             <div class="search-modal-body">
                 <input type="text" class="search-modal-input" placeholder="Cari produk, UMKM, kode..." id="searchModalInput">
@@ -879,13 +879,13 @@
     
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
-            <span class="close-image-modal">&times;</span>
+            <span class="close-image-modal">×</span>
             <img id="zoomedImage" src="" alt="Zoomed Image">
         </div>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
+        <span class="close-notification" id="closeNotification">×</span>
         
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
@@ -908,7 +908,7 @@
         <div class="generator-modal-content">
             <div class="generator-modal-header">
                 <h2><i class="fas fa-magic"></i> Product Data Generator</h2>
-                <span class="close-generator-modal" id="closeGeneratorModal">&times;</span>
+                <span class="close-generator-modal" id="closeGeneratorModal">×</span>
             </div>
             <div class="generator-modal-body">
                 <div class="generator-section">
@@ -1259,8 +1259,9 @@
                 const detailImagesHTML = (product.details?.images || []).map((img, index) => `<img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy">`).join('');
                 const detailSpecsHTML = (product.details?.specs || []).map(spec => `<div class="spec-item"><span class="spec-label">${spec.label || ''}:</span><span class="spec-value">${spec.value || ''}</span></div>`).join('');
                 
+                // [PERBAIKAN] Mengubah warna tombol Lokasi menjadi merah dan menambahkan efek hover
                 const locationButtonHTML = product.seller?.locationLink
-                    ? `<a href="${product.seller.locationLink}" target="_blank" class="btn-visit" style="background-color: #17a2b8;"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`
+                    ? `<a href="${product.seller.locationLink}" target="_blank" class="btn-visit" style="background-color: #dc3545;" onmouseover="this.style.backgroundColor='#c82333'" onmouseout="this.style.backgroundColor='#dc3545'"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`
                     : `<button class="btn-visit" style="background-color: #6c757d; cursor: not-allowed;" onclick="alert('Belum Menetapkan Lokasi')"><i class="fas fa-map-marker-alt"></i> Lokasi</button>`;
 
                 return `
@@ -1530,7 +1531,7 @@
             function applyFilters() { document.querySelectorAll('.gallery-item').forEach(item => { const iC = item.dataset.category; const iT = item.dataset.type; const cM = activeCategory === 'all' || iC === activeCategory; const tM = activeType === 'all' || iT === activeType || (iT === 'all' && activeType !== 'rental' && activeType !== 'promo' && activeType !== 'jasa') ; item.style.display = (cM && tM) ? 'block' : 'none'; }); }
             if (productCategories) { productCategories.addEventListener('click', e => { if (e.target.classList.contains('product-category-btn')) { productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeCategory = e.target.dataset.category; applyFilters(); playButtonSound(); } }); }
             if (categoryTabs) { categoryTabs.addEventListener('click', e => { if (e.target.classList.contains('category-btn')) { categoryTabs.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeType = e.target.dataset.type; applyFilters(); playButtonSound(); } }); }
-            const contactForm = document.getElementById('contactForm'); if (contactForm) { contactForm.addEventListener('submit', function(e) { e.preventDefault(); alert('Fitur ini sedang dalam pengembangan.'); playButtonSound(); }); }
+            const contactForm = document.getElementById('contactForm'); if (contactForm) { contactForm.addEventListener('submit', function(e) { /* Biarkan default action dari formsubmit.co berjalan */ }); }
             const orderModal = document.getElementById('orderModal'); const quickOrderBtn = document.getElementById('quick-order'); if (orderModal && quickOrderBtn) { quickOrderBtn.addEventListener('click', () => { orderModal.classList.add('show'); body.style.overflow = 'hidden'; playButtonSound(); }); }
             document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => { modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('close-modal') || e.target.classList.contains('close-image-modal') || e.target.classList.contains('close-search-modal')) { modal.classList.remove('show'); body.style.overflow = ''; } }); });
             const buttonSound = document.getElementById('buttonSound'); function playButtonSound() { if(buttonSound) { buttonSound.currentTime = 0; buttonSound.play().catch(() => {}); } }
