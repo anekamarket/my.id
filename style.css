@@ -998,6 +998,42 @@ section {
     box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
 }
 
+/* Gaya untuk tombol "Kunjungi Gerai" */
+.btn-visit {
+    background-color: var(--primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(52, 97, 253, 0.3);
+}
+
+.btn-visit:hover {
+    background-color: var(--dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 97, 253, 0.4);
+}
+
+/* Gaya khusus untuk tombol "Lokasi" agar berwarna merah */
+.btn-location {
+    background-color: #dc3545; /* Warna merah */
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
+
+.btn-location:hover {
+    background-color: #c82333; /* Warna merah lebih gelap saat disentuh */
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+}
+
+/* Gaya untuk tombol lokasi yang tidak aktif/tidak ada link */
+.btn-location-disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+.btn-location-disabled:hover {
+    background-color: #6c757d; /* Mencegah warna berubah */
+    transform: none;
+    box-shadow: none;
+}
+
 .action-buttons {
     display: flex;
     gap: 1rem;
