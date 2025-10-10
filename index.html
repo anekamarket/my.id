@@ -9,44 +9,63 @@
     <meta http-equiv="Expires" content="0">
     <meta http-equiv="refresh" content="1200">
     
-    <meta name="description" content="Temukan produk UMKM, jasa, dan sewa terbaik di Situbondo melalui ANEKAMARKET. Platform jual beli online untuk makanan, kerajinan, promosi, dan kebutuhan lainnya.">
-    <meta name="keywords" content="UMKM Situbondo, jual beli online, aneka market, produk lokal, makanan, jasa, sewa, promosi, Situbondo">
+    <meta name="description" content="ANEKAMARKET: Platform jual beli online untuk produk UMKM, jasa, dan sewa di seluruh Indonesia. Temukan makanan khas, kerajinan unik, dan dukung usaha lokal dari Situbondo dan berbagai daerah lainnya.">
+    <meta name="keywords" content="UMKM Situbondo, UMKM Indonesia, jual beli online, aneka market, produk lokal, makanan, jasa, sewa, promosi, Situbondo, marketplace umkm, toko online, produk indonesia, kerajinan tangan, belanja online murah, dukung produk lokal, wirausaha digital">
     <meta name="author" content="ANEKAMARKET">
     <link rel="canonical" href="https://anekamarket.my.id">
 
-    <meta property="og:title" content="ANEKAMARKET Situbondo | Jual Beli Online UMKM, Jasa & Sewa">
-    <meta property="og:description" content="Temukan produk UMKM, jasa, dan sewa terbaik di Situbondo. Semua bisa jualan, semua bisa pesan. Dukung usaha lokal bersama kami!">
+    <meta property="og:title" content="ANEKAMARKET | Marketplace UMKM, Jasa & Sewa Online se-Indonesia">
+    <meta property="og:description" content="ANEKAMARKET adalah platform untuk jual beli produk UMKM, jasa, dan sewa online. Semua bisa jualan, semua bisa pesan. Dukung usaha dan produk lokal Indonesia bersama kami!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://anekamarket.my.id">
     <meta property="og:image" content="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png">
     <meta property="og:site_name" content="ANEKAMARKET">
 
-    <title>ANEKAMARKET Situbondo | Jual Beli Online UMKM, Jasa & Sewa</title>
+    <title>ANEKAMARKET | Jual Beli Online UMKM, Jasa & Sewa se-Indonesia</title>
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "ANEKAMARKET",
-      "url": "https://anekamarket.my.id",
-      "logo": "https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+6285647709114",
-        "contactType": "Customer Service",
-        "areaServed": "ID",
-        "availableLanguage": "Indonesian"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Jl. PB Sudirman, Desa Wringin Anom",
-        "addressLocality": "Panarukan",
-        "addressRegion": "Jawa Timur",
-        "postalCode": "68351",
-        "addressCountry": "ID"
-      },
-      "sameAs": [
-        "https://wa.me/6285647709114"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "ANEKAMARKET",
+          "url": "https://anekamarket.my.id",
+          "logo": "https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png",
+          "description": "ANEKAMARKET adalah platform digital yang didedikasikan untuk mendukung Usaha Mikro, Kecil, dan Menengah (UMKM) di seluruh Indonesia dengan menyediakan marketplace online untuk jual beli produk, penyewaan barang, dan penawaran jasa.",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+6285647709114",
+            "contactType": "Customer Service",
+            "areaServed": "ID",
+            "availableLanguage": "Indonesian"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Jl. PB Sudirman, Desa Wringin Anom",
+            "addressLocality": "Panarukan",
+            "addressRegion": "Jawa Timur",
+            "postalCode": "68351",
+            "addressCountry": "ID"
+          },
+          "sameAs": [
+            "https://wa.me/6285647709114"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://anekamarket.my.id",
+          "name": "ANEKAMARKET",
+          "description": "Platform jual beli online untuk produk UMKM, jasa, dan sewa di seluruh Indonesia.",
+          "publisher": {
+            "@id": "https://anekamarket.my.id/#organization"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://anekamarket.my.id#gallery?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        }
       ]
     }
     </script>
@@ -674,10 +693,62 @@
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Bayangan teks agar lebih terbaca */
         }
 
+        /* --- [FITUR BARU] Tombol Aksesibilitas --- */
+        .accessibility-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #4a148c; /* Warna ungu khas aksesibilitas */
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            z-index: 1002;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .accessibility-toggle:hover {
+            background-color: #380f6b;
+            transform: scale(1.1);
+        }
+        .accessibility-toggle.active {
+            background-color: #f50057; /* Warna pink cerah saat aktif */
+        }
+        .accessibility-toggle.active .fa-volume-up::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 2px;
+            background-color: white;
+            transform: rotate(-45deg);
+            display: none; /* Sembunyikan garis coret */
+        }
+        .accessibility-toggle .fa-volume-mute {
+            display: none;
+        }
+        .accessibility-toggle.active .fa-volume-up {
+            display: none;
+        }
+        .accessibility-toggle.active .fa-volume-mute {
+            display: inline-block;
+        }
+
         @media (max-width: 768px) {
             #productGeneratorForm { grid-template-columns: 1fr; }
             .search-modal-header h2 { font-size: 1.1rem; }
             .search-modal-input { padding: 12px 15px; font-size: 1rem; }
+            /* Posisikan ulang tombol FAB agar tidak bertumpuk di mobile */
+            .payment-fab { bottom: 160px; }
+            .generator-fab { bottom: 90px; }
+            .accessibility-toggle { bottom: 20px; }
         }
     </style>
 </head>
@@ -701,7 +772,7 @@
             
             <div class="header-search">
                 <input type="text" id="headerSearchInput" placeholder="Cari produk, UMKM, kode...">
-                <button id="headerSearchBtn"><i class="fas fa-search"></i></button>
+                <button id="headerSearchBtn" aria-label="Cari"><i class="fas fa-search"></i></button>
             </div>
             
             <div class="header-buttons">
@@ -715,7 +786,7 @@
                     <i class="fas fa-envelope"></i> Hubungi Kami
                 </a>
             </div>
-            <a href="#services" class="scroll-down">
+            <a href="#services" class="scroll-down" aria-label="Gulir ke bawah">
                 <i class="fas fa-chevron-down"></i>
             </a>
         </div>
@@ -730,14 +801,14 @@
             
             <div class="nav-search" id="navSearch">
                 <input type="text" id="navSearchInput" placeholder="Cari produk atau layanan...">
-                <button id="navSearchBtn"><i class="fas fa-search"></i></button>
+                <button id="navSearchBtn" aria-label="Cari"><i class="fas fa-search"></i></button>
             </div>
             
-            <button class="search-toggle" id="searchToggle">
+            <button class="search-toggle" id="searchToggle" aria-label="Buka pencarian">
                 <i class="fas fa-search"></i>
             </button>
             
-            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Buka menu navigasi">
                 <i class="fas fa-bars"></i>
             </button>
             
@@ -895,7 +966,13 @@
     </a>
     
     <div class="generator-fab" id="openGeneratorBtn" aria-label="Buka Generator Produk">
-        <i class="fas fa-cogs"></i> </div>
+        <i class="fas fa-cogs"></i> 
+    </div>
+    
+    <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Aktifkan Mode Suara">
+        <i class="fas fa-volume-up"></i>
+        <i class="fas fa-volume-mute"></i>
+    </button>
     
     <footer>
         <div class="footer-container">
@@ -922,7 +999,7 @@
                 <p>Berlangganan newsletter kami untuk mendapatkan update produk terbaru dan penawaran spesial.</p>
                 <form class="newsletter-form">
                     <input type="email" placeholder="Alamat email Anda" required>
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" aria-label="Berlangganan newsletter">
                         <i class="fas fa-envelope"></i> Berlangganan
                     </button>
                 </form>
@@ -936,7 +1013,7 @@
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">×</span>
+            <span class="close-modal" aria-label="Tutup">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm" action="https://formsubmit.co/admin@anekamarket.my.id" method="POST">
                 <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -968,7 +1045,7 @@
         <div class="search-modal-content">
             <div class="search-modal-header">
                 <h2><i class="fas fa-search"></i> Pencarian Cerdas</h2>
-                <span class="close-search-modal" title="Tutup">×</span>
+                <span class="close-search-modal" title="Tutup" aria-label="Tutup Pencarian">×</span>
             </div>
             <div class="search-modal-body">
                 <input type="text" class="search-modal-input" placeholder="Cari produk, UMKM, kode..." id="searchModalInput">
@@ -999,13 +1076,13 @@
     
     <div class="image-modal" id="imageModal">
         <div class="image-modal-content">
-            <span class="close-image-modal">×</span>
+            <span class="close-image-modal" aria-label="Tutup gambar">×</span>
             <img id="zoomedImage" src="" alt="Zoomed Image">
         </div>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">×</span>
+        <span class="close-notification" id="closeNotification" aria-label="Tutup notifikasi">×</span>
         
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
@@ -1028,7 +1105,7 @@
         <div class="generator-modal-content">
             <div class="generator-modal-header">
                 <h2><i class="fas fa-magic"></i> Product Data Generator</h2>
-                <span class="close-generator-modal" id="closeGeneratorModal">×</span>
+                <span class="close-generator-modal" id="closeGeneratorModal" aria-label="Tutup generator">×</span>
             </div>
             <div class="generator-modal-body">
                 <div class="generator-section">
@@ -1202,13 +1279,13 @@
                     <div class="output-controls">
                         <h3><i class="fas fa-code"></i> Hasil Script</h3>
                         <div class="output-actions">
-                            <button id="toggleScriptVisibilityBtn" title="Lihat/Sembunyikan Script">
+                            <button id="toggleScriptVisibilityBtn" title="Lihat/Sembunyikan Script" aria-label="Lihat atau sembunyikan script">
                                 <i class="fas fa-eye-slash"></i>
                             </button>
-                            <button id="copyScriptBtn" title="Salin ke Clipboard">
+                            <button id="copyScriptBtn" title="Salin ke Clipboard" aria-label="Salin script">
                                 <i class="fas fa-copy"></i> Salin
                             </button>
-                            <button id="downloadScriptBtn" title="Unduh sebagai file .js">
+                            <button id="downloadScriptBtn" title="Unduh sebagai file .js" aria-label="Unduh script">
                                 <i class="fas fa-download"></i> Unduh
                             </button>
                         </div>
@@ -1367,9 +1444,9 @@
                                 <span class="price-variation-value">${formatPrice(v.price)}</span>
                             </div>
                             <div class="quantity-controls">
-                                <button class="quantity-btn minus" aria-label="Kurangi jumlah">-</button>
-                                <input type="number" class="quantity-input" value="0" min="0" aria-label="Jumlah item">
-                                <button class="quantity-btn plus" aria-label="Tambah jumlah">+</button>
+                                <button class="quantity-btn minus" aria-label="Kurangi jumlah ${v.name || ''}">-</button>
+                                <input type="number" class="quantity-input" value="0" min="0" aria-label="Jumlah item ${v.name || ''}">
+                                <button class="quantity-btn plus" aria-label="Tambah jumlah ${v.name || ''}">+</button>
                             </div>
                         </div>`).join('')
                     : '';
@@ -1379,7 +1456,6 @@
                 const detailImagesHTML = (product.details?.images || []).map((img, index) => `<img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy">`).join('');
                 const detailSpecsHTML = (product.details?.specs || []).map(spec => `<div class="spec-item"><span class="spec-label">${spec.label || ''}:</span><span class="spec-value">${spec.value || ''}</span></div>`).join('');
                 
-                // [PERBAIKAN TOMBOL LOKASI] Kode ini menambahkan class .btn-location dan .btn-location-disabled
                 const locationButtonHTML = product.seller?.locationLink
                     ? `<a href="${product.seller.locationLink}" target="_blank" class="btn-visit btn-location"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`
                     : `<button class="btn-visit btn-location-disabled" onclick="alert('Belum Menetapkan Lokasi')"><i class="fas fa-map-marker-alt"></i> Lokasi</button>`;
@@ -1400,7 +1476,7 @@
                             
                             <div class="price-section-collapsible">
                                 <div class="price-variations-container">${priceVariationsHTML}</div>
-                                <select class="unit-select">${unitOptionsHTML}</select>
+                                <select class="unit-select" aria-label="Pilih satuan">${unitOptionsHTML}</select>
                                 <div class="total-price">
                                     <span class="total-price-label">Total Harga:</span>
                                     <span class="total-price-value">${formatPrice(0)}</span>
@@ -1411,7 +1487,7 @@
                                 </div>
                                 <div class="preorder-form">
                                     <div class="preorder-title"><i class="fas fa-money-bill-wave"></i><span>Form Uang Muka (DP)</span></div>
-                                    <input type="number" class="preorder-input" placeholder="Masukkan nominal DP (minimal 40%)">
+                                    <input type="number" class="preorder-input" placeholder="Masukkan nominal DP (minimal 40%)" aria-label="Nominal uang muka pre-order">
                                     <p class="preorder-note">* Untuk pre-order, harap masukkan nominal uang muka minimal 40% dari total harga. Kami akan menghubungi Anda untuk konfirmasi lebih lanjut.</p>
                                     <button class="btn-preorder"><i class="fas fa-paper-plane"></i> Kirim Pre-Order</button>
                                 </div>
@@ -1657,7 +1733,6 @@
             const buttonSound = document.getElementById('buttonSound'); function playButtonSound() { if(buttonSound) { buttonSound.currentTime = 0; buttonSound.play().catch(() => {}); } }
             document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); } } }); });
             
-            // --- [PERUBAHAN] Logika Notifikasi dengan Suara ---
             const offerNotification = document.getElementById('offerNotification'); 
             const notificationSound = document.getElementById('notificationSound');
             const step1 = document.getElementById('notificationStep1'); 
@@ -1674,7 +1749,6 @@
             setTimeout(showNotification, 5000); 
             if(offerNotification) { offerNotification.addEventListener('click', (e) => { const t = e.target; if (t.id === 'closeNotification') hideNotification(); if (t.matches('.notification-btn')) { const a = t.dataset.action; if (a === 'close') hideNotification(); else if (a === 'next') { step1.classList.remove('active'); step2.classList.add('active'); } else if (a === 'register') { window.open('https://anekamarket.my.id/formulirpendaftaran', '_blank'); hideNotification(); } } }); }
         
-            // --- [Penyempurnaan] Generator Logic ---
             const generatorModal = document.getElementById('generatorModal');
             const openGeneratorBtn = document.getElementById('openGeneratorBtn');
             const closeGeneratorModalBtn = document.getElementById('closeGeneratorModal');
@@ -1719,7 +1793,7 @@
                 item.innerHTML = `
                     <input type="text" class="dynamic-name" placeholder="${placeholder1}" value="${name}" required>
                     <input type="text" class="dynamic-value" placeholder="${placeholder2}" value="${value}" required>
-                    <button type="button" class="btn-remove-item"><i class="fas fa-trash"></i></button>
+                    <button type="button" class="btn-remove-item" aria-label="Hapus item"><i class="fas fa-trash"></i></button>
                 `;
                 if (container === priceVariationsContainer) {
                     item.querySelector('.dynamic-value').type = 'number';
@@ -1911,6 +1985,69 @@
                     descriptionTextarea.selectionStart = descriptionTextarea.selectionEnd = cursorPosition;
                 });
             }
+            
+            // --- [FITUR BARU] LOGIKA MODE AKSESIBILITAS (VOICE-OVER) ---
+            const accessibilityToggle = document.getElementById('accessibilityToggle');
+            let isAccessibilityModeActive = false;
+            const synth = window.speechSynthesis;
+            let utterance = new SpeechSynthesisUtterance();
+            utterance.lang = 'id-ID';
+            utterance.rate = 1.1;
+
+            function speak(text) {
+                if (!isAccessibilityModeActive || !text || synth.speaking) {
+                    return;
+                }
+                synth.cancel(); // Hentikan ucapan sebelumnya jika ada
+                utterance.text = text;
+                synth.speak(utterance);
+            }
+
+            if (accessibilityToggle) {
+                accessibilityToggle.addEventListener('click', () => {
+                    isAccessibilityModeActive = !isAccessibilityModeActive;
+                    accessibilityToggle.classList.toggle('active', isAccessibilityModeActive);
+                    if (isAccessibilityModeActive) {
+                        accessibilityToggle.setAttribute('aria-label', 'Nonaktifkan Mode Suara');
+                        speak('Mode Suara diaktifkan.');
+                    } else {
+                        synth.cancel();
+                        accessibilityToggle.setAttribute('aria-label', 'Aktifkan Mode Suara');
+                    }
+                    playButtonSound();
+                });
+            }
+            
+            document.body.addEventListener('mouseover', (e) => {
+                if (!isAccessibilityModeActive) return;
+
+                const target = e.target;
+                const interactiveElement = target.closest('a, button, input, [role="button"], label');
+                if (interactiveElement) {
+                    let textToSpeak = interactiveElement.getAttribute('aria-label') || interactiveElement.title || interactiveElement.textContent || interactiveElement.placeholder;
+                    if (textToSpeak) {
+                        // Membersihkan teks dari spasi berlebih dan baris baru
+                        textToSpeak = textToSpeak.trim().replace(/\s+/g, ' ');
+                        speak(textToSpeak);
+                    }
+                }
+            });
+            
+            // Intersection Observer untuk mengumumkan judul section saat scroll
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionTitle = entry.target.querySelector('.section-title');
+                        if (sectionTitle) {
+                            speak(`Anda berada di bagian ${sectionTitle.textContent}`);
+                        }
+                    }
+                });
+            }, { threshold: 0.5 }); // threshold 0.5 berarti 50% section harus terlihat
+
+            document.querySelectorAll('section[id]').forEach(section => {
+                sectionObserver.observe(section);
+            });
 
         });
     </script>
