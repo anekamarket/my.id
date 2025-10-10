@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kebijakan Pengembalian AnekaMarket - Informasi mengenai proses pengembalian produk di platform promosi UMKM">
+    <meta name="keywords" content="pengembalian anekamarket, kebijakan refund, return policy, garansi produk">
+    <title>Kebijakan Pengembalian - AnekaMarket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset dan gaya dasar */
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #ff6b6b;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --gray-color: #666;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            font-size: 28px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+        
+        /* Return Policy Page Styles */
+        .page-header {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .page-header h1 {
+            color: var(--primary-color);
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .page-header h1 i {
+            margin-right: 15px;
+        }
+        
+        .page-header p {
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .policy-section {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            margin: 40px 0;
+        }
+        
+        .last-updated {
+            color: var(--gray-color);
+            margin-bottom: 30px;
+            font-style: italic;
+            background-color: #f0f4ff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .policy-section h2 {
+            color: var(--primary-color);
+            margin: 30px 0 20px 0;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .policy-section h2 i {
+            margin-right: 10px;
+        }
+        
+        .policy-section h3 {
+            color: var(--dark-color);
+            margin: 25px 0 15px 0;
+            font-size: 20px;
+        }
+        
+        .policy-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .policy-section ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .policy-section li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .policy-section li:before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: -10px;
+        }
+        
+        .warning-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .info-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .important-box {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .process-step {
+            background-color: #f8f9fa;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            text-align: center;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+        }
+        
+        .contact-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .contact-option {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+        
+        .contact-option:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            font-size: 30px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-section h3 i {
+            margin-right: 8px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: #fff;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 18px;
+            background-color: #444;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            .policy-section {
+                padding: 20px;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-options {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 24px;
+            }
+            
+            .policy-section {
+                padding: 15px;
+            }
+            
+            .policy-section h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i>
+                    Aneka<span>Market</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                        <li><a href="produk.html"><i class="fas fa-shopping-bag"></i> Produk</a></li>
+                        <li><a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a></li>
+                        <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <section class="policy-section">
+            <h1><i class="fas fa-undo"></i> Kebijakan Pengembalian</h1>
+            <p class="last-updated">Terakhir diperbarui: 1 Januari 2024</p>
+            
+            <div class="important-box">
+                <p><strong>PENTING:</strong> AnekaMarket adalah platform promosi online yang difasilitasi oleh Lentera Karya Situbondo. Kami hanya menyediakan layanan promosi dan tidak bertanggung jawab atas kualitas produk, pengiriman, garansi, atau proses pengembalian barang.</p>
+            </div>
+            
+            <h2><i class="fas fa-info-circle"></i> Peran AnekaMarket</h2>
+            <p>AnekaMarket berfungsi sebagai platform promosi digital yang menghubungkan pembeli dengan berbagai UMKM dan gerai yang bergabung dalam ekosistem kami. Dengan jelas kami nyatakan bahwa:</p>
+            
+            <div class="warning-box">
+                <p><strong>Perhatian:</strong> Segala bentuk transaksi, kualitas produk, pengiriman, garansi, dan proses pengembalian sepenuhnya menjadi tanggung jawab masing-masing pembeli dan gerai/UMKM yang bersangkutan.</p>
+            </div>
+            
+            <h2><i class="fas fa-exclamation-triangle"></i> Peringatan Penting</h2>
+            <p>Sebelum melakukan pembelian melalui platform AnekaMarket, harap perhatikan hal-hal berikut:</p>
+            
+            <ul>
+                <li>Lakukan verifikasi kredibilitas gerai/UMKM penjual</li>
+                <li>Mintalah informasi lengkap tentang produk sebelum membeli</li>
+                <li>Pastikan Anda memahami kebijakan pengembalian dari masing-masing gerai</li>
+                <li>Simpan bukti transaksi dan komunikasi dengan penjual</li>
+                <li>Selalu lakukan pembayaran melalui channel yang aman dan terverifikasi</li>
+            </ul>
+            
+            <h2><i class="fas fa-handshake"></i> Mekanisme Pengembalian</h2>
+            <p>Jika Anda ingin mengajukan pengembalian produk, berikut adalah langkah-langkah yang disarankan:</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Hubungi Penjual Langsung</div>
+                    <p>Komunikasikan masalah Anda langsung dengan gerai/UMKM penjual</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Siapkan Bukti</div>
+                    <p>Kumpulkan bukti transaksi, foto produk, dan keluhan yang jelas</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Negosiasi Solusi</div>
+                    <p>Diskusikan solusi terbaik dengan penjual (tukar barang, refund, dll)</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Proses Penyelesaian</div>
+                    <p>Ikuti prosedur yang ditetapkan oleh gerai/UMKM penjual</p>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <p><strong>Fasilitasi Mediasi:</strong> Meskipun AnekaMarket tidak bertanggung jawab langsung atas proses pengembalian, kami dapat memfasilitasi komunikasi antara pembeli dan penjual jika diperlukan. Hubungi tim kami jika mengalami kesulitan berkomunikasi dengan penjual.</p>
+            </div>
+            
+            <h2><i class="fas fa-user-shield"></i> Tanggung Jawab Masing-Masing Pihak</h2>
+            
+            <h3>Tanggung Jawab Pembeli:</h3>
+            <ul>
+                <li>Melakukan penelitian tentang produk dan penjual sebelum membeli</li>
+                <li>Memastikan spesifikasi produk sesuai kebutuhan</li>
+                <li>Menyimpan semua bukti transaksi dengan baik</li>
+                <li>Memahami dan menyetujui kebijakan penjual sebelum transaksi</li>
+                <li>Melakukan pembayaran melalui metode yang aman</li>
+            </ul>
+            
+            <h3>Tanggung Jawab Gerai/UMKM Penjual:</h3>
+            <ul>
+                <li>Menyediakan informasi produk yang akurat dan jujur</li>
+                <li>Menjaga kualitas produk sesuai deskripsi</li>
+                <li>Memberikan layanan purna jual yang memadai</li>
+                <li>Memiliki kebijakan pengembalian yang jelas dan transparan</li>
+                <li>Menanggapi keluhan pelanggan dengan profesional</li>
+            </ul>
+            
+            <h2><i class="fas fa-lightbulb"></i> Tips untuk Pembeli</h2>
+            <p>Agar terhindar dari masalah pengembalian, kami sarankan:</p>
+            
+            <ul>
+                <li><strong>Teliti sebelum membeli:</strong> Baca deskripsi produk dengan seksama dan lihat ulasan jika tersedia</li>
+                <li><strong>Ajukan pertanyaan:</strong> Jangan ragu bertanya detail produk kepada penjual sebelum memutuskan membeli</li>
+                <li><strong>Pilih penjual terpercaya:</strong> Perhatikan reputasi dan pengalaman gerai/UMKM tersebut</li>
+                <li><strong>Dokumentasi:</strong> Simpan semua percakapan dan bukti transaksi</li>
+                <li><strong>Pahami kebijakan:</strong> Pastikan Anda memahami syarat dan ketentuan dari penjual</li>
+            </ul>
+            
+            <h2><i class="fas fa-headset"></i> Bantuan dan Dukungan</h2>
+            <p>Jika Anda mengalami kendala dalam berkomunikasi dengan penjual atau membutuhkan bantuan lainnya, tim AnekaMarket siap membantu:</p>
+            
+            <div class="contact-options">
+                <div class="contact-option">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>085647709114</p>
+                    <p>Konsultasi cepat</p>
+                </div>
+                
+                <div class="contact-option">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <p>admin@anekamarket.my.id</p>
+                    <p>Untuk kasus kompleks</p>
+                </div>
+                
+                <div class="contact-option">
+                    <div class="contact-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Mediasi</h3>
+                    <p>Fasilitasi komunikasi</p>
+                    <p>Antara pembeli & penjual</p>
+                </div>
+            </div>
+            
+            <div class="important-box">
+                <p><strong>Peringatan Akhir:</strong> Dengan menggunakan platform AnekaMarket, Anda menyadari dan menyetujui bahwa semua transaksi dan tanggung jawab produk sepenuhnya berada di antara pembeli dan gerai/UMKM penjual. AnekaMarket tidak bertindak sebagai penjamin atau penanggung jawab atas kualitas produk dan proses pengembalian.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-store"></i> Tentang AnekaMarket</h3>
+                    <p>AnekaMarket adalah platform promosi online untuk UMKM yang difasilitasi oleh Lentera Karya Situbondo.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/6285647709114" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-link"></i> Link Cepat</h3>
+                    <a href="index.html"><i class="fas fa-home"></i> Beranda</a>
+                    <a href="produk.html"><i class="fas fa-shopping-bag"></i> Produk</a>
+                    <a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a>
+                    <a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-headset"></i> Layanan Pelanggan</h3>
+                    <a href="bantuan.html"><i class="fas fa-question-circle"></i> Pusat Bantuan</a>
+                    <a href="pengembalian.html"><i class="fas fa-undo"></i> Kebijakan Pengembalian</a>
+                    <a href="syarat.html"><i class="fas fa-file-contract"></i> Syarat dan Ketentuan</a>
+                    <a href="privasi.html"><i class="fas fa-shield-alt"></i> Kebijakan Privasi</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Hubungi Kami</h3>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:admin@anekamarket.my.id">admin@anekamarket.my.id</a></p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/6285647709114" target="_blank">085647709114</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Pb Sudirman Situbondo (68351) Jawa Timur</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 AnekaMarket - Lentera Karya Situbondo. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
