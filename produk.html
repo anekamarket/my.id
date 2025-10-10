@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AnekaMarket - Platform Marketplace untuk Promosi Produk UMKM">
+    <meta name="keywords" content="marketplace, promosi produk, UMKM, jualan online, anekamarket">
+    <title>Produk - AnekaMarket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #ff9800;
+            --accent-color: #4caf50;
+            --dark-color: #1b5e20;
+            --light-color: #f8f9fa;
+            --gray-color: #666;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            font-size: 28px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        nav ul li a.active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .hero-content p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 25px;
+            opacity: 0.9;
+        }
+        
+        .btn-hero {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Categories Section */
+        .categories-section {
+            margin: 40px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section-title h2 i {
+            margin-right: 15px;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+        
+        .category-card.active {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+        
+        .category-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .category-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* Products Section */
+        .products-section {
+            margin: 50px 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .product-card {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #f0f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 60px;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            color: var(--gray-color);
+            font-size: 12px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .product-description {
+            color: var(--gray-color);
+            font-size: 14px;
+            margin-bottom: 15px;
+            height: 60px;
+            overflow: hidden;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--dark-color);
+        }
+        
+        .btn i {
+            margin-right: 8px;
+        }
+        
+        /* Info Section */
+        .info-section {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 40px;
+            margin: 50px 0;
+            text-align: center;
+        }
+        
+        .info-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .info-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .info-card i {
+            font-size: 50px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .info-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-section h3 i {
+            margin-right: 8px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: #fff;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 18px;
+            background-color: #444;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 26px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .info-section {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 24px;
+            }
+            
+            .section-title h2 {
+                font-size: 22px;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i>
+                    Aneka<span>Market</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                        <li><a href="produk.html" class="active"><i class="fas fa-shopping-bag"></i> Produk</a></li>
+                        <li><a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a></li>
+                        <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Platform Marketplace untuk Promosi Produk UMKM</h1>
+                    <p>Temukan berbagai produk unggulan dari UMKM lokal di AnekaMarket. Dapatkan penawaran terbaik langsung dari produsen.</p>
+                    <a href="https://www.anekamarket.my.id" target="_blank" rel="noopener noreferrer" class="btn-hero">
+                        <i class="fas fa-external-link-alt"></i> Kunjungi Marketplace
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Categories Section -->
+            <section class="categories-section">
+                <div class="section-title">
+                    <h2><i class="fas fa-list"></i> Kategori Produk</h2>
+                </div>
+                
+                <div class="categories-grid">
+                    <div class="category-card active" data-category="all">
+                        <div class="category-icon">
+                            <i class="fas fa-th-large"></i>
+                        </div>
+                        <div class="category-name">Semua Produk</div>
+                    </div>
+                    <div class="category-card" data-category="makanan">
+                        <div class="category-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="category-name">Makanan & Minuman</div>
+                    </div>
+                    <div class="category-card" data-category="kerajinan">
+                        <div class="category-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="category-name">Kerajinan Tangan</div>
+                    </div>
+                    <div class="category-card" data-category="fashion">
+                        <div class="category-icon">
+                            <i class="fas fa-tshirt"></i>
+                        </div>
+                        <div class="category-name">Fashion</div>
+                    </div>
+                    <div class="category-card" data-category="kecantikan">
+                        <div class="category-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <div class="category-name">Kecantikan</div>
+                    </div>
+                    <div class="category-card" data-category="rumah-tangga">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="category-name">Rumah Tangga</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Products Section -->
+            <section class="products-section">
+                <div class="section-title">
+                    <h2><i class="fas fa-box-open"></i> Produk Unggulan</h2>
+                </div>
+                
+                <div class="products-grid" id="productsGrid">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Info Section -->
+            <section class="info-section">
+                <h2>Mengapa Memilih AnekaMarket?</h2>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <i class="fas fa-store"></i>
+                        <h3>Platform Marketplace</h3>
+                        <p>AnekaMarket adalah platform khusus untuk promosi produk UMKM dengan jangkauan luas.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-users"></i>
+                        <h3>Komunitas UMKM</h3>
+                        <p>Bergabung dengan komunitas UMKM yang terus berkembang dan saling mendukung.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Promosi Efektif</h3>
+                        <p>Dapatkan exposure maksimal untuk produk Anda dengan strategi promosi yang tepat.</p>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Kemitraan Strategis</h3>
+                        <p>Jalin kemitraan strategis dengan berbagai pihak untuk pengembangan bisnis.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-store"></i> Tentang AnekaMarket</h3>
+                    <p>AnekaMarket adalah platform marketplace yang fokus pada promosi produk UMKM lokal dengan jangkauan nasional.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/6285647709114" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-link"></i> Link Cepat</h3>
+                    <a href="index.html"><i class="fas fa-home"></i> Beranda</a>
+                    <a href="produk.html"><i class="fas fa-shopping-bag"></i> Produk</a>
+                    <a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a>
+                    <a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-headset"></i> Layanan Pelanggan</h3>
+                    <a href="bantuan.html"><i class="fas fa-question-circle"></i> Pusat Bantuan</a>
+                    <a href="mitra.html"><i class="fas fa-handshake"></i> Jadi Mitra</a>
+                    <a href="syarat.html"><i class="fas fa-file-contract"></i> Syarat dan Ketentuan</a>
+                    <a href="privasi.html"><i class="fas fa-shield-alt"></i> Kebijakan Privasi</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Hubungi Kami</h3>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:admin@anekamarket.my.id">admin@anekamarket.my.id</a></p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/6285647709114" target="_blank" rel="noopener noreferrer">085647709114</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Pb Sudirman Situbondo (68351) Jawa Timur</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 AnekaMarket. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Sample product data
+        const products = [
+            { 
+                id: 1, 
+                name: "Keripik Singkong Pedas", 
+                category: "makanan", 
+                description: "Keripik singkong dengan rasa pedas gurih, dibuat dari bahan pilihan tanpa pengawet.",
+                image: "fas fa-cookie" 
+            },
+            { 
+                id: 2, 
+                name: "Tas Anyaman Eceng Gondok", 
+                category: "kerajinan", 
+                description: "Tas anyaman tangan dari eceng gondok dengan desain modern dan ramah lingkungan.",
+                image: "fas fa-shopping-bag" 
+            },
+            { 
+                id: 3, 
+                name: "Batik Tulis Situbondo", 
+                category: "fashion", 
+                description: "Kain batik tulis khas Situbondo dengan motif tradisional dan warna alami.",
+                image: "fas fa-tshirt" 
+            },
+            { 
+                id: 4, 
+                name: "Madu Hutan Asli", 
+                category: "makanan", 
+                description: "Madu hutan murni dari lebah liar di hutan Situbondo, tanpa campuran gula.",
+                image: "fas fa-wine-bottle" 
+            },
+            { 
+                id: 5, 
+                name: "Lilin Aromaterapi", 
+                category: "rumah-tangga", 
+                description: "Lilin aromaterapi dengan essential oil alami untuk relaksasi dan penyegar ruangan.",
+                image: "fas fa-fire" 
+            },
+            { 
+                id: 6, 
+                name: "Sabun Herbal Alami", 
+                category: "kecantikan", 
+                description: "Sabun mandi herbal dengan bahan alami untuk perawatan kulit sensitif.",
+                image: "fas fa-pump-soap" 
+            },
+            { 
+                id: 7, 
+                name: "Gula Aren Organik", 
+                category: "makanan", 
+                description: "Gula aren organik dari perkebunan tradisional, tanpa bahan kimia tambahan.",
+                image: "fas fa-cube" 
+            },
+            { 
+                id: 8, 
+                name: "Kerajinan Gerabah", 
+                category: "kerajinan", 
+                description: "Berbagai produk gerabah dengan motif khas dan fungsi dekoratif maupun praktis.",
+                image: "fas fa-vase" 
+            }
+        ];
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Category filtering
+        const categoryCards = document.querySelectorAll('.category-card');
+        const productsGrid = document.getElementById('productsGrid');
+        
+        // Function to display products
+        function displayProducts(category = 'all') {
+            productsGrid.innerHTML = '';
+            
+            const filteredProducts = category === 'all' 
+                ? products 
+                : products.filter(product => product.category === category);
+            
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <i class="${product.image}"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">${product.category}</div>
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-description">${product.description}</div>
+                        <div class="product-actions">
+                            <a href="https://www.anekamarket.my.id" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                                <i class="fas fa-external-link-alt"></i> Lihat di Marketplace
+                            </a>
+                        </div>
+                    </div>
+                `;
+                productsGrid.appendChild(productCard);
+            });
+        }
+        
+        // Initialize with all products
+        displayProducts();
+        
+        // Add event listeners to category cards
+        categoryCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove active class from all cards
+                categoryCards.forEach(c => c.classList.remove('active'));
+                // Add active class to clicked card
+                card.classList.add('active');
+                // Filter products
+                const category = card.getAttribute('data-category');
+                displayProducts(category);
+            });
+        });
+    </script>
+</body>
+</html>
