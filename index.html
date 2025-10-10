@@ -7,16 +7,49 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta http-equiv="refresh" content="1200"> 
-    <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas.">
-    <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir">
+    <meta http-equiv="refresh" content="1200">
+    
+    <meta name="description" content="Temukan produk UMKM, jasa, dan sewa terbaik di Situbondo melalui ANEKAMARKET. Platform jual beli online untuk makanan, kerajinan, promosi, dan kebutuhan lainnya.">
+    <meta name="keywords" content="UMKM Situbondo, jual beli online, aneka market, produk lokal, makanan, jasa, sewa, promosi, Situbondo">
     <meta name="author" content="ANEKAMARKET">
-    <meta property="og:title" content="ANEKAMARKET | Platform Jual Beli Online Terpercaya">
-    <meta property="og:description" content="Semua Bisa Jualan & Semua Bisa Pesan - Platform lengkap untuk kebutuhan jual beli online Anda">
+    <link rel="canonical" href="https://anekamarket.my.id">
+
+    <meta property="og:title" content="ANEKAMARKET Situbondo | Jual Beli Online UMKM, Jasa & Sewa">
+    <meta property="og:description" content="Temukan produk UMKM, jasa, dan sewa terbaik di Situbondo. Semua bisa jualan, semua bisa pesan. Dukung usaha lokal bersama kami!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://anekamarket.my.id">
     <meta property="og:image" content="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png">
-    <title>ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
+    <meta property="og:site_name" content="ANEKAMARKET">
+
+    <title>ANEKAMARKET Situbondo | Jual Beli Online UMKM, Jasa & Sewa</title>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "ANEKAMARKET",
+      "url": "https://anekamarket.my.id",
+      "logo": "https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+6285647709114",
+        "contactType": "Customer Service",
+        "areaServed": "ID",
+        "availableLanguage": "Indonesian"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Jl. PB Sudirman, Desa Wringin Anom",
+        "addressLocality": "Panarukan",
+        "addressRegion": "Jawa Timur",
+        "postalCode": "68351",
+        "addressCountry": "ID"
+      },
+      "sameAs": [
+        "https://wa.me/6285647709114"
+      ]
+    }
+    </script>
     
     <link rel="stylesheet" href="style.css">
     
@@ -558,6 +591,26 @@
             background-color: #8e44ad;
             color: white;
         }
+        
+        /* [PERBAIKAN] Warna Tombol Lokasi */
+        .btn-location {
+            background-color: #dc3545; /* Warna merah */
+            color: white;
+            border-color: #dc3545;
+        }
+        .btn-location:hover {
+            background-color: #c82333; /* Warna merah lebih gelap saat disentuh */
+            border-color: #c82333;
+        }
+        .btn-location-disabled {
+            background-color: #e07a83; /* Warna merah pudar untuk tombol non-aktif */
+            color: white;
+            cursor: not-allowed;
+            border: none;
+        }
+        .btn-location-disabled:hover {
+             background-color: #e07a83;
+        }
 
         @media (max-width: 768px) {
             #productGeneratorForm { grid-template-columns: 1fr; }
@@ -580,7 +633,7 @@
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
                 <span>ANEKAMARKET</span>
             </div>
-            <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
+            <h1 class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</h1>
             
             <div class="header-search">
                 <input type="text" id="headerSearchInput" placeholder="Cari produk, UMKM, kode...">
@@ -1259,7 +1312,7 @@
                 const detailImagesHTML = (product.details?.images || []).map((img, index) => `<img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy">`).join('');
                 const detailSpecsHTML = (product.details?.specs || []).map(spec => `<div class="spec-item"><span class="spec-label">${spec.label || ''}:</span><span class="spec-value">${spec.value || ''}</span></div>`).join('');
                 
-                // Ganti dengan blok kode yang lebih rapi ini
+                // [PERBAIKAN TOMBOL LOKASI] Kode ini menambahkan class .btn-location dan .btn-location-disabled
                 const locationButtonHTML = product.seller?.locationLink
                     ? `<a href="${product.seller.locationLink}" target="_blank" class="btn-visit btn-location"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`
                     : `<button class="btn-visit btn-location-disabled" onclick="alert('Belum Menetapkan Lokasi')"><i class="fas fa-map-marker-alt"></i> Lokasi</button>`;
