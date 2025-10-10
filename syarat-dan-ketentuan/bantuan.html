@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pusat Bantuan AnekaMarket - Dukungan dan panduan penggunaan platform promosi UMKM">
+    <meta name="keywords" content="bantuan anekamarket, pusat bantuan, panduan UMKM, dukungan platform">
+    <title>Pusat Bantuan - AnekaMarket</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset dan gaya dasar */
+        :root {
+            --primary-color: #4a6cf7;
+            --secondary-color: #ff6b6b;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --gray-color: #666;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+            font-size: 28px;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+        
+        nav ul li a i {
+            margin-right: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+        }
+        
+        /* Help Page Styles */
+        .page-header {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .page-header h1 {
+            color: var(--primary-color);
+            font-size: 36px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .page-header h1 i {
+            margin-right: 15px;
+        }
+        
+        .page-header p {
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-section {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-box button:hover {
+            background: #3a5bd9;
+        }
+        
+        .help-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .category-card {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .category-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .help-section {
+            margin: 60px 0;
+        }
+        
+        .help-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .help-section h2 i {
+            margin-right: 10px;
+        }
+        
+        .help-item {
+            background-color: #fff;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .help-item:hover {
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .help-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .help-question i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .help-answer {
+            color: var(--gray-color);
+            margin-bottom: 15px;
+        }
+        
+        .help-steps {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .help-steps li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .help-steps li:before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: -10px;
+        }
+        
+        .contact-promo {
+            background: linear-gradient(135deg, var(--primary-color), #6a89ff);
+            color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .contact-promo h2 {
+            margin-bottom: 15px;
+        }
+        
+        .contact-promo p {
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .highlight-box {
+            background-color: #f0f4ff;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-section h3 i {
+            margin-right: 8px;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: #fff;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 18px;
+            background-color: #444;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+            color: #999;
+            font-size: 14px;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            .help-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-promo {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 24px;
+            }
+            
+            .search-section {
+                padding: 20px;
+            }
+            
+            .help-section h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-store"></i>
+                    Aneka<span>Market</span>
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+                        <li><a href="produk.html"><i class="fas fa-shopping-bag"></i> Produk</a></li>
+                        <li><a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a></li>
+                        <li><a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1><i class="fas fa-question-circle"></i> Pusat Bantuan</h1>
+            <p>Temukan solusi dan panduan untuk menggunakan platform AnekaMarket dengan mudah</p>
+        </div>
+
+        <section class="search-section">
+            <h2 style="color: var(--primary-color); margin-bottom: 20px;">Cari Bantuan</h2>
+            <div class="search-box">
+                <input type="text" placeholder="Ketik pertanyaan atau kata kunci...">
+                <button type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </section>
+
+        <div class="help-categories">
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h3>Pendaftaran UMKM</h3>
+                <p>Panduan bergabung sebagai mitra UMKM di platform AnekaMarket</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3>Manajemen Produk</h3>
+                <p>Cara mengelola dan mempromosikan produk di platform</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Promosi & Pemasaran</h3>
+                <p>Strategi memaksimalkan promosi produk melalui platform</p>
+            </div>
+            
+            <div class="category-card">
+                <div class="category-icon">
+                    <i class="fas fa-cog"></i>
+                </div>
+                <h3>Bantuan Teknis</h3>
+                <p>Pemecahan masalah teknis dalam menggunakan platform</p>
+            </div>
+        </div>
+
+        <section class="help-section">
+            <h2><i class="fas fa-hands-helping"></i> Pertanyaan Umum</h2>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Bagaimana cara bergabung sebagai UMKM di AnekaMarket?
+                </div>
+                <div class="help-answer">
+                    Untuk bergabung sebagai mitra UMKM, silakan ikuti langkah-langkah berikut:
+                    <ol class="help-steps">
+                        <li>Hubungi tim AnekaMarket melalui WhatsApp atau email</li>
+                        <li>Siapkan dokumen usaha (SIUP/TDP atau surat keterangan UMKM)</li>
+                        <li>Kirim katalog produk yang akan dipromosikan</li>
+                        <li>Tim kami akan memandu proses verifikasi dan onboarding</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Apa keuntungan bergabung dengan AnekaMarket?
+                </div>
+                <div class="help-answer">
+                    Sebagai mitra UMKM di AnekaMarket, Anda mendapatkan:
+                    <ul class="help-steps">
+                        <li>Platform promosi digital yang dapat diakses 24/7</li>
+                        <li>Jangkauan pasar yang lebih luas</li>
+                        <li>Konsultasi pemasaran digital gratis</li>
+                        <li>Fasilitas tampilan produk profesional</li>
+                        <li>Dukungan teknis dalam mengelola produk online</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Bagaimana sistem pembayaran dan komisi di AnekaMarket?
+                </div>
+                <div class="help-answer">
+                    AnekaMarket menggunakan sistem yang transparan:
+                    <ul class="help-steps">
+                        <li>Tidak ada biaya pendaftaran atau bulanan</li>
+                        <li>Komisi hanya dikenakan ketika terjadi transaksi berhasil</li>
+                        <li>Pembayaran dari customer langsung ke UMKM</li>
+                        <li>Laporan transaksi tersedia secara real-time</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Siapa yang bertanggung jawab atas kualitas produk?
+                </div>
+                <div class="help-answer">
+                    <div class="highlight-box">
+                        <p><strong>Penting:</strong> AnekaMarket berperan sebagai fasilitator platform promosi. Segala tanggung jawab terkait kualitas produk, pengiriman, garansi, dan layanan purna jual sepenuhnya menjadi tanggung jawab masing-masing UMKM mitra.</p>
+                    </div>
+                    <p>Kami memastikan semua UMKM mitra telah melalui proses verifikasi, namun kualitas produk dan layanan tetap menjadi kewajiban masing-masing pelaku usaha.</p>
+                </div>
+            </div>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Bagaimana cara mengupdate informasi produk?
+                </div>
+                <div class="help-answer">
+                    Untuk mengupdate informasi produk, Anda dapat:
+                    <ul class="help-steps">
+                        <li>Login ke dashboard UMKM Anda</li>
+                        <li>Pilih produk yang ingin diupdate</li>
+                        <li>Edit informasi yang diperlukan (harga, stok, deskripsi)</li>
+                        <li>Simpan perubahan</li>
+                        <li>Jika mengalami kendala, hubungi tim support kami</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Apakah ada batasan jenis produk yang bisa dipromosikan?
+                </div>
+                <div class="help-answer">
+                    Ya, kami memiliki pedoman tertentu untuk menjaga kualitas platform:
+                    <ul class="help-steps">
+                        <li>Produk harus legal dan sesuai dengan peraturan yang berlaku</li>
+                        <li>Dilarang mempromosikan produk ilegal atau berbahaya</li>
+                        <li>Produk harus memiliki kualitas yang memadai</li>
+                        <li>Semua produk akan melalui proses kurasi oleh tim kami</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="help-section">
+            <h2><i class="fas fa-mobile-alt"></i> Panduan Teknis</h2>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Bagaimana cara reset password akun UMKM?
+                </div>
+                <div class="help-answer">
+                    Jika lupa password, ikuti langkah berikut:
+                    <ol class="help-steps">
+                        <li>Klik "Lupa Password" di halaman login</li>
+                        <li>Masukkan email yang terdaftar</li>
+                        <li>Periksa email Anda untuk link reset password</li>
+                        <li>Ikuti instruksi dalam email untuk membuat password baru</li>
+                        <li>Jika tidak menerima email, hubungi tim technical support</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="help-item">
+                <div class="help-question">
+                    <i class="fas fa-question-circle"></i>
+                    Bagaimana cara upload foto produk yang optimal?
+                </div>
+                <div class="help-answer">
+                    Untuk hasil terbaik, gunakan panduan berikut:
+                    <ul class="help-steps">
+                        <li>Format gambar: JPG atau PNG</li>
+                        <li>Ukuran optimal: 800x800 pixels</li>
+                        <li>Ukuran file maksimal: 2MB per gambar</li>
+                        <li>Gunakan latar belakang bersih dan pencahayaan baik</li>
+                        <li>Tampilkan produk dari berbagai angle</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="contact-promo">
+            <h2>Butuh Bantuan Lebih Lanjut?</h2>
+            <p>Tim support kami siap membantu Anda 7 hari seminggu melalui berbagai channel</p>
+            <a href="kontak.html" class="btn">
+                <i class="fas fa-headset"></i> Hubungi Support
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-store"></i> Tentang AnekaMarket</h3>
+                    <p>AnekaMarket adalah platform promosi online untuk UMKM yang difasilitasi oleh Lentera Karya Situbondo.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/6285647709114" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-link"></i> Link Cepat</h3>
+                    <a href="index.html"><i class="fas fa-home"></i> Beranda</a>
+                    <a href="produk.html"><i class="fas fa-shopping-bag"></i> Produk</a>
+                    <a href="tentang.html"><i class="fas fa-info-circle"></i> Tentang Kami</a>
+                    <a href="kontak.html"><i class="fas fa-envelope"></i> Kontak</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-headset"></i> Layanan Pelanggan</h3>
+                    <a href="bantuan.html"><i class="fas fa-question-circle"></i> Pusat Bantuan</a>
+                    <a href="pengembalian.html"><i class="fas fa-undo"></i> Kebijakan Pengembalian</a>
+                    <a href="syarat.html"><i class="fas fa-file-contract"></i> Syarat dan Ketentuan</a>
+                    <a href="privasi.html"><i class="fas fa-shield-alt"></i> Kebijakan Privasi</a>
+                </div>
+                <div class="footer-section">
+                    <h3><i class="fas fa-map-marker-alt"></i> Hubungi Kami</h3>
+                    <p><i class="fas fa-envelope"></i> Email: <a href="mailto:admin@anekamarket.my.id">admin@anekamarket.my.id</a></p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/6285647709114" target="_blank">085647709114</a></p>
+                    <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Pb Sudirman Situbondo (68351) Jawa Timur</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 AnekaMarket - Lentera Karya Situbondo. Hak Cipta Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <script>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-box input');
+        const searchButton = document.querySelector('.search-box button');
+        
+        searchButton.addEventListener('click', function() {
+            performSearch();
+        });
+        
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+        
+        function performSearch() {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                // In a real implementation, this would filter help items
+                // For now, just show an alert
+                alert(`Pencarian untuk: "${searchTerm}"\n\nFitur pencarian lengkap akan segera tersedia. Silakan jelajahi kategori bantuan di bawah.`);
+                searchInput.value = '';
+            }
+        }
+
+        // Category card click functionality
+        const categoryCards = document.querySelectorAll('.category-card');
+        
+        categoryCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const categoryName = this.querySelector('h3').textContent;
+                // Scroll to help section
+                document.querySelector('.help-section').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
