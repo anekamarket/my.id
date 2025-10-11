@@ -342,6 +342,57 @@
         .btn-visit:hover { background-color: #218838; }
         .gallery-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .gallery-actions .btn-detail, .gallery-actions .btn-order, .gallery-actions .btn-preorder-toggle, .gallery-actions .btn-visit, .gallery-actions .btn-toggle-prices { flex-grow: 1; min-width: 120px; }
+        
+        /* --- [REVISI TOTAL] SLIDER GAMBAR OTOMATIS --- */
+        .gallery-image-container {
+            position: relative;
+            width: 100%;
+            padding-top: 100%; /* Membuat container rasio 1:1 */
+            overflow: hidden;
+            background-color: #f0f0f0;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .gallery-slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            cursor: zoom-in; /* Menunjukkan gambar bisa di-klik */
+        }
+
+        .gallery-slider-image.active {
+            opacity: 1;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 5;
+        }
+
+        .slider-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background-color: #ffffff;
+        }
+
 
         /* --- [PERBAIKAN & PENYEMPURNAAN] DESAIN TOMBOL CEK HARGA --- */
         .btn-toggle-prices {
@@ -945,7 +996,7 @@
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
                 <span>ANEKAMARKET</span>
             </div>
-            <h1 class="tagline">"Semua Bisa Jualan & Semua Bisa Pesan"</h1>
+            <h1 class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</h1>
             
             <div class="header-search">
                 <input type="text" id="headerSearchInput" placeholder="Cari produk, UMKM, kode...">
@@ -1509,9 +1560,9 @@
         { "id": "BNJ-2025-3184", "category": "food", "type": "all", "seller": { "name": "Bu Nju", "link": "https://anekamarket.my.id/bunju", "locationLink": null }, "badge": { "text": "Produk Lokal", "type": "promo" }, "mainImage": "https://i.imgur.com/Ra4CZgd.jpeg", "title": "Ikan Kering & Terasi Puger Premium", "code": "BNJ-2025-3184", "price": 4000, "originalPrice": null, "discount": null, "priceVariations": [ { "name": "Terasi Puger 1kg", "price": 80000 }, { "name": "Terasi Puger 1ons", "price": 8000 }, { "name": "Terasi Puger ½ons", "price": 4000 }, { "name": "Ikan Kering (berbumbu)", "price": 75000 }, { "name": "Ikan Kering (polos)", "price": 65000 } ], "units": ["pcs", "kg", "ons", "pack"], "defaultUnit": "pcs", "details": { "description": "<strong>Bu Nju</strong> menghadirkan produk ikan kering dan terasi Puger berkualitas premium dari Panarukan. Terasi kami diproduksi secara tradisional dengan kualitas terbaik, memiliki aroma khas dan rasa gurih autentik. Ikan kering kami diproses secara higienis dengan dua varian: siap goreng (sudah berbumbu) dan polos (tanpa bumbu). Semua produk dibuat dengan bahan pilihan dan pengolahan yang menjaga cita rasa asli. Cocok untuk berbagai masakan rumahan hingga usaha kuliner.", "images": [ "https://i.imgur.com/CV57qDP.jpeg", "https://i.imgur.com/ImPrZJw.jpeg", "https://i.imgur.com/eFnhNYu.jpeg" ], "specs": [ { "label": "Kode Produk", "value": "BNJ-2025-3184" }, { "label": "Nama UMKM", "value": "Bu Nju" }, { "label": "Pemilik", "value": "Riqi" }, { "label": "Alamat", "value": "Karangsari, Desa Kilensari, Kecamatan Panarukan" }, { "label": "Kontak", "value": "082327600708 | vaiper.blood22@gmail.com" }, { "label": "Daftar Harga", "value": "• Terasi Puger 1kg: Rp80.000<br>• Terasi Puger 1ons: Rp8.000<br>• Terasi Puger ½ons: Rp4.000<br>• Ikan kering berbumbu: Rp70.000/kg<br>• Ikan kering polos: Rp60.000/kg" }, { "label": "Media Sosial", "value": "TikTok @seesaretadek" }, { "label": "Catatan", "value": "Harga bisa berubah sewaktu-waktu" } ] }, "contact": { "whatsapp": "6282327600708", "phone": "+6282327600708" } },
         { "id": "LDW-2025-8001", "category": "software", "type": "promo", "seller": { "name": "Lentera Karya Situbondo", "link": "https://www.anekamarket.my.id/lenterakaryasitubondo", "locationLink": null }, "badge": { "text": "Super Deal", "type": "promo" }, "mainImage": "https://i.imgur.com/VumvfHv.png", "title": "Paket Lengkap Aplikasi Web HTML", "code": "LDW-2025-8001", "price": 599000, "originalPrice": 899000, "discount": "33% OFF", "priceVariations": [ { "name": "Paket Komplit (7 Aplikasi)", "price": 599000, "original": 899000 }, { "name": "Aplikasi Kasir Web", "price": 350000, "original": 450000 }, { "name": "Sistem Pembukuan Web", "price": 400000, "original": 550000 } ], "units": ["paket", "lisensi", "unit"], "defaultUnit": "paket", "details": { "description": "<strong>SOLUSI APLIKASI WEB TERBAIK UNTUK BISNIS ANDA!</strong> Paket lengkap aplikasi web HTML kami dirancang khusus untuk bekerja sempurna di semua perangkat tanpa perlu instalasi. Cukup buka browser dan aplikasi siap digunakan! Setiap aplikasi memiliki anturarmuka modern yang responsif, beradaptasi otomatis dengan layar desktop, tablet, maupun smartphone. Sistem kami mencakup fitur-fitur canggih seperti penyimpanan data di perangkat pengguna, backup/restore, laporan transaksi, dan cetak struk - semuanya dalam platform web yang ringan dan cepat.", "images": [ "https://i.imgur.com/GjByUuX.png", "https://i.imgur.com/rsR7RhC.png", "https://i.imgur.com/gg5AGFc.png", "https://i.imgur.com/VumvfHv.png" ], "specs": [ { "label": "Kode Produk", "value": "LDW-2025-8001" }, { "label": "Developer", "value": "Lentera Karya Situbondo" }, { "label": "Daftar Aplikasi", "value": "• Aplikasi Kasir Web - Sistem kasir lengkap dengan cetak struk<br>• Sistem Pembukuan Web - Pencatatan keuangan profesional<br>• Aplikasi Absensi Web - Manajemen kehadiran karyawan<br>• Sistem Manajemen Restoran - Pesanan, meja, dan kitchen display<br>• Website Profesional Instan - Website bisnis siap pakai<br>• Aplikasi Tiket/Karcis - Sistem tiket elektronik<br>• Sistem Penginapan Web - Manajemen kamar dan tamu" }, { "label": "Fitur Unggulan", "value": "• Akses dari perangkat apapun dengan browser modern<br>• Tampilan responsif otomatis menyesuaikan layar<br>• Tanpa perlu instalasi - langsung buka file<br>• Penyimpanan data aman di perangkat pengguna<br>• Backup & restore data dengan satu klik<br>• Laporan keuangan lengkap dengan grafik<br>• Multi-user support dengan level akses berbeda<br>• Offline capable (PWA) - bisa digunakan tanpa internet" }, { "label": "Kompatibilitas", "value": "• Browser: Chrome, Firefox, Edge, Safari versi terbaru<br>• Sistem Operasi: Windows 10/11, macOS, Linux, Android, iOS<br>• Perangkat: Desktop, Laptop, Tablet, Smartphone<br>• Resolusi: Mendukung dari 320px hingga 4K" }, { "label": "Cara Penggunaan", "value": "1. Terima file HTML via email setelah pembelian<br>2. Buka file di browser favorit Anda (Chrome direkomendasikan)<br>3. Aplikasi siap digunakan segera!<br>4. Simpan sebagai PWA (Add to Home Screen) untuk pengalaman seperti aplikasi native<br>5. Untuk backup, cukup simpan file data yang dihasilkan aplikasi" } ] }, "contact": { "whatsapp": "6285647709114", "phone": "+6285647709114" } },
         { "id": "LDW-2025-8002", "category": "software", "type": "promo", "seller": { "name": "Lentera Karya Situbondo", "link": "https://www.anekamarket.my.id/lenterakaryasitubondo", "locationLink": null }, "badge": { "text": "Baru!", "type": "new" }, "mainImage": "https://i.imgur.com/i7PAJfs.png", "title": "Aplikasi Kasir Web HTML", "code": "LDW-2025-8002", "price": 350000, "originalPrice": 450000, "discount": "22% OFF", "priceVariations": [ { "name": "Lisensi Tunggal", "price": 350000, "original": 450000 } ], "units": ["lisensi", "pcs", "unit"], "defaultUnit": "lisensi", "details": { "description": "<strong>APLIKASI KASIR MODERN TANPA INSTALASI!</strong> Aplikasi Kasir Web HTML dari Lentera Karya Situbondo adalah solusi sempurna untuk bisnis retail, toko, atau usaha kecil. Cukup buka file HTML di browser dan aplikasi siap digunakan! Dirancang khusus untuk bekerja optimal di semua perangkat - dari desktop PC hingga smartphone. Fitur termasuk manajemen produk, transaksi cepat, cetak struk, laporan penjualan, dan penyimpanan data langsung di perangkat Anda. Tidak perlu server mahal atau koneksi internet terus-menerus! Ada bonus voucher diskon 15% juga.", "images": [ "https://i.imgur.com/9IuPANW.png", "https://i.imgur.com/PY8ge6k.png", "https://i.imgur.com/2Yr4njs.png", "https://i.imgur.com/i7PAJfs.png" ], "specs": [ { "label": "Kode Produk", "value": "LDW-2025-8002" }, { "label": "Developer", "value": "Lentera Karya Situbondo" }, { "label": "Fitur Inti", "value": "• Input transaksi cepat dengan anturarmuka modern<br>• Manajemen produk & kategori<br>• Pencarian produk instan dengan autocomplete<br>• Cetak struk pdf dengan header custom<br>• Laporan harian/mingguan/bulanan dengan grafik<br>• Backup & restore data dengan enkripsi<br>• Manajemen diskon dan promo produk<br>• Hitung kembalian & Stok otomatis berkurang saat transaksi" }, { "label": "Keunggulan", "value": "• Buka langsung di browser tanpa proses instalasi<br>• Tampilan responsif semua device (desktop, tablet, HP)<br>• Bisa digunakan offline setelah pertama kali dibuka<br>• Penyimpanan data aman di perangkat pengguna<br>• Tidak perlu server/hosting yang mahal<br>• Ringan dan cepat bahkan di spesifikasi rendah<br>• Update mudah dengan mengganti file HTML<br>• Tidak ada biaya bulanan/tahunan" }, { "label": "Cara Implementasi", "value": "1. Dapatkan file HTML aplikasi setelah pembelian<br>2. Buka file di browser favorit (Chrome direkomendasikan)<br>3. Mulai gunakan aplikasi kasir langsung<br>4. (Opsional) Simpan sebagai PWA untuk pengalaman seperti app native<br>5. Data otomatis tersimpan aman di perangkat<br>6. Backup rutin dengan menyimpan file data yang dihasilkan" }, { "label": "Bonus Pembelian", "value": "• Panduan penggunaan video step-by-step<br>• Template struk profesional yang bisa dicustom<br>• File contoh database produk siap pakai<br>• Support via WhatsApp  gratis<br>• Voucher diskon 15% untuk pembelian produk lain" } ] }, "contact": { "whatsapp": "6285647709114", "phone": "+6285647709114" } },
-        {"id":"WPU-2025-0610","category":"food","type":"promo","seller":{"name":"Warung Pak Untung","link":"https://anekamarket.my.id/pakuntung","locationLink":"https://maps.app.goo.gl/6xMBrsLe2WmuKRWX9"},"badge":{"text":"Diskon Spesial","type":"promo"},"mainImage":"https://i.imgur.com/1Mvj3cv.jpeg","title":"Menu Bakaran Spesial Warung Pak Untung","code":"WPU-2025-0610","price":30000,"originalPrice":50000,"discount":"40% OFF","priceVariations":[{"name":"Paket Hemat Komplit","price":30000},{"name":"Ikan Super (1 org) - 2 ons","price":25000},{"name":"Ikan Super (1 org) - 3 ons","price":30000},{"name":"Ikan Super (1 org) - 4 ons","price":35000},{"name":"Ikan Super (1 org) - 5 ons","price":45000},{"name":"Ikan Super (1 org) - 6 ons","price":55000},{"name":"Ikan Super (1 org) - 7 ons","price":60000},{"name":"Ikan Super (1 org) - 8 ons","price":70000},{"name":"Ikan Super (1 org) - 9 ons","price":80000},{"name":"Ikan Super (1 org) - 1 kg","price":90000},{"name":"Ikan Super (2 org) - 2 ons","price":30000},{"name":"Ikan Super (2 org) - 3 ons","price":40000},{"name":"Ikan Super (2 org) - 4 ons","price":50000},{"name":"Ikan Super (2 org) - 5 ons","price":60000},{"name":"Ikan Super (2 org) - 6 ons","price":65000},{"name":"Ikan Super (2 org) - 7 ons","price":75000},{"name":"Ikan Super (2 org) - 8 ons","price":85000},{"name":"Ikan Super (2 org) - 9 ons","price":95000},{"name":"Ikan Super (2 org) - 1 kg","price":100000}],"units":["porsi","kg","ons","ekor"],"defaultUnit":"porsi","details":{"description":"<strong>Diskon Spesial: Nikmati Sensasi Kuliner Laut Bakar di Warung Pak Untung!</strong><br>Cari tempat makan yang bikin penasaran? Mampir ke <strong>Warung Pak Untung</strong>! Terletak strategis di dekat destinasi Wisata Kampung Kerapu, kami menyajikan hidangan laut bakar segar dengan bumbu rahasia yang meresap sempurna hingga ke dalam daging.<br><br>🔥 <strong>PROMO SPESIAL!</strong> Jangan lewatkan paket komplit kami yang super hemat! Cukup dengan <strong>Rp 30.000</strong> saja dari harga normal Rp 50.000, Anda sudah bisa menikmati hidangan lezat yang bikin ketahihan.<br><br>Ingin yang lebih spesial? Pilih sendiri <strong>ikan super segar</strong> kami dengan berbagai ukuran sesuai selera Anda, cocok untuk dinikmati sendiri atau beramai-ramai. Setiap hidangan disajikan dengan sambal khas Pak Untung yang pedasnya nendang dan segar, dijamin akan menyempurnakan setiap suapan Anda.","images":["https://i.imgur.com/1Mvj3cv.jpeg","https://i.imgur.com/54G3vZ8.jpeg","https://i.imgur.com/jSYOe6m.jpeg","https://i.imgur.com/YqGxIMK.jpeg","https://i.imgur.com/2tbgQnd.jpeg","https://i.imgur.com/aSEVqAp.jpeg","https://i.imgur.com/v1kqfUt.jpeg","https://i.imgur.com/8XfYID8.jpeg","https://i.imgur.com/QjUO7gc.jpeg","https://i.imgur.com/NgAvdi7.jpeg","https://i.imgur.com/MOahwIU.jpeg","https://i.imgur.com/vTbwJGv.jpeg"],"specs":[{"label":"Kode Promo","value":"WPU-2025-0610"},{"label":"Nama Gerai","value":"Warung Pak Untung"},{"label":"Pemilik","value":"Mas Eko"},{"label":"Alamat","value":"Jalan Raya Gundil, sebelah barat Wisata Kampung Kerapu (selatan jalan)"},{"label":"Kontak","value":"083826231962"},{"label":"Menu Promo","value":"• Paket Hemat Komplit <s>Rp50.000</s> <strong>Rp30.000</strong> (Diskon 40%)"},{"label":"Lauk Tambahan","value":"• Ikan Super (1 Orang) mulai dari Rp25.000<br>• Ikan Super (2 Orang) mulai dari Rp30.000"},{"label":"Catatan","value":"Harga dapat berubah sewaktu-waktu tanpa pemberitahuan."}]},"contact":{"whatsapp":"6283826231962","phone":"+6283826231962"}},
-        {"id": "AJN-2025-JASA", "category": "construction", "type": "jasa", "seller": { "name": "Abang Joni", "link": "https://anekamarket.my.id/abangjoni", "locationLink": null }, "badge": { "text": "Jasa Profesional", "type": "service" }, "mainImage": "https://i.imgur.com/8SQGdWj.jpeg", "title": "Jasa Tukang Profesional Berpengalaman", "code": "AJN-2025-JASA", "price": 0, "originalPrice": null, "discount": "Nego", "priceVariations": [], "units": ["proyek", "harian", "borongan"], "defaultUnit": "proyek", "details": { "description": "<strong>Butuh tukang handal dan berpengalaman untuk proyek bangunan Anda? Abang Joni solusinya!</strong><br><br>Dengan pengalaman sejak tahun 2000, Abang Joni telah terbukti profesional dalam mengerjakan berbagai proyek, mulai dari rumah minimalis, perumahan, kost-kostan, hingga perkantoran. Dikenal dengan karakter yang humoris dan sosial tinggi, Abang Joni tidak hanya memberikan hasil kerja yang rapi dan berkualitas, tetapi juga suasana kerja yang menyenangkan.<br><br>Siap bekerja dengan sistem harian, mingguan, bulanan, maupun borongan sesuai kebutuhan Anda. Hubungi langsung untuk konsultasi gratis dan dapatkan penawaran terbaik untuk proyek impian Anda! Harga bisa nego.", "images": [ "https://i.imgur.com/gVuL79s.jpeg", "https://i.imgur.com/lrAPJFa.jpeg", "https://i.imgur.com/hIl9fQz.jpeg", "https://i.imgur.com/RcQWBKO.jpeg", "https://i.imgur.com/8SQGdWj.jpeg" ], "specs": [ { "label": "Kode Jasa", "value": "AJN-2025-JASA" }, { "label": "Nama Tukang", "value": "Abang Joni" }, { "label": "Pengalaman", "value": "Sejak tahun 2000" }, { "label": "Portofolio", "value": "Rumah minimalis, kolam, gudang, perumahan, kost, perkantoran" }, { "label": "Jabatan Proyek", "value": "Pernah menjadi Mandor, Kepala Proyek, Kepala Tukang" }, { "label": "Sistem Kerja", "value": "Harian, Mingguan, Bulanan, Borongan" }, { "label": "Karakter", "value": "Humoris, Sosial Tinggi, Profesional" }, { "label": "Area Layanan", "value": "Situbondo & sekitarnya (Nego)" }, { "label": "Catatan", "value": "Hubungi langsung untuk diskusi harga dan jadwal." } ] }, "contact": { "whatsapp": "6285257633212", "phone": "+6285257633212" } },
-        { "id":"RIC-2025-0810","category":"snack","type":"promo","seller":{"name":"Regginang Situbondo Ibu Ican","link":"https://anekamarket.my.id/rengginang-situbondo-ibu-ican", "locationLink": null},"badge":{"text":"Harga Hemat","type":"promo"},"mainImage":"https://i.imgur.com/H3Lc1Qt.jpeg","title":"RENGGINANG ANEKA RASA","code":"RIC-2025-0810","price":18000,"originalPrice":20000,"discount":"10%","priceVariations":[{"name":"Renggginang Rasa Terasi","price":8000},{"name":"Renggginang Rasa Bawang","price":8000},{"name":"Renggginang Rasa Udang","price":8000},{"name":"Renggginang Rasa Cumi","price":8000},{"name":"Renggginang Rasa Mix","price":19000}],"units":["pack 450gram"],"defaultUnit":"pack","details":{"description":"<b>Rengginang Gurih Renyah</b> – <strong>Cita Rasa Tradisional yang Tak Pernah Lekang oleh Waktu</strong>\n\nNikmati kelezatan rengginang khas Nusantara yang dibuat dari beras ketan pilihan, diproses secara higienis, dan digoreng hingga renyah sempurna. \n\nCocok sebagai camilan keluarga, teman minum teh, atau oleh-oleh khas yang menggugah selera. Tersedia dalam berbagai varian rasa: Terasi,bawang,Udang dan Cumi pasti ketagihan!","images":["https://i.imgur.com/H3Lc1Qt.jpeg","https://i.imgur.com/mtQc5pc.jpeg","https://i.imgur.com/EuC9Np2.jpeg","https://i.imgur.com/yGCEh0n.jpeg","https://i.imgur.com/ACGxe8H.jpeg"],"specs":[]},"contact":{"whatsapp":"6282338341476","phone":"+6282338341476"}}
+        {"id":"WPU-2025-0610","category":"food","type":"promo","seller":{"name":"Warung Pak Untung","link":"https://anekamarket.my.id/pakuntung","locationLink":"https://maps.app.goo.gl/6xMBrsLe2WmuKRWX9"},"badge":{"text":"Diskon Spesial","type":"promo"},"mainImage":"https://i.imgur.com/1Mvj3cv.jpeg","title":"Menu Bakaran Spesial Warung Pak Untung","code":"WPU-2025-0610","price":30000,"originalPrice":50000,"discount":"40% OFF","priceVariations":[{"name":"Paket Hemat Komplit","price":30000},{"name":"Ikan Super (1 org) - 2 ons","price":25000},{"name":"Ikan Super (1 org) - 3 ons","price":30000},{"name":"Ikan Super (1 org) - 4 ons","price":35000},{"name":"Ikan Super (1 org) - 5 ons","price":45000},{"name":"Ikan Super (1 org) - 6 ons","price":55000},{"name":"Ikan Super (1 org) - 7 ons","price":60000},{"name":"Ikan Super (1 org) - 8 ons","price":70000},{"name":"Ikan Super (1 org) - 9 ons","price":80000},{"name":"Ikan Super (1 org) - 1 kg","price":90000},{"name":"Ikan Super (2 org) - 2 ons","price":30000},{"name":"Ikan Super (2 org) - 3 ons","price":40000},{"name":"Ikan Super (2 org) - 4 ons","price":50000},{"name":"Ikan Super (2 org) - 5 ons","price":60000},{"name":"Ikan Super (2 org) - 6 ons","price":65000},{"name":"Ikan Super (2 org) - 7 ons","price":75000},{"name":"Ikan Super (2 org) - 8 ons","price":85000},{"name":"Ikan Super (2 org) - 9 ons","price":95000},{"name":"Ikan Super (2 org) - 1 kg","price":100000}],"units":["porsi","kg","ons","ekor"],"defaultUnit":"porsi","details":{"description":"<strong>Diskon Spesial: Nikmati Sensasi Kuliner Laut Bakar di Warung Pak Untung!</strong><br>Cari tempat makan yang bikin penasaran? Mampir ke <strong>Warung Pak Untung</strong>! Terletak strategis di dekat destinasi Wisata Kampung Kerapu, kami menyajikan hidangan laut bakar segar dengan bumbu rahasia yang meresap sempurna hingga ke dalam daging.<br><br>🔥 <strong>PROMO SPESIAL!</strong> Jangan lewatkan paket komplit kami yang super hemat! Cukup dengan <strong>Rp 30.000</strong> saja dari harga normal Rp 50.000, Anda sudah bisa menikmati hidangan lezat yang bikin ketahihan.<br><br>Ingin yang lebih spesial? Pilih sendiri <strong>ikan super segar</strong> kami dengan berbagai ukuran sesuai selera Anda, cocok untuk dinikmati sendiri atau beramai-ramai. Setiap hidangan disajikan dengan sambal khas Pak Untung yang pedasnya nendang dan segar, dijamin akan menyempurnakan setiap suapan Anda.","images":["https://i.imgur.com/54G3vZ8.jpeg","https://i.imgur.com/jSYOe6m.jpeg","https://i.imgur.com/YqGxIMK.jpeg","https://i.imgur.com/2tbgQnd.jpeg","https://i.imgur.com/aSEVqAp.jpeg","https://i.imgur.com/v1kqfUt.jpeg","https://i.imgur.com/8XfYID8.jpeg","https://i.imgur.com/QjUO7gc.jpeg","https://i.imgur.com/NgAvdi7.jpeg","https://i.imgur.com/MOahwIU.jpeg","https://i.imgur.com/vTbwJGv.jpeg"],"specs":[{"label":"Kode Promo","value":"WPU-2025-0610"},{"label":"Nama Gerai","value":"Warung Pak Untung"},{"label":"Pemilik","value":"Mas Eko"},{"label":"Alamat","value":"Jalan Raya Gundil, sebelah barat Wisata Kampung Kerapu (selatan jalan)"},{"label":"Kontak","value":"083826231962"},{"label":"Menu Promo","value":"• Paket Hemat Komplit <s>Rp50.000</s> <strong>Rp30.000</strong> (Diskon 40%)"},{"label":"Lauk Tambahan","value":"• Ikan Super (1 Orang) mulai dari Rp25.000<br>• Ikan Super (2 Orang) mulai dari Rp30.000"},{"label":"Catatan","value":"Harga dapat berubah sewaktu-waktu tanpa pemberitahuan."}]},"contact":{"whatsapp":"6283826231962","phone":"+6283826231962"}},
+        { "id": "AJN-2025-JASA", "category": "construction", "type": "jasa", "seller": { "name": "Abang Joni", "link": "https://anekamarket.my.id/abangjoni", "locationLink": null }, "badge": { "text": "Jasa Profesional", "type": "service" }, "mainImage": "https://i.imgur.com/8SQGdWj.jpeg", "title": "Jasa Tukang Profesional Berpengalaman", "code": "AJN-2025-JASA", "price": 0, "originalPrice": null, "discount": "Nego", "priceVariations": [], "units": ["proyek", "harian", "borongan"], "defaultUnit": "proyek", "details": { "description": "<strong>Butuh tukang handal dan berpengalaman untuk proyek bangunan Anda? Abang Joni solusinya!</strong><br><br>Dengan pengalaman sejak tahun 2000, Abang Joni telah terbukti profesional dalam mengerjakan berbagai proyek, mulai dari rumah minimalis, perumahan, kost-kostan, hingga perkantoran. Dikenal dengan karakter yang humoris dan sosial tinggi, Abang Joni tidak hanya memberikan hasil kerja yang rapi dan berkualitas, tetapi juga suasana kerja yang menyenangkan.<br><br>Siap bekerja dengan sistem harian, mingguan, bulanan, maupun borongan sesuai kebutuhan Anda. Hubungi langsung untuk konsultasi gratis dan dapatkan penawaran terbaik untuk proyek impian Anda! Harga bisa nego.", "images": [ "https://i.imgur.com/gVuL79s.jpeg", "https://i.imgur.com/lrAPJFa.jpeg", "https://i.imgur.com/hIl9fQz.jpeg", "https://i.imgur.com/RcQWBKO.jpeg" ], "specs": [ { "label": "Kode Jasa", "value": "AJN-2025-JASA" }, { "label": "Nama Tukang", "value": "Abang Joni" }, { "label": "Pengalaman", "value": "Sejak tahun 2000" }, { "label": "Portofolio", "value": "Rumah minimalis, kolam, gudang, perumahan, kost, perkantoran" }, { "label": "Jabatan Proyek", "value": "Pernah menjadi Mandor, Kepala Proyek, Kepala Tukang" }, { "label": "Sistem Kerja", "value": "Harian, Mingguan, Bulanan, Borongan" }, { "label": "Karakter", "value": "Humoris, Sosial Tinggi, Profesional" }, { "label": "Area Layanan", "value": "Situbondo & sekitarnya (Nego)" }, { "label": "Catatan", "value": "Hubungi langsung untuk diskusi harga dan jadwal." } ] }, "contact": { "whatsapp": "6285257633212", "phone": "+6285257633212" } },
+        { "id":"RIC-2025-0810","category":"snack","type":"promo","seller":{"name":"Regginang Situbondo Ibu Ican","link":"https://anekamarket.my.id/rengginang-situbondo-ibu-ican", "locationLink": null},"badge":{"text":"Harga Hemat","type":"promo"},"mainImage":"https://i.imgur.com/H3Lc1Qt.jpeg","title":"RENGGINANG ANEKA RASA","code":"RIC-2025-0810","price":18000,"originalPrice":20000,"discount":"10%","priceVariations":[{"name":"Renggginang Rasa Terasi","price":8000},{"name":"Renggginang Rasa Bawang","price":8000},{"name":"Renggginang Rasa Udang","price":8000},{"name":"Renggginang Rasa Cumi","price":8000},{"name":"Renggginang Rasa Mix","price":19000}],"units":["pack 450gram"],"defaultUnit":"pack","details":{"description":"<b>Rengginang Gurih Renyah</b> – <strong>Cita Rasa Tradisional yang Tak Pernah Lekang oleh Waktu</strong>\n\nNikmati kelezatan rengginang khas Nusantara yang dibuat dari beras ketan pilihan, diproses secara higienis, dan digoreng hingga renyah sempurna. \n\nCocok sebagai camilan keluarga, teman minum teh, atau oleh-oleh khas yang menggugah selera. Tersedia dalam berbagai varian rasa: Terasi,bawang,Udang dan Cumi pasti ketagihan!","images":["https://i.imgur.com/mtQc5pc.jpeg","https://i.imgur.com/EuC9Np2.jpeg","https://i.imgur.com/yGCEh0n.jpeg","https://i.imgur.com/ACGxe8H.jpeg"],"specs":[]},"contact":{"whatsapp":"6282338341476","phone":"+6282338341476"}}
    ];
                                                                               
         document.addEventListener('DOMContentLoaded', () => {
@@ -1698,19 +1749,31 @@
                 
                 const units = product.units || [product.defaultUnit || 'pcs'];
                 const unitOptionsHTML = units.map(unit => `<option value="${unit}" ${unit === product.defaultUnit ? 'selected' : ''}>${unit}</option>`).join('');
-                const detailImagesHTML = (product.details?.images || []).map((img, index) => `<img src="${img}" alt="Thumbnail ${index + 1}" class="thumbnail" loading="lazy">`).join('');
+                
                 const detailSpecsHTML = (product.details?.specs || []).map(spec => `<div class="spec-item"><span class="spec-label">${spec.label || ''}:</span><span class="spec-value">${spec.value || ''}</span></div>`).join('');
                 
                 // [PERBAIKAN TOMBOL LOKASI] Kode ini menambahkan class .btn-location dan .btn-location-disabled
                 const locationButtonHTML = product.seller?.locationLink
                     ? `<a href="${product.seller.locationLink}" target="_blank" class="btn-visit btn-location"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`
                     : `<button class="btn-visit btn-location-disabled" onclick="alert('Belum Menetapkan Lokasi')"><i class="fas fa-map-marker-alt"></i> Lokasi</button>`;
+
+                // [REVISI SLIDER] Menyiapkan gambar untuk slider
+                const allImages = [product.mainImage, ...(product.details?.images || [])].filter(Boolean); // Filter out any null/undefined images
+                const imagesHTML = allImages.map((img, index) =>
+                    `<img src="${img}" alt="${product.title} - Gambar ${index + 1}" class="gallery-slider-image ${index === 0 ? 'active' : ''}" loading="lazy">`
+                ).join('');
+                const dotsHTML = allImages.length > 1 ? `<div class="slider-dots">${allImages.map((_, index) => `<span class="slider-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></span>`).join('')}</div>` : '';
                 
                 return `
                     <div class="gallery-item" data-category="${product.category || 'all'}" data-type="${product.type || 'all'}" data-id="${product.id}" id="product-${product.id}">
                         <a href="${product.seller?.link || '#'}" target="_blank" class="gallery-badge seller">Gerai: ${product.seller?.name || 'N/A'}</a>
                         <span class="gallery-badge ${product.badge?.type || 'promo'}">${product.badge?.text || 'Promo'}</span>
-                        <div class="gallery-image-container"><img src="${product.mainImage}" alt="${product.title}" class="gallery-image" loading="lazy"></div>
+                        
+                        <div class="gallery-image-container" data-product-id="${product.id}">
+                            ${imagesHTML}
+                            ${dotsHTML}
+                        </div>
+
                         <div class="gallery-details">
                             <h3 class="gallery-title">${product.title || 'Judul Produk'}</h3>
                             <div class="gallery-meta"><span class="gallery-code">Kode: ${product.code || 'N/A'}</span><span class="gallery-seller"><i class="fas fa-store"></i> ${product.seller?.name || 'N/A'}</span></div>
@@ -1746,9 +1809,14 @@
                             </div>
                             
                             <div class="gallery-detail-expanded">
-                                <div class="gallery-carousel"><img src="${product.mainImage}" alt="${product.title}" class="gallery-main-image" loading="lazy"><div class="gallery-thumbnails">${detailImagesHTML}</div></div>
-                                <div class="gallery-content"><p class="gallery-description">${product.details?.description || ''}</p><div class="gallery-specs">${detailSpecsHTML}</div></div>
-                                <div class="gallery-actions-expanded"><a href="https://wa.me/${product.contact?.whatsapp || ''}?text=Halo%20${encodeURIComponent(product.seller?.name || '')},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title || '')}%20(${product.code || ''})" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat Whatsapp</a><a href="tel:${product.contact?.phone || ''}" class="btn-call"><i class="fas fa-phone-alt"></i> Telepon</a></div>
+                                <div class="gallery-content">
+                                    <p class="gallery-description">${product.details?.description || ''}</p>
+                                    <div class="gallery-specs">${detailSpecsHTML}</div>
+                                </div>
+                                <div class="gallery-actions-expanded">
+                                    <a href="https://wa.me/${product.contact?.whatsapp || ''}?text=Halo%20${encodeURIComponent(product.seller?.name || '')},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title || '')}%20(${product.code || ''})" class="btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat Whatsapp</a>
+                                    <a href="tel:${product.contact?.phone || ''}" class="btn-call"><i class="fas fa-phone-alt"></i> Telepon</a>
+                                </div>
                             </div>
                         </div>
                     </div>`;
@@ -1763,6 +1831,53 @@
                 galleryGrid.innerHTML = productsData.map(product => createProductCardHTML(product)).join('');
             }
             renderProducts(products); 
+
+             function initializeProductSliders() {
+                const containers = document.querySelectorAll('.gallery-image-container');
+                containers.forEach(container => {
+                    const images = container.querySelectorAll('.gallery-slider-image');
+                    const dots = container.querySelectorAll('.slider-dot');
+                    let currentIndex = 0;
+                    let slideInterval;
+
+                    if (images.length <= 1) return; // Don't start slider if only one image
+
+                    const showSlide = (index) => {
+                        images.forEach((img, i) => img.classList.toggle('active', i === index));
+                        dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+                    };
+
+                    const nextSlide = () => {
+                        currentIndex = (currentIndex + 1) % images.length;
+                        showSlide(currentIndex);
+                    };
+
+                    const startSlider = () => {
+                        stopSlider(); // Ensure no multiple intervals are running
+                        slideInterval = setInterval(nextSlide, 3000);
+                    };
+
+                    const stopSlider = () => {
+                        clearInterval(slideInterval);
+                    };
+                    
+                    images.forEach(img => {
+                        img.addEventListener('click', () => {
+                            document.getElementById('zoomedImage').src = img.src;
+                            document.getElementById('imageModal').classList.add('show');
+                            body.style.overflow = 'hidden';
+                            playButtonSound();
+                        });
+                    });
+
+                    container.addEventListener('mouseenter', stopSlider);
+                    container.addEventListener('mouseleave', startSlider);
+
+                    startSlider();
+                });
+            }
+            initializeProductSliders();
+
 
             function initCardEventListeners(container) {
                  const updateGrandTotal = (productCard) => {
@@ -1815,21 +1930,7 @@
                         if (expandedContent.classList.contains('active')) expandedContent.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                         playButtonSound(); 
                     }
-
-                    if (target.classList.contains('thumbnail')) { 
-                        const mainImage = productCard.querySelector('.gallery-main-image'); 
-                        mainImage.src = target.src; 
-                        productCard.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-                        target.classList.add('active');
-                        playButtonSound(); 
-                    }
                     
-                    if(target.classList.contains('gallery-main-image')) { 
-                        document.getElementById('zoomedImage').src = target.src; 
-                        document.getElementById('imageModal').classList.add('show');
-                        body.style.overflow = 'hidden'; playButtonSound();
-                    }
-
                     if (target.closest('.btn-preorder-toggle')) {
                         const btn = target.closest('.btn-preorder-toggle');
                         const preorderForm = productCard.querySelector('.preorder-form');
@@ -2225,6 +2326,7 @@
                         generatorPreviewContainer.style.display = 'block';
                         outputContainer.style.display = 'none';
                         initCardEventListeners(previewTarget);
+                        initializeProductSliders(); // Initialize slider for the preview
                         generatorPreviewContainer.scrollIntoView({ behavior: 'smooth' });
                         playButtonSound();
                     } catch(e){ alert("Gagal membuat preview. Pastikan semua field wajib diisi dengan benar."); }
