@@ -530,47 +530,41 @@
             color: #004d40;
         }
         
-        /* --- [FIX TERBARU & KUNCI PERBAIKAN] MENCEGAH TOMBOL TERTINDIH GAMBAR DETAIL --- */
-        /* Kunci perbaikan: Mengatur parent container (.gallery-details) menjadi flex column.
-           Ini memaksa semua elemen di dalamnya (termasuk .gallery-actions dan .gallery-detail-expanded)
-           untuk tersusun secara vertikal. Saat .gallery-detail-expanded muncul,
-           ia akan secara alami berada di bawah .gallery-actions, bukan menindihnya. */
+        /* --- [PERBAIKAN FINAL] MENCEGAH TOMBOL TERTINDIH OLEH DETAIL PRODUK --- */
+        /* Kunci perbaikan utama: Mengatur container '.gallery-details' menjadi flexbox dengan arah vertikal (column).
+           Ini memaksa semua elemen di dalamnya (termasuk tombol-tombol dan blok detail) untuk
+           tersusun secara rapi dari atas ke bawah. Saat blok detail muncul, ia akan secara
+           alami mendorong konten di bawahnya, bukan menindihnya. */
         .gallery-details {
             display: flex;
             flex-direction: column;
-            flex-grow: 1; /* Memastikan container ini mengisi sisa ruang yang tersedia di dalam card */
+            flex-grow: 1; /* Memastikan container ini mengisi sisa ruang yang tersedia di kartu */
         }
         
-        /* --- [PERBAIKAN & PENYEMPURNAAN] TAMPILAN DETAIL PRODUK AGAR TIDAK TERPOTONG --- */
+        /* Memastikan blok detail yang tersembunyi tidak memakan ruang dan siap untuk transisi */
         .gallery-detail-expanded {
-            /* Menggunakan flexbox untuk tata letak vertikal yang kuat dan fleksibel.
-               Ini memastikan semua elemen (gambar, deskripsi, tombol) tersusun rapi dari atas ke bawah. */
             display: flex;
             flex-direction: column;
-            gap: 15px; /* Memberi jarak yang konsisten antar elemen di dalam detail box */
+            gap: 15px;
         }
 
-        /* KUNCI PERBAIKAN KEDUA:
-           Saat detail box aktif (di-klik), aturan ini akan menimpa `max-height`
-           yang mungkin ada di file style.css. Dengan `max-height: none`, container bisa
-           mengembang setinggi apapun yang dibutuhkan oleh konten di dalamnya. */
+        /* Saat blok detail aktif (ditampilkan), kita pastikan tingginya bisa mengembang
+           sepenuhnya sesuai dengan konten di dalamnya, tanpa ada batasan. */
         .gallery-detail-expanded.active {
-            max-height: none;
+            max-height: none; /* Menghapus batasan tinggi maksimum */
         }
 
+        /* Memastikan area deskripsi itu sendiri juga bisa mengembang dan tidak terpotong */
         .gallery-description {
-            /* Memastikan area deskripsi bisa tumbuh secara dinamis sesuai panjang teks */
             height: auto;
             max-height: none;
             overflow: visible; /* Mencegah konten terpotong */
             word-wrap: break-word; /* Memaksa kata yang sangat panjang untuk pindah baris */
-            white-space: pre-wrap; /* Menjaga format seperti enter dan spasi berlebih dari data produk */
+            white-space: pre-wrap; /* Menjaga format spasi dan baris baru dari data produk */
         }
 
         .gallery-actions-expanded {
-            /* Mencegah container tombol (WhatsApp & Telepon) agar tidak 'gepeng' atau menyusut
-               jika ada elemen lain yang memakan banyak ruang. */
-            flex-shrink: 0;
+           flex-shrink: 0; /* Mencegah container tombol agar tidak menyusut */
         }
         
         /* --- [REVISI & PERBAIKAN] LOGIKA SEMBUNYI/TAMPILKAN TOMBOL OTOMATIS --- */
@@ -966,11 +960,16 @@
              transform: none;
          }
 
-        /* --- [PERBAIKAN] Warna Teks Tagline Header --- */
+        /* --- [PERBAIKAN] Warna Teks Tagline Header & Hapus Tanda Petik --- */
         .tagline {
             color: #FFFFFF; /* Warna putih */
             font-weight: 600;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Bayangan teks agar lebih terbaca */
+        }
+        /* Mencegah pseudo-elements dari file CSS eksternal menambahkan tanda petik */
+        .tagline::before, .tagline::after {
+            content: none !important;
+            display: none !important;
         }
 
         @media (max-width: 768px) {
