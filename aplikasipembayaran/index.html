@@ -530,33 +530,33 @@
             margin: 20px auto;
             box-shadow: var(--shadow-lg);
             line-height: 1.5;
-            display: flex; /* Using flexbox for better structure */
-            flex-direction: column; /* Stack elements vertically */
+            display: flex;
+            flex-direction: column;
         }
         
-        /* This new wrapper holds the main content and is used as the anchor for the watermark */
         .receipt-body-content {
-            position: relative; /* Crucial for positioning the watermark inside it */
+            position: relative;
             z-index: 1;
-            flex-grow: 1; /* Allows this section to grow */
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
 
         .receipt-watermark {
             position: absolute;
-            /* Centering logic now applies to the .receipt-body-content wrapper */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 70%; /* Slightly larger for better visibility */
+            width: 70%;
             opacity: 0.08;
-            z-index: -1; /* Place it behind the text content */
+            z-index: -1;
             pointer-events: none;
         }
         
         .receipt-header, .receipt-info, .receipt-items, .receipt-total, .receipt-payment-details, .receipt-footer {
             width: 100%;
+            position: relative;
+            z-index: 2; /* Ensure text is above watermark */
         }
 
         .receipt-header {
@@ -585,7 +585,7 @@
         .receipt-items {
             padding: 10px 0;
             min-height: 50px;
-            flex-grow: 1; /* Key change: makes this section expand, pushing the footer down */
+            flex-grow: 1;
         }
 
         .receipt-item-line {
@@ -624,7 +624,7 @@
 
         .receipt-footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: auto; /* Pushes footer to the bottom */
             font-size: 0.85rem;
             padding-top: 10px;
         }
@@ -815,6 +815,7 @@
                 overflow: hidden !important;
                 z-index: 9999 !important;
                 display: block !important;
+                align-items: flex-start !important;
             }
             #receiptPrint {
                 width: 100% !important;
@@ -824,10 +825,10 @@
                 margin: 0 !important;
                 font-size: 10pt !important;
                 color: #000 !important;
+                border: none !important;
             }
             .receipt-watermark {
                 opacity: 0.06 !important;
-                z-index: -1 !important;
             }
             .no-print {
                 display: none !important;
@@ -1270,7 +1271,8 @@
             <div class="receipt-divider"></div>
             
             <div class="receipt-body-content">
-                <img src="https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png"
+                <img src="https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png" class="receipt-watermark" alt="Watermark">
+                
                 <div class="receipt-items" id="receiptItems">
                     </div>
                 
@@ -1298,28 +1300,28 @@
                         <span id="receiptTotal">Rp 0</span>
                     </div>
                 </div>
-            </div>
-            
-            <div class="receipt-divider"></div>
-
-            <div class="receipt-payment-details">
-                <div class="receipt-total-row">
-                    <span id="receiptPaymentMethod">Tunai</span>
-                    <span id="receiptPaymentAmount">Rp 0</span>
-                </div>
-                <div class="receipt-total-row">
-                    <span>Kembali</span>
-                    <span id="receiptChange">Rp 0</span>
-                </div>
-            </div>
-
-            <div class="receipt-footer">
+                
                 <div class="receipt-divider"></div>
-                <div>Terima kasih telah berbelanja</div>
-                 <div>Kasir: <span id="receiptCashier">Admin</span></div>
-                <br>
-                <div class="receipt-brand">www.aplikasiusaha.com</div>
-                <div class="receipt-order-info">Order Aplikasi: info@aplikasiusaha.com</div>
+
+                <div class="receipt-payment-details">
+                    <div class="receipt-total-row">
+                        <span id="receiptPaymentMethod">Tunai</span>
+                        <span id="receiptPaymentAmount">Rp 0</span>
+                    </div>
+                    <div class="receipt-total-row">
+                        <span>Kembali</span>
+                        <span id="receiptChange">Rp 0</span>
+                    </div>
+                </div>
+
+                <div class="receipt-footer">
+                    <div class="receipt-divider"></div>
+                    <div>Terima kasih telah berbelanja</div>
+                    <div>Kasir: <span id="receiptCashier">Admin</span></div>
+                    <br>
+                    <div class="receipt-brand">www.aplikasiusaha.com</div>
+                    <div class="receipt-order-info">Order Aplikasi: info@aplikasiusaha.com</div>
+                </div>
             </div>
             
             <div class="print-button no-print">
@@ -1386,7 +1388,6 @@
             let transactions = JSON.parse(localStorage.getItem(STORAGE_KEYS.TRANSACTIONS)) || [];
             let storeInfo = JSON.parse(localStorage.getItem(STORAGE_KEYS.STORE_INFO)) || null;
             
-            // [FIXED] Default taxRate is now 0 as requested.
             let settings = JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {
                 taxRate: 0, 
                 discountType: 'percentage',
@@ -1776,26 +1777,17 @@
                 const transactionId = $('#receiptTransactionId').text().replace('No: ', '');
                 
                 const opt = {
-                    margin: [5, 4, 5, 4],
-                    filename: `struk-${transactionId}.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { 
-                        scale: 3, 
-                        useCORS: true, 
-                        dpi: 300, 
-                        letterRendering: true,
-                        logging: false 
-                    },
-                    jsPDF: { 
-                        unit: 'mm', 
-                        format: [72, 'auto'],
-                        orientation: 'portrait' 
-                    }
+                    margin:       [5, 5, 5, 5], // [top, left, bottom, right] in mm
+                    filename:     `struk-${transactionId}.pdf`,
+                    image:        { type: 'jpeg', quality: 0.98 },
+                    html2canvas:  { scale: 3, useCORS: true, dpi: 300, letterRendering: true, logging: false },
+                    jsPDF:        { unit: 'mm', format: [80, 200], orientation: 'portrait' } // Format thermal printer
                 };
 
                 html2pdf().set(opt).from(element).save().then(() => {
                     btn.prop('disabled', false).html(originalHtml);
                     hideLoading();
+                    showToast('Struk berhasil diunduh.', 'success');
                 }).catch(err => {
                     console.error("PDF generation error:", err);
                     showToast('Gagal mengunduh PDF.', 'error');
