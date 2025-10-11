@@ -503,7 +503,7 @@
         }
         
         /* ========================================================== */
-        /* START: REVISED AND IMPROVED CODE FOR RECEIPT               */
+        /* START: FINAL REVISED CODE FOR RECEIPT LAYOUT & WATERMARK   */
         /* ========================================================== */
         #receiptContainer {
             display: none;
@@ -529,26 +529,34 @@
             max-width: 340px;
             margin: 20px auto;
             box-shadow: var(--shadow-lg);
-            position: relative; 
             line-height: 1.5;
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
+            display: flex; /* Using flexbox for better structure */
+            flex-direction: column; /* Stack elements vertically */
         }
         
+        /* This new wrapper holds the main content and is used as the anchor for the watermark */
+        .receipt-body-content {
+            position: relative; /* Crucial for positioning the watermark inside it */
+            z-index: 1;
+            flex-grow: 1; /* Allows this section to grow */
+            display: flex;
+            flex-direction: column;
+        }
+
         .receipt-watermark {
             position: absolute;
+            /* Centering logic now applies to the .receipt-body-content wrapper */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60%;
+            width: 70%; /* Slightly larger for better visibility */
             opacity: 0.08;
-            z-index: 0;
+            z-index: -1; /* Place it behind the text content */
             pointer-events: none;
         }
-
-        #receiptPrint > * {
-            position: relative;
-            z-index: 1;
+        
+        .receipt-header, .receipt-info, .receipt-items, .receipt-total, .receipt-payment-details, .receipt-footer {
+            width: 100%;
         }
 
         .receipt-header {
@@ -577,6 +585,7 @@
         .receipt-items {
             padding: 10px 0;
             min-height: 50px;
+            flex-grow: 1; /* Key change: makes this section expand, pushing the footer down */
         }
 
         .receipt-item-line {
@@ -626,7 +635,7 @@
             margin-bottom: 5px;
         }
         /* ========================================================== */
-        /* END: REVISED AND IMPROVED CODE FOR RECEIPT                 */
+        /* END: FINAL REVISED CODE FOR RECEIPT                        */
         /* ========================================================== */
         
         .ml-2 {
@@ -653,6 +662,7 @@
             border-top-color: #fff;
             animation: spin 1s ease-in-out infinite;
             margin-right: 10px;
+            vertical-align: middle;
         }
 
         @keyframes spin {
@@ -778,42 +788,49 @@
         /* START: REVISED AND IMPROVED PRINT STYLES                   */
         /* ========================================================== */
         @media print {
-            body, html {
-                background: #fff;
-            }
-            body * {
-                visibility: hidden;
-            }
-            #receiptContainer, #receiptContainer * {
-                visibility: visible;
-            }
-            #receiptContainer {
-                position: absolute;
-                left: 0;
-                top: 0;
+            html, body {
                 width: 100%;
-                height: auto; /* PENTING: Tinggi otomatis untuk mencegah ruang kosong */
-                background: none;
-                padding: 0;
+                height: 100%;
+                background: #fff !important;
                 margin: 0;
-                overflow: visible;
-                z-index: 9999;
-                align-items: flex-start;
-            }
-            #receiptPrint {
-                width: 100%;
-                max-width: 100%; /* Gunakan lebar area cetak penuh */
-                box-shadow: none;
                 padding: 0;
-                margin: 0;
-                font-size: 10pt; /* Sesuaikan ukuran font agar mudah dibaca di kertas */
-                color: #000;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            
+            body > *:not(#receiptContainer) {
+                display: none !important;
+            }
+            #receiptContainer, #receiptContainer * {
+                visibility: visible !important;
+            }
+            #receiptContainer {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                height: auto !important;
+                background: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: hidden !important;
+                z-index: 9999 !important;
+                display: block !important;
+            }
+            #receiptPrint {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                font-size: 10pt !important;
+                color: #000 !important;
+            }
+            .receipt-watermark {
+                opacity: 0.06 !important;
+                z-index: -1 !important;
+            }
             .no-print {
-                display: none !important; /* Sembunyikan tombol saat mencetak */
+                display: none !important;
             }
         }
         /* ========================================================== */
@@ -1187,7 +1204,7 @@
                         <span class="summary-value" id="cartDiscount">Rp 0</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Pajak (<span id="taxPercentage">10</span>%):</span>
+                        <span class="summary-label">Pajak (<span id="taxPercentage">0</span>%):</span>
                         <span class="summary-value" id="cartTax">Rp 0</span>
                     </div>
                     <div class="additional-fee-section">
@@ -1235,8 +1252,6 @@
     
     <div id="receiptContainer">
         <div id="receiptPrint">
-            <img src="https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png" class="receipt-watermark" alt="Watermark">
-
             <div class="receipt-header">
                 <div class="receipt-title" id="receiptStoreName">ONLINE STORE</div>
                 <div class="receipt-address" id="receiptStoreAddress">Kabupaten Situbondo - Provinsi Jawa Timur</div>
@@ -1254,31 +1269,35 @@
 
             <div class="receipt-divider"></div>
             
-            <div class="receipt-items" id="receiptItems">
-                </div>
-            
-            <div class="receipt-divider"></div>
-            
-            <div class="receipt-total">
-                <div class="receipt-total-row">
-                    <span>Subtotal</span>
-                    <span id="receiptSubtotal">Rp 0</span>
-                </div>
-                <div class="receipt-total-row">
-                    <span>Diskon</span>
-                    <span id="receiptDiscount">Rp 0</span>
-                </div>
-                <div class="receipt-total-row">
-                    <span>Pajak (<span id="receiptTaxPercentage">10</span>%)</span>
-                    <span id="receiptTax">Rp 0</span>
-                </div>
-                <div class="receipt-total-row" id="receiptAdditionalFeeItem" style="display: none;">
-                    <span id="receiptAdditionalFeeLabel">Biaya Tambahan</span>
-                    <span id="receiptAdditionalFeeValue">Rp 0</span>
-                </div>
-                <div class="receipt-total-row receipt-final-total">
-                    <span>TOTAL</span>
-                    <span id="receiptTotal">Rp 0</span>
+            <div class="receipt-body-content">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPAAAADwCAMAAAAJixmgAAACXVBMVEUAAAAYPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk4YPk7///8A28k/AAAAtHRSTlMAAQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyEiJCUnKCkqLC0uLzAxMjM1Njc4Ojs8PT5AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4SFhoeIiYqLjI2Oj5CR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" class="receipt-watermark" alt="Watermark">
+
+                <div class="receipt-items" id="receiptItems">
+                    </div>
+                
+                <div class="receipt-divider"></div>
+                
+                <div class="receipt-total">
+                    <div class="receipt-total-row">
+                        <span>Subtotal</span>
+                        <span id="receiptSubtotal">Rp 0</span>
+                    </div>
+                    <div class="receipt-total-row">
+                        <span>Diskon</span>
+                        <span id="receiptDiscount">Rp 0</span>
+                    </div>
+                    <div class="receipt-total-row">
+                        <span>Pajak (<span id="receiptTaxPercentage">0</span>%)</span>
+                        <span id="receiptTax">Rp 0</span>
+                    </div>
+                    <div class="receipt-total-row" id="receiptAdditionalFeeItem" style="display: none;">
+                        <span id="receiptAdditionalFeeLabel">Biaya Tambahan</span>
+                        <span id="receiptAdditionalFeeValue">Rp 0</span>
+                    </div>
+                    <div class="receipt-total-row receipt-final-total">
+                        <span>TOTAL</span>
+                        <span id="receiptTotal">Rp 0</span>
+                    </div>
                 </div>
             </div>
             
@@ -1367,8 +1386,10 @@
             let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
             let transactions = JSON.parse(localStorage.getItem(STORAGE_KEYS.TRANSACTIONS)) || [];
             let storeInfo = JSON.parse(localStorage.getItem(STORAGE_KEYS.STORE_INFO)) || null;
+            
+            // [FIXED] Default taxRate is now 0 as requested.
             let settings = JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {
-                taxRate: 10,
+                taxRate: 0, 
                 discountType: 'percentage',
                 discountValue: 0
             };
@@ -1744,18 +1765,23 @@
             $('#closeReceiptBtn').on('click', () => $('#receiptContainer').hide());
 
             // ==========================================================
-            // START: REVISED AND IMPROVED PDF DOWNLOAD FUNCTION
+            // START: FINAL REVISED PDF DOWNLOAD FUNCTION
             // ==========================================================
             $('#downloadReceiptBtn').on('click', function() {
+                const btn = $(this);
+                const originalHtml = btn.html();
+                btn.prop('disabled', true).html('<span class="spinner"></span> Mengunduh...');
+                showLoading('Membuat PDF...');
+                
                 const element = document.getElementById('receiptPrint');
-                const transactionId = $('#receiptTransactionId').text().split(': ')[1];
+                const transactionId = $('#receiptTransactionId').text().replace('No: ', '');
                 
                 const opt = {
-                    margin: [5, 4, 5, 4], // Margin: Atas, Kiri, Bawah, Kanan (dalam mm)
+                    margin: [5, 4, 5, 4],
                     filename: `struk-${transactionId}.pdf`,
                     image: { type: 'jpeg', quality: 0.98 },
                     html2canvas: { 
-                        scale: 3, // Meningkatkan skala render untuk kualitas yang lebih tinggi
+                        scale: 3, 
                         useCORS: true, 
                         dpi: 300, 
                         letterRendering: true,
@@ -1763,16 +1789,23 @@
                     },
                     jsPDF: { 
                         unit: 'mm', 
-                        // Format: [lebar, tinggi]. Lebar 72mm, tinggi 'auto' agar pas dengan konten
-                        format: [72, 'auto'], 
+                        format: [72, 'auto'],
                         orientation: 'portrait' 
                     }
                 };
 
-                html2pdf().set(opt).from(element).save();
+                html2pdf().set(opt).from(element).save().then(() => {
+                    btn.prop('disabled', false).html(originalHtml);
+                    hideLoading();
+                }).catch(err => {
+                    console.error("PDF generation error:", err);
+                    showToast('Gagal mengunduh PDF.', 'error');
+                    btn.prop('disabled', false).html(originalHtml);
+                    hideLoading();
+                });
             });
             // ==========================================================
-            // END: REVISED AND IMPROVED PDF DOWNLOAD FUNCTION
+            // END: FINAL REVISED PDF DOWNLOAD FUNCTION
             // ==========================================================
             
             // Settings logic
@@ -1821,7 +1854,7 @@
                             products = data.products || [];
                             transactions = data.transactions || [];
                             storeInfo = data.storeInfo || null;
-                            settings = data.settings || { taxRate: 10, discountType: 'percentage', discountValue: 0 };
+                            settings = data.settings || { taxRate: 0, discountType: 'percentage', discountValue: 0 };
                             
                             saveProducts();
                             saveTransactions();
