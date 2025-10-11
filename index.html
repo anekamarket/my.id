@@ -479,7 +479,7 @@
             color: #004d40;
         }
         
-        /* --- [FIX TERBARU] MENCEGAH TOMBOL TERTINDIH GAMBAR DETAIL --- */
+        /* --- [FIX TERBARU & KUNCI PERBAIKAN] MENCEGAH TOMBOL TERTINDIH GAMBAR DETAIL --- */
         /* Kunci perbaikan: Mengatur parent container (.gallery-details) menjadi flex column.
            Ini memaksa semua elemen di dalamnya (termasuk .gallery-actions dan .gallery-detail-expanded)
            untuk tersusun secara vertikal. Saat .gallery-detail-expanded muncul,
@@ -499,9 +499,9 @@
             gap: 15px; /* Memberi jarak yang konsisten antar elemen di dalam detail box */
         }
 
-        /* KUNCI PERBAIKAN:
-           Saat detail box aktif (di-klik), aturan ini akan menimpa `max-height: 1500px`
-           yang ada di file style.css. Dengan `max-height: none`, container bisa
+        /* KUNCI PERBAIKAN KEDUA:
+           Saat detail box aktif (di-klik), aturan ini akan menimpa `max-height`
+           yang mungkin ada di file style.css. Dengan `max-height: none`, container bisa
            mengembang setinggi apapun yang dibutuhkan oleh konten di dalamnya. */
         .gallery-detail-expanded.active {
             max-height: none;
