@@ -227,20 +227,116 @@
             transform: rotate(90deg);
         }
         
-        /* --- [PERBAIKAN] Posisi notifikasi dinaikkan agar tidak tumpang tindih dengan FAB Generator --- */
-        .offer-notification { position: fixed; bottom: 160px; right: 20px; background-color: #ffffff; color: #333; padding: 20px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); width: 320px; z-index: 1001; transform: translateY(200%); opacity: 0; transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; font-family: 'Poppins', sans-serif; }
-        .offer-notification.show { transform: translateY(0); opacity: 1; }
-        .offer-notification .notification-content { display: none; }
-        .offer-notification .notification-content.active { display: block; }
-        .offer-notification h4 { margin: 0 0 10px 0; font-weight: 600; font-size: 1rem; line-height: 1.4; }
-        .offer-notification .notification-buttons { display: flex; gap: 10px; margin-top: 15px; }
-        .offer-notification .notification-btn { flex: 1; padding: 8px 12px; border: none; border-radius: 5px; cursor: pointer; font-weight: 500; transition: background-color 0.3s, color 0.3s; }
-        .offer-notification .btn-yes { background-color: #007bff; color: white; }
-        .offer-notification .btn-yes:hover { background-color: #0056b3; }
-        .offer-notification .btn-no { background-color: #f1f1f1; color: #333; border: 1px solid #ddd; }
-        .offer-notification .btn-no:hover { background-color: #e0e0e0; }
-        .offer-notification .close-notification { position: absolute; top: 10px; right: 15px; font-size: 20px; color: #888; cursor: pointer; transition: color 0.3s; }
-        .offer-notification .close-notification:hover { color: #333; }
+        /* --- [PENYEMPURNAAN TOTAL] DESAIN NOTIFIKASI BISNIS --- */
+        .offer-notification {
+            position: fixed;
+            bottom: 20px; /* [REVISI] Posisi disesuaikan agar lebih harmonis */
+            right: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
+            color: #333;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #eef2f7;
+            box-shadow: 0 10px 40px rgba(0, 50, 100, 0.15), 0 2px 10px rgba(0, 0, 0, 0.05);
+            width: 350px;
+            max-width: 90vw;
+            z-index: 1001;
+            transform: translateX(calc(100% + 30px)); /* Animasi dari samping */
+            opacity: 0;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        .offer-notification::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #28a745);
+        }
+        .offer-notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        .offer-notification .notification-content {
+            display: none;
+        }
+        .offer-notification .notification-content.active {
+            display: block;
+            animation: fadeInContent 0.5s ease-in-out forwards;
+        }
+        @keyframes fadeInContent {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .offer-notification h4 {
+            margin: 0 0 15px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+        .offer-notification h4 .fas {
+            color: #007bff;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        .offer-notification .notification-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .offer-notification .notification-btn {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .offer-notification .btn-yes {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+        }
+        .offer-notification .btn-yes:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.3);
+        }
+        .offer-notification .btn-no {
+            background-color: transparent;
+            color: #6c757d;
+            border-color: #ced4da;
+        }
+        .offer-notification .btn-no:hover {
+            background-color: #f8f9fa;
+            color: #343a40;
+            border-color: #b8c2cc;
+        }
+        .offer-notification .close-notification {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            font-size: 24px;
+            color: #adb5bd;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.3s ease;
+            line-height: 1;
+        }
+        .offer-notification .close-notification:hover {
+            color: #343a40;
+            transform: rotate(90deg);
+        }
         
         .btn-visit { display: flex; align-items: center; justify-content: center; background-color: #28a745; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none; font-weight: 500; font-size: 0.85rem; transition: background-color 0.3s; flex: 1; text-align: center; }
         .btn-visit:hover { background-color: #218838; }
@@ -382,29 +478,90 @@
             font-weight: 700;
             color: #004d40;
         }
+        
+        /* --- [REVISI & PERBAIKAN] LOGIKA SEMBUNYI/TAMPILKAN TOMBOL OTOMATIS --- */
+        /* Container untuk semua tombol di kanan */
+        .contact-bar {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.4s ease-in-out;
+        }
+        /* State tersembunyi untuk container kanan */
+        .contact-bar.fab-hidden {
+            transform: translateX(calc(100% + 20px));
+        }
 
-        /* --- [FITUR TAMBAHAN & PERBAIKAN] TOMBOL PEMBAYARAN MENGAMBANG --- */
+        /* --- [PERBAIKAN & PENYEMPURNAAN] UKURAN TOMBOL MELAYANG (FAB) --- */
+        /* Penyeragaman ukuran untuk FAB kiri (Payment) */
+        .payment-fab {
+            width: 56px;
+            height: 56px;
+            font-size: 22px;
+            transition: background-color 0.3s, transform 0.4s ease-in-out;
+        }
+        
+        /* Styling seragam untuk SEMUA tombol di dalam bar kontak kanan */
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            height: 56px;
+            margin-bottom: 12px;
+            border-radius: 50%;
+            color: white;
+            font-size: 22px;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .contact-bar .contact-btn:last-child {
+            margin-bottom: 0;
+        }
+        .contact-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Warna spesifik untuk setiap tombol di kanan */
+        .contact-btn.whatsapp { background-color: #25D366; }
+        .contact-btn.whatsapp:hover { background-color: #128C7E; }
+        .contact-btn.phone { background-color: #007bff; }
+        .contact-btn.phone:hover { background-color: #0056b3; }
+        .contact-btn.order { background-color: #f57c00; }
+        .contact-btn.order:hover { background-color: #e67e22; }
+        .contact-btn.maps { background-color: #4285F4; } /* Warna untuk tombol Peta */
+        .contact-btn.maps:hover { background-color: #3367D6; }
+        .contact-btn.generator { background-color: #28a745; } /* Warna untuk tombol Generator */
+        .contact-btn.generator:hover { background-color: #218838; }
+
+        /* --- [FITUR TAMBAHAN & PERBAIKAN] TOMBOL PEMBAYARAN MENGAMBANG (TETAP DI KIRI) --- */
         .payment-fab {
             position: fixed;
-            bottom: 160px; /* [PERBAIKAN] Posisi dinaikkan untuk memberi ruang bagi tombol baru */
+            bottom: 20px;
             left: 20px;
-            width: 60px;
-            height: 60px;
             background-color: #007bff;
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.25);
             z-index: 1000;
             text-decoration: none;
-            transition: background-color 0.3s, transform 0.2s ease-in-out;
         }
         .payment-fab:hover {
             background-color: #0056b3;
             transform: scale(1.1);
+        }
+        /* State tersembunyi untuk FAB kiri */
+        .payment-fab.fab-hidden { 
+            transform: translateX(-calc(100% + 20px));
         }
         .payment-fab::before {
             content: '';
@@ -431,54 +588,9 @@
             }
         }
         
-        /* --- [FITUR BARU] TOMBOL PETA LOKASI MENGAMBANG --- */
-        .maps-fab {
-            position: fixed;
-            bottom: 90px; /* Posisi di antara tombol Generator dan Pembayaran */
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #4285F4; /* Warna khas Google */
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px; /* Disesuaikan agar ikon pas */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            z-index: 1001; 
-            text-decoration: none;
-            transition: background-color 0.3s, transform 0.2s ease-in-out;
-        }
-        .maps-fab:hover {
-            background-color: #3367D6; /* Warna lebih gelap saat hover */
-            transform: scale(1.1);
-        }
+        /* --- CSS UNTUK .maps-fab dan .generator-fab YANG LAMA DIHAPUS KARENA SUDAH DIGABUNG KE .contact-btn --- */
 
         /* --- [FITUR BARU & PENYEMPURNAAN TAMPILAN] FORM GENERATOR --- */
-        /* --- [PERBAIKAN] Posisi FAB Generator dipindah ke kiri bawah untuk menghindari tumpang tindih --- */
-        .generator-fab {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 60px;
-            height: 60px;
-            background-color: #28a745;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            z-index: 1002;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s ease-in-out;
-        }
-        .generator-fab:hover {
-            background-color: #218838;
-            transform: scale(1.1);
-        }
         .generator-modal {
             display: none;
             position: fixed;
@@ -920,7 +1032,7 @@
         </section>
     </div>
     
-    <div class="contact-bar">
+    <div class="contact-bar autohide-fab">
         <a href="https://wa.me/6285647709114" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
@@ -930,19 +1042,17 @@
         <button class="contact-btn order" id="quick-order" aria-label="Pesan Cepat">
             <i class="fas fa-shopping-cart"></i>
         </button>
+        <a href="https://www.anekamarket.my.id/googlemap.html" class="contact-btn maps" target="_blank" aria-label="Lihat Peta Lokasi">
+            <i class="fas fa-map-marked-alt"></i>
+        </a>
+        <button class="contact-btn generator" id="openGeneratorBtn" aria-label="Buka Generator Produk">
+            <i class="fas fa-cogs"></i> 
+        </button>
     </div>
 
-    <a href="https://www.anekamarket.my.id/aplikasipembayaran" class="payment-fab" target="_blank" aria-label="Aplikasi Pembayaran Kasir">
+    <a href="https://www.anekamarket.my.id/aplikasipembayaran" class="payment-fab autohide-fab" target="_blank" aria-label="Aplikasi Pembayaran Kasir">
         <i class="fas fa-cash-register"></i>
     </a>
-    
-    <a href="https://www.anekamarket.my.id/googlemap.html" class="maps-fab" target="_blank" aria-label="Lihat Peta Lokasi">
-        <i class="fas fa-map-marked-alt"></i>
-    </a>
-
-    <div class="generator-fab" id="openGeneratorBtn" aria-label="Buka Generator Produk">
-        <i class="fas fa-cogs"></i> 
-    </div>
     
     <footer>
         <div class="footer-container">
@@ -1055,7 +1165,7 @@
         <span class="close-notification" id="closeNotification">×</span>
         
         <div class="notification-content active" id="notificationStep1">
-            <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
+            <h4><i class="fas fa-rocket"></i> Punya bisnis atau usaha? Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
                 <button class="notification-btn btn-no" data-action="close">Tidak</button>
                 <button class="notification-btn btn-yes" data-action="next">Iya, Tentu</button>
@@ -1063,7 +1173,7 @@
         </div>
         
         <div class="notification-content" id="notificationStep2">
-            <h4>Tertarik mendaftarkan usaha Anda di Anekamarket secara GRATIS dan tanpa komisi?</h4>
+            <h4><i class="fas fa-handshake"></i> Tertarik mendaftarkan usaha Anda di Anekamarket secara GRATIS dan tanpa komisi?</h4>
             <div class="notification-buttons">
                 <button class="notification-btn btn-no" data-action="close">Lain Kali</button>
                 <button class="notification-btn btn-yes" data-action="register">Iya, Saya Mau</button>
@@ -1756,23 +1866,70 @@
             const buttonSound = document.getElementById('buttonSound'); function playButtonSound() { if(buttonSound) { buttonSound.currentTime = 0; buttonSound.play().catch(() => {}); } }
             document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); } } }); });
             
-            // --- [PERUBAHAN] Logika Notifikasi dengan Suara ---
-            const offerNotification = document.getElementById('offerNotification'); 
+            // --- [PENYEMPURNAAN] Logika Notifikasi Profesional dengan Fitur "Jangan Tampilkan Lagi" ---
+            const offerNotification = document.getElementById('offerNotification');
             const notificationSound = document.getElementById('notificationSound');
-            const step1 = document.getElementById('notificationStep1'); 
-            const step2 = document.getElementById('notificationStep2'); 
-            const showNotification = () => { 
-                if (offerNotification && !sessionStorage.getItem('offerDismissed')) { 
-                    offerNotification.classList.add('show'); 
+            const step1 = document.getElementById('notificationStep1');
+            const step2 = document.getElementById('notificationStep2');
+
+            // Menggunakan localStorage agar pilihan pengguna diingat selamanya (bukan hanya per sesi).
+            const showNotification = () => {
+                if (offerNotification && !localStorage.getItem('offerDismissed')) { 
+                    offerNotification.classList.add('show');
                     if (notificationSound) {
                         notificationSound.play().catch(e => console.log("Autoplay untuk suara notifikasi diblokir oleh browser."));
                     }
-                } 
-            }; 
-            const hideNotification = () => { if(offerNotification) { offerNotification.classList.remove('show'); sessionStorage.setItem('offerDismissed', 'true'); }}; 
-            setTimeout(showNotification, 5000); 
-            if(offerNotification) { offerNotification.addEventListener('click', (e) => { const t = e.target; if (t.id === 'closeNotification') hideNotification(); if (t.matches('.notification-btn')) { const a = t.dataset.action; if (a === 'close') hideNotification(); else if (a === 'next') { step1.classList.remove('active'); step2.classList.add('active'); } else if (a === 'register') { window.open('https://anekamarket.my.id/formulirpendaftaran', '_blank'); hideNotification(); } } }); }
-        
+                }
+            };
+
+            const hideNotification = () => {
+                if(offerNotification) {
+                    offerNotification.classList.remove('show');
+                    // Menyimpan status penolakan di localStorage agar tidak muncul lagi.
+                    localStorage.setItem('offerDismissed', 'true');
+                }
+            };
+
+            setTimeout(showNotification, 5000); // Tampilkan notifikasi setelah 5 detik
+
+            if(offerNotification) {
+                offerNotification.addEventListener('click', (e) => {
+                    const target = e.target;
+                    
+                    // Logika untuk tombol close (X) dan tombol dengan data-action="close" (Tidak, Lain Kali)
+                    if (target.id === 'closeNotification' || (target.matches('.notification-btn') && target.dataset.action === 'close')) {
+                        hideNotification();
+                    } 
+                    // Logika untuk tombol lain di dalam notifikasi
+                    else if (target.matches('.notification-btn')) {
+                        const action = target.dataset.action;
+                        if (action === 'next') {
+                            step1.classList.remove('active');
+                            step2.classList.add('active');
+                        } else if (action === 'register') {
+                            window.open('https://anekamarket.my.id/formulirpendaftaran', '_blank');
+                            hideNotification(); // Sembunyikan juga setelah klik register
+                        }
+                    }
+                });
+            }
+            
+            // --- [PENYEMPURNAAN BARU] Logika untuk menyembunyikan semua tombol saat scroll ---
+            let lastScrollTop = 0;
+            // [REVISI] Selector ini sekarang menargetkan SEMUA container tombol melayang
+            const fabContainers = document.querySelectorAll('.autohide-fab');
+            window.addEventListener('scroll', function() {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 200) {
+                    // Scroll Down
+                    fabContainers.forEach(container => container.classList.add('fab-hidden'));
+                } else {
+                    // Scroll Up
+                    fabContainers.forEach(container => container.classList.remove('fab-hidden'));
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            }, false);
+
             // --- [Penyempurnaan] Generator Logic ---
             const generatorModal = document.getElementById('generatorModal');
             const openGeneratorBtn = document.getElementById('openGeneratorBtn');
