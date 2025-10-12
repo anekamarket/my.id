@@ -675,6 +675,9 @@
         .contact-btn.maps:hover { background-color: #3367D6; }
         .contact-btn.generator { background-color: #28a745; }
         .contact-btn.generator:hover { background-color: #218838; }
+        /* --- [PENAMBAHAN BARU] --- */
+        .contact-btn.android-app { background-color: #3DDC84; }
+        .contact-btn.android-app:hover { background-color: #30b06a; }
 
         .payment-fab {
             position: fixed;
@@ -1024,9 +1027,12 @@
             #productGeneratorForm { grid-template-columns: 1fr; }
             .search-modal-header h2 { font-size: 1.1rem; }
             .search-modal-input { padding: 12px 15px; font-size: 1rem; }
-            /* Memastikan grid kembali ke 1 kolom di layar kecil */
+            
+            /* --- [PERBAIKAN SESUAI PERMINTAAN PENGGUNA] --- */
+            /* Mengatur galeri menjadi 2 kolom di layar kecil (smartphone) */
             .gallery-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px; /* Mengurangi jarak antar item agar pas */
             }
         }
     </style>
@@ -1227,6 +1233,9 @@
         <button class="contact-btn generator" id="openGeneratorBtn" aria-label="Buka Generator Produk">
             <i class="fas fa-cogs"></i> 
         </button>
+        <a href="https://www.anekamarket.my.id/aplikasiusaha.html" class="contact-btn android-app" target="_blank" aria-label="Lihat Aplikasi Usaha">
+            <i class="fab fa-android"></i>
+        </a>
     </div>
 
     <a href="https://www.anekamarket.my.id/aplikasipembayaran" class="payment-fab autohide-fab" target="_blank" aria-label="Aplikasi Pembayaran Kasir">
