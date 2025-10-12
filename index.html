@@ -1027,12 +1027,9 @@
             #productGeneratorForm { grid-template-columns: 1fr; }
             .search-modal-header h2 { font-size: 1.1rem; }
             .search-modal-input { padding: 12px 15px; font-size: 1rem; }
-            
-            /* --- [PERBAIKAN SESUAI PERMINTAAN PENGGUNA] --- */
-            /* Mengatur galeri menjadi 2 kolom di layar kecil (smartphone) */
+            /* Memastikan grid kembali ke 1 kolom di layar kecil */
             .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px; /* Mengurangi jarak antar item agar pas */
+                grid-template-columns: 1fr;
             }
         }
     </style>
