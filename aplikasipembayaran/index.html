@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Store Pro</title>
+    <title>Online Store Pro - Versi Final Absolut</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -185,50 +185,26 @@
             width: 100%;
         }
 
-        .btn-success {
-            background-color: var(--success-color);
-        }
-
-        .btn-success:hover:not(:disabled) {
-            background-color: #0d9b6c;
-        }
-
-        .btn-danger {
-            background-color: var(--danger-color);
-        }
-
-        .btn-danger:hover:not(:disabled) {
-            background-color: #dc2626;
-        }
-
-        .btn-warning {
-            background-color: var(--warning-color);
-        }
-
-        .btn-warning:hover:not(:disabled) {
-            background-color: #e69007;
-        }
-
-        .btn-info {
-            background-color: var(--info-color);
-        }
-
-        .btn-info:hover:not(:disabled) {
-            background-color: #2563eb;
-        }
-
-        .btn-secondary {
-            background-color: var(--gray-color);
-        }
-
-        .btn-secondary:hover:not(:disabled) {
-            background-color: #4b5563;
-        }
+        .btn-success { background-color: var(--success-color); }
+        .btn-success:hover:not(:disabled) { background-color: #0d9b6c; }
+        .btn-danger { background-color: var(--danger-color); }
+        .btn-danger:hover:not(:disabled) { background-color: #dc2626; }
+        .btn-warning { background-color: var(--warning-color); color: white; }
+        .btn-warning:hover:not(:disabled) { background-color: #e69007; }
+        .btn-info { background-color: var(--info-color); }
+        .btn-info:hover:not(:disabled) { background-color: #2563eb; }
+        .btn-secondary { background-color: var(--gray-color); }
+        .btn-secondary:hover:not(:disabled) { background-color: #4b5563; }
 
         .btn-sm {
             padding: 5px 10px;
             font-size: 0.85rem;
         }
+        
+        .btn-link {
+            background: none; border: none; color: var(--primary-color); cursor: pointer; padding: 0; font-size: 0.9rem;
+        }
+        .btn-link:hover { text-decoration: underline; }
 
         .btn-outline {
             background-color: transparent;
@@ -245,6 +221,7 @@
             border-radius: var(--rounded-sm);
             box-shadow: var(--shadow-sm);
             margin-bottom: 20px;
+            max-height: 500px;
         }
 
         .table {
@@ -288,6 +265,9 @@
             color: #999;
         }
 
+        #cartItems {
+             max-height: 250px; overflow-y: auto; padding-right: 10px;
+        }
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -342,6 +322,7 @@
         .summary-row {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             margin-bottom: 10px;
         }
 
@@ -351,6 +332,10 @@
 
         .summary-value {
             font-weight: 500;
+        }
+        
+        .summary-label-actions {
+            display: flex; align-items: center; gap: 5px;
         }
 
         .total-row {
@@ -412,20 +397,10 @@
             animation: modalFadeIn 0.3s;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .modal-header {
@@ -436,35 +411,14 @@
             align-items: center;
         }
 
-        .modal-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-
+        .modal-title { font-size: 1.2rem; font-weight: 600; }
         .modal-close {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
-            transition: all 0.2s;
+            background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #999; transition: all 0.2s;
         }
-
-        .modal-close:hover {
-            color: #333;
-            transform: rotate(90deg);
-        }
-
-        .modal-body {
-            padding: 20px;
-        }
-
+        .modal-close:hover { color: #333; transform: rotate(90deg); }
+        .modal-body { padding: 20px; }
         .modal-footer {
-            padding: 15px 20px;
-            border-top: 1px solid #eee;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
+            padding: 15px 20px; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 10px;
         }
 
         .setup-container {
@@ -480,31 +434,16 @@
         }
         
         .setup-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
 
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         .setup-title {
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            font-weight: 600;
+            text-align: center; margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem; font-weight: 600;
         }
         
-        /* ========================================================== */
-        /* START: FINAL REVISED CODE FOR RECEIPT LAYOUT & WATERMARK   */
-        /* ========================================================== */
         #receiptContainer {
             display: none;
             position: fixed;
@@ -530,16 +469,13 @@
             margin: 20px auto;
             box-shadow: var(--shadow-lg);
             line-height: 1.5;
-            display: flex;
-            flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
         
         .receipt-body-content {
             position: relative;
-            z-index: 1;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+            z-index: 2;
         }
 
         .receipt-watermark {
@@ -549,440 +485,145 @@
             transform: translate(-50%, -50%);
             width: 70%;
             opacity: 0.08;
-            z-index: -1;
+            z-index: 1;
             pointer-events: none;
         }
+
+        .receipt-header { text-align: center; margin-bottom: 15px; }
+        .receipt-title { font-weight: bold; font-size: 1.3rem; margin-bottom: 5px; text-transform: uppercase; }
+        .receipt-address, .receipt-date { font-size: 0.85rem; margin-bottom: 2px; }
+        .receipt-divider { border-top: 1px dashed #000; margin: 10px 0; }
+        .receipt-info { font-size: 0.85rem; }
+        .receipt-info-row { display: flex; justify-content: space-between; }
+        .receipt-items { padding: 10px 0; }
+
+        .receipt-item-line { font-size: 0.9rem; margin-bottom: 8px; }
+        .receipt-item-line .item-name { word-break: break-word; margin-bottom: 3px; }
+        .receipt-item-line .item-breakdown { display: flex; justify-content: space-between; padding-left: 10px; }
         
-        .receipt-header, .receipt-info, .receipt-items, .receipt-total, .receipt-payment-details, .receipt-footer {
-            width: 100%;
-            position: relative;
-            z-index: 2; /* Ensure text is above watermark */
-        }
-
-        .receipt-header {
-            text-align: center;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-        }
-
-        .receipt-title {
-            font-weight: bold;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .receipt-address, .receipt-date, #receiptTransactionId {
-            font-size: 0.85rem;
-            margin-bottom: 2px;
-        }
-
-        .receipt-divider {
-            border-top: 1px dashed #000;
-            margin: 10px 0;
-        }
+        .receipt-total { padding-top: 5px; font-size: 0.9rem; }
+        .receipt-total-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .receipt-total-row span:last-child { font-weight: 500; }
+        .receipt-final-total { font-weight: bold; font-size: 1.1rem; }
+        .receipt-footer { text-align: center; margin-top: 20px; font-size: 0.85rem; }
+        .receipt-brand, .receipt-order-info { font-size: 0.75rem; color: #555; margin-bottom: 5px; }
         
-        .receipt-items {
-            padding: 10px 0;
-            min-height: 50px;
-            flex-grow: 1;
-        }
-
-        .receipt-item-line {
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
-        .receipt-item-line .item-name {
-            word-break: break-word;
-            margin-bottom: 3px;
-        }
-        .receipt-item-line .item-breakdown {
-            display: flex;
-            justify-content: space-between;
-            padding-left: 10px;
-        }
-        
-        .receipt-total {
-            padding-top: 5px;
-            font-size: 0.9rem;
-        }
-        
-        .receipt-total-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 5px;
-        }
-        
-        .receipt-total-row span:last-child {
-            font-weight: 500;
-        }
-
-        .receipt-final-total {
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-
-        .receipt-footer {
-            text-align: center;
-            margin-top: auto; /* Pushes footer to the bottom */
-            font-size: 0.85rem;
-            padding-top: 10px;
-        }
-        
-        .receipt-brand, .receipt-order-info {
-            font-size: 0.75rem;
-            color: #555;
-            margin-bottom: 5px;
-        }
-        /* ========================================================== */
-        /* END: FINAL REVISED CODE FOR RECEIPT                        */
-        /* ========================================================== */
-        
-        .ml-2 {
-            margin-left: 10px;
-        }
-
-        .mt-4 {
-            margin-top: 20px;
-        }
-
-        .error-message {
-            color: var(--danger-color);
-            font-size: 0.8rem;
-            margin-top: 5px;
-            display: none;
-        }
-
+        .ml-2 { margin-left: 10px; }
+        .mt-4 { margin-top: 20px; }
+        .error-message { color: var(--danger-color); font-size: 0.8rem; margin-top: 5px; display: none; }
         .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-            vertical-align: middle;
+            display: inline-block; width: 20px; height: 20px; border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%; border-top-color: #fff; animation: spin 1s ease-in-out infinite;
+            margin-right: 10px; vertical-align: middle;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         .toast {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            background-color: #333;
-            color: white;
-            border-radius: var(--rounded-sm);
-            box-shadow: var(--shadow-md);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            transform: translateX(120%);
+            position: fixed; top: 20px; right: 20px; padding: 15px 20px; background-color: #333;
+            color: white; border-radius: var(--rounded-sm); box-shadow: var(--shadow-md);
+            z-index: 9999; display: flex; align-items: center; transform: translateX(120%);
             transition: transform 0.3s ease;
         }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-        
+        .toast.show { transform: translateX(0); }
         .toast.success { background-color: var(--success-color); }
         .toast.error { background-color: var(--danger-color); }
-        .toast.warning { background-color: var(--warning-color); }
+        .toast.warning { background-color: var(--warning-color); color: #333; }
         .toast.info { background-color: var(--info-color); }
-
-        .toast i {
-            margin-right: 10px;
-        }
+        .toast i { margin-right: 10px; }
 
         .confirmation-dialog {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1200;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); z-index: 1200; justify-content: center;
+            align-items: center; animation: fadeIn 0.3s ease;
         }
-        
-        .confirmation-dialog.show {
-            display: flex;
-        }
-        
+        .confirmation-dialog.show { display: flex; }
         .confirmation-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: var(--rounded-lg);
-            max-width: 400px;
-            width: 90%;
-            box-shadow: var(--shadow-lg);
-            text-align: center;
+            background-color: white; padding: 20px; border-radius: var(--rounded-lg);
+            max-width: 400px; width: 90%; box-shadow: var(--shadow-lg); text-align: center;
         }
+        .confirmation-buttons { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
 
-        .confirmation-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .additional-fee-section {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px dashed #ddd;
-        }
-
-        .additional-fee-options {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .additional-fee-option {
-            flex: 1;
-            text-align: center;
-        }
-
-        .additional-fee-option input[type="radio"] {
-            display: none;
-        }
-
+        .additional-fee-section { margin-top: 15px; padding-top: 15px; border-top: 1px dashed #ddd; }
+        .additional-fee-options { display: flex; gap: 10px; margin-bottom: 15px; }
+        .additional-fee-option { flex: 1; text-align: center; }
+        .additional-fee-option input[type="radio"] { display: none; }
         .additional-fee-option label {
-            display: block;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: var(--rounded-sm);
-            cursor: pointer;
-            transition: all 0.2s;
+            display: block; padding: 8px; border: 1px solid #ddd; border-radius: var(--rounded-sm);
+            cursor: pointer; transition: all 0.2s;
         }
-
         .additional-fee-option input[type="radio"]:checked + label {
-            background-color: var(--primary-light);
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            font-weight: 500;
+            background-color: var(--primary-light); border-color: var(--primary-color);
+            color: var(--primary-color); font-weight: 500;
         }
-
-        .additional-fee-details {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border-radius: var(--rounded-sm);
-        }
-
-        .additional-fee-description {
-            font-size: 0.8rem;
-            color: #666;
-            margin-top: 5px;
-        }
-
-        /* ========================================================== */
-        /* START: REVISED AND IMPROVED PRINT STYLES                   */
-        /* ========================================================== */
+        .additional-fee-details { display: none; margin-top: 10px; padding: 10px; background-color: #f9f9f9; border-radius: var(--rounded-sm); }
+        
         @media print {
             html, body {
-                width: 100%;
-                height: 100%;
-                background: #fff !important;
-                margin: 0;
-                padding: 0;
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
+                width: 100%; height: 100%; background: #fff !important; margin: 0; padding: 0;
+                -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;
             }
-            body > *:not(#receiptContainer) {
-                display: none !important;
-            }
-            #receiptContainer, #receiptContainer * {
-                visibility: visible !important;
-            }
+            body > *:not(#receiptContainer) { display: none !important; }
+            #receiptContainer, #receiptContainer * { visibility: visible !important; }
             #receiptContainer {
-                position: absolute !important;
-                left: 0 !important;
-                top: 0 !important;
-                width: 100% !important;
-                height: auto !important;
-                background: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                overflow: hidden !important;
-                z-index: 9999 !important;
-                display: block !important;
-                align-items: flex-start !important;
+                position: absolute !important; left: 0 !important; top: 0 !important;
+                width: 100% !important; height: auto !important; background: none !important;
+                padding: 0 !important; margin: 0 !important; overflow: visible !important;
+                z-index: 9999 !important; display: block !important;
             }
             #receiptPrint {
-                width: 100% !important;
-                max-width: 100% !important;
-                box-shadow: none !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                font-size: 10pt !important;
-                color: #000 !important;
-                border: none !important;
+                width: 100% !important; max-width: 100% !important; box-shadow: none !important;
+                padding: 0 !important; margin: 0 !important; font-size: 10pt !important;
+                color: #000 !important; border: none !important;
             }
-            .receipt-watermark {
-                opacity: 0.06 !important;
-            }
-            .no-print {
-                display: none !important;
-            }
+            .receipt-watermark { opacity: 0.06 !important; }
+            .no-print { display: none !important; }
         }
-        /* ========================================================== */
-        /* END: REVISED AND IMPROVED PRINT STYLES                     */
-        /* ========================================================== */
         
         @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
-            }
-            .left-panel, .right-panel {
-                min-width: 100%;
-            }
-            .header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .header-info {
-                text-align: center;
-                margin-top: 10px;
-            }
-            
-            .modal-content {
-                width: 95%;
-            }
-            
-            .setup-container {
-                padding: 20px;
-                margin: 20px auto;
-            }
-            
-            .additional-fee-options {
-                flex-direction: column;
-            }
+            .main-content { flex-direction: column; }
+            .left-panel, .right-panel { min-width: 100%; }
+            .header { flex-direction: column; text-align: center; }
+            .header-info { text-align: center; margin-top: 10px; }
+            .modal-content { width: 95%; }
+            .setup-container { padding: 20px; margin: 20px auto; }
+            .additional-fee-options { flex-direction: column; }
         }
 
-        .empty-state {
-            text-align: center;
-            padding: 30px;
-            color: #666;
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            color: #ddd;
-            margin-bottom: 15px;
-        }
-
-        .radio-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
+        .empty-state { text-align: center; padding: 30px; color: #666; }
+        .empty-state i { font-size: 3rem; color: #ddd; margin-bottom: 15px; }
+        .radio-group { display: flex; gap: 15px; margin-bottom: 15px; align-items: center;}
+        .radio-option label { font-weight: 400; }
 
         .loading-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 1300;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.5); z-index: 1300; justify-content: center;
+            align-items: center; flex-direction: column; color: white;
         }
-        
-        .loading-overlay.show {
-            display: flex;
-        }
-
+        .loading-overlay.show { display: flex; }
         .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-bottom: 15px;
+            width: 50px; height: 50px; border: 5px solid rgba(255,255,255,0.3); border-radius: 50%;
+            border-top-color: white; animation: spin 1s ease-in-out infinite; margin-bottom: 15px;
         }
 
         .print-button {
-            margin-top: 20px;
-            text-align: center;
-            display: flex;
-            gap: 10px;
-            justify-content: center;
+            margin-top: 20px; text-align: center; display: flex; gap: 10px; justify-content: center;
         }
 
         .settings-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: var(--shadow-md);
-            z-index: 100;
-            transition: all 0.3s;
+            position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px;
+            background-color: var(--primary-color); color: white; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; cursor: pointer;
+            box-shadow: var(--shadow-md); z-index: 100; transition: all 0.3s;
         }
-
-        .settings-button:hover {
-            background-color: var(--secondary-color);
-            transform: rotate(90deg) scale(1.1);
-        }
+        .settings-button:hover { background-color: var(--secondary-color); transform: rotate(90deg) scale(1.1); }
         
-        .discount-input {
-            display: flex;
-            gap: 10px;
-        }
-
-        .discount-input input { flex: 1; }
-        .discount-input select { width: 80px; }
-        
-        .backup-section {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-        
-        .backup-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        
+        .backup-section { margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+        .backup-actions { display: flex; gap: 10px; margin-top: 15px; }
         .backup-actions .btn { flex: 1; }
         
-        .file-input-wrapper {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-            width: 100%;
-        }
-        
+        .file-input-wrapper { position: relative; overflow: hidden; display: inline-block; width: 100%; }
         .file-input-wrapper input[type="file"] {
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            cursor: pointer;
+            position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer;
         }
     </style>
 </head>
@@ -1018,38 +659,34 @@
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body">
-                <h4 class="panel-title">Pengaturan Pajak & Diskon</h4>
+                <h4 class="panel-title">Default Pajak & Diskon</h4>
                 <div class="form-group">
                     <label for="taxRate">Persentase Pajak (%)</label>
                     <input type="number" id="taxRate" class="form-control" min="0" max="100" step="0.1" placeholder="Masukkan persentase pajak">
                 </div>
                 <div class="form-group">
-                    <label for="discountType">Tipe Diskon Default</label>
-                    <select id="discountType" class="form-control">
+                    <label for="defaultDiscountType">Tipe Diskon Default</label>
+                    <select id="defaultDiscountType" class="form-control">
                         <option value="percentage">Persentase (%)</option>
                         <option value="fixed">Nominal Tetap</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="discountValue">Nilai Diskon Default</label>
-                    <input type="number" id="discountValue" class="form-control" min="0" placeholder="Masukkan nilai diskon">
+                    <label for="defaultDiscountValue">Nilai Diskon Default</label>
+                    <input type="number" id="defaultDiscountValue" class="form-control" min="0" placeholder="Masukkan nilai diskon">
                 </div>
                 <div class="backup-section">
                     <h4 class="panel-title">Backup & Restore Data</h4>
                     <div class="form-group">
                         <label>Cadangkan data produk dan transaksi</label>
                         <div class="backup-actions">
-                            <button id="backupDataBtn" class="btn btn-info">
-                                <i class="fas fa-download"></i> Backup Data
-                            </button>
+                            <button id="backupDataBtn" class="btn btn-info"><i class="fas fa-download"></i> Backup Data</button>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Restore data dari backup</label>
                         <div class="file-input-wrapper">
-                            <button class="btn btn-warning btn-block">
-                                <i class="fas fa-upload"></i> Pilih File Backup
-                            </button>
+                            <button class="btn btn-warning btn-block"><i class="fas fa-upload"></i> Pilih File Backup</button>
                             <input type="file" id="restoreFile" accept=".json">
                         </div>
                         <small>Pilih file backup (.json) untuk mengembalikan data.</small>
@@ -1057,8 +694,35 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary close-settings-modal">Batal</button>
-                <button class="btn btn-success save-settings"><i class="fas fa-save"></i> Simpan Pengaturan</button>
+                <button class="btn btn-secondary close-modal">Batal</button>
+                <button class="btn btn-success" id="saveSettingsBtn"><i class="fas fa-save"></i> Simpan Pengaturan</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="discountModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Terapkan Diskon</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="transactionDiscountType">Tipe Diskon</label>
+                    <select id="transactionDiscountType" class="form-control">
+                        <option value="percentage">Persentase (%)</option>
+                        <option value="fixed">Nominal Tetap (Rp)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDiscountValue">Nilai Diskon</label>
+                    <input type="number" id="transactionDiscountValue" class="form-control" min="0" placeholder="Masukkan nilai diskon">
+                    <div class="error-message" id="discountValueError">Nilai diskon tidak valid</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal">Batal</button>
+                <button class="btn btn-success" id="applyDiscountBtn"><i class="fas fa-check"></i> Terapkan</button>
             </div>
         </div>
     </div>
@@ -1077,7 +741,7 @@
                     </div>
                     <div class="additional-fee-option">
                         <input type="radio" id="feeShipping" name="additionalFee" value="shipping">
-                        <label for="feeShipping">Biaya Kirim/Antar</label>
+                        <label for="feeShipping">Biaya Kirim</label>
                     </div>
                     <div class="additional-fee-option">
                         <input type="radio" id="feeOther" name="additionalFee" value="other">
@@ -1098,15 +762,12 @@
                     <div class="form-group">
                         <label for="otherFeeDescription">Keterangan (maks. 180 karakter)</label>
                         <textarea id="otherFeeDescription" class="form-control" rows="2" maxlength="180" placeholder="Masukkan keterangan biaya"></textarea>
-                        <div class="additional-fee-description">
-                            <span id="charCount">0</span>/180 karakter
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-secondary close-additional-fee-modal">Batal</button>
-                <button class="btn btn-success save-additional-fee">Simpan Biaya</button>
+                <button class="btn btn-secondary close-modal">Batal</button>
+                <button class="btn btn-success" id="saveAdditionalFeeBtn">Simpan Biaya</button>
             </div>
         </div>
     </div>
@@ -1124,20 +785,19 @@
                     <label>Anda sebagai:</label>
                     <div class="radio-group">
                         <div class="radio-option">
-                            <input type="radio" id="ownerRole" name="userRole" value="owner" checked>
-                            <label for="ownerRole">Owner</label>
+                            <input type="radio" id="ownerRole" name="userRole" value="owner" checked> <label for="ownerRole">Owner</label>
                         </div>
                         <div class="radio-option">
-                            <input type="radio" id="employeeRole" name="userRole" value="employee">
-                            <label for="employeeRole">Karyawan</label>
+                            <input type="radio" id="employeeRole" name="userRole" value="employee"> <label for="employeeRole">Karyawan</label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="userPosition">Sebagai:</label>
+                    <label for="userPosition">Jabatan/Posisi:</label>
                     <select id="userPosition" class="form-control" required>
                         <option value="Kasir">Kasir</option>
                         <option value="Owner">Owner</option>
+                        <option value="Admin">Admin</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -1187,9 +847,7 @@
                         <tbody id="productListBody"></tbody>
                     </table>
                 </div>
-                <button id="addProductBtn" class="btn btn-success btn-block">
-                    <i class="fas fa-plus"></i> Tambah Produk
-                </button>
+                <button id="addProductBtn" class="btn btn-success btn-block"><i class="fas fa-plus"></i> Tambah Produk</button>
             </div>
 
             <div class="right-panel">
@@ -1201,7 +859,10 @@
                         <span class="summary-value" id="cartSubtotal">Rp 0</span>
                     </div>
                     <div class="summary-row">
-                        <span class="summary-label">Diskon:</span>
+                        <span class="summary-label summary-label-actions">
+                            Diskon:
+                            <button id="setDiscountBtn" class="btn-link">(Atur)</button>
+                        </span>
                         <span class="summary-value" id="cartDiscount">Rp 0</span>
                     </div>
                     <div class="summary-row">
@@ -1221,109 +882,73 @@
                     </div>
                 </div>
                 <div class="form-group mt-4">
-                    <button id="addAdditionalFeeBtn" class="btn btn-outline btn-block">
-                        <i class="fas fa-plus-circle"></i> Tambah Biaya
-                    </button>
+                    <button id="addAdditionalFeeBtn" class="btn btn-outline btn-block"><i class="fas fa-plus-circle"></i> Tambah Biaya Lain</button>
                 </div>
                 <div class="payment-methods">
                     <label>Metode Pembayaran:</label>
                     <div class="payment-method">
-                        <input type="radio" id="cash" name="paymentMethod" value="cash" checked>
-                        <label for="cash">Tunai</label>
+                        <input type="radio" id="cash" name="paymentMethod" value="cash" checked> <label for="cash">Tunai</label>
                     </div>
                     <div class="payment-method">
-                        <input type="radio" id="transfer" name="paymentMethod" value="transfer">
-                        <label for="transfer">Transfer Bank</label>
+                        <input type="radio" id="transfer" name="paymentMethod" value="transfer"> <label for="transfer">Transfer Bank</label>
                     </div>
                     <div class="payment-method">
-                        <input type="radio" id="ewallet" name="paymentMethod" value="ewallet">
-                        <label for="ewallet">E-Wallet</label>
+                        <input type="radio" id="ewallet" name="paymentMethod" value="ewallet"> <label for="ewallet">E-Wallet</label>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="paymentAmount">Jumlah Pembayaran</label>
                     <input type="number" id="paymentAmount" class="form-control" placeholder="Masukkan jumlah pembayaran">
                 </div>
-                <button id="completePayment" class="btn btn-success btn-block">
-                    <i class="fas fa-print"></i> Selesaikan & Cetak
-                </button>
+                <button id="completePaymentBtn" class="btn btn-success btn-block"><i class="fas fa-print"></i> Selesaikan & Cetak</button>
             </div>
         </div>
     </div>
     
     <div id="receiptContainer">
         <div id="receiptPrint">
-            <div class="receipt-header">
-                <div class="receipt-title" id="receiptStoreName">ONLINE STORE</div>
-                <div class="receipt-address" id="receiptStoreAddress">Kabupaten Situbondo - Provinsi Jawa Timur</div>
-                <div class="receipt-address" id="receiptStorePhone">Telp: 081234567890</div>
-            </div>
-            
-            <div class="receipt-divider"></div>
-
-            <div class="receipt-info">
-                <div class="receipt-total-row">
-                    <span id="receiptDate">01/01/2023 10:00:00</span>
-                    <span id="receiptTransactionId">T20230101000000</span>
-                </div>
-            </div>
-
-            <div class="receipt-divider"></div>
-            
+             <img src="https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png" class="receipt-watermark" alt="Watermark">
             <div class="receipt-body-content">
-                <img src="https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png" class="receipt-watermark" alt="Watermark">
-                
-                <div class="receipt-items" id="receiptItems">
-                    </div>
-                
+                <div class="receipt-header">
+                    <div class="receipt-title" id="receiptStoreName">NAMA TOKO</div>
+                    <div class="receipt-address" id="receiptStoreAddress">Alamat Toko</div>
+                    <div class="receipt-address" id="receiptStorePhone">Telp: 081234567890</div>
+                </div>
                 <div class="receipt-divider"></div>
-                
+                <div class="receipt-info">
+                    <div class="receipt-info-row">
+                        <span id="receiptDate">01/01/2023 10:00</span>
+                        <span id="receiptTransactionId">T20230101000000</span>
+                    </div>
+                </div>
+                <div class="receipt-divider"></div>
+                <div class="receipt-items" id="receiptItems"></div>
+                <div class="receipt-divider"></div>
                 <div class="receipt-total">
-                    <div class="receipt-total-row">
-                        <span>Subtotal</span>
-                        <span id="receiptSubtotal">Rp 0</span>
-                    </div>
-                    <div class="receipt-total-row">
-                        <span>Diskon</span>
-                        <span id="receiptDiscount">Rp 0</span>
-                    </div>
-                    <div class="receipt-total-row">
-                        <span>Pajak (<span id="receiptTaxPercentage">0</span>%)</span>
-                        <span id="receiptTax">Rp 0</span>
-                    </div>
+                    <div class="receipt-total-row"><span>Subtotal</span><span id="receiptSubtotal">Rp 0</span></div>
+                    <div class="receipt-total-row" id="receiptDiscountRow"><span>Diskon</span><span id="receiptDiscount">Rp 0</span></div>
+                    <div class="receipt-total-row" id="receiptTaxRow"><span>Pajak (<span id="receiptTaxPercentage">0</span>%)</span><span id="receiptTax">Rp 0</span></div>
                     <div class="receipt-total-row" id="receiptAdditionalFeeItem" style="display: none;">
                         <span id="receiptAdditionalFeeLabel">Biaya Tambahan</span>
                         <span id="receiptAdditionalFeeValue">Rp 0</span>
                     </div>
-                    <div class="receipt-total-row receipt-final-total">
-                        <span>TOTAL</span>
-                        <span id="receiptTotal">Rp 0</span>
-                    </div>
+                    <div class="receipt-total-row receipt-final-total"><span>TOTAL</span><span id="receiptTotal">Rp 0</span></div>
                 </div>
-                
                 <div class="receipt-divider"></div>
-
                 <div class="receipt-payment-details">
                     <div class="receipt-total-row">
-                        <span id="receiptPaymentMethod">Tunai</span>
-                        <span id="receiptPaymentAmount">Rp 0</span>
+                        <span id="receiptPaymentMethod">Tunai</span><span id="receiptPaymentAmount">Rp 0</span>
                     </div>
-                    <div class="receipt-total-row">
-                        <span>Kembali</span>
-                        <span id="receiptChange">Rp 0</span>
-                    </div>
+                    <div class="receipt-total-row"><span>Kembali</span><span id="receiptChange">Rp 0</span></div>
                 </div>
-
                 <div class="receipt-footer">
                     <div class="receipt-divider"></div>
                     <div>Terima kasih telah berbelanja</div>
-                    <div>Kasir: <span id="receiptCashier">Admin</span></div>
-                    <br>
+                    <div>Kasir: <span id="receiptCashier">Admin</span></div><br>
                     <div class="receipt-brand">www.aplikasiusaha.com</div>
                     <div class="receipt-order-info">Order Aplikasi: info@aplikasiusaha.com</div>
                 </div>
             </div>
-            
             <div class="print-button no-print">
                 <button id="printReceiptBtn" class="btn btn-primary"><i class="fas fa-print"></i> Cetak</button>
                 <button id="downloadReceiptBtn" class="btn btn-success"><i class="fas fa-download"></i> Download PDF</button>
@@ -1338,33 +963,35 @@
                 <h3 class="modal-title" id="productModalTitle">Tambah Produk</h3>
                 <button class="modal-close">&times;</button>
             </div>
-            <div class="modal-body">
-                <input type="hidden" id="productId">
-                <div class="form-group">
-                    <label for="productName">Nama Produk</label>
-                    <input type="text" id="productName" class="form-control" placeholder="Masukkan nama produk" required>
-                    <div class="error-message" id="productNameError">Nama produk wajib diisi</div>
+            <form id="productForm">
+                <div class="modal-body">
+                    <input type="hidden" id="productId">
+                    <div class="form-group">
+                        <label for="productName">Nama Produk</label>
+                        <input type="text" id="productName" class="form-control" placeholder="Masukkan nama produk" required>
+                        <div class="error-message" id="productNameError">Nama produk wajib diisi</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory">Kategori</label>
+                        <input type="text" id="productCategory" class="form-control" placeholder="Masukkan kategori" required>
+                         <div class="error-message" id="productCategoryError">Kategori wajib diisi</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice">Harga</label>
+                        <input type="number" id="productPrice" class="form-control" placeholder="Masukkan harga" required min="1">
+                        <div class="error-message" id="productPriceError">Harga harus lebih dari 0</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="productStock">Stok</label>
+                        <input type="number" id="productStock" class="form-control" placeholder="Masukkan stok awal" required min="0">
+                        <div class="error-message" id="productStockError">Stok tidak boleh negatif</div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="productCategory">Kategori</label>
-                    <input type="text" id="productCategory" class="form-control" placeholder="Masukkan kategori" required>
-                     <div class="error-message" id="productCategoryError">Kategori wajib diisi</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal">Batal</button>
+                    <button type="button" class="btn btn-success" id="saveProductBtn"><i class="fas fa-save"></i> Simpan</button>
                 </div>
-                <div class="form-group">
-                    <label for="productPrice">Harga</label>
-                    <input type="number" id="productPrice" class="form-control" placeholder="Masukkan harga" required min="1">
-                    <div class="error-message" id="productPriceError">Harga harus lebih dari 0</div>
-                </div>
-                <div class="form-group">
-                    <label for="productStock">Stok</label>
-                    <input type="number" id="productStock" class="form-control" placeholder="Masukkan stok awal" required min="0">
-                    <div class="error-message" id="productStockError">Stok tidak boleh negatif</div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary close-product-modal">Batal</button>
-                <button class="btn btn-success save-product"><i class="fas fa-save"></i> Simpan</button>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -1372,543 +999,548 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/id.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            moment.locale('id');
+    document.addEventListener('DOMContentLoaded', function() {
+        moment.locale('id');
 
-            const STORAGE_KEYS = {
-                PRODUCTS: 'online_store_products_v2',
-                TRANSACTIONS: 'online_store_transactions_v2',
-                STORE_INFO: 'online_store_info_v2',
-                CURRENT_CART: 'online_store_current_cart_v2',
-                SETTINGS: 'online_store_settings_v2'
-            };
-            
-            let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
-            let transactions = JSON.parse(localStorage.getItem(STORAGE_KEYS.TRANSACTIONS)) || [];
-            let storeInfo = JSON.parse(localStorage.getItem(STORAGE_KEYS.STORE_INFO)) || null;
-            
-            let settings = JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {
-                taxRate: 0, 
-                discountType: 'percentage',
-                discountValue: 0
-            };
-            
-            let currentCart = JSON.parse(localStorage.getItem(STORAGE_KEYS.CURRENT_CART)) || {
-                items: [],
-                discount: 0,
-                tax: 0,
-                additionalFee: 0,
-                additionalFeeDescription: '',
-                subtotal: 0,
-                total: 0
-            };
+        const STORAGE_KEYS = {
+            PRODUCTS: 'online_store_products_v3',
+            TRANSACTIONS: 'online_store_transactions_v3',
+            STORE_INFO: 'online_store_info_v3',
+            CURRENT_CART: 'online_store_current_cart_v3',
+            SETTINGS: 'online_store_settings_v3'
+        };
+        
+        let products = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRODUCTS)) || [];
+        let transactions = JSON.parse(localStorage.getItem(STORAGE_KEYS.TRANSACTIONS)) || [];
+        let storeInfo = JSON.parse(localStorage.getItem(STORAGE_KEYS.STORE_INFO)) || null;
+        
+        let settings = JSON.parse(localStorage.getItem(STORAGE_KEYS.SETTINGS)) || {
+            taxRate: 0, 
+            defaultDiscountType: 'percentage',
+            defaultDiscountValue: 0
+        };
+        
+        const initialCartState = {
+            items: [],
+            discountType: 'percentage',
+            discountValue: 0,
+            discountAmount: 0,
+            tax: 0, 
+            additionalFee: 0, 
+            additionalFeeDescription: '', 
+            subtotal: 0, 
+            total: 0
+        };
+        let currentCart = JSON.parse(localStorage.getItem(STORAGE_KEYS.CURRENT_CART)) || JSON.parse(JSON.stringify(initialCartState));
 
-            // --- UI Helper Functions ---
-            const showToast = (message, type = 'info', duration = 3000) => {
-                const toast = $('#toast');
-                toast.removeClass('success error warning info').addClass(type);
-                $('#toast-message').text(message);
-                toast.addClass('show');
-                setTimeout(() => toast.removeClass('show'), duration);
-            };
+        const showToast = (message, type = 'info', duration = 3000) => {
+            const toast = $('#toast');
+            toast.removeClass('success error warning info').addClass(type);
+            $('#toast-message').text(message);
+            toast.addClass('show');
+            setTimeout(() => toast.removeClass('show'), duration);
+        };
 
-            const showLoading = (message = 'Memproses...') => {
-                $('#loadingText').text(message);
-                $('#loadingOverlay').addClass('show');
-            };
+        const showLoading = (message = 'Memproses...') => {
+            $('#loadingText').text(message);
+            $('#loadingOverlay').addClass('show');
+        };
 
-            const hideLoading = () => {
-                $('#loadingOverlay').removeClass('show');
-            };
+        const hideLoading = () => {
+            $('#loadingOverlay').removeClass('show');
+        };
 
-            const showConfirmation = (message, confirmText = 'Ya, Lanjutkan') => {
-                return new Promise(resolve => {
-                    $('#confirmationMessage').text(message);
-                    $('#confirmOk').text(confirmText);
-                    $('#confirmationDialog').addClass('show');
-                    
-                    $('#confirmOk').off('click').on('click', () => {
-                        $('#confirmationDialog').removeClass('show');
-                        resolve(true);
-                    });
-                    
-                    $('#confirmCancel').off('click').on('click', () => {
-                        $('#confirmationDialog').removeClass('show');
-                        resolve(false);
-                    });
+        const showConfirmation = (message, confirmText = 'Ya, Lanjutkan') => {
+            return new Promise(resolve => {
+                $('#confirmationMessage').text(message);
+                $('#confirmOk').text(confirmText);
+                $('#confirmationDialog').addClass('show');
+                $('#confirmOk').off('click').on('click', () => {
+                    $('#confirmationDialog').removeClass('show'); resolve(true);
                 });
-            };
-
-            const openModal = (modalId) => $(modalId).addClass('show');
-            const closeModal = (modalId) => $(modalId).removeClass('show');
-
-            const formatCurrency = (amount) => 'Rp ' + (amount || 0).toLocaleString('id-ID');
-
-            // --- Core Logic ---
-            const saveProducts = () => localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
-            const saveTransactions = () => localStorage.setItem(STORAGE_KEYS.TRANSACTIONS, JSON.stringify(transactions));
-            const saveCurrentCart = () => localStorage.setItem(STORAGE_KEYS.CURRENT_CART, JSON.stringify(currentCart));
-            const saveSettings = () => localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
-            const saveStoreInfo = () => localStorage.setItem(STORAGE_KEYS.STORE_INFO, JSON.stringify(storeInfo));
-
-            const calculateCart = () => {
-                currentCart.subtotal = currentCart.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
-                
-                if (settings.discountType === 'percentage') {
-                    currentCart.discount = currentCart.subtotal * (settings.discountValue / 100);
-                } else {
-                    currentCart.discount = Math.min(settings.discountValue, currentCart.subtotal);
-                }
-
-                const taxableAmount = currentCart.subtotal - currentCart.discount;
-                currentCart.tax = taxableAmount * (settings.taxRate / 100);
-                currentCart.total = taxableAmount + currentCart.tax + currentCart.additionalFee;
-                
-                saveCurrentCart();
-                updateCartUI();
-            };
-            
-            const resetCart = () => {
-                currentCart = {
-                    items: [], discount: 0, tax: 0, additionalFee: 0, additionalFeeDescription: '', subtotal: 0, total: 0
-                };
-                saveCurrentCart();
-                updateCartUI();
-                $('#paymentAmount').val('');
-                $('#cash').prop('checked', true);
-            };
-
-            // --- UI Rendering ---
-            const updateCurrentDate = () => {
-                $('#currentDate').text(moment().format('dddd, D MMMM YYYY, HH:mm'));
-            };
-            
-            const loadProductsUI = (searchTerm = '') => {
-                const filtered = products.filter(p => 
-                    p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                    (p.category && p.category.toLowerCase().includes(searchTerm.toLowerCase()))
-                );
-                
-                const tbody = $('#productListBody');
-                tbody.empty();
-
-                if (filtered.length === 0) {
-                    tbody.html(`<tr><td colspan="4"><div class="empty-state"><i class="fas fa-box-open"></i><p>Tidak ada produk</p></div></td></tr>`);
-                } else {
-                    filtered.forEach(product => {
-                        tbody.append(`
-                            <tr>
-                                <td>${product.name}<br><small style="color: #6c757d;">${product.category || ''}</small></td>
-                                <td>${formatCurrency(product.price)}</td>
-                                <td>${product.stock}</td>
-                                <td>
-                                    <button class="btn btn-success btn-sm add-to-cart" data-id="${product.id}" ${product.stock <= 0 ? 'disabled' : ''} title="Tambah ke Keranjang"><i class="fas fa-cart-plus"></i></button>
-                                    <button class="btn btn-info btn-sm edit-product" data-id="${product.id}" title="Edit Produk"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-danger btn-sm delete-product" data-id="${product.id}" title="Hapus Produk"><i class="fas fa-trash"></i></button>
-                                </td>
-                            </tr>
-                        `);
-                    });
-                }
-            };
-
-            const updateCartUI = () => {
-                const cartItemsContainer = $('#cartItems');
-                cartItemsContainer.empty();
-                
-                if (currentCart.items.length === 0) {
-                    cartItemsContainer.html(`<div class="empty-state"><i class="fas fa-shopping-cart"></i><p>Keranjang belanja kosong</p></div>`);
-                } else {
-                    currentCart.items.forEach(item => {
-                        cartItemsContainer.append(`
-                            <div class="cart-item">
-                                <div class="cart-item-info">
-                                    <div class="cart-item-name">${item.product.name}</div>
-                                    <div class="cart-item-price">${item.quantity} x ${formatCurrency(item.product.price)}</div>
-                                </div>
-                                <div class="cart-item-qty">
-                                    <input type="number" value="${item.quantity}" min="1" max="${item.product.stock}" class="cart-item-quantity form-control" data-id="${item.product.id}">
-                                    <button class="btn btn-danger btn-sm ml-2 remove-from-cart" data-id="${item.product.id}"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>
-                        `);
-                    });
-                }
-                
-                $('#cartSubtotal').text(formatCurrency(currentCart.subtotal));
-                $('#cartDiscount').text(formatCurrency(currentCart.discount));
-                $('#cartTax').text(formatCurrency(currentCart.tax));
-                $('#cartAdditionalFee').text(formatCurrency(currentCart.additionalFee));
-                $('#cartTotal').text(formatCurrency(currentCart.total));
-                $('#additionalFeeDescription').text(currentCart.additionalFeeDescription || '').toggle(!!currentCart.additionalFeeDescription);
-            };
-
-            // --- Receipt Generation ---
-            const generateReceiptUI = (transaction) => {
-                $('#receiptStoreName').text(storeInfo.storeName);
-                $('#receiptStoreAddress').text(storeInfo.storeAddress);
-                $('#receiptStorePhone').text(`Telp: ${storeInfo.storePhone}`);
-                $('#receiptDate').text(moment(transaction.date).format('DD/MM/YY HH:mm'));
-                $('#receiptTransactionId').text(`No: ${transaction.id}`);
-                
-                const itemsHtml = transaction.items.map(item => `
-                    <div class="receipt-item-line">
-                        <div class="item-name">${item.product.name}</div>
-                        <div class="item-breakdown">
-                            <span>${item.quantity}x @${(item.product.price || 0).toLocaleString('id-ID')}</span>
-                            <span>${formatCurrency(item.product.price * item.quantity)}</span>
-                        </div>
-                    </div>
-                `).join('');
-                $('#receiptItems').html(itemsHtml);
-                
-                $('#receiptSubtotal').text(formatCurrency(transaction.subtotal));
-                $('#receiptDiscount').text(formatCurrency(transaction.discount));
-                $('#receiptTaxPercentage').text(settings.taxRate);
-                $('#receiptTax').text(formatCurrency(transaction.tax));
-                
-                $('#receiptAdditionalFeeLabel').text(transaction.additionalFeeDescription || 'Biaya Tambahan');
-                $('#receiptAdditionalFeeValue').text(formatCurrency(transaction.additionalFee));
-                $('#receiptAdditionalFeeItem').toggle(transaction.additionalFee > 0);
-                
-                $('#receiptTotal').text(formatCurrency(transaction.total));
-                $('#receiptPaymentMethod').text(transaction.paymentMethod === 'cash' ? 'Tunai' : transaction.paymentMethod === 'transfer' ? 'Transfer' : 'E-Wallet');
-                $('#receiptPaymentAmount').text(formatCurrency(transaction.paymentAmount));
-                $('#receiptChange').text(formatCurrency(transaction.change));
-                $('#receiptCashier').text(transaction.cashier);
-                
-                $('#receiptContainer').css('display', 'flex');
-            };
-
-            const initializeApp = () => {
-                $('#storeNameHeader').text(storeInfo.storeName);
-                $('#loggedInUser').text(storeInfo.userPosition);
-                $('#taxPercentage').text(settings.taxRate);
-                loadProductsUI();
-                calculateCart();
-                $('#mainApp').fadeIn();
-            };
-
-            // --- Event Handlers ---
-            $('#setupForm').on('submit', function(e) {
-                e.preventDefault();
-                $('.error-message').hide();
-                let isValid = true;
-                
-                if (!$('#storeName').val().trim()) { $('#storeNameError').show(); isValid = false; }
-                if (!$('#storeAddress').val().trim()) { $('#storeAddressError').show(); isValid = false; }
-                if (!/^[0-9]{10,13}$/.test($('#storePhone').val())) { $('#storePhoneError').show(); isValid = false; }
-                
-                if (isValid) {
-                    storeInfo = {
-                        storeName: $('#storeName').val().trim(),
-                        userRole: $('input[name="userRole"]:checked').val(),
-                        userPosition: $('#userPosition').val(),
-                        storeAddress: $('#storeAddress').val().trim(),
-                        storePhone: $('#storePhone').val(),
-                    };
-                    saveStoreInfo();
-                    closeModal('#setupModal');
-                    initializeApp();
-                    showToast('Setup toko berhasil!', 'success');
-                }
-            });
-            
-            $('#addProductBtn').on('click', () => {
-                $('#productModalTitle').text('Tambah Produk');
-                $('#productId').val('');
-                $('#productName').val('');
-                $('#productCategory').val('');
-                $('#productPrice').val('');
-                $('#productStock').val('');
-                $('.error-message').hide();
-                openModal('#productModal');
-            });
-
-            $(document).on('click', '.edit-product', function() {
-                const product = products.find(p => p.id === $(this).data('id'));
-                if (product) {
-                    $('#productModalTitle').text('Edit Produk');
-                    $('#productId').val(product.id);
-                    $('#productName').val(product.name);
-                    $('#productCategory').val(product.category);
-                    $('#productPrice').val(product.price);
-                    $('#productStock').val(product.stock);
-                    $('.error-message').hide();
-                    openModal('#productModal');
-                }
-            });
-            
-            $('.save-product').on('click', function() {
-                $('.error-message').hide();
-                let isValid = true;
-                
-                const name = $('#productName').val().trim();
-                const category = $('#productCategory').val().trim();
-                const price = parseFloat($('#productPrice').val());
-                const stock = parseInt($('#productStock').val());
-                
-                if (!name) { $('#productNameError').show(); isValid = false; }
-                if (!category) { $('#productCategoryError').show(); isValid = false; }
-                if (isNaN(price) || price <= 0) { $('#productPriceError').show(); isValid = false; }
-                if (isNaN(stock) || stock < 0) { $('#productStockError').show(); isValid = false; }
-
-                if (!isValid) return;
-
-                const id = $('#productId').val();
-                if (id) {
-                    const index = products.findIndex(p => p.id === id);
-                    if (index > -1) {
-                        products[index] = { ...products[index], name, category, price, stock };
-                        showToast('Produk berhasil diperbarui.', 'success');
-                    }
-                } else {
-                    products.push({ id: 'P' + Date.now(), name, category, price, stock });
-                    showToast('Produk berhasil ditambahkan.', 'success');
-                }
-                saveProducts();
-                loadProductsUI();
-                closeModal('#productModal');
-            });
-
-            $(document).on('click', '.delete-product', async function() {
-                const productId = $(this).data('id');
-                const product = products.find(p => p.id === productId);
-                if (!product) return;
-
-                if (await showConfirmation(`Hapus produk "${product.name}"?`, 'Ya, Hapus')) {
-                    products = products.filter(p => p.id !== productId);
-                    saveProducts();
-                    loadProductsUI();
-                    showToast('Produk berhasil dihapus.', 'info');
-                }
-            });
-
-            $(document).on('click', '.add-to-cart', function() {
-                const product = products.find(p => p.id === $(this).data('id'));
-                if (!product) return;
-
-                const itemInCart = currentCart.items.find(item => item.product.id === product.id);
-                if (itemInCart) {
-                    if (itemInCart.quantity < product.stock) {
-                        itemInCart.quantity++;
-                    } else {
-                        showToast('Stok tidak mencukupi.', 'warning');
-                    }
-                } else {
-                    currentCart.items.push({ product: { ...product }, quantity: 1 });
-                }
-                calculateCart();
-            });
-
-            $(document).on('click', '.remove-from-cart', function() {
-                const productId = $(this).data('id');
-                currentCart.items = currentCart.items.filter(item => item.product.id !== productId);
-                calculateCart();
-            });
-
-            $(document).on('change input', '.cart-item-quantity', function() {
-                const productId = $(this).data('id');
-                const newQuantity = parseInt($(this).val()) || 1;
-                const item = currentCart.items.find(item => item.product.id === productId);
-
-                if (item) {
-                    if (newQuantity > item.product.stock) {
-                        $(this).val(item.product.stock);
-                        item.quantity = item.product.stock;
-                        showToast('Jumlah melebihi stok.', 'warning');
-                    } else {
-                         item.quantity = newQuantity < 1 ? 1 : newQuantity;
-                    }
-                    calculateCart();
-                }
-            });
-
-            $('#completePayment').on('click', async function() {
-                if(currentCart.items.length === 0) {
-                    showToast('Keranjang kosong!', 'warning');
-                    return;
-                }
-                const paymentAmount = parseFloat($('#paymentAmount').val()) || 0;
-                if(paymentAmount < currentCart.total) {
-                    showToast('Jumlah pembayaran kurang.', 'error');
-                    return;
-                }
-
-                if (await showConfirmation('Selesaikan transaksi dan cetak struk?', 'Ya, Selesaikan')) {
-                    const transaction = {
-                        id: 'T' + Date.now(),
-                        date: new Date(),
-                        ...currentCart,
-                        paymentMethod: $('input[name="paymentMethod"]:checked').val(),
-                        paymentAmount: paymentAmount,
-                        change: paymentAmount - currentCart.total,
-                        cashier: storeInfo.userPosition
-                    };
-                    
-                    transaction.items.forEach(item => {
-                        const product = products.find(p => p.id === item.product.id);
-                        if (product) product.stock -= item.quantity;
-                    });
-                    
-                    transactions.unshift(transaction);
-                    saveTransactions();
-                    saveProducts();
-                    loadProductsUI();
-                    generateReceiptUI(transaction);
-                    resetCart();
-                }
-            });
-            
-            $('#printReceiptBtn').on('click', () => window.print());
-            $('#closeReceiptBtn').on('click', () => $('#receiptContainer').hide());
-
-            // ==========================================================
-            // START: FINAL REVISED PDF DOWNLOAD FUNCTION
-            // ==========================================================
-            $('#downloadReceiptBtn').on('click', function() {
-                const btn = $(this);
-                const originalHtml = btn.html();
-                btn.prop('disabled', true).html('<span class="spinner"></span> Mengunduh...');
-                showLoading('Membuat PDF...');
-                
-                const element = document.getElementById('receiptPrint');
-                const transactionId = $('#receiptTransactionId').text().replace('No: ', '');
-                
-                const opt = {
-                    margin:       [5, 5, 5, 5], // [top, left, bottom, right] in mm
-                    filename:     `struk-${transactionId}.pdf`,
-                    image:        { type: 'jpeg', quality: 0.98 },
-                    html2canvas:  { scale: 3, useCORS: true, dpi: 300, letterRendering: true, logging: false },
-                    jsPDF:        { unit: 'mm', format: [80, 200], orientation: 'portrait' } // Format thermal printer
-                };
-
-                html2pdf().set(opt).from(element).save().then(() => {
-                    btn.prop('disabled', false).html(originalHtml);
-                    hideLoading();
-                    showToast('Struk berhasil diunduh.', 'success');
-                }).catch(err => {
-                    console.error("PDF generation error:", err);
-                    showToast('Gagal mengunduh PDF.', 'error');
-                    btn.prop('disabled', false).html(originalHtml);
-                    hideLoading();
+                $('#confirmCancel').off('click').on('click', () => {
+                    $('#confirmationDialog').removeClass('show'); resolve(false);
                 });
             });
-            // ==========================================================
-            // END: FINAL REVISED PDF DOWNLOAD FUNCTION
-            // ==========================================================
-            
-            // Settings logic
-            $('#settingsButton').on('click', () => {
-                $('#taxRate').val(settings.taxRate);
-                $('#discountType').val(settings.discountType);
-                $('#discountValue').val(settings.discountValue);
-                openModal('#settingsModal');
-            });
-            $('.save-settings').on('click', () => {
-                settings = {
-                    taxRate: parseFloat($('#taxRate').val()) || 0,
-                    discountType: $('#discountType').val(),
-                    discountValue: parseFloat($('#discountValue').val()) || 0
-                };
-                saveSettings();
-                calculateCart();
-                $('#taxPercentage').text(settings.taxRate);
-                closeModal('#settingsModal');
-                showToast('Pengaturan disimpan!', 'success');
-            });
+        };
 
-            // Backup & Restore
-            $('#backupDataBtn').on('click', () => {
-                const data = { products, transactions, storeInfo, settings };
-                const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `backup_${moment().format('YYYYMMDD_HHmmss')}.json`;
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                showToast('Backup berhasil diunduh.', 'success');
-            });
-            
-            $('#restoreFile').on('change', function(e) {
-                const file = e.target.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = async (event) => {
-                    if(await showConfirmation('Ini akan menimpa semua data saat ini. Lanjutkan?', 'Ya, Timpa Data')) {
-                        try {
-                            const data = JSON.parse(event.target.result);
-                            products = data.products || [];
-                            transactions = data.transactions || [];
-                            storeInfo = data.storeInfo || null;
-                            settings = data.settings || { taxRate: 0, discountType: 'percentage', discountValue: 0 };
-                            
-                            saveProducts();
-                            saveTransactions();
-                            saveStoreInfo();
-                            saveSettings();
-                            
-                            showToast('Restore berhasil! Halaman akan dimuat ulang.', 'success');
-                            setTimeout(() => location.reload(), 1500);
-                        } catch (err) {
-                            showToast('File backup tidak valid.', 'error');
-                        }
-                    }
-                };
-                reader.readAsText(file);
-                $(this).val('');
-            });
-            
-            // Modal closing events
-            $('.modal-close, .close-settings-modal, .close-product-modal, .close-additional-fee-modal').on('click', function(){
-                $(this).closest('.modal').removeClass('show');
-            });
-            
-            // Product search
-            $('#productSearch').on('input', function() {
-                loadProductsUI($(this).val());
-            });
+        const openModal = (modalId) => $(modalId).addClass('show');
+        const closeModal = (modalId) => $(modalId).removeClass('show');
+        const formatCurrency = (amount) => 'Rp ' + (amount || 0).toLocaleString('id-ID');
 
-            // Additional Fee Logic
-             $('#addAdditionalFeeBtn').click(function() {
-                $('#feeNone').prop('checked', true).trigger('change');
-                openModal('#additionalFeeModal');
-            });
-            $('input[name="additionalFee"]').change(function() {
-                const value = $(this).val();
-                $('#shippingFeeDetails').toggle(value === 'shipping');
-                $('#otherFeeDetails').toggle(value === 'other');
-            });
-             $('.save-additional-fee').click(function() {
-                const selected = $('input[name="additionalFee"]:checked').val();
-                if (selected === 'none') {
-                    currentCart.additionalFee = 0;
-                    currentCart.additionalFeeDescription = '';
-                } else if (selected === 'shipping') {
-                    currentCart.additionalFee = parseFloat($('#shippingFeeAmount').val()) || 0;
-                    currentCart.additionalFeeDescription = 'Biaya Kirim/Antar';
-                } else if (selected === 'other') {
-                    currentCart.additionalFee = parseFloat($('#otherFeeAmount').val()) || 0;
-                    currentCart.additionalFeeDescription = $('#otherFeeDescription').val().trim() || 'Biaya Lainnya';
-                }
-                calculateCart();
-                closeModal('#additionalFeeModal');
-            });
+        const saveProducts = () => localStorage.setItem(STORAGE_KEYS.PRODUCTS, JSON.stringify(products));
+        const saveTransactions = () => localStorage.setItem(STORAGE_KEYS.TRANSACTIONS, JSON.stringify(transactions));
+        const saveCurrentCart = () => localStorage.setItem(STORAGE_KEYS.CURRENT_CART, JSON.stringify(currentCart));
+        const saveSettings = () => localStorage.setItem(STORAGE_KEYS.SETTINGS, JSON.stringify(settings));
+        const saveStoreInfo = () => localStorage.setItem(STORAGE_KEYS.STORE_INFO, JSON.stringify(storeInfo));
 
-            // Initializer
-            updateCurrentDate();
-            setInterval(updateCurrentDate, 60000);
+        const calculateCart = () => {
+            currentCart.subtotal = currentCart.items.reduce((total, item) => total + (item.product.price * item.quantity), 0);
             
-            if (!storeInfo) {
-                openModal('#setupModal');
+            if (currentCart.discountType === 'percentage') {
+                currentCart.discountAmount = currentCart.subtotal * (currentCart.discountValue / 100);
             } else {
+                currentCart.discountAmount = Math.min(currentCart.discountValue, currentCart.subtotal);
+            }
+
+            const taxableAmount = currentCart.subtotal - currentCart.discountAmount;
+            currentCart.tax = taxableAmount * (settings.taxRate / 100);
+            currentCart.total = taxableAmount + currentCart.tax + currentCart.additionalFee;
+            
+            saveCurrentCart();
+            updateCartUI();
+        };
+        
+        const resetCart = () => {
+            currentCart = JSON.parse(JSON.stringify(initialCartState));
+            saveCurrentCart();
+            updateCartUI();
+            $('#paymentAmount').val('');
+            $('#cash').prop('checked', true);
+        };
+
+        const updateCurrentDate = () => {
+            $('#currentDate').text(moment().format('dddd, D MMMM YYYY, HH:mm'));
+        };
+        
+        const loadProductsUI = (searchTerm = '') => {
+            const filtered = products.filter(p => 
+                p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                (p.category && p.category.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            
+            const tbody = $('#productListBody');
+            tbody.empty();
+
+            if (filtered.length === 0) {
+                tbody.html(`<tr><td colspan="4"><div class="empty-state"><i class="fas fa-box-open"></i><p>Tidak ada produk</p></div></td></tr>`);
+            } else {
+                filtered.forEach(product => {
+                    tbody.append(`
+                        <tr>
+                            <td>${product.name}<br><small style="color: #6c757d;">${product.category || ''}</small></td>
+                            <td>${formatCurrency(product.price)}</td>
+                            <td>${product.stock}</td>
+                            <td>
+                                <button class="btn btn-success btn-sm add-to-cart" data-id="${product.id}" ${product.stock <= 0 ? 'disabled' : ''} title="Tambah"><i class="fas fa-cart-plus"></i></button>
+                                <button class="btn btn-info btn-sm edit-product" data-id="${product.id}" title="Edit"><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-danger btn-sm delete-product" data-id="${product.id}" title="Hapus"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                    `);
+                });
+            }
+        };
+
+        const updateCartUI = () => {
+            const cartItemsContainer = $('#cartItems');
+            cartItemsContainer.empty();
+            
+            if (currentCart.items.length === 0) {
+                cartItemsContainer.html(`<div class="empty-state"><i class="fas fa-shopping-cart"></i><p>Keranjang belanja kosong</p></div>`);
+            } else {
+                currentCart.items.forEach(item => {
+                    cartItemsContainer.append(`
+                        <div class="cart-item">
+                            <div class="cart-item-info">
+                                <div class="cart-item-name">${item.product.name}</div>
+                                <div class="cart-item-price">${item.quantity} x ${formatCurrency(item.product.price)}</div>
+                            </div>
+                            <div class="cart-item-qty">
+                                <input type="number" value="${item.quantity}" min="1" max="${item.product.stock + item.quantity}" class="cart-item-quantity form-control" data-id="${item.product.id}">
+                                <button class="btn btn-danger btn-sm ml-2 remove-from-cart" data-id="${item.product.id}"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    `);
+                });
+            }
+            
+            $('#cartSubtotal').text(formatCurrency(currentCart.subtotal));
+            $('#cartDiscount').text(formatCurrency(currentCart.discountAmount));
+            $('#cartTax').text(formatCurrency(currentCart.tax));
+            $('#cartAdditionalFee').text(formatCurrency(currentCart.additionalFee));
+            $('#cartTotal').text(formatCurrency(currentCart.total));
+            $('#additionalFeeDescription').text(currentCart.additionalFeeDescription || '').toggle(!!currentCart.additionalFeeDescription);
+        };
+
+        const generateReceiptUI = (transaction) => {
+            $('#receiptStoreName').text(storeInfo.storeName);
+            $('#receiptStoreAddress').text(storeInfo.storeAddress);
+            $('#receiptStorePhone').text(`Telp: ${storeInfo.storePhone}`);
+            $('#receiptDate').text(moment(transaction.date).format('DD/MM/YY HH:mm'));
+            $('#receiptTransactionId').text(`No: ${transaction.id}`);
+            
+            const itemsHtml = transaction.items.map(item => `
+                <div class="receipt-item-line">
+                    <div class="item-name">${item.product.name}</div>
+                    <div class="item-breakdown">
+                        <span>${item.quantity}x @${(item.product.price || 0).toLocaleString('id-ID')}</span>
+                        <span>${formatCurrency(item.product.price * item.quantity)}</span>
+                    </div>
+                </div>
+            `).join('');
+            $('#receiptItems').html(itemsHtml);
+            
+            $('#receiptSubtotal').text(formatCurrency(transaction.subtotal));
+            $('#receiptDiscount').text(formatCurrency(transaction.discountAmount));
+            $('#receiptTaxPercentage').text(settings.taxRate);
+            $('#receiptTax').text(formatCurrency(transaction.tax));
+
+            $('#receiptDiscountRow').toggle(transaction.discountAmount > 0);
+            $('#receiptTaxRow').toggle(transaction.tax > 0);
+            $('#receiptAdditionalFeeItem').toggle(transaction.additionalFee > 0);
+            
+            $('#receiptAdditionalFeeLabel').text(transaction.additionalFeeDescription || 'Biaya Tambahan');
+            $('#receiptAdditionalFeeValue').text(formatCurrency(transaction.additionalFee));
+            
+            $('#receiptTotal').text(formatCurrency(transaction.total));
+            const paymentMethodText = { cash: 'Tunai', transfer: 'Transfer', ewallet: 'E-Wallet' };
+            $('#receiptPaymentMethod').text(paymentMethodText[transaction.paymentMethod] || 'Lainnya');
+            $('#receiptPaymentAmount').text(formatCurrency(transaction.paymentAmount));
+            $('#receiptChange').text(formatCurrency(transaction.change));
+            $('#receiptCashier').text(transaction.cashier);
+            
+            $('#receiptContainer').css('display', 'flex');
+        };
+
+        const initializeApp = () => {
+            $('#storeNameHeader').text(storeInfo.storeName);
+            $('#loggedInUser').text(storeInfo.userPosition);
+            $('#taxPercentage').text(settings.taxRate);
+            loadProductsUI();
+            calculateCart();
+            $('#mainApp').fadeIn();
+        };
+
+        $('#setupForm').on('submit', function(e) {
+            e.preventDefault();
+            $('.error-message').hide();
+            let isValid = true;
+            if (!$('#storeName').val().trim()) { $('#storeNameError').show(); isValid = false; }
+            if (!$('#storeAddress').val().trim()) { $('#storeAddressError').show(); isValid = false; }
+            if (!/^[0-9]{10,13}$/.test($('#storePhone').val())) { $('#storePhoneError').show(); isValid = false; }
+            
+            if (isValid) {
+                storeInfo = {
+                    storeName: $('#storeName').val().trim(),
+                    userRole: $('input[name="userRole"]:checked').val(),
+                    userPosition: $('#userPosition').val(),
+                    storeAddress: $('#storeAddress').val().trim(),
+                    storePhone: $('#storePhone').val(),
+                };
+                saveStoreInfo();
+                closeModal('#setupModal');
                 initializeApp();
+                showToast('Setup toko berhasil!', 'success');
             }
         });
+        
+        $('#addProductBtn').on('click', () => {
+            $('#productModalTitle').text('Tambah Produk');
+            $('#productForm')[0].reset();
+            $('#productId').val('');
+            $('.error-message').hide();
+            openModal('#productModal');
+        });
+
+        $(document).on('click', '.edit-product', function() {
+            const product = products.find(p => p.id === $(this).data('id'));
+            if (product) {
+                $('#productForm')[0].reset();
+                $('#productModalTitle').text('Edit Produk');
+                $('#productId').val(product.id);
+                $('#productName').val(product.name);
+                $('#productCategory').val(product.category);
+                $('#productPrice').val(product.price);
+                $('#productStock').val(product.stock);
+                $('.error-message').hide();
+                openModal('#productModal');
+            }
+        });
+        
+        $('#saveProductBtn').on('click', function() {
+            $('.error-message').hide();
+            let isValid = true;
+            const name = $('#productName').val().trim();
+            const category = $('#productCategory').val().trim();
+            const price = parseFloat($('#productPrice').val());
+            const stock = parseInt($('#productStock').val());
+            if (!name) { $('#productNameError').show(); isValid = false; }
+            if (!category) { $('#productCategoryError').show(); isValid = false; }
+            if (isNaN(price) || price <= 0) { $('#productPriceError').show(); isValid = false; }
+            if (isNaN(stock) || stock < 0) { $('#productStockError').show(); isValid = false; }
+            if (!isValid) return;
+
+            const id = $('#productId').val();
+            if (id) {
+                const index = products.findIndex(p => p.id === id);
+                if (index > -1) {
+                    products[index] = { ...products[index], name, category, price, stock };
+                    showToast('Produk berhasil diperbarui.', 'success');
+                }
+            } else {
+                products.push({ id: 'P' + Date.now(), name, category, price, stock });
+                showToast('Produk berhasil ditambahkan.', 'success');
+            }
+            saveProducts(); loadProductsUI(); closeModal('#productModal');
+        });
+
+        $(document).on('click', '.delete-product', async function() {
+            const productId = $(this).data('id');
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            if (await showConfirmation(`Hapus produk "${product.name}"?`, 'Ya, Hapus')) {
+                products = products.filter(p => p.id !== productId);
+                saveProducts(); loadProductsUI();
+                showToast('Produk berhasil dihapus.', 'info');
+            }
+        });
+
+        $(document).on('click', '.add-to-cart', function() {
+            const product = products.find(p => p.id === $(this).data('id'));
+            if (!product) return;
+            const itemInCart = currentCart.items.find(item => item.product.id === product.id);
+            if (itemInCart) {
+                if (itemInCart.quantity < product.stock) {
+                    itemInCart.quantity++;
+                } else { showToast('Stok tidak mencukupi.', 'warning'); }
+            } else {
+                currentCart.items.push({ product: { ...product }, quantity: 1 });
+            }
+            showToast(`"${product.name}" ditambahkan ke keranjang.`, 'success');
+            calculateCart();
+        });
+
+        $(document).on('click', '.remove-from-cart', function() {
+            currentCart.items = currentCart.items.filter(item => item.product.id !== $(this).data('id'));
+            calculateCart();
+        });
+
+        $(document).on('change input', '.cart-item-quantity', function() {
+            const item = currentCart.items.find(item => item.product.id === $(this).data('id'));
+            if (item) {
+                const originalProduct = products.find(p => p.id === item.product.id);
+                let newQuantity = parseInt($(this).val()) || 1;
+                if (newQuantity > originalProduct.stock) {
+                    newQuantity = originalProduct.stock;
+                    $(this).val(newQuantity);
+                    showToast('Jumlah melebihi stok.', 'warning');
+                }
+                item.quantity = newQuantity < 1 ? 1 : newQuantity;
+                calculateCart();
+            }
+        });
+        
+        $('#completePaymentBtn').on('click', async function() {
+            if(currentCart.items.length === 0) { showToast('Keranjang kosong!', 'warning'); return; }
+            const paymentAmount = parseFloat($('#paymentAmount').val()) || 0;
+            if(paymentAmount < currentCart.total) { showToast('Jumlah pembayaran kurang.', 'error'); return; }
+
+            if (await showConfirmation('Selesaikan transaksi dan cetak struk?', 'Ya, Selesaikan')) {
+                const transaction = {
+                    id: 'T' + Date.now(), date: new Date(), ...currentCart,
+                    paymentMethod: $('input[name="paymentMethod"]:checked').val(),
+                    paymentAmount: paymentAmount, change: paymentAmount - currentCart.total,
+                    cashier: storeInfo.userPosition
+                };
+                transaction.items.forEach(item => {
+                    const product = products.find(p => p.id === item.product.id);
+                    if (product) product.stock -= item.quantity;
+                });
+                transactions.unshift(transaction);
+                saveTransactions(); saveProducts(); loadProductsUI();
+                generateReceiptUI(transaction); resetCart();
+            }
+        });
+        
+        $('#printReceiptBtn').on('click', () => window.print());
+        $('#closeReceiptBtn').on('click', () => $('#receiptContainer').hide());
+
+        // =================================================================== //
+        // START: FUNGSI UNDUH PDF FINAL DENGAN PENGUKURAN TINGGI OTOMATIS     //
+        // =================================================================== //
+        $('#downloadReceiptBtn').on('click', async function() {
+            const btn = $(this);
+            const originalHtml = btn.html();
+            btn.prop('disabled', true).html('<span class="spinner"></span> Mengunduh...');
+            showLoading('Membuat PDF...');
+
+            const transactionId = $('#receiptTransactionId').text().replace('No: ', '');
+            
+            // 1. Kloning elemen struk untuk diukur dan dirender secara terpisah
+            const elementToRender = $('#receiptPrint').clone();
+            
+            // 2. Buat wadah tak terlihat untuk proses rendering
+            const renderContainer = $('<div>').css({
+                position: 'absolute',
+                left: '-9999px', // Posisikan jauh di luar layar
+                top: 0,
+                width: '80mm', // Paksa lebar render sesuai lebar kertas PDF
+                'font-family': "'Courier New', monospace"
+            }).append(elementToRender);
+
+            $('body').append(renderContainer);
+
+            // 3. Hitung tinggi konten yang sebenarnya (dalam pixel)
+            const heightInPx = renderContainer[0].scrollHeight;
+
+            // 4. Konversi tinggi dari pixel ke milimeter (1mm = 3.78px) dan beri sedikit ruang ekstra
+            const heightInMm = (heightInPx / 3.78) + 5; 
+
+            const opt = {
+                margin: 2, // Margin 2mm di semua sisi
+                filename: `struk-${transactionId}.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 3, useCORS: true },
+                jsPDF: { 
+                    unit: 'mm', 
+                    // 5. Gunakan format kustom dengan tinggi dinamis yang sudah dihitung
+                    format: [80, heightInMm], 
+                    orientation: 'portrait' 
+                }
+            };
+
+            try {
+                // 6. Generate PDF dari elemen yang sudah dirender di wadah tak terlihat
+                await html2pdf().from(renderContainer[0]).set(opt).save();
+                showToast('Struk berhasil diunduh.', 'success');
+            } catch (error) {
+                console.error("Gagal membuat PDF:", error);
+                showToast('Gagal mengunduh PDF. Coba lagi.', 'error');
+            } finally {
+                // 7. Selalu hapus wadah sementara dan pulihkan tombol setelah selesai
+                renderContainer.remove();
+                btn.prop('disabled', false).html(originalHtml);
+                hideLoading();
+            }
+        });
+        // =================================================================== //
+        // END: FUNGSI UNDUH PDF FINAL                                         //
+        // =================================================================== //
+        
+        $('#settingsButton').on('click', () => {
+            $('#taxRate').val(settings.taxRate);
+            $('#defaultDiscountType').val(settings.defaultDiscountType);
+            $('#defaultDiscountValue').val(settings.defaultDiscountValue);
+            openModal('#settingsModal');
+        });
+        $('#saveSettingsBtn').on('click', () => {
+            settings = {
+                taxRate: parseFloat($('#taxRate').val()) || 0,
+                defaultDiscountType: $('#defaultDiscountType').val(),
+                defaultDiscountValue: parseFloat($('#defaultDiscountValue').val()) || 0
+            };
+            saveSettings(); calculateCart();
+            $('#taxPercentage').text(settings.taxRate);
+            closeModal('#settingsModal');
+            showToast('Pengaturan disimpan!', 'success');
+        });
+
+        $('#backupDataBtn').on('click', () => {
+            const data = { products, transactions, storeInfo, settings };
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `backup_${moment().format('YYYYMMDD_HHmmss')}.json`;
+            a.click(); URL.revokeObjectURL(url); a.remove();
+            showToast('Backup berhasil diunduh.', 'success');
+        });
+        
+        $('#restoreFile').on('change', function(e) {
+            const file = e.target.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async (event) => {
+                if(await showConfirmation('Ini akan menimpa semua data saat ini. Lanjutkan?', 'Ya, Timpa Data')) {
+                    showLoading('Memulihkan data...');
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (!data.products || !data.storeInfo) throw new Error("Invalid file");
+                        products = data.products || [];
+                        transactions = data.transactions || [];
+                        storeInfo = data.storeInfo || null;
+                        settings = data.settings || { taxRate: 0, defaultDiscountType: 'percentage', defaultDiscountValue: 0 };
+                        saveProducts(); saveTransactions(); saveStoreInfo(); saveSettings();
+                        showToast('Restore berhasil! Halaman akan dimuat ulang.', 'success');
+                        setTimeout(() => location.reload(), 1500);
+                    } catch (err) { 
+                        hideLoading();
+                        showToast('File backup tidak valid.', 'error'); 
+                    }
+                }
+            };
+            reader.readAsText(file); $(this).val('');
+        });
+        
+        $('.modal-close, .close-modal').on('click', function(){
+            $(this).closest('.modal').removeClass('show');
+        });
+        
+        $('#productSearch').on('input', function() { loadProductsUI($(this).val()); });
+
+        $('#addAdditionalFeeBtn').click(() => {
+            $('#feeNone').prop('checked', true).trigger('change');
+            openModal('#additionalFeeModal');
+        });
+        $('input[name="additionalFee"]').change(function() {
+            const value = $(this).val();
+            $('#shippingFeeDetails').toggle(value === 'shipping');
+            $('#otherFeeDetails').toggle(value === 'other');
+        });
+         $('#saveAdditionalFeeBtn').click(() => {
+            const selected = $('input[name="additionalFee"]:checked').val();
+            if (selected === 'none') {
+                currentCart.additionalFee = 0; currentCart.additionalFeeDescription = '';
+            } else if (selected === 'shipping') {
+                currentCart.additionalFee = parseFloat($('#shippingFeeAmount').val()) || 0;
+                currentCart.additionalFeeDescription = 'Biaya Kirim/Antar';
+            } else if (selected === 'other') {
+                currentCart.additionalFee = parseFloat($('#otherFeeAmount').val()) || 0;
+                currentCart.additionalFeeDescription = $('#otherFeeDescription').val().trim() || 'Biaya Lainnya';
+            }
+            calculateCart(); closeModal('#additionalFeeModal');
+        });
+
+        $('#setDiscountBtn').click(() => {
+            $('#transactionDiscountType').val(currentCart.discountValue > 0 ? currentCart.discountType : settings.defaultDiscountType);
+            $('#transactionDiscountValue').val(currentCart.discountValue > 0 ? currentCart.discountValue : settings.defaultDiscountValue);
+            $('#discountValueError').hide();
+            openModal('#discountModal');
+        });
+
+        $('#applyDiscountBtn').click(() => {
+            const type = $('#transactionDiscountType').val();
+            const value = parseFloat($('#transactionDiscountValue').val());
+            
+            if (isNaN(value) || value < 0) {
+                $('#discountValueError').show();
+                return;
+            }
+            $('#discountValueError').hide();
+            
+            currentCart.discountType = type;
+            currentCart.discountValue = value;
+            
+            calculateCart();
+            closeModal('#discountModal');
+            showToast('Diskon berhasil diterapkan.', 'success');
+        });
+
+        const init = () => {
+            updateCurrentDate();
+            setInterval(updateCurrentDate, 1000); 
+            
+            if (!storeInfo) { 
+                openModal('#setupModal'); 
+            } else { 
+                initializeApp(); 
+            }
+        };
+
+        init();
+    });
     </script>
 </body>
 </html>
