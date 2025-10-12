@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Aplikasi - Efek Gradien & Animasi</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <style>
+        /* --- [BARU] Variabel Warna & Gaya Global --- */
+        :root {
+            --bg-color-1: #0f0c29;
+            --bg-color-2: #302b63;
+            --bg-color-3: #24243e;
+            --primary-glow: #da22ff;
+            --secondary-glow: #00c6ff;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* --- [BARU] Latar Belakang Animatid --- */
+        body {
+            background: linear-gradient(-45deg, var(--bg-color-1), var(--bg-color-2), var(--bg-color-3), var(--secondary-glow));
+            background-size: 400% 400%;
+            animation: gradient-bg 25s ease infinite;
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 60px 20px;
+            overflow-x: hidden;
+            position: relative; /* Diperlukan untuk partikel */
+        }
+
+        @keyframes gradient-bg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- [BARU] Partikel Bercahaya --- */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--secondary-glow);
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 0 10px var(--secondary-glow), 0 0 20px var(--secondary-glow);
+            animation: floatUp 25s linear infinite;
+        }
+        
+        @keyframes floatUp {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-120vh); opacity: 0; }
+        }
+
+        /* --- Container Utama --- */
+        .app-gallery-container {
+            width: 100%;
+            max-width: 1100px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* --- [BARU] Gaya Judul dengan Gradien Warna --- */
+        .gallery-title {
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .gallery-title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow), var(--text-primary));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: text-gradient-animation 5s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes text-gradient-animation {
+            to { background-position: 200% center; }
+        }
+
+        .gallery-title p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Grid Kartu Aplikasi --- */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* --- [BARU] Gaya Kartu dengan Efek Kaca dan Gradien Hover --- */
+        .app-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+            
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        /* Staggered animation delay */
+        .app-grid .app-card:nth-child(1) { animation-delay: 0.1s; }
+        .app-grid .app-card:nth-child(2) { animation-delay: 0.2s; }
+        .app-grid .app-card:nth-child(3) { animation-delay: 0.3s; }
+        .app-grid .app-card:nth-child(4) { animation-delay: 0.4s; }
+        .app-grid .app-card:nth-child(5) { animation-delay: 0.5s; }
+        /* ... tambahkan delay lain jika perlu ... */
+        
+        /* [SUPER EFEK] Bingkai gradien animatid saat hover */
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 300%;
+            background: conic-gradient(from 0deg, transparent 50%, var(--primary-glow), var(--secondary-glow), var(--primary-glow), transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: rotate-border 6s linear infinite;
+            z-index: -1;
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .app-card:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes rotate-border {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* [BARU] Ikon dengan Gradien Baru */
+        .app-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-primary);
+            box-shadow: 0 0 20px rgba(0, 198, 255, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .app-card:hover .app-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(218, 34, 255, 0.6);
+        }
+
+        .app-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .app-card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            flex-grow: 1; /* Membuat deskripsi punya tinggi sama */
+        }
+        
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 40px 15px; }
+            .gallery-title h1 { font-size: 2.5rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .app-grid { grid-template-columns: 1fr; }
+            .gallery-title h1 { font-size: 2rem; }
+            .gallery-title p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="particle-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
+
+    <main class="app-gallery-container">
+        <div class="gallery-title">
+            <h1>Galeri Aplikasi</h1>
+            <p>Jelajahi koleksi aplikasi kami yang dirancang untuk memberdayakan dan menyederhanakan berbagai kebutuhan bisnis Anda.</p>
+        </div>
+        
+        <div class="app-grid">
+            <a href="https://aplikasiusaha.com/bantuansosial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-hands-helping"></i></div>
+                <h3>Bantuan BARJAS</h3>
+                <p>Manajemen penyaluran bantuan sosial agar tepat sasaran.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/arsipsurat/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-archive"></i></div>
+                <h3>Arsip Surat</h3>
+                <p>Sistem pengarsipan surat masuk dan keluar secara digital.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/absensitrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-user-check"></i></div>
+                <h3>Absen Karyawan</h3>
+                <p>Catat kehadiran dan kelola data jam kerja karyawan.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/notagratis/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-receipt"></i></div>
+                <h3>Nota Digital</h3>
+                <p>Buat dan kirim nota atau invoice profesional dengan mudah.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/supermarkettrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-shopping-cart"></i></div>
+                <h3>Aplikasi Toko</h3>
+                <p>Solusi kasir (POS) dan manajemen stok untuk bisnis ritel.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/caferestotrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-utensils"></i></div>
+                <h3>Cafe & Resto</h3>
+                <p>Kelola pesanan, meja, dan pembayaran untuk F&B.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/hoteltrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-concierge-bell"></i></div>
+                <h3>Aplikasi Hotel</h3>
+                <p>Sistem manajemen booking dan reservasi kamar penginapan.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/wisatatrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>Tiket Wisata</h3>
+                <p>Manajemen penjualan tiket untuk destinasi wisata.</p>
+            </a>
+            <a href="https://pergunu.github.io/ujian-online/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-file-alt"></i></div>
+                <h3>Ujian Online</h3>
+                <p>Platform untuk menyelenggarakan ujian berbasis web.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/laundrytrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-tshirt"></i></div>
+                <h3>Aplikasi Laundry</h3>
+                <p>Catat transaksi dan status pengerjaan laundry kiloan.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/traveltrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-plane"></i></div>
+                <h3>Agen Travel</h3>
+                <p>Kelola pemesanan tiket dan paket perjalanan wisata.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/keuangantrial/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-book-open"></i></div>
+                <h3>Catatan Keuangan</h3>
+                <p>Pencatatan pemasukan dan pengeluaran usaha simpel.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/undian/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-ticket-alt"></i></div>
+                <h3>Lotre Digital</h3>
+                <p>Sistem pengundian hadiah secara adil dan transparan.</p>
+            </a>
+            <a href="https://aplikasiusaha.com/segerahadir/" target="_blank" class="app-card">
+                <div class="app-icon"><i class="fas fa-plus-circle"></i></div>
+                <h3>Aplikasi Lainnya</h3>
+                <p>Jelajahi lebih banyak solusi yang akan segera kami rilis.</p>
+            </a>
+        </div>
+    </main>
+    
+    <script>
+    // Script untuk membuat partikel bercahaya secara dinamis
+    document.addEventListener('DOMContentLoaded', function() {
+        const particleContainer = document.getElementById('particle-container');
+        if (particleContainer) {
+            const particleCount = 60; // Jumlah partikel bisa disesuaikan
+            for (let i = 0; i < particleCount; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 4 + 1; // Ukuran partikel lebih kecil
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                const duration = Math.random() * 20 + 10; // Durasi animasi
+                particle.style.animationDuration = `${duration}s`;
+                
+                const delay = Math.random() * 15; // Delay agar tidak mulai bersamaan
+                particle.style.animationDelay = `${delay}s`;
+                
+                particleContainer.appendChild(particle);
+            }
+        }
+    });
+    </script>
+</body>
+</html>
