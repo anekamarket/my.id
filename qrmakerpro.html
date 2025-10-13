@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator QR Code Ultimate v8.1 (Frame Profesional)</title>
+    <title>Generator QR Code Ultimate v9.0 (Frame Lingkaran Profesional)</title>
     <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
@@ -79,167 +79,98 @@
             color: #7f8c8d;
         }
 
-        .data-type-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .tab-btn {
-            background: #f0f0f0;
-            border: 2px solid #dfe6e9;
-            border-radius: 8px;
-            padding: 10px 15px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #7f8c8d;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            border-color: var(--primary-color);
-        }
-
-        .data-input-panel {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-
-        .data-input-panel.active {
-            display: block;
-        }
-
-        .input-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
+        .data-type-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { background: #f0f0f0; border: 2px solid #dfe6e9; border-radius: 8px; padding: 10px 15px; cursor: pointer; font-weight: 600; color: #7f8c8d; transition: all 0.3s ease; }
+        .tab-btn.active { background-color: var(--primary-color); color: var(--white-color); border-color: var(--primary-color); }
+        .data-input-panel { display: none; animation: fadeIn 0.5s; }
+        .data-input-panel.active { display: block; }
+        .input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .input-group, .control-group { margin-bottom: 15px; text-align: left;}
 
         .input-group input, .input-group textarea, .input-group select, .control-group input[type="text"] {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #dfe6e9;
-            border-radius: var(--border-radius);
-            font-size: 16px;
-            box-sizing: border-box;
-            transition: border-color 0.3s ease;
+            width: 100%; padding: 15px; border: 2px solid #dfe6e9; border-radius: var(--border-radius);
+            font-size: 16px; box-sizing: border-box; transition: border-color 0.3s ease;
         }
-        
         .control-group input[type="text"] { padding: 12px; font-size: 14px; }
-
-
-        .input-group input:focus, .input-group textarea:focus, .input-group select:focus, .control-group input[type="text"]:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus, .control-group input[type="text"]:focus { outline: none; border-color: var(--primary-color); }
         textarea { resize: vertical; min-height: 100px; }
-        
-        .customization-panel {
-            border: 2px solid #f0f0f0;
-            border-radius: var(--border-radius);
-            padding: 25px;
-            margin-top: 25px;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .panel-header {
-            text-align: center; margin-top: 0; margin-bottom: 25px; color: var(--dark-color);
-            font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px;
-        }
-
-        .customization-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-        }
-
-        .control-group label {
-            font-weight: 600; color: var(--dark-color); display: block; font-size: 14px; margin-bottom: 8px;
-        }
-        
-        .control-group .smart-warning {
-            font-size: 12px; color: var(--warning-color); font-weight: 600;
-            display: none; margin-top: 4px; animation: fadeIn 0.5s;
-        }
-
-        .control-group select, .control-group input[type="file"] {
-            width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: var(--border-radius);
-            font-size: 14px; box-sizing: border-box; transition: border-color 0.3s ease; background-color: #fff;
-        }
-        
+        .customization-panel { border: 2px solid #f0f0f0; border-radius: var(--border-radius); padding: 25px; margin-top: 25px; margin-bottom: 20px; text-align: left; }
+        .panel-header { text-align: center; margin-top: 0; margin-bottom: 25px; color: var(--dark-color); font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .customization-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .control-group label { font-weight: 600; color: var(--dark-color); display: block; font-size: 14px; margin-bottom: 8px; }
+        .control-group .smart-warning { font-size: 12px; color: var(--warning-color); font-weight: 600; display: none; margin-top: 4px; animation: fadeIn 0.5s; }
+        .control-group select, .control-group input[type="file"] { width: 100%; padding: 12px; border: 2px solid #dfe6e9; border-radius: var(--border-radius); font-size: 14px; box-sizing: border-box; transition: border-color 0.3s ease; background-color: #fff; }
         .control-group input[type="file"] { padding: 8px; cursor: pointer; }
         .control-group select:focus { outline: none; border-color: var(--primary-color); }
-        
         .color-controls .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; align-items: flex-end; }
         .color-picker-wrapper { display: flex; align-items: center; gap: 10px; }
         .color-picker-wrapper input[type="color"] { min-width: 40px; height: 40px; border: none; padding: 0; border-radius: 8px; cursor: pointer; background: none; }
         .color-picker-wrapper input[type="text"] { width: 100%; border: 2px solid #dfe6e9; border-radius: 8px; padding: 8px 10px; font-family: 'Poppins', sans-serif; font-size: 14px; text-transform: uppercase; }
-        
         .slider-group { grid-column: 1 / -1; display: flex; flex-direction: column;}
         .slider-group label { display: block; margin-bottom: 5px; }
         .slider-group input[type="range"] { width: 100%; }
         .slider-group .value-display { font-weight: 600; color: var(--primary-color); text-align: right; font-size: 14px; }
-        
         .collapsible { display: grid; overflow: hidden; transition: all 0.4s ease-in-out; max-height: 500px; opacity: 1; transform-origin: top; }
-        .collapsible.is-hidden { max-height: 0; opacity: 0; margin-top: 0 !important; padding: 0 !important; transform: scaleY(0); pointer-events: none; }
+        .collapsible.is-hidden, .frame-control-toggle.is-hidden { max-height: 0 !important; opacity: 0 !important; margin-bottom: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; transform: scaleY(0); pointer-events: none; overflow: hidden; }
         #color-end-group, .frame-control-toggle { transition: all 0.4s ease-in-out; opacity: 1; transform-origin: center; }
-        #color-end-group.is-hidden, .frame-control-toggle.is-hidden { opacity: 0; pointer-events: none; transform: scale(0.8); max-height: 0; margin-bottom: 0; overflow: hidden; }
-
-        .btn {
-            background-image: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--white-color); border: none; padding: 16px 20px; width: 100%;
-            border-radius: var(--border-radius); font-size: 16px; font-weight: 600; cursor: pointer;
-            transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px;
-            display: inline-flex; justify-content: center; align-items: center; gap: 10px;
-        }
-        
+        .btn { background-image: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%); color: var(--white-color); border: none; padding: 16px 20px; width: 100%; border-radius: var(--border-radius); font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; justify-content: center; align-items: center; gap: 10px; }
         .btn:hover { box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3); transform: translateY(-3px); }
-        
         .message-box { padding: 15px; margin-top: 20px; border-radius: var(--border-radius); font-weight: 600; display: none; animation: fadeIn 0.5s; text-align: left; }
         .message-box.error { background-color: #fadbd8; color: var(--danger-color); border: 1px solid var(--danger-color); }
 
         #presentation-frame { margin-top: 30px; padding: 25px; border-radius: var(--border-radius); display: none; animation: fadeIn 0.5s; transition: all 0.4s ease; }
         #presentation-frame .frame-header { font-size: 20px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
-        #qr-code-canvas-wrapper { display: inline-block; position: relative; }
+        #qr-code-canvas-wrapper { display: flex; justify-content: center; align-items: center; }
         #qr-code-display-frame {
-            padding: 20px; /* Default padding */
-            border-radius: var(--border-radius);
-            display: flex; /* Use flexbox for easier centering */
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            position: relative; /* Needed for pseudo-elements if used */
+            display: flex; /* Centering */
+            justify-content: center;
+            align-items: center;
         }
         #presentation-frame .frame-footer { margin-top: 15px; font-size: 12px; word-break: break-all; }
         
-        /* --- New Professional Frame Styles --- */
-        .frame-call-to-action {
-            width: 100%;
-            text-align: center;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 10px;
-        }
-
-        .frame-style-plain { background-color: var(--frame-color, #ffffff); }
-
-        .frame-style-gradient-text {
-            background-image: linear-gradient(45deg, var(--frame-color, #6a11cb) 0%, var(--frame-color-2, #2575fc) 100%);
-        }
-        .frame-style-gradient-text .frame-call-to-action { color: var(--white-color); text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+        /* --- Professional Frame Styles (Rectangular & Circular) --- */
+        .frame-style-plain { background-color: var(--frame-color); padding: var(--frame-width); }
         
-        .frame-style-double-line {
-            background-color: var(--frame-color-2, #e0e6ed);
-            padding: 5px !important; /* Override inline style for this specific style */
-            box-shadow: 0 0 0 15px var(--frame-color, #ffffff) inset;
+        .frame-style-gradient-text {
+            background-image: linear-gradient(45deg, var(--frame-color), var(--frame-color-2));
+            padding: var(--frame-width);
+            display: flex; flex-direction: column; gap: 15px;
+        }
+        .frame-style-gradient-text .frame-call-to-action {
+             width: 100%; text-align: center; font-weight: 700; color: #fff;
+             text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        /* --- ✨ NEW CIRCULAR FRAME STYLES ✨ --- */
+        .frame-style-circle-elegant, .frame-style-gradient-ring {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            padding: 20px; /* Padding for the outer circle */
+            box-sizing: border-box;
+        }
+        .frame-style-circle-elegant { background-color: var(--frame-color); }
+        .frame-style-gradient-ring { background-image: linear-gradient(45deg, var(--frame-color), var(--frame-color-2)); }
+        
+        .qr-inner-background { /* This div sits inside the circle and holds the QR */
+            width: 100%;
+            height: 100%;
+            background-color: var(--frame-color-inner);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px; /* Padding inside the inner circle */
+            box-sizing: border-box;
+        }
+        #qr-code-holder { /* Holds the actual QR canvas */
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         
         .template-biru-futuristik { background: #0c0a3e; background-image: linear-gradient(315deg, #0c0a3e 0%, #2a2777 74%); }
@@ -251,10 +182,8 @@
         .template-gradien-modern { background-image: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%); }
         .template-gradien-modern .frame-header { color: var(--white-color); text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .template-gradien-modern .frame-footer { color: rgba(255, 255, 255, 0.85); }
-        
         .download-btn { background-image: linear-gradient(45deg, #34495e 0%, #2c3e50 100%); display: none; margin-top: 20px; }
         .divider { border-top: 1px solid rgba(0,0,0,0.1); margin: 25px 0; }
-        
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -262,15 +191,15 @@
     <div id="particles-js"></div>
     <div class="container">
         <div class="header">
-            <h1>QR Maker Ultimate v8.1</h1>
-            <p>Buat QR Code Profesional untuk URL, Teks, Wi-Fi, dan lainnya</p>
+            <h1>QR Maker Ultimate v9.0</h1>
+            <p>Buat QR Code Profesional dengan Frame Kotak & Lingkaran Keren</p>
         </div>
 
         <div class="data-type-tabs">
-            <button class="tab-btn active" data-tab="url"><i class="fas fa-link"></i> URL</button>
-            <button class="tab-btn" data-tab="text"><i class="fas fa-font"></i> Teks</button>
-            <button class="tab-btn" data-tab="wifi"><i class="fas fa-wifi"></i> Wi-Fi</button>
-            <button class="tab-btn" data-tab="email"><i class="fas fa-envelope"></i> Email</button>
+             <button class="tab-btn active" data-tab="url"><i class="fas fa-link"></i> URL</button>
+             <button class="tab-btn" data-tab="text"><i class="fas fa-font"></i> Teks</button>
+             <button class="tab-btn" data-tab="wifi"><i class="fas fa-wifi"></i> Wi-Fi</button>
+             <button class="tab-btn" data-tab="email"><i class="fas fa-envelope"></i> Email</button>
         </div>
         
         <div class="data-input-panels">
@@ -283,7 +212,7 @@
         <div class="customization-panel">
             <div class="panel-header"><i class="fas fa-palette"></i> Panel Kustomisasi QR</div>
             <div class="customization-grid">
-                <div class="control-group"><label for="dot-style-select">Gaya Titik</label><select id="dot-style-select"><option value="rounded" selected>Kotak Halus</option><option value="dots">Bulat (Lingkaran)</option><option value="classy">Klasik</option><option value="classy-rounded">Klasik Modern</option><option value="square">Kotak</option><option value="extra-rounded">Sangat Bulat</option></select><small id="dot-style-warning" class="smart-warning"><i class="fas fa-exclamation-triangle"></i> Untuk hasil terbaik, gunakan 'Warna Solid'.</small></div>
+                <div class="control-group"><label for="dot-style-select">Gaya Titik</label><select id="dot-style-select"><option value="rounded" selected>Kotak Halus</option><option value="dots">Bulat</option><option value="classy">Klasik</option><option value="classy-rounded">Klasik Modern</option><option value="square">Kotak</option><option value="extra-rounded">Sangat Bulat</option></select><small id="dot-style-warning" class="smart-warning"><i class="fas fa-exclamation-triangle"></i> Untuk hasil terbaik, gunakan 'Warna Solid'.</small></div>
                 <div class="control-group"><label for="corner-square-style-select">Gaya Mata Sudut (Luar)</label><select id="corner-square-style-select"><option value="extra-rounded" selected>Sangat Bulat</option><option value="square">Kotak</option><option value="dot">Bulat</option></select></div>
                 <div class="control-group"><label for="corner-dot-style-select">Gaya Mata Sudut (Dalam)</label><select id="corner-dot-style-select"><option value="dot" selected>Bulat</option><option value="square">Kotak</option></select></div>
                 <div class="control-group"><label for="frame-design-select">Desain Latar (Hanya Tampilan)</label><select id="frame-design-select"><option value="template-biru-futuristik" selected>Biru Futuristik</option><option value="template-minimalis-putih">Minimalis Putih</option><option value="template-gradien-modern">Gradien Modern</option></select></div>
@@ -304,27 +233,27 @@
                     <select id="frame-style-select">
                         <option value="plain" selected>Minimalis Polos</option>
                         <option value="gradient-text">Gradien dengan Teks</option>
-                        <option value="double-line">Garis Ganda</option>
+                        <option value="circle-elegant">✨ Lingkaran Elegan</option>
+                        <option value="gradient-ring">✨ Cincin Gradien Keren</option>
                     </select>
                 </div>
 
                 <div class="control-group frame-control-toggle" id="frame-color-control">
                     <label id="frame-color-label">Warna Bingkai</label>
-                    <div class="color-picker-wrapper">
-                        <input type="color" id="frame-color" value="#ffffff">
-                        <input type="text" id="frame-color-hex" value="#FFFFFF">
-                    </div>
+                    <div class="color-picker-wrapper"><input type="color" id="frame-color" value="#ffffff"><input type="text" id="frame-color-hex" value="#FFFFFF"></div>
                 </div>
 
-                <div class="control-group frame-control-toggle" id="frame-color-2-control" style="display: none;">
-                    <label id="frame-color-2-label">Warna Kedua / Luar</label>
-                    <div class="color-picker-wrapper">
-                        <input type="color" id="frame-color-2" value="#2575fc">
-                        <input type="text" id="frame-color-2-hex" value="#2575FC">
-                    </div>
+                <div class="control-group frame-control-toggle" id="frame-color-2-control">
+                    <label id="frame-color-2-label">Warna Kedua</label>
+                    <div class="color-picker-wrapper"><input type="color" id="frame-color-2" value="#2575fc"><input type="text" id="frame-color-2-hex" value="#2575FC"></div>
+                </div>
+
+                <div class="control-group frame-control-toggle" id="frame-color-inner-control">
+                    <label id="frame-color-inner-label">Warna Latar Dalam</label>
+                    <div class="color-picker-wrapper"><input type="color" id="frame-color-inner" value="#ffffff"><input type="text" id="frame-color-inner-hex" value="#FFFFFF"></div>
                 </div>
                 
-                <div class="control-group frame-control-toggle" id="frame-cta-control" style="display: none;">
+                <div class="control-group frame-control-toggle" id="frame-cta-control">
                      <label for="frame-cta-text">Teks Ajakan (Call to Action)</label>
                      <input type="text" id="frame-cta-text" value="SCAN ME">
                 </div>
@@ -364,93 +293,53 @@
             
             tsParticles.load("particles-js", { fpsLimit: 60, interactivity: { events: { onHover: { enable: true, mode: "repulse" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 } } }, particles: { color: { value: "#ffffff" }, links: { color: "#ffffff", distance: 150, enable: true, opacity: 0.2, width: 1 }, move: { direction: "none", enable: true, outModes: { default: "bounce" }, random: false, speed: 2, straight: false }, number: { density: { enable: true, area: 800 }, value: 80 }, opacity: { value: 0.3 }, shape: { type: "circle" }, size: { value: { min: 1, max: 5 } } }, detectRetina: true });
 
-            const generateBtn = document.getElementById('generate-btn');
-            const downloadBtn = document.getElementById('download-btn');
-            const messageBox = document.getElementById('message-box');
-            const presentationFrame = document.getElementById('presentation-frame');
-            const qrCanvasWrapper = document.getElementById('qr-code-canvas-wrapper');
-            const qrCodeDisplayFrame = document.getElementById('qr-code-display-frame');
-            const frameFooterUrl = document.getElementById('frame-footer-url');
+            // --- Efisiensi: Mengelompokkan semua elemen di awal ---
+            const getEl = (id) => document.getElementById(id);
+            const generateBtn = getEl('generate-btn'), downloadBtn = getEl('download-btn'), messageBox = getEl('message-box');
+            const presentationFrame = getEl('presentation-frame'), qrCodeDisplayFrame = getEl('qr-code-display-frame'), frameFooterUrl = getEl('frame-footer-url');
+            const dotStyleSelector = getEl('dot-style-select'), cornerSquareStyleSelector = getEl('corner-square-style-select'), cornerDotStyleSelector = getEl('corner-dot-style-select');
+            const frameDesignSelector = getEl('frame-design-select'), logoUploadInput = getEl('logo-upload');
+            const colorModeSelector = getEl('color-mode-select'), colorStartInput = getEl('color-start'), colorStartHexInput = getEl('color-start-hex');
+            const colorStartLabel = getEl('color-start-label'), colorEndInput = getEl('color-end'), colorEndHexInput = getEl('color-end-hex'), colorEndGroup = getEl('color-end-group');
+            const gradientOptions = getEl('gradient-options'), gradientTypeSelector = getEl('gradient-type-select'), gradientRotationInput = getEl('gradient-rotation');
             
-            const dotStyleSelector = document.getElementById('dot-style-select');
-            const dotStyleWarning = document.getElementById('dot-style-warning');
-            const cornerSquareStyleSelector = document.getElementById('corner-square-style-select');
-            const cornerDotStyleSelector = document.getElementById('corner-dot-style-select');
-            const frameDesignSelector = document.getElementById('frame-design-select');
-            const logoUploadInput = document.getElementById('logo-upload');
-            
-            const colorModeSelector = document.getElementById('color-mode-select');
-            const colorStartInput = document.getElementById('color-start');
-            const colorStartHexInput = document.getElementById('color-start-hex');
-            const colorStartLabel = document.getElementById('color-start-label');
-            const colorEndInput = document.getElementById('color-end');
-            const colorEndHexInput = document.getElementById('color-end-hex');
-            const colorEndGroup = document.getElementById('color-end-group');
-            const gradientOptions = document.getElementById('gradient-options');
-            const gradientTypeSelector = document.getElementById('gradient-type-select');
-            const gradientRotationInput = document.getElementById('gradient-rotation');
-            
-            // --- New Frame Controls ---
-            const frameStyleSelector = document.getElementById('frame-style-select');
-            const frameColorControl = document.getElementById('frame-color-control');
-            const frameColorInput = document.getElementById('frame-color');
-            const frameColorHexInput = document.getElementById('frame-color-hex');
-            const frameColorLabel = document.getElementById('frame-color-label');
-            const frameColor2Control = document.getElementById('frame-color-2-control');
-            const frameColor2Input = document.getElementById('frame-color-2');
-            const frameColor2HexInput = document.getElementById('frame-color-2-hex');
-            const frameCtaControl = document.getElementById('frame-cta-control');
-            const frameCtaTextInput = document.getElementById('frame-cta-text');
-            const frameWidthControl = document.getElementById('frame-width-control');
-            const frameWidthInput = document.getElementById('frame-width');
-            const frameWidthValue = document.getElementById('frame-width-value');
+            // Frame Controls
+            const frameStyleSelector = getEl('frame-style-select'), frameColorControl = getEl('frame-color-control'), frameColorInput = getEl('frame-color'), frameColorHexInput = getEl('frame-color-hex');
+            const frameColorLabel = getEl('frame-color-label'), frameColor2Control = getEl('frame-color-2-control'), frameColor2Input = getEl('frame-color-2'), frameColor2HexInput = getEl('frame-color-2-hex');
+            const frameColor2Label = getEl('frame-color-2-label'), frameColorInnerControl = getEl('frame-color-inner-control'), frameColorInnerInput = getEl('frame-color-inner'), frameColorInnerHexInput = getEl('frame-color-inner-hex');
+            const frameCtaControl = getEl('frame-cta-control'), frameCtaTextInput = getEl('frame-cta-text'), frameWidthControl = getEl('frame-width-control'), frameWidthInput = getEl('frame-width'), frameWidthValue = getEl('frame-width-value');
 
-
+            // --- Logika Tab Switching ---
             const tabButtons = document.querySelectorAll('.tab-btn');
-            const dataPanels = document.querySelectorAll('.data-input-panel');
-            tabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    tabButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    activeTab = button.dataset.tab;
-                    dataPanels.forEach(panel => panel.classList.toggle('active', panel.id === `panel-${activeTab}`));
-                });
-            });
+            tabButtons.forEach(button => button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                activeTab = button.dataset.tab;
+                document.querySelectorAll('.data-input-panel').forEach(panel => panel.classList.toggle('active', panel.id === `panel-${activeTab}`));
+            }));
 
+            // --- Fungsi Bantu (Helpers) ---
             const forbiddenCategories = { "Konten Judi Online": ['judi', 'slot', 'poker', 'casino', 'togel', 'sbo', 'bet', 'sbobet'], "Konten Dewasa/Pornografi": ['porn', 'sex', 'xxx', 'bokep', 'adult', 'nude', 'bugil'], "Penipuan (Scam/Phishing)": ['scam', 'phishing', 'tipu', 'penipuan', 'giveaway', 'hadiah gratis'], "Malware/Virus Berbahaya": ['malware', 'virus', 'trojan', 'ransomware', 'spyware'] };
-            function checkUrlSafety(url) {
+            const checkUrlSafety = url => {
                 const lowerCaseUrl = url.toLowerCase();
-                for (const category in forbiddenCategories) {
-                    for (const keyword of forbiddenCategories[category]) {
-                        if (lowerCaseUrl.includes(keyword)) return { safe: false, category: category, keyword: keyword };
-                    }
-                }
+                for (const category in forbiddenCategories) for (const keyword of forbiddenCategories[category]) if (lowerCaseUrl.includes(keyword)) return { safe: false, category, keyword };
                 return { safe: true };
-            }
+            };
 
-            function displayMessage(type, title, text) {
+            const displayMessage = (type, title, text) => {
                 messageBox.style.display = 'block';
                 messageBox.className = `message-box ${type}`;
                 messageBox.innerHTML = `<strong>${title}</strong><br>${text}`;
-            }
+            };
 
-            function syncColorInputs(colorPicker, hexInput) {
-                hexInput.addEventListener('input', (e) => {
-                    let hex = e.target.value.toUpperCase();
-                    if (!hex.startsWith('#')) hex = '#' + hex;
-                    if (/^#([0-9A-F]{3}){1,2}$/i.test(hex)) colorPicker.value = hex;
-                });
-                colorPicker.addEventListener('input', (e) => { hexInput.value = e.target.value.toUpperCase(); });
-            }
-            syncColorInputs(colorStartInput, colorStartHexInput);
-            syncColorInputs(colorEndInput, colorEndHexInput);
-            syncColorInputs(frameColorInput, frameColorHexInput);
-            syncColorInputs(frameColor2Input, frameColor2HexInput);
+            const syncColorInputs = (colorPicker, hexInput) => {
+                hexInput.addEventListener('input', e => { let hex = e.target.value.toUpperCase(); if (!hex.startsWith('#')) hex = '#' + hex; if (/^#([0-9A-F]{3}){1,2}$/i.test(hex)) colorPicker.value = hex; });
+                colorPicker.addEventListener('input', e => { hexInput.value = e.target.value.toUpperCase(); });
+            };
+            [ [colorStartInput, colorStartHexInput], [colorEndInput, colorEndHexInput], [frameColorInput, frameColorHexInput], [frameColor2Input, frameColor2HexInput], [frameColorInnerInput, frameColorInnerHexInput] ].forEach(p => syncColorInputs(p[0], p[1]));
 
-            function checkSmartWarning() {
-                dotStyleWarning.style.display = (dotStyleSelector.value === 'dots' && colorModeSelector.value === 'gradient') ? 'block' : 'none';
-            }
-
+            // --- Event Listeners untuk Kustomisasi ---
+            const checkSmartWarning = () => getEl('dot-style-warning').style.display = (dotStyleSelector.value === 'dots' && colorModeSelector.value === 'gradient') ? 'block' : 'none';
             colorModeSelector.addEventListener('change', () => {
                 const isGradient = colorModeSelector.value === 'gradient';
                 gradientOptions.classList.toggle('is-hidden', !isGradient);
@@ -460,219 +349,171 @@
             });
             dotStyleSelector.addEventListener('change', checkSmartWarning);
             
-            frameWidthInput.addEventListener('input', (e) => {
-                frameWidthValue.textContent = e.target.value;
+            frameWidthInput.addEventListener('input', e => frameWidthValue.textContent = e.target.value);
+            logoUploadInput.addEventListener('change', e => {
+                if (e.target.files && e.target.files[0]) { const reader = new FileReader(); reader.onload = (e) => uploadedLogo = e.target.result; reader.readAsDataURL(e.target.files[0]); } 
+                else { uploadedLogo = null; }
             });
 
-            logoUploadInput.addEventListener('change', (event) => {
-                if (event.target.files && event.target.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => { uploadedLogo = e.target.result; };
-                    reader.readAsDataURL(event.target.files[0]);
-                } else { uploadedLogo = null; }
-            });
-
-            // --- New Frame Logic ---
-            function updateFrameControls() {
+            // --- Logika Inti untuk Bingkai (Frame) ---
+            const updateFrameControls = () => {
                 const style = frameStyleSelector.value;
-                frameColorControl.style.display = 'block';
-                frameColor2Control.style.display = 'none';
-                frameCtaControl.style.display = 'none';
-                frameWidthControl.style.display = 'block';
+                const controls = { frameColorControl, frameColor2Control, frameColorInnerControl, frameCtaControl, frameWidthControl };
+                Object.values(controls).forEach(c => c.classList.add('is-hidden')); // Sembunyikan semua dulu
 
+                // Tampilkan kontrol yang relevan berdasarkan pilihan
                 if (style === 'plain') {
                     frameColorLabel.textContent = 'Warna Bingkai';
+                    controls.frameColorControl.classList.remove('is-hidden');
+                    controls.frameWidthControl.classList.remove('is-hidden');
                 } else if (style === 'gradient-text') {
                     frameColorLabel.textContent = 'Warna Gradien 1';
-                    frameColor2Control.style.display = 'block';
-                    frameCtaControl.style.display = 'block';
-                } else if (style === 'double-line') {
-                    frameColorLabel.textContent = 'Warna Garis Dalam';
-                    frameColor2Control.style.display = 'block';
-                    frameColor2Label.textContent = 'Warna Latar Belakang';
-                    frameWidthControl.style.display = 'none'; // Padding is fixed for this style
+                    frameColor2Label.textContent = 'Warna Gradien 2';
+                    controls.frameColorControl.classList.remove('is-hidden');
+                    controls.frameColor2Control.classList.remove('is-hidden');
+                    controls.frameCtaControl.classList.remove('is-hidden');
+                    controls.frameWidthControl.classList.remove('is-hidden');
+                } else if (style === 'circle-elegant') {
+                    frameColorLabel.textContent = 'Warna Lingkaran';
+                    controls.frameColorControl.classList.remove('is-hidden');
+                    controls.frameColorInnerControl.classList.remove('is-hidden');
+                } else if (style === 'gradient-ring') {
+                    frameColorLabel.textContent = 'Warna Cincin 1';
+                    frameColor2Label.textContent = 'Warna Cincin 2';
+                    controls.frameColorControl.classList.remove('is-hidden');
+                    controls.frameColor2Control.classList.remove('is-hidden');
+                    controls.frameColorInnerControl.classList.remove('is-hidden');
                 }
-            }
+            };
             frameStyleSelector.addEventListener('change', updateFrameControls);
-            updateFrameControls(); // Initial call
+            updateFrameControls(); // Panggil saat pertama kali load
 
-            function applyFrameStyles(targetElement, isDownload = false) {
-                // Clear previous state
-                targetElement.className = '';
-                targetElement.style.cssText = '';
-                const existingCTA = targetElement.querySelector('.frame-call-to-action');
-                if (existingCTA) existingCTA.remove();
-                const existingQR = targetElement.querySelector('canvas');
-                if (existingQR) existingQR.remove();
-
+            // Fungsi ini membangun struktur HTML untuk frame, membuatnya fleksibel
+            const buildFrameStructure = (targetElement, isDownload = false) => {
+                targetElement.innerHTML = ''; // Selalu bersihkan elemen target
                 const style = frameStyleSelector.value;
-                const color1 = frameColorInput.value;
-                const color2 = frameColor2Input.value;
-                const width = frameWidthInput.value;
+                targetElement.className = `frame-style-${style}`;
 
-                targetElement.classList.add(`frame-style-${style}`);
+                // Set CSS variables untuk warna dan lebar yang akan digunakan di CSS
+                targetElement.style.setProperty('--frame-color', frameColorInput.value);
+                targetElement.style.setProperty('--frame-color-2', frameColor2Input.value);
+                targetElement.style.setProperty('--frame-color-inner', frameColorInnerInput.value);
+                targetElement.style.setProperty('--frame-width', `${frameWidthInput.value}px`);
 
-                if (style === 'plain') {
-                    targetElement.style.backgroundColor = color1;
-                    targetElement.style.padding = `${width}px`;
+                let qrHolder;
+
+                if (style.includes('circle') || style.includes('ring')) {
+                    const innerBg = document.createElement('div');
+                    innerBg.className = 'qr-inner-background';
+                    qrHolder = document.createElement('div');
+                    qrHolder.id = 'qr-code-holder';
+                    innerBg.appendChild(qrHolder);
+                    targetElement.appendChild(innerBg);
+                     if(isDownload){ // Buat ukuran lebih besar untuk download resolusi tinggi
+                        targetElement.style.width = '1200px';
+                        targetElement.style.height = '1200px';
+                    }
                 } else if (style === 'gradient-text') {
-                    const ctaText = frameCtaTextInput.value;
-                    targetElement.style.setProperty('--frame-color', color1);
-                    targetElement.style.setProperty('--frame-color-2', color2);
-                    targetElement.style.padding = `${width}px`;
-                    targetElement.style.paddingBottom = `${parseInt(width, 10) / 2}px`; // Less padding at bottom
-
-                    const ctaElement = document.createElement('div');
-                    ctaElement.className = 'frame-call-to-action';
-                    ctaElement.textContent = ctaText;
-                    // Adjust font size for high-res download
-                    ctaElement.style.fontSize = isDownload ? '48px' : '14px'; 
-                    ctaElement.style.marginTop = isDownload ? '30px' : '15px';
-                    
-                    // The QR code will be inserted before this element
-                    targetElement.appendChild(ctaElement);
-
-                } else if (style === 'double-line') {
-                    targetElement.style.setProperty('--frame-color', color1);
-                    targetElement.style.setProperty('--frame-color-2', color2);
-                    // The padding is controlled by the box-shadow in the CSS for this style
+                    qrHolder = document.createElement('div');
+                    const cta = document.createElement('div');
+                    cta.className = 'frame-call-to-action';
+                    cta.textContent = frameCtaTextInput.value;
+                    targetElement.appendChild(qrHolder);
+                    targetElement.appendChild(cta);
+                } else { // Untuk gaya 'plain'
+                    qrHolder = document.createElement('div');
+                    targetElement.appendChild(qrHolder);
                 }
-            }
+                
+                return qrHolder; // Mengembalikan elemen tempat QR code akan digambar
+            };
 
-            function getQrData() {
+            // --- Pengambilan Data & Pembuatan QR ---
+            const getQrData = () => {
                 let data = '', displayData = '', isValid = true;
+                const url = getEl('url-input').value.trim(), text = getEl('text-input').value, ssid = getEl('wifi-ssid').value;
+                const pass = getEl('wifi-pass').value, enc = getEl('wifi-encryption').value, to = getEl('email-to').value;
+                const subj = encodeURIComponent(getEl('email-subject').value), body = encodeURIComponent(getEl('email-body').value);
+
                 switch (activeTab) {
                     case 'url':
-                        let url = document.getElementById('url-input').value.trim();
                         if (!url) { isValid = false; break; }
-                        if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
-                        const safetyCheck = checkUrlSafety(url);
-                        if (!safetyCheck.safe) { displayMessage('error', `URL Ditolak: Terdeteksi ${safetyCheck.category}`, `Sistem menemukan kata kunci terlarang ('${safetyCheck.keyword}').`); return null; }
-                        data = url; displayData = url;
+                        let finalUrl = !/^https?:\/\//i.test(url) ? 'https://' + url : url;
+                        const safetyCheck = checkUrlSafety(finalUrl);
+                        if (!safetyCheck.safe) { displayMessage('error', `URL Ditolak: Terdeteksi ${safetyCheck.category}`, `Kata kunci: '${safetyCheck.keyword}'.`); return null; }
+                        data = finalUrl; displayData = finalUrl;
                         break;
-                    case 'text':
-                        data = document.getElementById('text-input').value;
-                        if (!data) { isValid = false; break; }
-                        displayData = data.length > 50 ? data.substring(0, 47) + '...' : data;
-                        break;
-                    case 'wifi':
-                        const ssid = document.getElementById('wifi-ssid').value;
-                        const pass = document.getElementById('wifi-pass').value;
-                        const encryption = document.getElementById('wifi-encryption').value;
-                        if (!ssid) { isValid = false; break; }
-                        data = `WIFI:T:${encryption};S:${ssid};P:${pass};;`; displayData = `Wi-Fi: ${ssid}`;
-                        break;
-                    case 'email':
-                        const to = document.getElementById('email-to').value;
-                        const subject = encodeURIComponent(document.getElementById('email-subject').value);
-                        const body = encodeURIComponent(document.getElementById('email-body').value);
-                        if (!to) { isValid = false; break; }
-                        data = `mailto:${to}?subject=${subject}&body=${body}`; displayData = `Email ke: ${to}`;
-                        break;
+                    case 'text': if (!text) isValid = false; data = text; displayData = text.length > 50 ? text.substring(0, 47) + '...' : text; break;
+                    case 'wifi': if (!ssid) isValid = false; data = `WIFI:T:${enc};S:${ssid};P:${pass};;`; displayData = `Wi-Fi: ${ssid}`; break;
+                    case 'email': if (!to) isValid = false; data = `mailto:${to}?subject=${subj}&body=${body}`; displayData = `Email ke: ${to}`; break;
                 }
                 if (!isValid) { displayMessage('error', 'Input Kosong!', 'Mohon isi data yang diperlukan.'); return null; }
                 return { data, displayData };
-            }
+            };
 
             generateBtn.addEventListener('click', () => {
                 presentationFrame.style.display = 'none';
-                qrCodeDisplayFrame.innerHTML = ''; // Clear previous content
                 messageBox.style.display = 'none';
                 downloadBtn.style.display = 'none';
 
                 const qrInput = getQrData();
                 if (!qrInput) return; 
 
-                let colorOptions;
-                if (colorModeSelector.value === 'solid') {
-                    colorOptions = { color: colorStartInput.value };
-                } else {
-                    colorOptions = {
-                        gradient: { type: gradientTypeSelector.value, rotation: gradientRotationInput.value * (Math.PI / 180), colorStops: [{ offset: 0, color: colorStartInput.value }, { offset: 1, color: colorEndInput.value }] }
-                    };
-                }
+                const colorOptions = colorModeSelector.value === 'solid' 
+                    ? { color: colorStartInput.value } 
+                    : { gradient: { type: gradientTypeSelector.value, rotation: gradientRotationInput.value * (Math.PI / 180), colorStops: [{ offset: 0, color: colorStartInput.value }, { offset: 1, color: colorEndInput.value }] }};
 
                 try {
                     const sharedOptions = {
                         data: qrInput.data,
                         image: uploadedLogo || defaultLogo,
-                        backgroundOptions: { color: "transparent" }, // Transparent to show frame bg
+                        backgroundOptions: { color: "transparent" }, // Transparan agar warna frame terlihat
                         imageOptions: { crossOrigin: "anonymous", imageSize: 0.4, margin: 5 },
                         dotsOptions: { type: dotStyleSelector.value, ...colorOptions },
                         cornersSquareOptions: { type: cornerSquareStyleSelector.value, ...colorOptions },
                         cornersDotOptions: { type: cornerDotStyleSelector.value, ...colorOptions }
                     };
-
-                    qrCodeInstance = new QRCodeStyling({ ...sharedOptions, width: 1080, height: 1080, margin: 20 });
-                    const displayQrInstance = new QRCodeStyling({ ...sharedOptions, width: 300, height: 300, margin: 0 });
-
-                    // Apply styles to the display frame
-                    applyFrameStyles(qrCodeDisplayFrame, false);
                     
-                    // Append QR to the correct position (before CTA if it exists)
-                    const ctaElement = qrCodeDisplayFrame.querySelector('.frame-call-to-action');
-                    const qrHolder = document.createElement('div');
+                    const qrHolder = buildFrameStructure(qrCodeDisplayFrame, false);
+                    const qrSize = qrHolder.clientWidth; // Ukuran QR disesuaikan dengan kontainernya
+
+                    // Instance untuk ditampilkan di layar
+                    const displayQrInstance = new QRCodeStyling({ ...sharedOptions, width: qrSize, height: qrSize, margin: 0 });
                     displayQrInstance.append(qrHolder);
-                    if (ctaElement) {
-                        qrCodeDisplayFrame.insertBefore(qrHolder, ctaElement);
-                    } else {
-                        qrCodeDisplayFrame.appendChild(qrHolder);
-                    }
                     
+                    // Siapkan instance resolusi tinggi untuk diunduh nanti
+                    qrCodeInstance = new QRCodeStyling({ ...sharedOptions, width: 900, height: 900, margin: 0 });
+
                     presentationFrame.className = frameDesignSelector.value;
                     frameFooterUrl.textContent = qrInput.displayData; 
                     presentationFrame.style.display = 'block';
                     downloadBtn.style.display = 'inline-flex';
                 
                 } catch (error) {
-                    displayMessage('error', 'Terjadi Kesalahan', 'Gagal membuat QR Code. Pastikan format input sudah benar.');
+                    displayMessage('error', 'Terjadi Kesalahan', 'Gagal membuat QR Code. Pastikan format input benar.');
                     console.error("QR Code Generation Error:", error);
                 }
             });
 
             downloadBtn.addEventListener('click', () => {
-                if (!qrCodeInstance) {
-                    displayMessage('error', 'Gagal Mengunduh', 'Silakan buat QR code terlebih dahulu.');
-                    return;
-                }
+                if (!qrCodeInstance) return;
 
+                // Buat kontainer sementara di luar layar untuk proses render download
                 const downloadWrapper = document.createElement('div');
                 downloadWrapper.style.position = 'absolute';
                 downloadWrapper.style.left = '-9999px';
-                downloadWrapper.style.top = '0';
-                downloadWrapper.style.display = 'flex';
-                downloadWrapper.style.flexDirection = 'column';
-                downloadWrapper.style.justifyContent = 'center';
-                downloadWrapper.style.alignItems = 'center';
                 
-                // Apply the selected professional frame styles to the download wrapper
-                applyFrameStyles(downloadWrapper, true); // true for high-res adjustments
-                
-                const qrHolder = document.createElement('div');
-                downloadWrapper.appendChild(qrHolder);
-
-                // If a CTA text element exists, it's already been added by applyFrameStyles
-                // but we need to move the QR code before it.
-                const ctaInWrapper = downloadWrapper.querySelector('.frame-call-to-action');
-                if(ctaInWrapper){
-                    downloadWrapper.insertBefore(qrHolder, ctaInWrapper);
-                }
-
+                const qrHolder = buildFrameStructure(downloadWrapper, true); // Bangun frame resolusi tinggi
+                qrCodeInstance.append(qrHolder); // Gambar QR code resolusi tinggi di dalamnya
                 document.body.appendChild(downloadWrapper);
 
-                qrCodeInstance.append(qrHolder);
-
-                html2canvas(downloadWrapper, { 
-                    scale: 1, // Scale is handled by the high-res QR code
-                    backgroundColor: null,
-                    logging: false
-                }).then(canvas => {
+                // Gunakan html2canvas untuk mengambil gambar dari kontainer sementara
+                html2canvas(downloadWrapper, { backgroundColor: null }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `qr-code-pro-${Date.now()}.png`;
                     link.href = canvas.toDataURL("image/png");
                     link.click();
-
-                    document.body.removeChild(downloadWrapper);
+                    document.body.removeChild(downloadWrapper); // Hapus kontainer setelah selesai
                 }).catch(error => {
                     displayMessage('error', 'Gagal Mengunduh', 'Terjadi kesalahan saat membuat file gambar.');
                     console.error("Download Error:", error);
