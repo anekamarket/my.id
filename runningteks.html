@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <title>Running Text Information</title>
+    <style>
+        /* CSS UNTUK RUNNING TEXT PROFESIONAL */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Mencegah scroll di dalam iframe */
+            font-family: 'Poppins', sans-serif;
+        }
+        .marquee-container {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            color: #ffffff;
+            padding: 12px 0;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid #5c6bc0;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1002;
+        }
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            will-change: transform;
+            /* [PERBAIKAN] Kecepatan animasi dipercepat dari 60s menjadi 35s */
+            animation: marquee 35s linear infinite;
+        }
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.95rem;
+            padding: 0 35px;
+            font-weight: 500;
+        }
+        .marquee-item .fas, .marquee-item .fab {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: #ffc107; /* Warna ikon kuning emas */
+            text-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
+        }
+        .marquee-separator {
+            width: 2px;
+            height: 20px;
+            background-color: #7986cb;
+            border-radius: 1px;
+            margin: 0 10px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media (max-width: 768px) {
+            .marquee-item { font-size: 0.85rem; padding: 0 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="marquee-item">[ROTATING MESSAGE 1] 🚀 KELOLA BISNIS TANPA KELUAR MODAL! Sistem Kasir & Aplikasi Usaha GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item">[ROTATING MESSAGE 2] 📱 DAPATKAN SEMUA FITUR PREMIUM: Kelola Stok, Kasir, Laporan - TANPA BIAYA!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item">[ROTATING MESSAGE 3] 🤝 BAGIAN DARI VISI MEMBERDAYAKAN UMKM: Semua Teknologi Kami BERIKAN GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item">[ROTATING MESSAGE 4] 👉 BUKTIKAN SENDIRI! Download Aplikasi Usaha GRATIS: anekamarket.my.id/aplikasiusaha.html</span>
+            <div class="marquee-separator"></div>
+            
+            <span class="marquee-item">[ROTATING MESSAGE 1] 🚀 KELOLA BISNIS TANPA KELUAR MODAL! Sistem Kasir & Aplikasi Usaha GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item">[ROTATING MESSAGE 2] 📱 DAPATKAN SEMUA FITUR PREMIUM: Kelola Stok, Kasir, Laporan - TANPA BIAYA!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item">[ROTATING MESSAGE 3] 🤝 BAGIAN DARI VISI MEMBERDAYAKAN UMKM: Semua Teknologi Kami BERIKAN GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item">[ROTATING MESSAGE 4] 👉 BUKTIKAN SENDIRI! Download Aplikasi Usaha GRATIS: anekamarket.my.id/aplikasiusaha.html</span>
+            <div class="marquee-separator"></div>
+
+        </div>
+    </div>
+</body>
+</html>
