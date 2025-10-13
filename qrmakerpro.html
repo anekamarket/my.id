@@ -311,7 +311,7 @@
                     </select>
                 </div>
                 <div class="control-group">
-                    <label for="frame-design-select">Desain Bingkai</label>
+                    <label for="frame-design-select">Desain Bingkai (Hanya Tampilan)</label>
                     <select id="frame-design-select">
                         <option value="template-biru-futuristik" selected>Biru Futuristik</option>
                         <option value="template-minimalis-putih">Minimalis Putih</option>
@@ -326,7 +326,7 @@
                     <label for="color-mode-select">Mode Warna</label>
                     <select id="color-mode-select">
                         <option value="gradient" selected>Warna Gradien</option>
-                        <option value="solid">Warna Solid (Anti Belepotan)</option>
+                        <option value="solid">Warna Solid</option>
                     </select>
                 </div>
                 <div class="grid-2">
@@ -383,25 +383,23 @@
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Variabel Global & Instance QR Code ---
+            let qrCodeInstance = null; // Variabel untuk menyimpan instance QR Code yang aktif
+            let uploadedLogo = null;
+            let activeTab = 'url';
+            const defaultLogo = "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png";
+            
             // --- Inisialisasi Animasi Partikel ---
             tsParticles.load("particles-js", {
                 fpsLimit: 60,
                 interactivity: {
-                    events: {
-                        onHover: { enable: true, mode: "repulse" },
-                        resize: true,
-                    },
-                    modes: {
-                        repulse: { distance: 100, duration: 0.4 },
-                    },
+                    events: { onHover: { enable: true, mode: "repulse" }, resize: true, },
+                    modes: { repulse: { distance: 100, duration: 0.4 }, },
                 },
                 particles: {
                     color: { value: "#ffffff" },
                     links: { color: "#ffffff", distance: 150, enable: true, opacity: 0.2, width: 1 },
-                    move: {
-                        direction: "none", enable: true, outModes: { default: "bounce" },
-                        random: false, speed: 2, straight: false,
-                    },
+                    move: { direction: "none", enable: true, outModes: { default: "bounce" }, random: false, speed: 2, straight: false, },
                     number: { density: { enable: true, area: 800 }, value: 80 },
                     opacity: { value: 0.3 },
                     shape: { type: "circle" },
@@ -438,12 +436,7 @@
             const gradientTypeSelector = document.getElementById('gradient-type-select');
             const gradientRotationInput = document.getElementById('gradient-rotation');
 
-            // --- Variabel Global ---
-            let uploadedLogo = null;
-            let activeTab = 'url';
-            const defaultLogo = "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png";
-
-            // --- PENYEMPURNAAN: Logika Pengalihan Tab ---
+            // --- Logika Pengalihan Tab ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             const dataPanels = document.querySelectorAll('.data-input-panel');
             tabButtons.forEach(button => {
@@ -461,7 +454,7 @@
                 });
             });
 
-            // --- Sistem Filter Keamanan (hanya untuk URL) ---
+            // --- Sistem Filter Keamanan URL ---
             const forbiddenCategories = {
                 "Konten Judi Online": ['judi', 'slot', 'poker', 'casino', 'togel', 'sbo', 'bet', 'sbobet'],
                 "Konten Dewasa/Pornografi": ['porn', 'sex', 'xxx', 'bokep', 'adult', 'nude', 'bugil'],
@@ -523,7 +516,7 @@
                 }
             });
 
-            // --- PENYEMPURNAAN: Fungsi untuk Mendapatkan Data QR berdasarkan Tab Aktif ---
+            // --- Fungsi untuk Mendapatkan Data QR berdasarkan Tab Aktif ---
             function getQrData() {
                 let data = '';
                 let displayData = '';
@@ -537,21 +530,17 @@
                         
                         const safetyCheck = checkUrlSafety(url);
                         if (!safetyCheck.safe) {
-                            const title = `URL Ditolak: Terdeteksi ${safetyCheck.category}`;
-                            const text = `Sistem menemukan kata kunci terlarang ('${safetyCheck.keyword}'). URL ini tidak dapat diproses.`;
-                            displayMessage('error', title, text);
+                            displayMessage('error', `URL Ditolak: Terdeteksi ${safetyCheck.category}`, `Sistem menemukan kata kunci terlarang ('${safetyCheck.keyword}'). URL ini tidak dapat diproses.`);
                             return null;
                         }
                         data = url;
                         displayData = url;
                         break;
-
                     case 'text':
                         data = document.getElementById('text-input').value;
                         if (!data) { isValid = false; break; }
                         displayData = data.length > 50 ? data.substring(0, 47) + '...' : data;
                         break;
-                    
                     case 'wifi':
                         const ssid = document.getElementById('wifi-ssid').value;
                         const pass = document.getElementById('wifi-pass').value;
@@ -560,7 +549,6 @@
                         data = `WIFI:T:${encryption};S:${ssid};P:${pass};;`;
                         displayData = `Wi-Fi: ${ssid}`;
                         break;
-
                     case 'email':
                         const to = document.getElementById('email-to').value;
                         const subject = encodeURIComponent(document.getElementById('email-subject').value);
@@ -586,7 +574,7 @@
                 downloadBtn.style.display = 'none';
 
                 const qrInput = getQrData();
-                if (!qrInput) return; // Hentikan jika data tidak valid atau diblokir
+                if (!qrInput) return; 
 
                 let colorOptions;
                 if (colorModeSelector.value === 'solid') {
@@ -605,15 +593,14 @@
                 }
 
                 try {
-                    const qrCode = new QRCodeStyling({
-                        // --- PERBAIKAN & PENYEMPURNAAN: Resolusi dasar ditingkatkan untuk hasil download yang jauh lebih tajam ---
-                        // Ukuran dasar yang lebih besar (480px) akan menghasilkan gambar PNG berkualitas tinggi saat diunduh.
-                        width: 480,
-                        height: 480,
+                    // Buat instance QR code baru
+                    qrCodeInstance = new QRCodeStyling({
+                        width: 1080,
+                        height: 1080,
                         data: qrInput.data,
                         image: uploadedLogo || defaultLogo,
                         backgroundOptions: { color: "#ffffff" },
-                        imageOptions: { crossOrigin: "anonymous", margin: 4, imageSize: 0.4 },
+                        imageOptions: { crossOrigin: "anonymous", margin: 20, imageSize: 0.4 },
                         dotsOptions: { type: dotStyleSelector.value, ...colorOptions },
                         cornersSquareOptions: { type: cornerSquareStyleSelector.value, ...colorOptions },
                         cornersDotOptions: { type: cornerDotStyleSelector.value, ...colorOptions }
@@ -621,8 +608,21 @@
                     
                     presentationFrame.className = frameDesignSelector.value;
                     qrCanvasWrapper.innerHTML = '';
-                    qrCode.append(qrCanvasWrapper);
-                    frameFooterUrl.textContent = qrInput.displayData; // Tampilkan data yang relevan
+                    // Tampilkan QR code di halaman dalam ukuran yang lebih kecil agar pas di layar
+                    const displayQrInstance = new QRCodeStyling({
+                         width: 300,
+                         height: 300,
+                         data: qrInput.data,
+                         image: uploadedLogo || defaultLogo,
+                         backgroundOptions: { color: "#ffffff" },
+                         imageOptions: { crossOrigin: "anonymous", margin: 4, imageSize: 0.4 },
+                         dotsOptions: { type: dotStyleSelector.value, ...colorOptions },
+                         cornersSquareOptions: { type: cornerSquareStyleSelector.value, ...colorOptions },
+                         cornersDotOptions: { type: cornerDotStyleSelector.value, ...colorOptions }
+                    });
+                    displayQrInstance.append(qrCanvasWrapper);
+
+                    frameFooterUrl.textContent = qrInput.displayData; 
                     presentationFrame.style.display = 'block';
                     downloadBtn.style.display = 'inline-flex';
                 
@@ -632,20 +632,19 @@
                 }
             });
 
+            // --- FUNGSI UNDUH YANG DISEMPURNAKAN ---
             downloadBtn.addEventListener('click', () => {
-                // Menggunakan html2canvas untuk menangkap elemen frame presentasi
-                html2canvas(presentationFrame, {
-                    scale: 3, // Skala 3x untuk memastikan resolusi akhir sangat tinggi dan tajam
-                    backgroundColor: null // Latar belakang transparan untuk mencegah warna ganda
-                }).then(canvas => {
-                    const link = document.createElement('a');
-                    link.download = `qr-code-${Date.now()}.png`;
-                    link.href = canvas.toDataURL("image/png");
-                    link.click();
-                }).catch(error => {
-                    displayMessage('error', 'Gagal Mengunduh', 'Terjadi kesalahan saat mencoba membuat file gambar.');
-                    console.error("Download Error:", error);
-                });
+                if (qrCodeInstance) {
+                    // Gunakan metode .download() bawaan dari library untuk hasil terbaik
+                    // Metode ini mengunduh file PNG langsung dari data QR, bukan dari tangkapan layar HTML
+                    qrCodeInstance.download({
+                        name: `qr-code-${Date.now()}`,
+                        extension: "png"
+                    });
+                } else {
+                    displayMessage('error', 'Gagal Mengunduh', 'Instance QR Code tidak ditemukan. Coba buat ulang.');
+                    console.error("Download Error: qrCodeInstance is not available.");
+                }
             });
         });
     </script>
