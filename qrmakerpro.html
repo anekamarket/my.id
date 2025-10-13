@@ -226,7 +226,7 @@
     <div id="particles-js"></div>
     <div class="container">
         <div class="header">
-            <h1>QR Maker Ultimate v1.4.99</h1>
+            <h1>QR Maker Ultimate v8.0</h1>
             <p>Buat QR Code Profesional untuk URL, Teks, Wi-Fi, dan lainnya</p>
         </div>
 
@@ -606,9 +606,10 @@
 
                 try {
                     const qrCode = new QRCodeStyling({
-                        // --- PERBAIKAN 1: Resolusi ditingkatkan untuk gambar lebih tajam ---
-                        width: 300,
-                        height: 300,
+                        // --- PERBAIKAN & PENYEMPURNAAN: Resolusi dasar ditingkatkan untuk hasil download yang jauh lebih tajam ---
+                        // Ukuran dasar yang lebih besar (480px) akan menghasilkan gambar PNG berkualitas tinggi saat diunduh.
+                        width: 480,
+                        height: 480,
                         data: qrInput.data,
                         image: uploadedLogo || defaultLogo,
                         backgroundOptions: { color: "#ffffff" },
@@ -632,9 +633,10 @@
             });
 
             downloadBtn.addEventListener('click', () => {
-                // --- PERBAIKAN 2: Opsi 'backgroundColor' dihapus untuk mencegah hasil buram/berlapis putih ---
+                // Menggunakan html2canvas untuk menangkap elemen frame presentasi
                 html2canvas(presentationFrame, {
-                    scale: 3 // Skala tetap 3 untuk hasil resolusi tinggi
+                    scale: 3, // Skala 3x untuk memastikan resolusi akhir sangat tinggi dan tajam
+                    backgroundColor: null // Latar belakang transparan untuk mencegah warna ganda
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `qr-code-${Date.now()}.png`;
