@@ -606,8 +606,9 @@
 
                 try {
                     const qrCode = new QRCodeStyling({
-                        width: 250,
-                        height: 250,
+                        // --- PERBAIKAN 1: Resolusi ditingkatkan untuk gambar lebih tajam ---
+                        width: 300,
+                        height: 300,
                         data: qrInput.data,
                         image: uploadedLogo || defaultLogo,
                         backgroundOptions: { color: "#ffffff" },
@@ -631,8 +632,9 @@
             });
 
             downloadBtn.addEventListener('click', () => {
+                // --- PERBAIKAN 2: Opsi 'backgroundColor' dihapus untuk mencegah hasil buram/berlapis putih ---
                 html2canvas(presentationFrame, {
-                    backgroundColor: null, scale: 3
+                    scale: 3 // Skala tetap 3 untuk hasil resolusi tinggi
                 }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `qr-code-${Date.now()}.png`;
