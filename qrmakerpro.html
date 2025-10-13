@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator QR Code Ultimate v9.1 (Perbaikan Tampilan QR)</title>
+    <title>Generator QR Code Ultimate v9.2 (Penyempurnaan Bingkai)</title>
     <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
@@ -124,15 +124,24 @@
         #qr-code-display-frame {
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            display: flex; /* Centering */
+            display: flex; 
             justify-content: center;
             align-items: center;
+            box-sizing: border-box;
+            max-width: 350px; /* Batas maksimum agar tampilan tidak pecah */
         }
         #presentation-frame .frame-footer { margin-top: 15px; font-size: 12px; word-break: break-all; }
         
-        /* --- Professional Frame Styles (Rectangular & Circular) --- */
+        /* --- Gaya Bingkai Profesional --- */
         .frame-style-plain { background-color: var(--frame-color); padding: var(--frame-width); }
         
+        /* ✨ BARU: Gaya Kotak Tumpul ✨ */
+        .frame-style-rounded-square { 
+            background-color: var(--frame-color); 
+            padding: var(--frame-width);
+            border-radius: 25px; /* Radius sudut yang tetap */
+        }
+
         .frame-style-gradient-text {
             background-image: linear-gradient(45deg, var(--frame-color), var(--frame-color-2));
             padding: var(--frame-width);
@@ -142,19 +151,46 @@
              width: 100%; text-align: center; font-weight: 700; color: #fff;
              text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
+        
+        /* ✨ BARU: Gaya Lencana Premium ✨ */
+        .frame-style-badge {
+            background-image: linear-gradient(45deg, var(--frame-color), var(--frame-color-2));
+            padding: var(--frame-width);
+            border-radius: 15px 15px 0 0;
+            position: relative;
+            display: flex; flex-direction: column;
+        }
+        .frame-style-badge:after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 15px;
+            border-style: solid;
+            border-color: var(--frame-color-2) transparent transparent transparent;
+        }
+         .frame-style-badge .frame-call-to-action {
+             order: 2; /* Pindahkan teks ke bawah QR */
+             margin-top: 15px;
+             width: 100%; text-align: center; font-weight: 700; color: #fff;
+             text-transform: uppercase; letter-spacing: 1px; text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+         .frame-style-badge #qr-code-holder { order: 1; }
 
-        /* --- ✨ NEW CIRCULAR FRAME STYLES ✨ --- */
+
+        /* --- Gaya Bingkai Lingkaran --- */
         .frame-style-circle-elegant, .frame-style-gradient-ring {
             width: 350px;
             height: 350px;
             border-radius: 50%;
-            padding: 20px; /* Padding for the outer circle */
+            padding: var(--frame-width); /* Diperbaiki: Menggunakan variabel dari slider */
             box-sizing: border-box;
         }
         .frame-style-circle-elegant { background-color: var(--frame-color); }
         .frame-style-gradient-ring { background-image: linear-gradient(45deg, var(--frame-color), var(--frame-color-2)); }
         
-        .qr-inner-background { /* This div sits inside the circle and holds the QR */
+        .qr-inner-background { /* Div di dalam lingkaran untuk menampung QR */
             width: 100%;
             height: 100%;
             background-color: var(--frame-color-inner);
@@ -162,10 +198,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px; /* Padding inside the inner circle */
+            padding: 15px; /* Padding tetap di dalam lingkaran */
             box-sizing: border-box;
         }
-        #qr-code-holder { /* Holds the actual QR canvas */
+        #qr-code-holder { /* Penampung canvas QR */
             width: 100%;
             height: 100%;
             display: flex;
@@ -191,7 +227,7 @@
     <div id="particles-js"></div>
     <div class="container">
         <div class="header">
-            <h1>QR Maker Ultimate v9.1</h1>
+            <h1>QR Maker Ultimate v9.2</h1>
             <p>Buat QR Code Profesional dengan Frame Kotak & Lingkaran Keren</p>
         </div>
 
@@ -231,10 +267,12 @@
                 <div class="control-group" style="grid-column: 1 / -1;">
                     <label for="frame-style-select">Gaya Bingkai</label>
                     <select id="frame-style-select">
-                        <option value="plain" selected>Minimalis Polos</option>
+                        <option value="plain">Minimalis Polos</option>
+                        <option value="rounded-square" selected>Kotak Tumpul</option>
                         <option value="gradient-text">Gradien dengan Teks</option>
-                        <option value="circle-elegant">✨ Lingkaran Elegan</option>
-                        <option value="gradient-ring">✨ Cincin Gradien Keren</option>
+                        <option value="badge">⭐ Lencana Premium</option>
+                        <option value="circle-elegant">Lingkaran Elegan</option>
+                        <option value="gradient-ring">Cincin Gradien Keren</option>
                     </select>
                 </div>
 
@@ -355,11 +393,11 @@
                 const controls = { frameColorControl, frameColor2Control, frameColorInnerControl, frameCtaControl, frameWidthControl };
                 Object.values(controls).forEach(c => c.classList.add('is-hidden'));
 
-                if (style === 'plain') {
+                if (style === 'plain' || style === 'rounded-square') {
                     frameColorLabel.textContent = 'Warna Bingkai';
                     controls.frameColorControl.classList.remove('is-hidden');
                     controls.frameWidthControl.classList.remove('is-hidden');
-                } else if (style === 'gradient-text') {
+                } else if (style === 'gradient-text' || style === 'badge') {
                     frameColorLabel.textContent = 'Warna Gradien 1';
                     frameColor2Label.textContent = 'Warna Gradien 2';
                     controls.frameColorControl.classList.remove('is-hidden');
@@ -370,12 +408,14 @@
                     frameColorLabel.textContent = 'Warna Lingkaran';
                     controls.frameColorControl.classList.remove('is-hidden');
                     controls.frameColorInnerControl.classList.remove('is-hidden');
+                    controls.frameWidthControl.classList.remove('is-hidden'); // Perbaikan: aktifkan slider padding
                 } else if (style === 'gradient-ring') {
                     frameColorLabel.textContent = 'Warna Cincin 1';
                     frameColor2Label.textContent = 'Warna Cincin 2';
                     controls.frameColorControl.classList.remove('is-hidden');
                     controls.frameColor2Control.classList.remove('is-hidden');
                     controls.frameColorInnerControl.classList.remove('is-hidden');
+                    controls.frameWidthControl.classList.remove('is-hidden'); // Perbaikan: aktifkan slider padding
                 }
             };
             frameStyleSelector.addEventListener('change', updateFrameControls);
@@ -404,15 +444,17 @@
                         targetElement.style.width = '1200px';
                         targetElement.style.height = '1200px';
                     }
-                } else if (style === 'gradient-text') {
+                } else if (style === 'gradient-text' || style === 'badge') {
                     qrHolder = document.createElement('div');
+                    qrHolder.id = 'qr-code-holder';
                     const cta = document.createElement('div');
                     cta.className = 'frame-call-to-action';
                     cta.textContent = frameCtaTextInput.value;
                     targetElement.appendChild(qrHolder);
                     targetElement.appendChild(cta);
-                } else {
+                } else { // Untuk 'plain' dan 'rounded-square'
                     qrHolder = document.createElement('div');
+                    qrHolder.id = 'qr-code-holder';
                     targetElement.appendChild(qrHolder);
                 }
                 
@@ -466,20 +508,28 @@
                     
                     const qrHolder = buildFrameStructure(qrCodeDisplayFrame, false);
                     
-                    // --- ✨ PERBAIKAN BUG UTAMA ADA DI SINI ✨ ---
+                    // --- ✨ PENYEMPURNAAN: Ukuran QR Dinamis Berdasarkan Bingkai ✨ ---
                     let qrSize;
                     const selectedStyle = frameStyleSelector.value;
+                    const framePadding = parseInt(frameWidthInput.value, 10);
+                    const containerSize = 350; // Ukuran dasar kontainer tampilan
+
                     if (selectedStyle.includes('circle') || selectedStyle.includes('ring')) {
-                        // Ukuran dihitung berdasarkan CSS: 350px (total) - 20px*2 (padding luar) - 15px*2 (padding dalam) = 280px
-                        qrSize = 280; 
+                        const innerPadding = 15; // Padding CSS dari .qr-inner-background
+                        // Ukuran dihitung dari total kontainer dikurangi padding luar (dari slider) dan padding dalam
+                        qrSize = containerSize - (framePadding * 2) - (innerPadding * 2);
                     } else {
-                        // Ukuran default yang aman untuk bingkai kotak
-                        qrSize = 300; 
+                        // Ukuran dihitung dari total kontainer dikurangi padding luar (dari slider)
+                        qrSize = containerSize - (framePadding * 2);
                     }
+                    
+                    // Pastikan ukuran QR tidak negatif
+                    qrSize = Math.max(qrSize, 100); 
 
                     const displayQrInstance = new QRCodeStyling({ ...sharedOptions, width: qrSize, height: qrSize, margin: 0 });
                     displayQrInstance.append(qrHolder);
                     
+                    // Ukuran QR untuk download dibuat lebih besar untuk kualitas tinggi
                     qrCodeInstance = new QRCodeStyling({ ...sharedOptions, width: 900, height: 900, margin: 0 });
 
                     presentationFrame.className = frameDesignSelector.value;
@@ -500,21 +550,31 @@
                 downloadWrapper.style.position = 'absolute';
                 downloadWrapper.style.left = '-9999px';
                 
+                // Atur ukuran dasar yang besar untuk hasil download berkualitas tinggi
+                const downloadFrameSize = 1000;
+                downloadWrapper.style.width = `${downloadFrameSize}px`;
+                if(frameStyleSelector.value.includes('circle') || frameStyleSelector.value.includes('ring')){
+                    downloadWrapper.style.height = `${downloadFrameSize}px`;
+                }
+                
                 const qrHolder = buildFrameStructure(downloadWrapper, true);
                 qrCodeInstance.append(qrHolder);
                 document.body.appendChild(downloadWrapper);
 
-                html2canvas(downloadWrapper, { backgroundColor: null }).then(canvas => {
-                    const link = document.createElement('a');
-                    link.download = `qr-code-pro-${Date.now()}.png`;
-                    link.href = canvas.toDataURL("image/png");
-                    link.click();
-                    document.body.removeChild(downloadWrapper);
-                }).catch(error => {
-                    displayMessage('error', 'Gagal Mengunduh', 'Terjadi kesalahan saat membuat file gambar.');
-                    console.error("Download Error:", error);
-                    document.body.removeChild(downloadWrapper);
-                });
+                // Sedikit penundaan untuk memastikan gambar dan gaya CSS dimuat sepenuhnya
+                setTimeout(() => {
+                    html2canvas(downloadWrapper, { backgroundColor: null, scale: 2 }).then(canvas => {
+                        const link = document.createElement('a');
+                        link.download = `qr-code-pro-${Date.now()}.png`;
+                        link.href = canvas.toDataURL("image/png");
+                        link.click();
+                        document.body.removeChild(downloadWrapper);
+                    }).catch(error => {
+                        displayMessage('error', 'Gagal Mengunduh', 'Terjadi kesalahan saat membuat file gambar.');
+                        console.error("Download Error:", error);
+                        document.body.removeChild(downloadWrapper);
+                    });
+                }, 500);
             });
         });
     </script>
