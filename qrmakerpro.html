@@ -32,7 +32,6 @@
             margin: 0;
             padding: 40px 20px;
             box-sizing: border-box;
-            /* Latar Belakang Gradien Animasi */
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
@@ -80,7 +79,6 @@
             color: #7f8c8d;
         }
 
-        /* --- FITUR BARU: Panel Tipe Data --- */
         .data-type-tabs {
             display: flex;
             justify-content: center;
@@ -384,7 +382,7 @@
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
             // --- Variabel Global & Instance QR Code ---
-            let qrCodeInstance = null; // Variabel untuk menyimpan instance QR Code yang aktif
+            let qrCodeInstance = null; // Variabel untuk menyimpan instance QR Code resolusi tinggi untuk diunduh
             let uploadedLogo = null;
             let activeTab = 'url';
             const defaultLogo = "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png";
@@ -593,13 +591,14 @@
                 }
 
                 try {
-                    // Buat instance QR code baru
+                    // **PERBAIKAN**: Buat instance QR code resolusi tinggi untuk diunduh dengan MARGIN (garis tepi)
                     qrCodeInstance = new QRCodeStyling({
                         width: 1080,
                         height: 1080,
+                        margin: 40, // Menambahkan garis tepi putih tebal yang rapi
                         data: qrInput.data,
                         image: uploadedLogo || defaultLogo,
-                        backgroundOptions: { color: "#ffffff" },
+                        backgroundOptions: { color: "#ffffff" }, // Latar belakang QR & margin akan berwarna ini
                         imageOptions: { crossOrigin: "anonymous", margin: 20, imageSize: 0.4 },
                         dotsOptions: { type: dotStyleSelector.value, ...colorOptions },
                         cornersSquareOptions: { type: cornerSquareStyleSelector.value, ...colorOptions },
@@ -608,10 +607,12 @@
                     
                     presentationFrame.className = frameDesignSelector.value;
                     qrCanvasWrapper.innerHTML = '';
-                    // Tampilkan QR code di halaman dalam ukuran yang lebih kecil agar pas di layar
+                    
+                    // Buat instance terpisah untuk ditampilkan di layar (preview) agar ukurannya pas
                     const displayQrInstance = new QRCodeStyling({
                          width: 300,
                          height: 300,
+                         margin: 15, // Menambahkan garis tepi yang serasi untuk preview
                          data: qrInput.data,
                          image: uploadedLogo || defaultLogo,
                          backgroundOptions: { color: "#ffffff" },
@@ -635,8 +636,7 @@
             // --- FUNGSI UNDUH YANG DISEMPURNAKAN ---
             downloadBtn.addEventListener('click', () => {
                 if (qrCodeInstance) {
-                    // Gunakan metode .download() bawaan dari library untuk hasil terbaik
-                    // Metode ini mengunduh file PNG langsung dari data QR, bukan dari tangkapan layar HTML
+                    // Mengunduh langsung dari instance resolusi tinggi untuk kualitas gambar terbaik
                     qrCodeInstance.download({
                         name: `qr-code-${Date.now()}`,
                         extension: "png"
