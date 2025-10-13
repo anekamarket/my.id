@@ -316,28 +316,25 @@
             transform: rotate(90deg);
         }
         
-        /* --- [REVISI TOTAL] DESAIN NOTIFIKASI BISNIS PROFESIONAL --- */
+        /* --- [PERBAIKAN & PENYEMPURNAAN] DESAIN NOTIFIKASI BISNIS PROFESIONAL --- */
         .offer-notification {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            /* Background lebih premium dengan gradien halus dan hint warna brand */
-            background: linear-gradient(145deg, #fdfdff 0%, #f4f6fc 100%);
-            color: #2c3e50; /* Warna teks lebih soft dari hitam pekat */
-            padding: 28px;
-            border-radius: 16px; /* Radius lebih besar untuk kesan modern */
-            border: 1px solid #e9eef7;
-            /* Shadow berlapis untuk efek 'mengambang' yang lebih nyata dan mewah */
-            box-shadow: 0 4px 15px rgba(40, 53, 147, 0.05), 0 15px 50px rgba(40, 53, 147, 0.18);
-            width: 380px; /* Sedikit lebih lebar */
+            background: linear-gradient(145deg, #f8f9fa 0%, #e9ecef 100%);
+            color: #212529;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            width: 360px; /* Ukuran lebih kecil */
             max-width: calc(100vw - 40px);
             z-index: 1001;
             transform: translateX(calc(100% + 40px));
             opacity: 0;
-            /* Transisi lebih smooth dengan cubic-bezier custom */
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-out;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease-out;
             font-family: 'Poppins', sans-serif;
-            overflow: hidden; /* Tetap diperlukan untuk border-top */
+            overflow: hidden;
         }
 
         .offer-notification::before {
@@ -346,10 +343,8 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px; /* Sedikit lebih tebal */
-            background: linear-gradient(90deg, #1a237e, #3949ab, #007bff); /* Gradien warna brand yang lebih solid */
-            /* Efek glow untuk bar di atas */
-            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+            height: 4px;
+            background: linear-gradient(90deg, #007bff, #17a2b8, #28a745);
             z-index: 2;
         }
 
@@ -364,97 +359,93 @@
 
         .offer-notification .notification-content.active {
             display: block;
-            animation: fadeInContent 0.7s 0.3s ease-in-out forwards; /* Delay animasi konten agar muncul setelah box slide in */
+            animation: fadeInContent 0.6s 0.2s ease-out forwards;
         }
 
         @keyframes fadeInContent {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .offer-notification h4 {
-            margin: 0 0 18px 0;
+            margin: 0 0 15px 0;
             font-weight: 600;
-            font-size: 1.15rem; /* Sedikit lebih besar */
-            line-height: 1.6;
-            color: #1a237e; /* Warna brand utama */
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #343a40;
             display: flex;
             align-items: center;
         }
 
         .offer-notification h4 .fas {
             color: #007bff;
-            margin-right: 14px;
-            font-size: 2rem; /* Ikon jauh lebih besar dan menonjol */
-            /* Animasi ikon yang menarik perhatian */
+            margin-right: 12px;
+            font-size: 1.8rem;
             animation: pulseIcon 2.5s infinite ease-in-out;
         }
 
         @keyframes pulseIcon {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+            50% { transform: scale(1.1); }
         }
 
         .offer-notification .notification-buttons {
             display: flex;
-            gap: 15px;
-            margin-top: 25px;
+            gap: 12px;
+            margin-top: 20px;
         }
 
         .offer-notification .notification-btn {
             flex: 1;
-            padding: 12px 18px; /* Padding lebih besar */
-            border: 2px solid transparent; /* Border disiapkan untuk hover */
-            border-radius: 10px; /* Radius lebih besar */
+            padding: 10px 15px;
+            border: 1px solid transparent;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 700; /* Font lebih tebal */
-            font-size: 0.95rem;
-            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
             text-align: center;
-            text-transform: uppercase; /* Memberi kesan lebih formal */
-            letter-spacing: 0.5px;
         }
 
         .offer-notification .btn-yes {
             background-color: #007bff;
             color: white;
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.25);
+            border-color: #007bff;
         }
 
         .offer-notification .btn-yes:hover {
-            background-color: #0069d9;
-            transform: translateY(-4px) scale(1.02); /* Efek hover lebih dramatis */
-            box-shadow: 0 8px 25px rgba(0, 123, 255, 0.4);
+            background-color: #0056b3;
+            border-color: #0056b3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
         }
 
         .offer-notification .btn-no {
-            background-color: #f1f3f5; /* Warna latar yang soft */
-            color: #495057;
-            border-color: #dee2e6;
+            background-color: transparent;
+            color: #6c757d;
+            border-color: #ced4da;
         }
 
         .offer-notification .btn-no:hover {
             background-color: #e9ecef;
             color: #212529;
-            border-color: #ced4da;
-            transform: translateY(-2px); /* Efek hover yang lebih halus */
         }
 
         .offer-notification .close-notification {
             position: absolute;
-            top: 15px;
-            right: 18px;
-            font-size: 28px;
+            top: 12px;
+            right: 15px;
+            font-size: 24px;
             color: #adb5bd;
             cursor: pointer;
-            transition: color 0.3s, transform 0.4s ease;
+            transition: color 0.3s, transform 0.3s ease;
             line-height: 1;
             z-index: 3;
         }
 
         .offer-notification .close-notification:hover {
             color: #343a40;
-            transform: rotate(180deg) scale(1.1); /* Efek hover lebih menarik */
+            transform: rotate(90deg);
         }
         
         /* --- [REVISI TOTAL & PERBAIKAN] LOGIKA TOMBOL DAN DESKRIPSI --- */
@@ -1144,7 +1135,7 @@
         </div>
     </div>
     
-    <audio id="notificationSound" src="https://voca.ro/1c6gE71yCAsl" preload="auto"></audio>
+    <audio id="notificationSound" src="https://voca.ro/1BjrRUnRSEqJ" preload="auto"></audio>
     
     <audio id="bgMusic" loop autoplay>
         <source src="https://cdn.pixabay.com/audio/2022/08/04/audio_2dde6b7573.mp3" type="audio/mpeg">
@@ -1474,7 +1465,7 @@
         <span class="close-notification" id="closeNotification">×</span>
         
         <div class="notification-content active" id="notificationStep1">
-            <h4><i class="fas fa-rocket"></i> Punya bisnis atau usaha? Ingin jangkauan pelanggan lebih luas?</h4>
+            <h4><i class="fas fa-bullhorn"></i> Punya bisnis? Ingin jangkauan lebih luas?</h4>
             <div class="notification-buttons">
                 <button class="notification-btn btn-no" data-action="close">Tidak</button>
                 <button class="notification-btn btn-yes" data-action="next">Iya, Tentu</button>
@@ -1482,7 +1473,7 @@
         </div>
         
         <div class="notification-content" id="notificationStep2">
-            <h4><i class="fas fa-handshake"></i> Daftarkan usaha Anda di Anekamarket secara GRATIS & tanpa komisi. Tertarik?</h4>
+            <h4><i class="fas fa-handshake"></i> Daftarkan usaha Anda di Anekamarket GRATIS & tanpa komisi. Tertarik?</h4>
             <div class="notification-buttons">
                 <button class="notification-btn btn-no" data-action="close">Lain Kali</button>
                 <button class="notification-btn btn-yes" data-action="register">Saya Mau</button>
@@ -1692,7 +1683,7 @@
         </div>
     </div>
     
-    <audio id="buttonSound" src="https://voca.ro/1BjrRUnRSEqJ"></audio>
+    <audio id="buttonSound" src="https://voca.ro/1c6gE71yCAsl"></audio>
     
     <script>
         // --- [PERUBAHAN] DATA PRODUK KINI DALAM FORMAT JSON YANG VALID ---
@@ -2252,7 +2243,7 @@
                                 : `Anda akan memesan dengan total ${formatPrice(orderDetails.grandTotal)}.\n\nSistem akan mengunduh nota pemesanan secara otomatis, lalu mengarahkan Anda ke WhatsApp penjual.\n\nLanjutkan?`;
 
                             if (confirm(confirmationMessage)) {
-                                playButtonSound();
+                                playNotificationSound();
                                 await generateAndDownloadReceipt(productData, orderDetails);
                                 
                                 setTimeout(() => {
@@ -2362,7 +2353,16 @@
             
             document.querySelectorAll('.modal, .image-modal, .search-modal').forEach(modal => { modal.addEventListener('click', (e) => { if (e.target === modal || e.target.classList.contains('close-modal') || e.target.classList.contains('close-image-modal') || e.target.classList.contains('close-search-modal')) { modal.classList.remove('show'); body.style.overflow = ''; } }); });
             
+            const notificationSound = document.getElementById('notificationSound');
             const buttonSound = document.getElementById('buttonSound'); 
+            
+            function playNotificationSound() {
+                if(notificationSound) {
+                    notificationSound.currentTime = 0;
+                    notificationSound.play().catch(() => {});
+                }
+            }
+
             function playButtonSound() { 
                 if(buttonSound) { 
                     buttonSound.currentTime = 0; 
@@ -2373,35 +2373,30 @@
             document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); } } }); });
             
             const offerNotification = document.getElementById('offerNotification');
-            const notificationSound = document.getElementById('notificationSound');
             const step1 = document.getElementById('notificationStep1');
             const step2 = document.getElementById('notificationStep2');
 
-            // --- [PERBAIKAN] Logika Notifikasi dengan Auto-Close ---
-            let notificationTimer; // Variabel untuk menampung timer
+            // --- [PERBAIKAN] Logika Notifikasi dengan Auto-Close 5 detik ---
+            let notificationTimer; 
 
             const showNotification = () => {
                 if (offerNotification && !localStorage.getItem('offerDismissed')) { 
                     offerNotification.classList.add('show');
-                    if (notificationSound) {
-                        notificationSound.play().catch(e => console.log("Autoplay untuk suara notifikasi diblokir oleh browser."));
-                    }
-                    // Atur timer untuk menutup notifikasi setelah 3 detik
-                    notificationTimer = setTimeout(hideNotification, 3000);
+                    playNotificationSound();
+                    // Atur timer untuk menutup notifikasi setelah 5 detik
+                    notificationTimer = setTimeout(hideNotification, 5000);
                 }
             };
 
             const hideNotification = () => {
                 if(offerNotification) {
                     offerNotification.classList.remove('show');
-                    // Simpan status bahwa notifikasi sudah pernah ditampilkan/ditutup
                     localStorage.setItem('offerDismissed', 'true');
-                    // Hapus timer jika ada
                     clearTimeout(notificationTimer);
                 }
             };
             
-            // Tampilkan notifikasi setelah 5 detik
+            // Tampilkan notifikasi setelah 5 detik halaman dimuat
             setTimeout(showNotification, 5000); 
 
             if(offerNotification) {
@@ -2409,15 +2404,20 @@
                 offerNotification.addEventListener('mouseenter', () => {
                     clearTimeout(notificationTimer);
                 });
+                
+                // Setel ulang timer auto-close saat mouse meninggalkan notifikasi
+                offerNotification.addEventListener('mouseleave', () => {
+                    clearTimeout(notificationTimer);
+                    notificationTimer = setTimeout(hideNotification, 5000);
+                });
 
                 offerNotification.addEventListener('click', (e) => {
                     const target = e.target;
-                    // Logika tombol close atau 'Tidak' akan memanggil hideNotification
+                    
                     if (target.id === 'closeNotification' || (target.matches('.notification-btn') && target.dataset.action === 'close')) {
                         hideNotification();
                     } 
                     else if (target.matches('.notification-btn')) {
-                        // Hapus timer juga saat tombol lain diklik
                         clearTimeout(notificationTimer); 
                         const action = target.dataset.action;
                         if (action === 'next') {
