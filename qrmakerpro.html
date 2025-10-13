@@ -177,9 +177,10 @@
         .color-picker-wrapper input[type="color"] { min-width: 40px; height: 40px; border: none; padding: 0; border-radius: 8px; cursor: pointer; background: none; }
         .color-picker-wrapper input[type="text"] { width: 100%; border: 2px solid #dfe6e9; border-radius: 8px; padding: 8px 10px; font-family: 'Poppins', sans-serif; font-size: 14px; text-transform: uppercase; }
         
-        .slider-group { grid-column: 1 / -1; }
+        .slider-group { grid-column: 1 / -1; display: flex; flex-direction: column;}
         .slider-group label { display: block; margin-bottom: 5px; }
         .slider-group input[type="range"] { width: 100%; }
+        .slider-group .value-display { font-weight: 600; color: var(--primary-color); text-align: right; font-size: 14px; }
         
         .collapsible { display: grid; overflow: hidden; transition: all 0.4s ease-in-out; max-height: 500px; opacity: 1; transform-origin: top; }
         .collapsible.is-hidden { max-height: 0; opacity: 0; margin-top: 0 !important; padding: 0 !important; transform: scaleY(0); pointer-events: none; }
@@ -201,7 +202,15 @@
 
         #presentation-frame { margin-top: 30px; padding: 25px; border-radius: var(--border-radius); display: none; animation: fadeIn 0.5s; transition: all 0.4s ease; }
         #presentation-frame .frame-header { font-size: 20px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
-        #qr-code-canvas-wrapper { background: var(--white-color); padding: 20px; border-radius: var(--border-radius); display: inline-block; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        #qr-code-canvas-wrapper { display: inline-block; }
+        #qr-code-display-frame {
+            background-color: var(--white-color); /* Fallback color */
+            padding: 20px; /* Default padding */
+            border-radius: var(--border-radius);
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
         #presentation-frame .frame-footer { margin-top: 15px; font-size: 12px; word-break: break-all; }
         
         .template-biru-futuristik { background: #0c0a3e; background-image: linear-gradient(315deg, #0c0a3e 0%, #2a2777 74%); }
@@ -236,135 +245,47 @@
         </div>
         
         <div class="data-input-panels">
-            <div id="panel-url" class="data-input-panel active">
-                <div class="input-group">
-                    <input type="text" id="url-input" placeholder="Masukkan URL 'Magic Link' atau URL biasa">
-                </div>
-            </div>
-            <div id="panel-text" class="data-input-panel">
-                <div class="input-group">
-                    <textarea id="text-input" placeholder="Masukkan teks apapun yang ingin Anda tampilkan..."></textarea>
-                </div>
-            </div>
-            <div id="panel-wifi" class="data-input-panel">
-                <div class="input-grid">
-                    <div class="input-group" style="grid-column: 1 / -1;">
-                        <input type="text" id="wifi-ssid" placeholder="Nama Jaringan (SSID)">
-                    </div>
-                    <div class="input-group">
-                        <input type="password" id="wifi-pass" placeholder="Password Jaringan">
-                    </div>
-                    <div class="input-group">
-                        <select id="wifi-encryption">
-                            <option value="WPA" selected>WPA/WPA2</option>
-                            <option value="WEP">WEP</option>
-                            <option value="nopass">Tidak Terenkripsi</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div id="panel-email" class="data-input-panel">
-                <div class="input-grid">
-                     <div class="input-group" style="grid-column: 1 / -1;">
-                        <input type="email" id="email-to" placeholder="Alamat Email Penerima">
-                    </div>
-                     <div class="input-group" style="grid-column: 1 / -1;">
-                        <input type="text" id="email-subject" placeholder="Subjek Email">
-                    </div>
-                     <div class="input-group" style="grid-column: 1 / -1;">
-                        <textarea id="email-body" placeholder="Isi pesan email..."></textarea>
-                    </div>
-                </div>
-            </div>
+            <div id="panel-url" class="data-input-panel active"><div class="input-group"><input type="text" id="url-input" placeholder="Masukkan URL 'Magic Link' atau URL biasa"></div></div>
+            <div id="panel-text" class="data-input-panel"><div class="input-group"><textarea id="text-input" placeholder="Masukkan teks apapun..."></textarea></div></div>
+            <div id="panel-wifi" class="data-input-panel"><div class="input-grid"><div class="input-group" style="grid-column: 1 / -1;"><input type="text" id="wifi-ssid" placeholder="Nama Jaringan (SSID)"></div><div class="input-group"><input type="password" id="wifi-pass" placeholder="Password Jaringan"></div><div class="input-group"><select id="wifi-encryption"><option value="WPA" selected>WPA/WPA2</option><option value="WEP">WEP</option><option value="nopass">Tidak Terenkripsi</option></select></div></div></div>
+            <div id="panel-email" class="data-input-panel"><div class="input-grid"><div class="input-group" style="grid-column: 1 / -1;"><input type="email" id="email-to" placeholder="Alamat Email Penerima"></div><div class="input-group" style="grid-column: 1 / -1;"><input type="text" id="email-subject" placeholder="Subjek Email"></div><div class="input-group" style="grid-column: 1 / -1;"><textarea id="email-body" placeholder="Isi pesan email..."></textarea></div></div></div>
         </div>
 
         <div class="customization-panel">
-            <div class="panel-header"><i class="fas fa-palette"></i> Panel Kustomisasi</div>
+            <div class="panel-header"><i class="fas fa-palette"></i> Panel Kustomisasi QR</div>
             <div class="customization-grid">
-                <div class="control-group">
-                    <label for="dot-style-select">Gaya Titik</label>
-                    <select id="dot-style-select">
-                        <option value="rounded" selected>Kotak Halus</option>
-                        <option value="dots">Bulat (Lingkaran)</option>
-                        <option value="classy">Klasik</option>
-                        <option value="classy-rounded">Klasik Modern</option>
-                        <option value="square">Kotak</option>
-                        <option value="extra-rounded">Sangat Bulat</option>
-                    </select>
-                    <small id="dot-style-warning" class="smart-warning"><i class="fas fa-exclamation-triangle"></i> Untuk hasil terbaik, gunakan 'Warna Solid'.</small>
-                </div>
-                <div class="control-group">
-                    <label for="corner-square-style-select">Gaya Mata Sudut (Luar)</label>
-                    <select id="corner-square-style-select">
-                        <option value="extra-rounded" selected>Sangat Bulat</option>
-                        <option value="square">Kotak</option>
-                        <option value="dot">Bulat</option>
-                    </select>
-                </div>
-                 <div class="control-group">
-                    <label for="corner-dot-style-select">Gaya Mata Sudut (Dalam)</label>
-                    <select id="corner-dot-style-select">
-                        <option value="dot" selected>Bulat</option>
-                        <option value="square">Kotak</option>
-                    </select>
-                </div>
-                <div class="control-group">
-                    <label for="frame-design-select">Desain Bingkai (Hanya Tampilan)</label>
-                    <select id="frame-design-select">
-                        <option value="template-biru-futuristik" selected>Biru Futuristik</option>
-                        <option value="template-minimalis-putih">Minimalis Putih</option>
-                        <option value="template-gradien-modern">Gradien Modern</option>
-                    </select>
-                </div>
+                <div class="control-group"><label for="dot-style-select">Gaya Titik</label><select id="dot-style-select"><option value="rounded" selected>Kotak Halus</option><option value="dots">Bulat (Lingkaran)</option><option value="classy">Klasik</option><option value="classy-rounded">Klasik Modern</option><option value="square">Kotak</option><option value="extra-rounded">Sangat Bulat</option></select><small id="dot-style-warning" class="smart-warning"><i class="fas fa-exclamation-triangle"></i> Untuk hasil terbaik, gunakan 'Warna Solid'.</small></div>
+                <div class="control-group"><label for="corner-square-style-select">Gaya Mata Sudut (Luar)</label><select id="corner-square-style-select"><option value="extra-rounded" selected>Sangat Bulat</option><option value="square">Kotak</option><option value="dot">Bulat</option></select></div>
+                <div class="control-group"><label for="corner-dot-style-select">Gaya Mata Sudut (Dalam)</label><select id="corner-dot-style-select"><option value="dot" selected>Bulat</option><option value="square">Kotak</option></select></div>
+                <div class="control-group"><label for="frame-design-select">Desain Latar (Hanya Tampilan)</label><select id="frame-design-select"><option value="template-biru-futuristik" selected>Biru Futuristik</option><option value="template-minimalis-putih">Minimalis Putih</option><option value="template-gradien-modern">Gradien Modern</option></select></div>
             </div>
             <div class="divider"></div>
             <div class="panel-header"><i class="fas fa-swatchbook"></i> Kontrol Warna Cerdas</div>
             <div class="color-controls">
-                <div class="control-group" style="margin-bottom: 20px;">
-                    <label for="color-mode-select">Mode Warna</label>
-                    <select id="color-mode-select">
-                        <option value="gradient" selected>Warna Gradien</option>
-                        <option value="solid">Warna Solid</option>
-                    </select>
-                </div>
-                <div class="grid-2">
-                    <div class="control-group">
-                        <label id="color-start-label">Warna Awal Gradien</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" id="color-start" value="#4CAF50">
-                            <input type="text" id="color-start-hex" value="#4CAF50">
-                        </div>
-                    </div>
-                     <div class="control-group" id="color-end-group">
-                        <label>Warna Akhir Gradien</label>
-                        <div class="color-picker-wrapper">
-                            <input type="color" id="color-end" value="#007bff">
-                            <input type="text" id="color-end-hex" value="#007BFF">
-                        </div>
+                <div class="control-group" style="margin-bottom: 20px;"><label for="color-mode-select">Mode Warna Titik</label><select id="color-mode-select"><option value="gradient" selected>Warna Gradien</option><option value="solid">Warna Solid</option></select></div>
+                <div class="grid-2"><div class="control-group"><label id="color-start-label">Warna Awal Gradien</label><div class="color-picker-wrapper"><input type="color" id="color-start" value="#4CAF50"><input type="text" id="color-start-hex" value="#4CAF50"></div></div><div class="control-group" id="color-end-group"><label>Warna Akhir Gradien</label><div class="color-picker-wrapper"><input type="color" id="color-end" value="#007bff"><input type="text" id="color-end-hex" value="#007BFF"></div></div></div>
+                <div id="gradient-options" class="collapsible" style="margin-top:20px"><div class="customization-grid"><div class="control-group"><label for="gradient-type-select">Tipe Gradien</label><select id="gradient-type-select"><option value="linear" selected>Linear</option><option value="radial">Radial</option></select></div><div class="control-group slider-group"><label for="gradient-rotation">Rotasi Gradien</label><input type="range" id="gradient-rotation" min="0" max="360" value="45" step="1"></div></div></div>
+            </div>
+            
+            <div class="divider"></div>
+            <div class="panel-header"><i class="fas fa-border-all"></i> Kustomisasi Bingkai (Frame)</div>
+            <div class="customization-grid">
+                 <div class="control-group">
+                    <label>Warna Bingkai</label>
+                    <div class="color-picker-wrapper">
+                        <input type="color" id="frame-color" value="#ffffff">
+                        <input type="text" id="frame-color-hex" value="#FFFFFF">
                     </div>
                 </div>
-                <div id="gradient-options" class="collapsible" style="margin-top:20px">
-                    <div class="customization-grid">
-                        <div class="control-group">
-                            <label for="gradient-type-select">Tipe Gradien</label>
-                            <select id="gradient-type-select">
-                                <option value="linear" selected>Linear</option>
-                                <option value="radial">Radial</option>
-                            </select>
-                        </div>
-                        <div class="control-group slider-group">
-                            <label for="gradient-rotation">Rotasi Gradien</label>
-                            <input type="range" id="gradient-rotation" min="0" max="360" value="45" step="1">
-                        </div>
-                    </div>
+                <div class="control-group slider-group">
+                    <label for="frame-width">Lebar Bingkai (Padding)</label>
+                    <input type="range" id="frame-width" min="0" max="50" value="20" step="1">
+                    <div class="value-display"><span id="frame-width-value">20</span> px</div>
                 </div>
             </div>
             <div class="divider"></div>
             <div class="panel-header"><i class="fas fa-image"></i> Logo Kustom</div>
-            <div class="control-group">
-                <label for="logo-upload">Ganti Logo Default (Opsional)</label>
-                <input type="file" id="logo-upload" accept="image/png, image/jpeg, image/svg+xml">
-            </div>
+            <div class="control-group"><label for="logo-upload">Ganti Logo Default (Opsional)</label><input type="file" id="logo-upload" accept="image/png, image/jpeg, image/svg+xml"></div>
         </div>
 
         <div id="message-box" class="message-box"></div>
@@ -372,7 +293,9 @@
         
         <div id="presentation-frame">
             <div class="frame-header">PINDAI SAYA</div>
-            <div id="qr-code-canvas-wrapper"></div>
+            <div id="qr-code-canvas-wrapper">
+                <div id="qr-code-display-frame"></div>
+            </div>
             <div id="frame-footer-url" class="frame-footer"></div>
         </div>
         
@@ -381,40 +304,21 @@
 
     <script type="text/javascript">
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Variabel Global & Instance QR Code ---
-            let qrCodeInstance = null; // Variabel untuk menyimpan instance QR Code resolusi tinggi untuk diunduh
+            let qrCodeInstance = null;
             let uploadedLogo = null;
             let activeTab = 'url';
             const defaultLogo = "https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/logo-anekamarket.png";
             
-            // --- Inisialisasi Animasi Partikel ---
-            tsParticles.load("particles-js", {
-                fpsLimit: 60,
-                interactivity: {
-                    events: { onHover: { enable: true, mode: "repulse" }, resize: true, },
-                    modes: { repulse: { distance: 100, duration: 0.4 }, },
-                },
-                particles: {
-                    color: { value: "#ffffff" },
-                    links: { color: "#ffffff", distance: 150, enable: true, opacity: 0.2, width: 1 },
-                    move: { direction: "none", enable: true, outModes: { default: "bounce" }, random: false, speed: 2, straight: false, },
-                    number: { density: { enable: true, area: 800 }, value: 80 },
-                    opacity: { value: 0.3 },
-                    shape: { type: "circle" },
-                    size: { value: { min: 1, max: 5 } },
-                },
-                detectRetina: true,
-            });
+            tsParticles.load("particles-js", { fpsLimit: 60, interactivity: { events: { onHover: { enable: true, mode: "repulse" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 } } }, particles: { color: { value: "#ffffff" }, links: { color: "#ffffff", distance: 150, enable: true, opacity: 0.2, width: 1 }, move: { direction: "none", enable: true, outModes: { default: "bounce" }, random: false, speed: 2, straight: false }, number: { density: { enable: true, area: 800 }, value: 80 }, opacity: { value: 0.3 }, shape: { type: "circle" }, size: { value: { min: 1, max: 5 } } }, detectRetina: true });
 
-            // --- Elemen DOM ---
             const generateBtn = document.getElementById('generate-btn');
             const downloadBtn = document.getElementById('download-btn');
             const messageBox = document.getElementById('message-box');
             const presentationFrame = document.getElementById('presentation-frame');
             const qrCanvasWrapper = document.getElementById('qr-code-canvas-wrapper');
+            const qrCodeDisplayFrame = document.getElementById('qr-code-display-frame');
             const frameFooterUrl = document.getElementById('frame-footer-url');
             
-            // --- Elemen Kustomisasi ---
             const dotStyleSelector = document.getElementById('dot-style-select');
             const dotStyleWarning = document.getElementById('dot-style-warning');
             const cornerSquareStyleSelector = document.getElementById('corner-square-style-select');
@@ -422,7 +326,6 @@
             const frameDesignSelector = document.getElementById('frame-design-select');
             const logoUploadInput = document.getElementById('logo-upload');
             
-            // --- Elemen Kontrol Warna Cerdas ---
             const colorModeSelector = document.getElementById('color-mode-select');
             const colorStartInput = document.getElementById('color-start');
             const colorStartHexInput = document.getElementById('color-start-hex');
@@ -433,8 +336,13 @@
             const gradientOptions = document.getElementById('gradient-options');
             const gradientTypeSelector = document.getElementById('gradient-type-select');
             const gradientRotationInput = document.getElementById('gradient-rotation');
+            
+            // Elemen baru untuk Frame Kustom
+            const frameColorInput = document.getElementById('frame-color');
+            const frameColorHexInput = document.getElementById('frame-color-hex');
+            const frameWidthInput = document.getElementById('frame-width');
+            const frameWidthValue = document.getElementById('frame-width-value');
 
-            // --- Logika Pengalihan Tab ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             const dataPanels = document.querySelectorAll('.data-input-panel');
             tabButtons.forEach(button => {
@@ -442,31 +350,16 @@
                     tabButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
                     activeTab = button.dataset.tab;
-                    
-                    dataPanels.forEach(panel => {
-                        panel.classList.remove('active');
-                        if (panel.id === `panel-${activeTab}`) {
-                            panel.classList.add('active');
-                        }
-                    });
+                    dataPanels.forEach(panel => panel.classList.toggle('active', panel.id === `panel-${activeTab}`));
                 });
             });
 
-            // --- Sistem Filter Keamanan URL ---
-            const forbiddenCategories = {
-                "Konten Judi Online": ['judi', 'slot', 'poker', 'casino', 'togel', 'sbo', 'bet', 'sbobet'],
-                "Konten Dewasa/Pornografi": ['porn', 'sex', 'xxx', 'bokep', 'adult', 'nude', 'bugil'],
-                "Penipuan (Scam/Phishing)": ['scam', 'phishing', 'tipu', 'penipuan', 'giveaway', 'hadiah gratis'],
-                "Malware/Virus Berbahaya": ['malware', 'virus', 'trojan', 'ransomware', 'spyware']
-            };
-            
+            const forbiddenCategories = { "Konten Judi Online": ['judi', 'slot', 'poker', 'casino', 'togel', 'sbo', 'bet', 'sbobet'], "Konten Dewasa/Pornografi": ['porn', 'sex', 'xxx', 'bokep', 'adult', 'nude', 'bugil'], "Penipuan (Scam/Phishing)": ['scam', 'phishing', 'tipu', 'penipuan', 'giveaway', 'hadiah gratis'], "Malware/Virus Berbahaya": ['malware', 'virus', 'trojan', 'ransomware', 'spyware'] };
             function checkUrlSafety(url) {
                 const lowerCaseUrl = url.toLowerCase();
                 for (const category in forbiddenCategories) {
                     for (const keyword of forbiddenCategories[category]) {
-                        if (lowerCaseUrl.includes(keyword)) {
-                            return { safe: false, category: category, keyword: keyword };
-                        }
+                        if (lowerCaseUrl.includes(keyword)) return { safe: false, category: category, keyword: keyword };
                     }
                 }
                 return { safe: true };
@@ -488,11 +381,10 @@
             }
             syncColorInputs(colorStartInput, colorStartHexInput);
             syncColorInputs(colorEndInput, colorEndHexInput);
+            syncColorInputs(frameColorInput, frameColorHexInput); // Sync untuk warna frame
 
             function checkSmartWarning() {
-                const isDots = dotStyleSelector.value === 'dots';
-                const isGradient = colorModeSelector.value === 'gradient';
-                dotStyleWarning.style.display = (isDots && isGradient) ? 'block' : 'none';
+                dotStyleWarning.style.display = (dotStyleSelector.value === 'dots' && colorModeSelector.value === 'gradient') ? 'block' : 'none';
             }
 
             colorModeSelector.addEventListener('change', () => {
@@ -503,36 +395,29 @@
                 checkSmartWarning();
             });
             dotStyleSelector.addEventListener('change', checkSmartWarning);
+            
+            frameWidthInput.addEventListener('input', (e) => {
+                frameWidthValue.textContent = e.target.value;
+            });
 
             logoUploadInput.addEventListener('change', (event) => {
                 if (event.target.files && event.target.files[0]) {
                     const reader = new FileReader();
                     reader.onload = (e) => { uploadedLogo = e.target.result; };
                     reader.readAsDataURL(event.target.files[0]);
-                } else {
-                    uploadedLogo = null;
-                }
+                } else { uploadedLogo = null; }
             });
 
-            // --- Fungsi untuk Mendapatkan Data QR berdasarkan Tab Aktif ---
             function getQrData() {
-                let data = '';
-                let displayData = '';
-                let isValid = true;
-
+                let data = '', displayData = '', isValid = true;
                 switch (activeTab) {
                     case 'url':
                         let url = document.getElementById('url-input').value.trim();
                         if (!url) { isValid = false; break; }
                         if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
-                        
                         const safetyCheck = checkUrlSafety(url);
-                        if (!safetyCheck.safe) {
-                            displayMessage('error', `URL Ditolak: Terdeteksi ${safetyCheck.category}`, `Sistem menemukan kata kunci terlarang ('${safetyCheck.keyword}'). URL ini tidak dapat diproses.`);
-                            return null;
-                        }
-                        data = url;
-                        displayData = url;
+                        if (!safetyCheck.safe) { displayMessage('error', `URL Ditolak: Terdeteksi ${safetyCheck.category}`, `Sistem menemukan kata kunci terlarang ('${safetyCheck.keyword}').`); return null; }
+                        data = url; displayData = url;
                         break;
                     case 'text':
                         data = document.getElementById('text-input').value;
@@ -544,30 +429,23 @@
                         const pass = document.getElementById('wifi-pass').value;
                         const encryption = document.getElementById('wifi-encryption').value;
                         if (!ssid) { isValid = false; break; }
-                        data = `WIFI:T:${encryption};S:${ssid};P:${pass};;`;
-                        displayData = `Wi-Fi: ${ssid}`;
+                        data = `WIFI:T:${encryption};S:${ssid};P:${pass};;`; displayData = `Wi-Fi: ${ssid}`;
                         break;
                     case 'email':
                         const to = document.getElementById('email-to').value;
                         const subject = encodeURIComponent(document.getElementById('email-subject').value);
                         const body = encodeURIComponent(document.getElementById('email-body').value);
                         if (!to) { isValid = false; break; }
-                        data = `mailto:${to}?subject=${subject}&body=${body}`;
-                        displayData = `Email ke: ${to}`;
+                        data = `mailto:${to}?subject=${subject}&body=${body}`; displayData = `Email ke: ${to}`;
                         break;
                 }
-                
-                if (!isValid) {
-                    displayMessage('error', 'Input Kosong!', 'Mohon isi data yang diperlukan untuk membuat QR Code.');
-                    return null;
-                }
-                
+                if (!isValid) { displayMessage('error', 'Input Kosong!', 'Mohon isi data yang diperlukan.'); return null; }
                 return { data, displayData };
             }
 
             generateBtn.addEventListener('click', () => {
                 presentationFrame.style.display = 'none';
-                qrCanvasWrapper.innerHTML = '';
+                qrCodeDisplayFrame.innerHTML = '';
                 messageBox.style.display = 'none';
                 downloadBtn.style.display = 'none';
 
@@ -579,50 +457,35 @@
                     colorOptions = { color: colorStartInput.value };
                 } else {
                     colorOptions = {
-                        gradient: {
-                            type: gradientTypeSelector.value,
-                            rotation: gradientRotationInput.value * (Math.PI / 180),
-                            colorStops: [
-                                { offset: 0, color: colorStartInput.value },
-                                { offset: 1, color: colorEndInput.value }
-                            ]
-                        }
+                        gradient: { type: gradientTypeSelector.value, rotation: gradientRotationInput.value * (Math.PI / 180), colorStops: [{ offset: 0, color: colorStartInput.value }, { offset: 1, color: colorEndInput.value }] }
                     };
                 }
 
                 try {
-                    // **PERBAIKAN**: Buat instance QR code resolusi tinggi untuk diunduh dengan MARGIN (garis tepi)
-                    qrCodeInstance = new QRCodeStyling({
-                        width: 1080,
-                        height: 1080,
-                        margin: 40, // Menambahkan garis tepi putih tebal yang rapi
+                    const sharedOptions = {
                         data: qrInput.data,
                         image: uploadedLogo || defaultLogo,
-                        backgroundOptions: { color: "#ffffff" }, // Latar belakang QR & margin akan berwarna ini
-                        imageOptions: { crossOrigin: "anonymous", margin: 20, imageSize: 0.4 },
+                        backgroundOptions: { color: "#ffffff" },
+                        imageOptions: { crossOrigin: "anonymous", imageSize: 0.4, margin: 5 },
                         dotsOptions: { type: dotStyleSelector.value, ...colorOptions },
                         cornersSquareOptions: { type: cornerSquareStyleSelector.value, ...colorOptions },
                         cornersDotOptions: { type: cornerDotStyleSelector.value, ...colorOptions }
-                    });
-                    
-                    presentationFrame.className = frameDesignSelector.value;
-                    qrCanvasWrapper.innerHTML = '';
-                    
-                    // Buat instance terpisah untuk ditampilkan di layar (preview) agar ukurannya pas
-                    const displayQrInstance = new QRCodeStyling({
-                         width: 300,
-                         height: 300,
-                         margin: 15, // Menambahkan garis tepi yang serasi untuk preview
-                         data: qrInput.data,
-                         image: uploadedLogo || defaultLogo,
-                         backgroundOptions: { color: "#ffffff" },
-                         imageOptions: { crossOrigin: "anonymous", margin: 4, imageSize: 0.4 },
-                         dotsOptions: { type: dotStyleSelector.value, ...colorOptions },
-                         cornersSquareOptions: { type: cornerSquareStyleSelector.value, ...colorOptions },
-                         cornersDotOptions: { type: cornerDotStyleSelector.value, ...colorOptions }
-                    });
-                    displayQrInstance.append(qrCanvasWrapper);
+                    };
 
+                    // Instance untuk diunduh (resolusi tinggi)
+                    qrCodeInstance = new QRCodeStyling({ ...sharedOptions, width: 1080, height: 1080, margin: 0 });
+                    
+                    // Instance untuk ditampilkan di layar (resolusi lebih kecil)
+                    const displayQrInstance = new QRCodeStyling({ ...sharedOptions, width: 300, height: 300, margin: 0 });
+
+                    const frameWidth = frameWidthInput.value + 'px';
+                    const frameColor = frameColorInput.value;
+                    qrCodeDisplayFrame.style.padding = frameWidth;
+                    qrCodeDisplayFrame.style.backgroundColor = frameColor;
+                    
+                    displayQrInstance.append(qrCodeDisplayFrame);
+
+                    presentationFrame.className = frameDesignSelector.value;
                     frameFooterUrl.textContent = qrInput.displayData; 
                     presentationFrame.style.display = 'block';
                     downloadBtn.style.display = 'inline-flex';
@@ -633,18 +496,49 @@
                 }
             });
 
-            // --- FUNGSI UNDUH YANG DISEMPURNAKAN ---
             downloadBtn.addEventListener('click', () => {
-                if (qrCodeInstance) {
-                    // Mengunduh langsung dari instance resolusi tinggi untuk kualitas gambar terbaik
-                    qrCodeInstance.download({
-                        name: `qr-code-${Date.now()}`,
-                        extension: "png"
-                    });
-                } else {
-                    displayMessage('error', 'Gagal Mengunduh', 'Instance QR Code tidak ditemukan. Coba buat ulang.');
-                    console.error("Download Error: qrCodeInstance is not available.");
+                if (!qrCodeInstance) {
+                    displayMessage('error', 'Gagal Mengunduh', 'Silakan buat QR code terlebih dahulu.');
+                    return;
                 }
+
+                // 1. Buat kontainer sementara di luar layar
+                const downloadWrapper = document.createElement('div');
+                downloadWrapper.style.position = 'absolute';
+                downloadWrapper.style.left = '-9999px';
+                downloadWrapper.style.top = '0';
+                
+                // 2. Atur style bingkai sesuai pilihan pengguna
+                const frameWidth = parseInt(frameWidthInput.value, 10);
+                const frameColor = frameColorInput.value;
+                downloadWrapper.style.padding = `${frameWidth * 2}px`; // Beri padding lebih besar untuk resolusi tinggi
+                downloadWrapper.style.backgroundColor = frameColor;
+                
+                // 3. Buat elemen untuk menampung kanvas QR resolusi tinggi
+                const qrHolder = document.createElement('div');
+                downloadWrapper.appendChild(qrHolder);
+                document.body.appendChild(downloadWrapper);
+
+                // 4. Masukkan QR code resolusi tinggi ke dalam kontainer
+                qrCodeInstance.append(qrHolder);
+
+                // 5. Gunakan html2canvas untuk menangkap kontainer berbingkai
+                html2canvas(downloadWrapper, { 
+                    scale: 2, // Tingkatkan skala untuk hasil super tajam
+                    backgroundColor: null // Gunakan warna dari elemen
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `qr-code-${Date.now()}.png`;
+                    link.href = canvas.toDataURL("image/png");
+                    link.click();
+
+                    // 6. Hapus kontainer sementara setelah selesai
+                    document.body.removeChild(downloadWrapper);
+                }).catch(error => {
+                    displayMessage('error', 'Gagal Mengunduh', 'Terjadi kesalahan saat membuat file gambar.');
+                    console.error("Download Error:", error);
+                    document.body.removeChild(downloadWrapper);
+                });
             });
         });
     </script>
