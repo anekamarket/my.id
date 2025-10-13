@@ -81,6 +81,63 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.js"></script>
     
     <style>
+        /* [PENAMBAHAN BARU] CSS UNTUK RUNNING TEXT PROFESIONAL */
+        .marquee-container {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            color: #ffffff;
+            padding: 12px 0;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid #5c6bc0;
+            overflow: hidden;
+            position: sticky;
+            top: 0;
+            z-index: 1002; /* Pastikan di atas navbar saat scroll */
+        }
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            will-change: transform;
+            animation: marquee 60s linear infinite;
+        }
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.95rem;
+            padding: 0 35px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+        }
+        .marquee-item .fas, .marquee-item .fab {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: #ffc107; /* Warna ikon kuning emas */
+            text-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
+        }
+        .marquee-separator {
+            width: 2px;
+            height: 20px;
+            background-color: #7986cb;
+            border-radius: 1px;
+            margin: 0 10px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        /* Penyesuaian navbar agar tidak tertutup */
+        #navbar.scrolled {
+            top: 48px; /* Sesuaikan dengan tinggi marquee-container */
+        }
+        @media (max-width: 768px) {
+            .marquee-item { font-size: 0.85rem; padding: 0 25px; }
+            #navbar.scrolled { top: 48px; }
+        }
+
         /* CSS yang sudah ada tetap dipertahankan */
         /* --- [PERBAIKAN & PENYEMPURNAAN] DESAIN GALERI PRODUK --- */
         .gallery-grid {
@@ -1035,6 +1092,31 @@
     </style>
 </head>
 <body>
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="marquee-item"><i class="fas fa-bullhorn"></i>Anekamarket: Platform Digital untuk UMKM, Jasa & Sewa Lokal. Dikembangkan oleh Lentera Karya Situbondo.</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-store"></i>Visi Kami: Memajukan ekonomi lokal dengan teknologi yang mudah diakses.</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-cogs"></i>Fitur Unggulan: Galeri Produk, Kategori Sewa & Jasa, Pencarian Cerdas, dan Pemesanan via WhatsApp.</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-handshake"></i>Misi Kami: Menjadi jembatan antara pelaku usaha lokal dengan pasar yang lebih luas. "Semua Bisa Jualan, Semua Bisa Pesan".</span>
+            <div class="marquee-separator"></div>
+             <span class="marquee-item"><i class="fab fa-android"></i>Download Aplikasi Android kami untuk pengalaman terbaik!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-bullhorn"></i>Anekamarket: Platform Digital untuk UMKM, Jasa & Sewa Lokal. Dikembangkan oleh Lentera Karya Situbondo.</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-store"></i>Visi Kami: Memajukan ekonomi lokal dengan teknologi yang mudah diakses.</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-cogs"></i>Fitur Unggulan: Galeri Produk, Kategori Sewa & Jasa, Pencarian Cerdas, dan Pemesanan via WhatsApp.</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-handshake"></i>Misi Kami: Menjadi jembatan antara pelaku usaha lokal dengan pasar yang lebih luas. "Semua Bisa Jualan, Semua Bisa Pesan".</span>
+            <div class="marquee-separator"></div>
+             <span class="marquee-item"><i class="fab fa-android"></i>Download Aplikasi Android kami untuk pengalaman terbaik!</span>
+            <div class="marquee-separator"></div>
+        </div>
+    </div>
+
     <audio id="notificationSound" src="https://voca.ro/1c6gE71yCAsl" preload="auto"></audio>
     
     <audio id="bgMusic" loop autoplay>
@@ -2243,7 +2325,7 @@
             
             const bgMusic = document.getElementById('bgMusic'); if (bgMusic) { bgMusic.volume = 0.3; let p = false; const pm = () => { if (!p) { bgMusic.play().then(() => { p = true; }).catch(() => {}); } }; pm(); document.body.addEventListener('click', pm, { once: true }); document.body.addEventListener('touchstart', pm, { once: true }); }
             const particlesContainer = document.getElementById('particles'); if (particlesContainer) { for (let i = 0; i < 40; i++) { const pr = document.createElement('div'); pr.classList.add('particle'); const s = Math.random() * 6 + 2; pr.style.width = `${s}px`; pr.style.height = `${s}px`; pr.style.left = `${Math.random() * 100}%`; pr.style.animationDuration = `${Math.random() * 15 + 15}s`; pr.style.animationDelay = `${Math.random() * 10}s`; particlesContainer.appendChild(pr); } }
-            const navbar = document.getElementById('navbar'); if (navbar) { window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); }); }
+            const navbar = document.getElementById('navbar'); if (navbar) { window.addEventListener('scroll', () => { const isScrolled = window.scrollY > 50; navbar.classList.toggle('scrolled', isScrolled); }); }
             const mobileMenuToggle = document.getElementById('mobileMenuToggle'); const navLinks = document.getElementById('navLinks'); if (mobileMenuToggle && navLinks) { mobileMenuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; playButtonSound(); }); navLinks.addEventListener('click', (e) => { if (e.target.tagName === 'A') { navLinks.classList.remove('active'); mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>'; } }); }
             const searchToggle = document.getElementById('searchToggle'); const navSearch = document.getElementById('navSearch'); if(searchToggle && navSearch) { searchToggle.addEventListener('click', () => { navSearch.classList.toggle('active'); playButtonSound(); }); }
             const productCategories = document.querySelector('.product-categories'); const categoryTabs = document.querySelector('.category-tabs'); let activeCategory = 'all'; let activeType = 'all';
