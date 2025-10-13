@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generator QR Code Ultimate v9.0 (Frame Lingkaran Profesional)</title>
+    <title>Generator QR Code Ultimate v9.1 (Perbaikan Tampilan QR)</title>
     <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
@@ -191,7 +191,7 @@
     <div id="particles-js"></div>
     <div class="container">
         <div class="header">
-            <h1>QR Maker Ultimate v9.0</h1>
+            <h1>QR Maker Ultimate v9.1</h1>
             <p>Buat QR Code Profesional dengan Frame Kotak & Lingkaran Keren</p>
         </div>
 
@@ -293,7 +293,6 @@
             
             tsParticles.load("particles-js", { fpsLimit: 60, interactivity: { events: { onHover: { enable: true, mode: "repulse" }, resize: true }, modes: { repulse: { distance: 100, duration: 0.4 } } }, particles: { color: { value: "#ffffff" }, links: { color: "#ffffff", distance: 150, enable: true, opacity: 0.2, width: 1 }, move: { direction: "none", enable: true, outModes: { default: "bounce" }, random: false, speed: 2, straight: false }, number: { density: { enable: true, area: 800 }, value: 80 }, opacity: { value: 0.3 }, shape: { type: "circle" }, size: { value: { min: 1, max: 5 } } }, detectRetina: true });
 
-            // --- Efisiensi: Mengelompokkan semua elemen di awal ---
             const getEl = (id) => document.getElementById(id);
             const generateBtn = getEl('generate-btn'), downloadBtn = getEl('download-btn'), messageBox = getEl('message-box');
             const presentationFrame = getEl('presentation-frame'), qrCodeDisplayFrame = getEl('qr-code-display-frame'), frameFooterUrl = getEl('frame-footer-url');
@@ -303,13 +302,11 @@
             const colorStartLabel = getEl('color-start-label'), colorEndInput = getEl('color-end'), colorEndHexInput = getEl('color-end-hex'), colorEndGroup = getEl('color-end-group');
             const gradientOptions = getEl('gradient-options'), gradientTypeSelector = getEl('gradient-type-select'), gradientRotationInput = getEl('gradient-rotation');
             
-            // Frame Controls
             const frameStyleSelector = getEl('frame-style-select'), frameColorControl = getEl('frame-color-control'), frameColorInput = getEl('frame-color'), frameColorHexInput = getEl('frame-color-hex');
             const frameColorLabel = getEl('frame-color-label'), frameColor2Control = getEl('frame-color-2-control'), frameColor2Input = getEl('frame-color-2'), frameColor2HexInput = getEl('frame-color-2-hex');
             const frameColor2Label = getEl('frame-color-2-label'), frameColorInnerControl = getEl('frame-color-inner-control'), frameColorInnerInput = getEl('frame-color-inner'), frameColorInnerHexInput = getEl('frame-color-inner-hex');
             const frameCtaControl = getEl('frame-cta-control'), frameCtaTextInput = getEl('frame-cta-text'), frameWidthControl = getEl('frame-width-control'), frameWidthInput = getEl('frame-width'), frameWidthValue = getEl('frame-width-value');
 
-            // --- Logika Tab Switching ---
             const tabButtons = document.querySelectorAll('.tab-btn');
             tabButtons.forEach(button => button.addEventListener('click', () => {
                 tabButtons.forEach(btn => btn.classList.remove('active'));
@@ -318,7 +315,6 @@
                 document.querySelectorAll('.data-input-panel').forEach(panel => panel.classList.toggle('active', panel.id === `panel-${activeTab}`));
             }));
 
-            // --- Fungsi Bantu (Helpers) ---
             const forbiddenCategories = { "Konten Judi Online": ['judi', 'slot', 'poker', 'casino', 'togel', 'sbo', 'bet', 'sbobet'], "Konten Dewasa/Pornografi": ['porn', 'sex', 'xxx', 'bokep', 'adult', 'nude', 'bugil'], "Penipuan (Scam/Phishing)": ['scam', 'phishing', 'tipu', 'penipuan', 'giveaway', 'hadiah gratis'], "Malware/Virus Berbahaya": ['malware', 'virus', 'trojan', 'ransomware', 'spyware'] };
             const checkUrlSafety = url => {
                 const lowerCaseUrl = url.toLowerCase();
@@ -338,7 +334,6 @@
             };
             [ [colorStartInput, colorStartHexInput], [colorEndInput, colorEndHexInput], [frameColorInput, frameColorHexInput], [frameColor2Input, frameColor2HexInput], [frameColorInnerInput, frameColorInnerHexInput] ].forEach(p => syncColorInputs(p[0], p[1]));
 
-            // --- Event Listeners untuk Kustomisasi ---
             const checkSmartWarning = () => getEl('dot-style-warning').style.display = (dotStyleSelector.value === 'dots' && colorModeSelector.value === 'gradient') ? 'block' : 'none';
             colorModeSelector.addEventListener('change', () => {
                 const isGradient = colorModeSelector.value === 'gradient';
@@ -355,13 +350,11 @@
                 else { uploadedLogo = null; }
             });
 
-            // --- Logika Inti untuk Bingkai (Frame) ---
             const updateFrameControls = () => {
                 const style = frameStyleSelector.value;
                 const controls = { frameColorControl, frameColor2Control, frameColorInnerControl, frameCtaControl, frameWidthControl };
-                Object.values(controls).forEach(c => c.classList.add('is-hidden')); // Sembunyikan semua dulu
+                Object.values(controls).forEach(c => c.classList.add('is-hidden'));
 
-                // Tampilkan kontrol yang relevan berdasarkan pilihan
                 if (style === 'plain') {
                     frameColorLabel.textContent = 'Warna Bingkai';
                     controls.frameColorControl.classList.remove('is-hidden');
@@ -386,15 +379,13 @@
                 }
             };
             frameStyleSelector.addEventListener('change', updateFrameControls);
-            updateFrameControls(); // Panggil saat pertama kali load
+            updateFrameControls();
 
-            // Fungsi ini membangun struktur HTML untuk frame, membuatnya fleksibel
             const buildFrameStructure = (targetElement, isDownload = false) => {
-                targetElement.innerHTML = ''; // Selalu bersihkan elemen target
+                targetElement.innerHTML = '';
                 const style = frameStyleSelector.value;
                 targetElement.className = `frame-style-${style}`;
 
-                // Set CSS variables untuk warna dan lebar yang akan digunakan di CSS
                 targetElement.style.setProperty('--frame-color', frameColorInput.value);
                 targetElement.style.setProperty('--frame-color-2', frameColor2Input.value);
                 targetElement.style.setProperty('--frame-color-inner', frameColorInnerInput.value);
@@ -409,7 +400,7 @@
                     qrHolder.id = 'qr-code-holder';
                     innerBg.appendChild(qrHolder);
                     targetElement.appendChild(innerBg);
-                     if(isDownload){ // Buat ukuran lebih besar untuk download resolusi tinggi
+                     if(isDownload){
                         targetElement.style.width = '1200px';
                         targetElement.style.height = '1200px';
                     }
@@ -420,15 +411,14 @@
                     cta.textContent = frameCtaTextInput.value;
                     targetElement.appendChild(qrHolder);
                     targetElement.appendChild(cta);
-                } else { // Untuk gaya 'plain'
+                } else {
                     qrHolder = document.createElement('div');
                     targetElement.appendChild(qrHolder);
                 }
                 
-                return qrHolder; // Mengembalikan elemen tempat QR code akan digambar
+                return qrHolder;
             };
 
-            // --- Pengambilan Data & Pembuatan QR ---
             const getQrData = () => {
                 let data = '', displayData = '', isValid = true;
                 const url = getEl('url-input').value.trim(), text = getEl('text-input').value, ssid = getEl('wifi-ssid').value;
@@ -467,7 +457,7 @@
                     const sharedOptions = {
                         data: qrInput.data,
                         image: uploadedLogo || defaultLogo,
-                        backgroundOptions: { color: "transparent" }, // Transparan agar warna frame terlihat
+                        backgroundOptions: { color: "transparent" },
                         imageOptions: { crossOrigin: "anonymous", imageSize: 0.4, margin: 5 },
                         dotsOptions: { type: dotStyleSelector.value, ...colorOptions },
                         cornersSquareOptions: { type: cornerSquareStyleSelector.value, ...colorOptions },
@@ -475,13 +465,21 @@
                     };
                     
                     const qrHolder = buildFrameStructure(qrCodeDisplayFrame, false);
-                    const qrSize = qrHolder.clientWidth; // Ukuran QR disesuaikan dengan kontainernya
+                    
+                    // --- ✨ PERBAIKAN BUG UTAMA ADA DI SINI ✨ ---
+                    let qrSize;
+                    const selectedStyle = frameStyleSelector.value;
+                    if (selectedStyle.includes('circle') || selectedStyle.includes('ring')) {
+                        // Ukuran dihitung berdasarkan CSS: 350px (total) - 20px*2 (padding luar) - 15px*2 (padding dalam) = 280px
+                        qrSize = 280; 
+                    } else {
+                        // Ukuran default yang aman untuk bingkai kotak
+                        qrSize = 300; 
+                    }
 
-                    // Instance untuk ditampilkan di layar
                     const displayQrInstance = new QRCodeStyling({ ...sharedOptions, width: qrSize, height: qrSize, margin: 0 });
                     displayQrInstance.append(qrHolder);
                     
-                    // Siapkan instance resolusi tinggi untuk diunduh nanti
                     qrCodeInstance = new QRCodeStyling({ ...sharedOptions, width: 900, height: 900, margin: 0 });
 
                     presentationFrame.className = frameDesignSelector.value;
@@ -498,22 +496,20 @@
             downloadBtn.addEventListener('click', () => {
                 if (!qrCodeInstance) return;
 
-                // Buat kontainer sementara di luar layar untuk proses render download
                 const downloadWrapper = document.createElement('div');
                 downloadWrapper.style.position = 'absolute';
                 downloadWrapper.style.left = '-9999px';
                 
-                const qrHolder = buildFrameStructure(downloadWrapper, true); // Bangun frame resolusi tinggi
-                qrCodeInstance.append(qrHolder); // Gambar QR code resolusi tinggi di dalamnya
+                const qrHolder = buildFrameStructure(downloadWrapper, true);
+                qrCodeInstance.append(qrHolder);
                 document.body.appendChild(downloadWrapper);
 
-                // Gunakan html2canvas untuk mengambil gambar dari kontainer sementara
                 html2canvas(downloadWrapper, { backgroundColor: null }).then(canvas => {
                     const link = document.createElement('a');
                     link.download = `qr-code-pro-${Date.now()}.png`;
                     link.href = canvas.toDataURL("image/png");
                     link.click();
-                    document.body.removeChild(downloadWrapper); // Hapus kontainer setelah selesai
+                    document.body.removeChild(downloadWrapper);
                 }).catch(error => {
                     displayMessage('error', 'Gagal Mengunduh', 'Terjadi kesalahan saat membuat file gambar.');
                     console.error("Download Error:", error);
