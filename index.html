@@ -81,21 +81,77 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.js"></script>
     
     <style>
-        /* [PERBAIKAN] Penyesuaian navbar agar tidak tertutup oleh iframe running text */
+        /* [PERBAIKAN] Penyesuaian navbar agar tidak tertutup oleh running text */
         #navbar.scrolled {
-            top: 48px; /* Sesuaikan dengan tinggi iframe running text */
+            top: 48px; /* Disesuaikan dengan tinggi running text container */
         }
         @media (max-width: 768px) {
             #navbar.scrolled { top: 48px; }
+        }
+
+        /* --- [PERBAIKAN & PENYEMPURNAAN] KODE RUNNING TEXT DIINTEGRASIKAN --- */
+        .marquee-container {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            color: #ffffff;
+            padding: 12px 0;
+            width: 100%;
+            height: 48px; /* Menetapkan tinggi eksplisit */
+            box-sizing: border-box; /* Memastikan padding termasuk dalam tinggi */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-bottom: 2px solid #5c6bc0;
+            overflow: hidden;
+            position: fixed; /* Diubah menjadi fixed agar selalu di atas */
+            top: 0;
+            left: 0;
+            z-index: 1002;
+            display: flex; /* Menggunakan flex untuk alignment */
+            align-items: center; /* Vertically center content */
+        }
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            will-change: transform;
+            animation: marquee 35s linear infinite;
+        }
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.95rem;
+            padding: 0 35px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+        .marquee-item .fas, .marquee-item .fab {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            color: #ffc107; /* Warna ikon kuning emas */
+            text-shadow: 0 0 5px rgba(255, 193, 7, 0.7);
+        }
+        .marquee-separator {
+            width: 2px;
+            height: 20px;
+            background-color: #7986cb;
+            border-radius: 1px;
+            margin: 0 10px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        @media (max-width: 768px) {
+            .marquee-item { font-size: 0.85rem; padding: 0 25px; }
         }
 
         /* CSS yang sudah ada tetap dipertahankan */
         /* --- [PERBAIKAN & PENYEMPURNAAN] DESAIN GALERI PRODUK --- */
         .gallery-grid {
             display: grid;
-            /* [REVISI] Menggunakan grid untuk layout 2 kolom di layar besar */
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px; /* Memberi jarak antar item */
+            gap: 25px;
         }
         
         .gallery-item {
@@ -111,7 +167,6 @@
             min-height: 0;
         }
         
-        /* [REVISI] Margin hanya diterapkan saat detail aktif untuk mencegah pergeseran layout */
         .gallery-detail-expanded.active {
             display: flex;
             margin-top: 15px; 
@@ -175,10 +230,10 @@
             border-radius: 8px; 
             margin-bottom: 20px; 
             transition: border-color 0.3s, box-shadow 0.3s;
-            color: #212529; /* [FIX] Warna font diperbaiki agar tidak samar */
+            color: #212529;
         }
         .search-modal-input::placeholder {
-            color: #888; /* [FIX] Warna placeholder juga diatur */
+            color: #888;
         }
         .search-modal-input:focus {
             border-color: #007bff;
@@ -193,7 +248,6 @@
         .search-result-info p { margin: 0; font-size: 0.85rem; color: #666; }
         .search-results-placeholder { text-align: center; color: #888; padding: 25px; font-size: 1rem; }
         
-        /* [IMPROVEMENT] Desain filter checklist */
         .search-filters {
             display: flex;
             flex-wrap: wrap;
@@ -201,9 +255,9 @@
             margin-bottom: 15px;
         }
         .search-filters label {
-            display: inline-flex; /* Menggunakan inline-flex untuk alignment ikon */
+            display: inline-flex;
             align-items: center;
-            gap: 8px; /* Jarak antara ikon dan teks */
+            gap: 8px;
             font-size: 0.9rem;
             background-color: #e9ecef;
             padding: 8px 16px;
@@ -218,7 +272,7 @@
             background-color: #d1dce5;
         }
         .search-filters input[type="checkbox"] {
-            display: none; /* Checkbox asli disembunyikan */
+            display: none;
         }
         .search-filters input[type="checkbox"]:checked + label {
             background-color: #007bff;
@@ -265,7 +319,7 @@
         /* --- [PENYEMPURNAAN TOTAL] DESAIN NOTIFIKASI BISNIS --- */
         .offer-notification {
             position: fixed;
-            bottom: 20px; /* [REVISI] Posisi disesuaikan agar lebih harmonis */
+            bottom: 20px;
             right: 20px;
             background: linear-gradient(135deg, #ffffff 0%, #f7f9fc 100%);
             color: #333;
@@ -276,7 +330,7 @@
             width: 350px;
             max-width: 90vw;
             z-index: 1001;
-            transform: translateX(calc(100% + 30px)); /* Animasi dari samping */
+            transform: translateX(calc(100% + 30px));
             opacity: 0;
             transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease;
             font-family: 'Poppins', sans-serif;
@@ -378,12 +432,11 @@
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: auto;      /* Mendorong tombol ke bagian bawah container flex */
-            padding-top: 15px;     /* Memberi jarak dari konten di atasnya */
-            flex-shrink: 0;        /* Mencegah tombol menyusut */
+            margin-top: auto;
+            padding-top: 15px;
+            flex-shrink: 0;
         }
 
-        /* [REVISI] Selector diperbarui untuk semua tombol di dalam .gallery-actions */
         .gallery-actions .btn-detail, 
         .gallery-actions .btn-order, 
         .gallery-actions .btn-preorder-toggle, 
@@ -392,12 +445,12 @@
         .gallery-actions .btn-whatsapp,
         .gallery-actions .btn-call {
             flex-grow: 1;
-            min-width: 120px; /* Lebar minimum untuk tombol */
-            text-decoration: none; /* Menghapus garis bawah dari link */
+            min-width: 120px;
+            text-decoration: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px; /* Jarak antara ikon dan teks */
+            gap: 8px;
             font-size: 0.85rem;
             padding: 10px;
             border-radius: 8px;
@@ -406,7 +459,6 @@
             transition: all 0.3s ease;
         }
         
-        /* [BARU] Styling untuk tombol WhatsApp dan Telepon yang dipindahkan */
         .gallery-actions .btn-whatsapp {
             background-color: #25D366;
             color: white;
@@ -416,7 +468,7 @@
             transform: translateY(-2px);
         }
         .gallery-actions .btn-call {
-            background-color: #4285F4; /* Warna biru yang berbeda */
+            background-color: #4285F4;
             color: white;
         }
         .gallery-actions .btn-call:hover {
@@ -428,7 +480,7 @@
         .gallery-image-container {
             position: relative;
             width: 100%;
-            padding-top: 100%; /* Membuat container rasio 1:1 */
+            padding-top: 100%;
             overflow: hidden;
             background-color: #f0f0f0;
             border-top-left-radius: 12px;
@@ -444,7 +496,7 @@
             object-fit: cover;
             opacity: 0;
             transition: opacity 0.8s ease-in-out;
-            cursor: zoom-in; /* Menunjukkan gambar bisa di-klik */
+            cursor: zoom-in;
         }
 
         .gallery-slider-image.active {
@@ -506,14 +558,13 @@
         }
 
         /* --- [PERBAIKAN TOTAL] CSS UNTUK PEMBELIAN MULTI-ITEM --- */
-        /* --- [FITUR BARU] Container untuk bagian harga yang bisa disembunyikan --- */
         .price-section-collapsible {
-            display: none; /* Disembunyikan secara default */
+            display: none;
             margin-top: 15px;
             animation: fadeIn 0.5s ease-in-out;
         }
         .price-section-collapsible.show {
-            display: block; /* Ditampilkan saat class 'show' ditambahkan */
+            display: block;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -683,7 +734,6 @@
         .contact-btn.maps:hover { background-color: #3367D6; }
         .contact-btn.generator { background-color: #28a745; }
         .contact-btn.generator:hover { background-color: #218838; }
-        /* --- [PENAMBAHAN BARU] --- */
         .contact-btn.android-app { background-color: #3DDC84; }
         .contact-btn.android-app:hover { background-color: #30b06a; }
 
@@ -1035,7 +1085,6 @@
             #productGeneratorForm { grid-template-columns: 1fr; }
             .search-modal-header h2 { font-size: 1.1rem; }
             .search-modal-input { padding: 12px 15px; font-size: 1rem; }
-            /* Memastikan grid kembali ke 1 kolom di layar kecil */
             .gallery-grid {
                 grid-template-columns: 1fr;
             }
@@ -1043,12 +1092,28 @@
     </style>
 </head>
 <body>
-    <iframe 
-        src="anekamarket.my.id/runningteks.html" 
-        style="width: 100%; height: 48px; border: none; position: sticky; top: 0; z-index: 1002; background-color: #1a237e;"
-        title="Informasi Promosi Berjalan">
-    </iframe>
-
+    <div class="marquee-container">
+        <div class="marquee-content">
+            <span class="marquee-item"><i class="fas fa-rocket"></i> KELOLA BISNIS TANPA KELUAR MODAL! Sistem Kasir & Aplikasi Usaha GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-mobile-alt"></i> DAPATKAN SEMUA FITUR PREMIUM: Kelola Stok, Kasir, Laporan - TANPA BIAYA!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-handshake"></i> BAGIAN DARI VISI MEMBERDAYAKAN UMKM: Semua Teknologi Kami BERIKAN GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-arrow-circle-right"></i> BUKTIKAN SENDIRI! Download Aplikasi Usaha GRATIS: anekamarket.my.id/aplikasiusaha.html</span>
+            <div class="marquee-separator"></div>
+            
+            <span class="marquee-item"><i class="fas fa-rocket"></i> KELOLA BISNIS TANPA KELUAR MODAL! Sistem Kasir & Aplikasi Usaha GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-mobile-alt"></i> DAPATKAN SEMUA FITUR PREMIUM: Kelola Stok, Kasir, Laporan - TANPA BIAYA!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-handshake"></i> BAGIAN DARI VISI MEMBERDAYAKAN UMKM: Semua Teknologi Kami BERIKAN GRATIS!</span>
+            <div class="marquee-separator"></div>
+            <span class="marquee-item"><i class="fas fa-arrow-circle-right"></i> BUKTIKAN SENDIRI! Download Aplikasi Usaha GRATIS: anekamarket.my.id/aplikasiusaha.html</span>
+            <div class="marquee-separator"></div>
+        </div>
+    </div>
+    
     <audio id="notificationSound" src="https://voca.ro/1c6gE71yCAsl" preload="auto"></audio>
     
     <audio id="bgMusic" loop autoplay>
@@ -2149,11 +2214,6 @@
                         return `Halo, saya ingin melakukan *${orderType}* untuk produk dari *${product.seller?.name || 'N/A'}*:\n\n*${product.title}*\n${itemsText}\n\nSatuan: ${details.unit}\n${totalText}\n\nBukti pemesanan sudah saya unduh. Mohon info lebih lanjut untuk proses selanjutnya. Terima kasih.`;
                     }
                     
-                    // [PENYEMPURNAAN SESUAI PERMINTAAN] Alur proses order cerdas: 
-                    // 1. Unduh Struk/Nota PDF secara otomatis.
-                    // 2. Langsung arahkan ke aplikasi WhatsApp pengguna dengan pesan yang sudah diisi.
-                    // Metode `https://wa.me/...` adalah cara standar dan paling ramah pengguna untuk membuka obrolan WhatsApp secara langsung, 
-                    // ini BUKAN API yang rumit dan berfungsi di semua perangkat (ponsel & desktop).
                     const processOrder = async (type) => {
                         const orderDetails = gatherOrderDetails(type);
                         if (orderDetails) {
@@ -2163,15 +2223,9 @@
 
                             if (confirm(confirmationMessage)) {
                                 playButtonSound();
-                                // Langkah 1: Generate dan picu unduh otomatis PDF. Fungsi ini menunggu hingga proses PDF selesai.
                                 await generateAndDownloadReceipt(productData, orderDetails);
                                 
-                                // Langkah 2: Setelah PDF diunduh, arahkan pengguna ke aplikasi WhatsApp.
-                                // Penundaan singkat untuk memastikan unduhan file dimulai tanpa masalah di browser.
                                 setTimeout(() => {
-                                  // Penggunaan `wa.me` akan membuka aplikasi WhatsApp (jika terinstal) atau WhatsApp Web.
-                                  // Pesan yang sudah dibuat sebelumnya (`generateWhatsAppMessage`) akan otomatis terisi,
-                                  // memudahkan konsumen dan pelaku usaha yang awam sekalipun.
                                   window.open(`https://wa.me/${productData.contact?.whatsapp}?text=${encodeURIComponent(generateWhatsAppMessage(productData, orderDetails))}`, '_blank');
                                 }, 500); 
                             }
@@ -2179,12 +2233,10 @@
                     };
 
                     if (target.closest('.btn-order')) {
-                        // Memproses pesanan langsung
                         await processOrder('PEMESANAN LANGSUNG');
                     }
                     
                     if (target.closest('.btn-preorder')) {
-                        // Memproses pesanan pre-order
                         await processOrder('PRE-ORDER');
                     }
                 });
