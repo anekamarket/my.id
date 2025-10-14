@@ -845,13 +845,13 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            © 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm">
                  <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -876,7 +876,7 @@
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
+            <span class="close-search-modal">×</span>
             <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput" aria-label="Input Pencarian Produk">
             <div class="search-results" id="searchResults" aria-live="polite">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari...</p>
@@ -893,11 +893,11 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
-        <span class="close-lightbox-modal">&times;</span>
+        <span class="close-lightbox-modal">×</span>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
+        <span class="close-notification" id="closeNotification">×</span>
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
@@ -932,7 +932,7 @@
                     seller: {
                         name: "Abang Joni",
                         link: "https://anekamarket.my.id/abangjoni",
-                        locationLink: "https://www.google.com/maps/search/?api=1&query=-7.983908,113.682617" // Menggunakan link Google Maps yang valid
+                        locationLink: "https://www.google.com/maps?q=-7.731845,113.9390115" // Menggunakan link Google Maps yang valid
                     },
                     badge: {
                         text: "Jasa Profesional",
@@ -950,9 +950,9 @@
                     details: {
                         description: "<br><strong>Butuh tukang handal dan berpengalaman untuk proyek bangunan Anda? Abang Joni solusinya!</strong><br><br>Dengan pengalaman sejak tahun 2000, Abang Joni telah terbukti profesional dalam mengerjakan berbagai proyek, mulai dari rumah minimalis, perumahan, kost-kostan, hingga perkantoran. Dikenal dengan karakter yang humoris dan sosial tinggi, Abang Joni tidak hanya memberikan hasil kerja yang rapi dan berkualitas, tetapi juga suasana kerja yang menyenangkan.<br><br>Siap bekerja dengan sistem harian, mingguan, bulanan, maupun borongan sesuai kebutuhan Anda. Hubungi langsung untuk konsultasi gratis dan dapatkan penawaran terbaik untuk proyek impian Anda! Harga bisa nego.",
                         images: [
-                            "https://i.imgur.com/Fz7VZoq.jpeg"
-                            "https://i.imgur.com/kje5fqp.jpeg"
-                            "https://i.imgur.com/hj6Zxh2.mp4"
+                            "https://i.imgur.com/Fz7VZoq.jpeg",
+                            "https://i.imgur.com/kje5fqp.jpeg",
+                            "https://i.imgur.com/hj6Zxh2.mp4",
                             "https://i.imgur.com/gVuL79s.jpeg",
                             "https://i.imgur.com/lrAPJFa.jpeg",
                             "https://i.imgur.com/hIl9fQz.jpeg",
@@ -1183,8 +1183,9 @@
                     let actionsHTML = '';
                     let locationButtonHTML = ''; // Variabel untuk tombol lokasi
 
-                    // Tambahkan tombol lokasi jika link tersedia
-                    if (product.seller && product.seller.locationLink && product.seller.locationLink !== "https://www.google.com/maps?q=-7.731845,113.9390115") {
+                    // *** PERBAIKAN 1: Logika untuk menampilkan tombol lokasi ***
+                    // Tambahkan tombol lokasi jika link tersedia (kondisi pengecekan URL spesifik dihapus)
+                    if (product.seller && product.seller.locationLink) {
                         locationButtonHTML = `<a href="${product.seller.locationLink}" target="_blank" class="btn-detail"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`;
                     }
 
@@ -1237,11 +1238,25 @@
                     
                     const sliderImages = product.details.images;
                     
-                    const mainSliderHTML = sliderImages.map((img, index) => `
-                        <div class="swiper-slide" data-index="${index}">
-                            <img src="${img}" alt="${product.title} - Gambar ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
-                        </div>
-                    `).join('');
+                    // *** PERBAIKAN 2: Logika untuk menampilkan video di galeri ***
+                    const mainSliderHTML = sliderImages.map((mediaUrl, index) => {
+                        if (mediaUrl.endsWith('.mp4')) {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <video controls style="width: 100%; height: 100%; object-fit: cover;">
+                                        <source src="${mediaUrl}" type="video/mp4">
+                                        Browser Anda tidak mendukung tag video.
+                                    </video>
+                                </div>
+                            `;
+                        } else {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <img src="${mediaUrl}" alt="${product.title} - Gambar ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
+                                </div>
+                            `;
+                        }
+                    }).join('');
 
                     const thumbSliderHTML = sliderImages.map(img => `
                         <div class="swiper-slide">
@@ -1584,4 +1599,4 @@
         });
     </script>
 </body>
-</html>htt
+</html>
