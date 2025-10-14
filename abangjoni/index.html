@@ -355,6 +355,7 @@
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none;
         }
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
@@ -927,21 +928,35 @@
                 {
                     id: "AJN-2025-JASA",
                     category: "construction",
-                    type: "promo",
-                    seller: { name: "Abang Joni", link: "https://anekamarket.my.id/abangjoni" },
-                    badge: { text: "Jasa Profesional", type: "promo" },
+                    type: "jasa",
+                    seller: {
+                        name: "Abang Joni",
+                        link: "https://anekamarket.my.id/abangjoni",
+                        locationLink: "https://www.google.com/maps/search/?api=1&query=-7.983908,113.682617" // Menggunakan link Google Maps yang valid
+                    },
+                    badge: {
+                        text: "Jasa Profesional",
+                        type: "service"
+                    },
+                    mainImage: "https://i.imgur.com/8SQGdWj.jpeg",
                     title: "Jasa Tukang Profesional Berpengalaman",
                     code: "AJN-2025-JASA",
+                    price: 0,
+                    originalPrice: null,
+                    discount: "Nego",
                     priceVariations: [],
                     units: ["proyek", "harian", "borongan"],
+                    defaultUnit: "proyek",
                     details: {
-                        description: "<strong>Butuh tukang handal dan berpengalaman untuk proyek bangunan Anda? Abang Joni solusinya!</strong><br><br>Dengan pengalaman sejak tahun 2000, Abang Joni telah terbukti profesional dalam mengerjakan berbagai proyek, mulai dari rumah minimalis, perumahan, kost-kostan, hingga perkantoran. Dikenal dengan karakter yang humoris dan sosial tinggi, Abang Joni tidak hanya memberikan hasil kerja yang rapi dan berkualitas, tetapi juga suasana kerja yang menyenangkan.<br><br>Siap bekerja dengan sistem harian, mingguan, bulanan, maupun borongan sesuai kebutuhan Anda. Hubungi langsung untuk konsultasi gratis dan dapatkan penawaran terbaik untuk proyek impian Anda!",
+                        description: "<br><strong>Butuh tukang handal dan berpengalaman untuk proyek bangunan Anda? Abang Joni solusinya!</strong><br><br>Dengan pengalaman sejak tahun 2000, Abang Joni telah terbukti profesional dalam mengerjakan berbagai proyek, mulai dari rumah minimalis, perumahan, kost-kostan, hingga perkantoran. Dikenal dengan karakter yang humoris dan sosial tinggi, Abang Joni tidak hanya memberikan hasil kerja yang rapi dan berkualitas, tetapi juga suasana kerja yang menyenangkan.<br><br>Siap bekerja dengan sistem harian, mingguan, bulanan, maupun borongan sesuai kebutuhan Anda. Hubungi langsung untuk konsultasi gratis dan dapatkan penawaran terbaik untuk proyek impian Anda! Harga bisa nego.",
                         images: [
+                            "https://i.imgur.com/Fz7VZoq.jpeg"
+                            "https://i.imgur.com/kje5fqp.jpeg"
+                            "https://i.imgur.com/hj6Zxh2.mp4"
                             "https://i.imgur.com/gVuL79s.jpeg",
                             "https://i.imgur.com/lrAPJFa.jpeg",
                             "https://i.imgur.com/hIl9fQz.jpeg",
-                            "https://i.imgur.com/RcQWBKO.jpeg",
-                            "https://i.imgur.com/8SQGdWj.jpeg"
+                            "https://i.imgur.com/RcQWBKO.jpeg"
                         ],
                         specs: [
                             { label: "Kode Jasa", value: "AJN-2025-JASA" },
@@ -955,7 +970,10 @@
                             { label: "Catatan", value: "Hubungi langsung untuk diskusi harga dan jadwal." }
                         ]
                     },
-                    contact: { whatsapp: "6285257633212", phone: "+6285257633212" }
+                    contact: {
+                        whatsapp: "6285257633212",
+                        phone: "+6285257633212"
+                    }
                 }
             ];
 
@@ -1163,6 +1181,12 @@
                     
                     let pricingHTML = '';
                     let actionsHTML = '';
+                    let locationButtonHTML = ''; // Variabel untuk tombol lokasi
+
+                    // Tambahkan tombol lokasi jika link tersedia
+                    if (product.seller && product.seller.locationLink && product.seller.locationLink !== "https://www.google.com/maps?q=-7.731845,113.9390115") {
+                        locationButtonHTML = `<a href="${product.seller.locationLink}" target="_blank" class="btn-detail"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`;
+                    }
 
                     // LOGIKA BARU: Cek apakah produk ini barang atau jasa
                     if (product.priceVariations && product.priceVariations.length > 0) {
@@ -1208,7 +1232,7 @@
                         const whatsappMessage = `Halo ${product.seller.name}, saya tertarik dengan jasa Anda '${product.title}' (Kode: ${product.code}) yang saya lihat di Anekamarket. Mohon informasinya.`;
                         const whatsappLink = `https://wa.me/${product.contact.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
-                        actionsHTML = `<a href="${whatsappLink}" target="_blank" class="btn-order" style="text-decoration: none; justify-content: center; flex-grow: 2;"><i class="fab fa-whatsapp"></i> Hubungi untuk Penawaran</a>`;
+                        actionsHTML = `<a href="${whatsappLink}" target="_blank" class="btn-order" style="flex-grow: 2;"><i class="fab fa-whatsapp"></i> Hubungi untuk Penawaran</a>`;
                     }
                     
                     const sliderImages = product.details.images;
@@ -1239,7 +1263,8 @@
                             ${pricingHTML}
                             <div class="gallery-actions">
                                 ${actionsHTML}
-                                <button class="btn-detail" style="flex-grow: 1;"><i class="fas fa-info-circle"></i> Detail</button>
+                                ${locationButtonHTML}
+                                <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
                             </div>
                             <div class="gallery-detail-expanded">
                                 <div thumbsSlider="" class="swiper product-slider-thumbs">
@@ -1374,6 +1399,9 @@
                 }
 
                 if (e.target.closest('.btn-detail')) {
+                    // Cek agar tidak konflik dengan link lokasi
+                    if (e.target.closest('a')) return;
+                    
                     playSound();
                     const btn = e.target.closest('.btn-detail');
                     const expandedContent = card.querySelector('.gallery-detail-expanded');
@@ -1556,4 +1584,4 @@
         });
     </script>
 </body>
-</html>
+</html>htt
