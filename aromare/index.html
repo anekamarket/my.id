@@ -76,7 +76,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: url('https://i.imgur.com/qw8X3pD.jpeg') no-repeat center center/cover;
+            background: url('https://i.imgur.com/2pw5SOS.jpeg') no-repeat center center/cover;
             overflow: hidden;
         }
         
@@ -85,7 +85,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://i.imgur.com/qw8X3pD.jpeg') no-repeat center center/cover;
+            background: url('https://i.imgur.com/2pw5SOS.jpeg') no-repeat center center/cover;
             animation: kenburns 20s ease-in-out infinite alternate;
         }
         @keyframes kenburns {
@@ -408,13 +408,17 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background-color: #000; /* Added for video letterboxing */
         }
-        .product-slider-main .swiper-slide img {
+        .product-slider-main .swiper-slide img,
+        .product-slider-main .swiper-slide video {
             width: 100%;
             height: 100%;
             object-fit: contain;
             cursor: pointer;
-            transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
+        }
+        .product-slider-main .swiper-slide img {
+             transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
         }
         .product-slider-main .swiper-slide:hover img {
             transform: scale(1.05);
@@ -547,7 +551,7 @@
         /* Lightbox Swiper styles */
         #lightbox-swiper { width: 100%; height: 100%; }
         #lightbox-swiper .swiper-slide { display: flex; justify-content: center; align-items: center; }
-        #lightbox-swiper img { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
+        #lightbox-swiper img, #lightbox-swiper video { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
         #lightbox-swiper .swiper-button-next, #lightbox-swiper .swiper-button-prev { color: var(--white); }
 
         /* Offer Notification */
@@ -813,13 +817,13 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            © 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm">
                  <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -844,7 +848,7 @@
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
+            <span class="close-search-modal">×</span>
             <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput" aria-label="Input Pencarian Produk">
             <div class="search-results" id="searchResults" aria-live="polite">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari...</p>
@@ -861,11 +865,11 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
-        <span class="close-lightbox-modal">&times;</span>
+        <span class="close-lightbox-modal">×</span>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
+        <span class="close-notification" id="closeNotification">×</span>
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
@@ -918,7 +922,7 @@
                         "text": "Harga Hemat",
                         "type": "new"
                     },
-                    "mainImage": "https://i.imgur.com/qw8X3pD.jpeg",
+                    "mainImage": "https://i.imgur.com/2pw5SOS.jpeg",
                     "title": "Pempek Ikan Tenggiri Khas Palembang",
                     "code": "GPA-2025-4392",
                     "price": 17000,
@@ -934,8 +938,12 @@
                     "defaultUnit": "Gram",
                     "details": {
                         "description": "<strong>🐟 Pempek Aromare – Cita Rasa Palembang dalam Satu Kemasan</strong>\n<br>\nNikmati kelezatan autentik khas Palembang dengan Pempek Aromare, sajian pempek ikan tenggiri berkualitas dalam bentuk frozen food praktis. Satu kemasan berisi 4 varian favorit:\n\n<b>- Adaan – gurih dan beraroma rempah\n- Lenjer – tekstur kenyal yang klasik\n- Kulit – rasa khas dengan sentuhan renyah\n- Kapal Selam Mini – Gurih Nikmat\n</b>\n💧Dilengkapi dengan pilihan kuah cuko khas Palembang:\n<b>- Pedas 🔥 – untuk pencinta sensasi ekstra\n- Sedang – pas di lidah semua kalangan\n- Tidak Pedas – tetap nikmat tanpa rasa menyengat</b>\n\n<i>📦 Berat bersih: 190 gram</i>\n<b>❄️ Cocok untuk stok di freezer, tinggal goreng dan sajikan!</b>\n",
-                        "images": [
-                            "https://i.imgur.com/qw8X3pD.jpeg"
+                        "media": [
+                            { "type": "image", "src": "https://i.imgur.com/2pw5SOS.jpeg", "thumb": "https://i.imgur.com/2pw5SOS.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/yornurz.jpeg", "thumb": "https://i.imgur.com/yornurz.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/QDgKZXC.jpeg", "thumb": "https://i.imgur.com/QDgKZXC.jpeg" },
+                            { "type": "video", "src": "https://i.imgur.com/2HPwOP7.mp4", "thumb": "https://i.imgur.com/qw8X3pD.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/qw8X3pD.jpeg", "thumb": "https://i.imgur.com/qw8X3pD.jpeg" }
                         ],
                         "specs": []
                     },
@@ -1161,17 +1169,28 @@
                             </div>
                         </div>`).join('');
                     
-                    const sliderImages = product.details.images && product.details.images.length > 0 ? product.details.images : [product.mainImage];
-                    
-                    const mainSliderHTML = sliderImages.map((img, index) => `
-                        <div class="swiper-slide" data-index="${index}">
-                            <img src="${img}" alt="${product.title} - Gambar ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
-                        </div>
-                    `).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
 
-                    const thumbSliderHTML = sliderImages.map(img => `
+                    const mainSliderHTML = mediaItems.map((media, index) => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <video controls playsinline loop muted>
+                                        <source src="${media.src}" type="video/mp4">
+                                        Browser Anda tidak mendukung tag video.
+                                    </video>
+                                </div>`;
+                        } else { // 'image'
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <img src="${media.src}" alt="${product.title} - Media ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
+                                </div>`;
+                        }
+                    }).join('');
+
+                    const thumbSliderHTML = mediaItems.map(media => `
                         <div class="swiper-slide">
-                            <img src="${img}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
+                            <img src="${media.thumb}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
                         </div>
                     `).join('');
 
@@ -1331,9 +1350,21 @@
                     const initialIndex = parseInt(clickedSlide.dataset.index, 10);
                     
                     const lightboxWrapper = document.getElementById('lightbox-swiper-wrapper');
-                    const images = product.details.images && product.details.images.length > 0 ? product.details.images : [product.mainImage];
-                    lightboxWrapper.innerHTML = images.map(img => `
-                        <div class="swiper-slide"><img src="${img}" alt="Gambar diperbesar"></div>`).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
+                    
+                    lightboxWrapper.innerHTML = mediaItems.map(media => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide">
+                                    <video controls playsinline>
+                                        <source src="${media.src}" type="video/mp4">
+                                    </video>
+                                </div>`;
+                        } else { // 'image'
+                            return `<div class="swiper-slide"><img src="${media.src}" alt="Gambar diperbesar"></div>`;
+                        }
+                    }).join('');
+
 
                     lightboxModal.classList.add('show');
 
@@ -1396,7 +1427,7 @@
                     const filteredProducts = products.filter(p => p.title.toLowerCase().includes(query) || p.code.toLowerCase().includes(query) || p.seller.name.toLowerCase().includes(query));
                     
                     if (filteredProducts.length > 0) {
-                        const mainImage = (p) => (p.details.images && p.details.images.length > 0) ? p.details.images[0] : p.mainImage;
+                        const mainImage = (p) => (p.details.media && p.details.media.length > 0) ? p.details.media[0].thumb : p.mainImage;
                         searchResults.innerHTML = filteredProducts.map(p => `
                             <a href="#product-${p.id}" class="search-result-item">
                                 <img src="${mainImage(p)}" class="search-result-image" alt="${p.title}" loading="lazy">
