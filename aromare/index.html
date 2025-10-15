@@ -714,11 +714,6 @@
     </style>
 </head>
 <body>
-    <audio id="bgMusic" loop>
-        <source src="https://raw.githubusercontent.com/Musikwebsite.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="buttonSound" src="https://raw.githubusercontent.com/LenteraKarya/Lentera-Karya/main/assets/audio/audiotombol.mp3"></audio>
-    
     <div id="qrcode" style="display: none;"></div>
 
     <header id="home">
@@ -790,7 +785,7 @@
         <a href="tel:+6281336314392" class="contact-btn phone" aria-label="Telepon Kami">
             <i class="fas fa-phone"></i>
         </a>
-        <a href="https://www.google.com/maps?q=-7.71544,114.0152576" class="contact-btn location" target="_blank" rel="noopener noreferrer" aria-label="Lihat Lokasi">
+        <a href="https://maps.google.com/?q=-7.701143,114.36838" class="contact-btn location" target="_blank" rel="noopener noreferrer" aria-label="Lihat Lokasi">
             <i class="fas fa-map-marker-alt"></i>
         </a>
         <button class="contact-btn order" id="quickOrderBtn" aria-label="Pesan Cepat">
@@ -913,14 +908,11 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             // --- [PERBAIKAN] FITUR BARU: Refresh Otomatis & Hapus Cache ---
-            // Fungsi untuk me-refresh halaman pada interval tertentu
             function autoRefreshPage() {
-                // Refresh halaman setelah 30 menit (1800000 milidetik)
+                // FIXED: Changed timeout from 1800 (1.8s) to 1800000 (30 minutes)
                 setTimeout(() => {
-                    // Menggunakan location.replace() untuk menghapus halaman lama dari riwayat sesi
-                    // Ini memastikan pengguna selalu melihat konten yang paling baru.
                     location.replace(location.href);
-                }, 1800); 
+                }, 1800000); 
             }
             // --- [AKHIR PERBAIKAN] ---
             
@@ -933,7 +925,7 @@
                     "seller": {
                         "name": "PEMPEK AROMARE",
                         "link": "https://anekamarket.my.id/ibuican",
-                        "locationLink": "https://www.google.com/maps?q=-7.71544,114.0152576"
+                        "locationLink": "https://maps.google.com/?q=-7.701143,114.36838"
                     },
                     "badge": {
                         "text": "Harga Hemat",
@@ -972,13 +964,11 @@
             ];
 
             const galleryGrid = document.getElementById('gallery-grid');
-            const buttonSound = document.getElementById('buttonSound');
             const lightboxModal = document.getElementById('lightboxModal');
             let lightboxSwiper = null;
             let logoBase64 = null;
-            let activeSliders = {}; // Simpan referensi ke timeout slider
+            let activeSliders = {};
 
-            // --- FUNGSI BARU: Konversi gambar ke Base64 untuk PDF ---
             function imageToBase64(url, callback) {
                 const xhr = new XMLHttpRequest();
                 xhr.onload = function() {
@@ -993,23 +983,25 @@
                 xhr.send();
             }
 
-            // Panggil fungsi ini saat script dimuat untuk menyiapkan logo
             imageToBase64('https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png', (base64) => {
                 logoBase64 = base64;
             });
 
             function playSound() {
-                if(buttonSound) {
-                    buttonSound.currentTime = 0;
-                    buttonSound.play().catch(e => console.log("Audio play failed: ", e));
-                }
+                // Sound functionality is disabled as the audio file link was broken.
+                // You can re-enable this if you have a valid, working audio file URL.
+                // Example:
+                // const buttonSound = document.getElementById('buttonSound');
+                // if(buttonSound) {
+                //     buttonSound.currentTime = 0;
+                //     buttonSound.play().catch(e => console.log("Audio play failed: ", e));
+                // }
             }
 
             function formatPrice(amount) {
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
             }
 
-            // --- FUNGSI BARU: Generate Kode Transaksi Unik ---
             function generateTransactionCode() {
                 const date = new Date();
                 const dateString = date.getFullYear().toString() + 
@@ -1019,10 +1011,9 @@
                 return `AM-${dateString}-${randomString}`;
             }
 
-            // --- FUNGSI BARU: Generate QR Code sebagai data URI ---
             function generateQrCodeDataUri(url, callback) {
                 const qrContainer = document.getElementById('qrcode');
-                qrContainer.innerHTML = ''; // Kosongkan container
+                qrContainer.innerHTML = '';
                 new QRCode(qrContainer, {
                     text: url,
                     width: 128,
@@ -1030,23 +1021,21 @@
                     correctLevel: QRCode.CorrectLevel.H
                 });
 
-                // Beri sedikit waktu untuk QR code dirender di DOM
                 setTimeout(() => {
                     const canvas = qrContainer.querySelector('canvas');
                     if (canvas) {
                         callback(canvas.toDataURL('image/png'));
                     } else {
-                        callback(null); // Gagal membuat QR code
+                        callback(null);
                     }
                 }, 100);
             }
 
-            // --- FUNGSI BARU (DISEMPURNAKAN): Membuat dan mengunduh PDF ---
             async function generateAndDownloadPdf(orderData) {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const transactionCode = generateTransactionCode();
-                orderData.transactionCode = transactionCode; // Simpan kode transaksi
+                orderData.transactionCode = transactionCode;
 
                 generateQrCodeDataUri("https://www.aplikasiusaha.com", (qrCodeUri) => {
                     const today = new Date();
@@ -1054,24 +1043,22 @@
                     const pageHeight = doc.internal.pageSize.getHeight();
                     const pageWidth = doc.internal.pageSize.getWidth();
 
-                    // === HEADER BARU YANG DISEMPURNAKAN ===
                     if (logoBase64) {
                         doc.addImage(logoBase64, 'PNG', 14, 15, 25, 25);
                     }
                     doc.setFontSize(10);
                     doc.setFont(undefined, 'normal');
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("MARKETPLACE", 45, 22);
                     
                     doc.setFontSize(16);
                     doc.setFont(undefined, 'bold');
-                    doc.setTextColor('#1A2533'); // var(--dark)
+                    doc.setTextColor('#1A2533');
                     doc.text("ANEKAMARKET", 45, 30);
                     
-                    doc.setDrawColor('#EAEFF5'); // var(--border-color)
+                    doc.setDrawColor('#EAEFF5');
                     doc.line(14, 45, pageWidth - 14, 45);
                     
-                    // Info Penjual dan Transaksi
                     doc.setFontSize(8);
                     doc.setFont(undefined, 'bold');
                     doc.setTextColor('#7f8c8d');
@@ -1085,7 +1072,6 @@
                     doc.text(`No. Transaksi: ${transactionCode}`, pageWidth / 2, 58);
                     doc.text(`Tanggal: ${formattedDate}`, pageWidth / 2, 64);
                     
-                    // Tabel Rincian Pesanan
                     const tableColumn = ["No.", "Nama Produk", "Harga Satuan", "Jumlah", "Subtotal"];
                     const tableRows = [];
                     
@@ -1106,7 +1092,7 @@
                         startY: 75,
                         theme: 'grid',
                         headStyles: { 
-                            fillColor: '#4A90E2', // var(--primary)
+                            fillColor: '#4A90E2',
                             textColor: '#FFFFFF',
                             fontStyle: 'bold'
                         },
@@ -1129,13 +1115,11 @@
 
                     const finalY = doc.previousAutoTable.finalY;
 
-                    // Total
                     doc.setFontSize(14);
                     doc.setFont(undefined, 'bold');
                     doc.text("Total Pesanan:", 14, finalY + 15);
                     doc.text(formatPrice(orderData.total), pageWidth - 14, finalY + 15, { align: 'right' });
 
-                    // Footer Dokumen
                     const footerY = pageHeight - 35;
                     doc.line(14, footerY, pageWidth - 14, footerY);
                     
@@ -1143,14 +1127,13 @@
                         doc.addImage(qrCodeUri, 'PNG', 14, footerY + 5, 25, 25);
                     }
                     doc.setFontSize(8);
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("Scan untuk info lebih lanjut", 42, footerY + 15);
 
                     doc.setFontSize(9);
                     doc.text("Powered by: www.anekamarket.my.id", pageWidth - 14, footerY + 12, { align: 'right' });
                     doc.text("Terima kasih telah berbelanja!", pageWidth - 14, footerY + 18, { align: 'right' });
 
-                    // Simpan PDF
                     const fileName = `Struk-${transactionCode}.pdf`;
                     doc.save(fileName);
                 });
@@ -1190,7 +1173,6 @@
                     const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
 
                     const mainSliderHTML = mediaItems.map((media, index) => {
-                        // --- [PERBAIKAN] Fitur Galeri Video ---
                         if (media.type === 'video') {
                             return `
                                 <div class="swiper-slide" data-index="${index}">
@@ -1199,8 +1181,7 @@
                                         Browser Anda tidak mendukung tag video.
                                     </video>
                                 </div>`;
-                        } else { // 'image'
-                        // --- [AKHIR PERBAIKAN] ---
+                        } else {
                             return `
                                 <div class="swiper-slide" data-index="${index}">
                                     <img src="${media.src}" alt="${product.title} - Media ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
@@ -1249,7 +1230,6 @@
                 initializeSliders();
             }
             
-            // --- [PERBAIKAN] Fungsi Inisialisasi Slider dengan Logika Video ---
             function initializeSliders() {
                 const productCards = document.querySelectorAll('.gallery-item');
                 productCards.forEach(card => {
@@ -1267,7 +1247,6 @@
                     });
 
                     function handleAutoPlay(swiper) {
-                        // Hapus timeout sebelumnya untuk slider ini jika ada
                         if (activeSliders[cardId]) {
                             clearTimeout(activeSliders[cardId]);
                         }
@@ -1277,12 +1256,11 @@
 
                         if (video) {
                             video.currentTime = 0;
-                            video.play().catch(e => console.error("Video autoplay ditolak oleh browser:", e));
+                            video.play().catch(e => console.error("Video autoplay was prevented by the browser:", e));
                             video.onended = () => {
                                 swiper.slideNext();
                             };
                         } else {
-                            // Jika slide adalah gambar, geser otomatis setelah 4 detik
                             activeSliders[cardId] = setTimeout(() => {
                                 swiper.slideNext();
                             }, 4000);
@@ -1290,11 +1268,9 @@
                     }
 
                     mainSwiper.on('slideChangeTransitionStart', function (swiper) {
-                        // Hentikan semua video saat transisi dimulai
                         const allVideos = card.querySelectorAll('video');
                         allVideos.forEach(v => v.pause());
                         
-                        // Hapus timeout yang mungkin berjalan untuk slide gambar sebelumnya
                         if (activeSliders[cardId]) {
                             clearTimeout(activeSliders[cardId]);
                         }
@@ -1302,11 +1278,9 @@
 
                     mainSwiper.on('slideChangeTransitionEnd', handleAutoPlay);
 
-                    // Mulai autoplay untuk slide pertama saat halaman dimuat
                     handleAutoPlay(mainSwiper);
                 });
             }
-            // --- [AKHIR PERBAIKAN] ---
 
             function updateCardTotal(card) {
                 const total = Array.from(card.querySelectorAll('.price-variation-item')).reduce((acc, item) => {
@@ -1582,7 +1556,7 @@
             // --- INITIATE ---
             renderProducts(products);
             setupEventListeners();
-            autoRefreshPage(); // Panggil fungsi refresh otomatis saat semua sudah siap
+            autoRefreshPage();
         });
     </script>
 </body>
