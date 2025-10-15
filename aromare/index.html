@@ -365,11 +365,22 @@
             color: white; box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
         }
         .gallery-actions .btn-order:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5); }
+        
+        /* --- [PERBAIKAN] Desain Tombol Detail --- */
         .gallery-actions .btn-detail {
-            background-color: var(--light); color: var(--text-dark);
+            background-color: var(--white);
+            color: var(--text-dark);
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
         }
-        .gallery-actions .btn-detail:hover { background-color: #eaf0f6; transform: translateY(-3px); }
+        .gallery-actions .btn-detail:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
 
         /* --- IMPROVED Detail View with smooth transition --- */
         .gallery-detail-expanded {
@@ -581,7 +592,13 @@
         .contact-btn:hover { transform: scale(1.1) rotate(10deg); box-shadow: var(--shadow-strong); }
         .contact-btn.whatsapp { background-color: #25D366; }
         .contact-btn.phone { background-color: #34B7F1; }
-        .contact-btn.location { background-color: #007BFF; } /* Style for new location button */
+        
+        /* --- [PERBAIKAN] Desain Tombol Lokasi --- */
+        .contact-btn.location {
+            background: linear-gradient(45deg, #4285F4, #34A853);
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         .contact-btn.order { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; cursor: pointer; }
         
         /* --- [PERBAIKAN] Tombol Daftar Mengambang dengan Animasi --- */
@@ -959,6 +976,7 @@
             const lightboxModal = document.getElementById('lightboxModal');
             let lightboxSwiper = null;
             let logoBase64 = null;
+            let activeSliders = {}; // Simpan referensi ke timeout slider
 
             // --- FUNGSI BARU: Konversi gambar ke Base64 untuk PDF ---
             function imageToBase64(url, callback) {
@@ -1172,15 +1190,17 @@
                     const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
 
                     const mainSliderHTML = mediaItems.map((media, index) => {
+                        // --- [PERBAIKAN] Fitur Galeri Video ---
                         if (media.type === 'video') {
                             return `
                                 <div class="swiper-slide" data-index="${index}">
-                                    <video controls playsinline loop muted>
+                                    <video playsinline muted>
                                         <source src="${media.src}" type="video/mp4">
                                         Browser Anda tidak mendukung tag video.
                                     </video>
                                 </div>`;
                         } else { // 'image'
+                        // --- [AKHIR PERBAIKAN] ---
                             return `
                                 <div class="swiper-slide" data-index="${index}">
                                     <img src="${media.src}" alt="${product.title} - Media ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
@@ -1228,24 +1248,65 @@
                 });
                 initializeSliders();
             }
-
+            
+            // --- [PERBAIKAN] Fungsi Inisialisasi Slider dengan Logika Video ---
             function initializeSliders() {
                 const productCards = document.querySelectorAll('.gallery-item');
                 productCards.forEach(card => {
+                    const cardId = card.dataset.id;
                     if (card.querySelector('.product-slider-main').swiper) return;
 
                     const thumbsSwiper = new Swiper(card.querySelector('.product-slider-thumbs'), {
                         spaceBetween: 10, slidesPerView: 4, freeMode: true, watchSlidesProgress: true,
                     });
 
-                    new Swiper(card.querySelector('.product-slider-main'), {
+                    const mainSwiper = new Swiper(card.querySelector('.product-slider-main'), {
                         spaceBetween: 10,
                         navigation: { nextEl: card.querySelector('.swiper-button-next'), prevEl: card.querySelector('.swiper-button-prev'), },
                         thumbs: { swiper: thumbsSwiper, },
-                        autoplay: { delay: 3500, disableOnInteraction: false, },
                     });
+
+                    function handleAutoPlay(swiper) {
+                        // Hapus timeout sebelumnya untuk slider ini jika ada
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+
+                        const activeSlide = swiper.slides[swiper.activeIndex];
+                        const video = activeSlide.querySelector('video');
+
+                        if (video) {
+                            video.currentTime = 0;
+                            video.play().catch(e => console.error("Video autoplay ditolak oleh browser:", e));
+                            video.onended = () => {
+                                swiper.slideNext();
+                            };
+                        } else {
+                            // Jika slide adalah gambar, geser otomatis setelah 4 detik
+                            activeSliders[cardId] = setTimeout(() => {
+                                swiper.slideNext();
+                            }, 4000);
+                        }
+                    }
+
+                    mainSwiper.on('slideChangeTransitionStart', function (swiper) {
+                        // Hentikan semua video saat transisi dimulai
+                        const allVideos = card.querySelectorAll('video');
+                        allVideos.forEach(v => v.pause());
+                        
+                        // Hapus timeout yang mungkin berjalan untuk slide gambar sebelumnya
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+                    });
+
+                    mainSwiper.on('slideChangeTransitionEnd', handleAutoPlay);
+
+                    // Mulai autoplay untuk slide pertama saat halaman dimuat
+                    handleAutoPlay(mainSwiper);
                 });
             }
+            // --- [AKHIR PERBAIKAN] ---
 
             function updateCardTotal(card) {
                 const total = Array.from(card.querySelectorAll('.price-variation-item')).reduce((acc, item) => {
