@@ -840,13 +840,13 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            © 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm">
                  <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -871,7 +871,7 @@
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
+            <span class="close-search-modal">×</span>
             <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput" aria-label="Input Pencarian Produk">
             <div class="search-results" id="searchResults" aria-live="polite">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari...</p>
@@ -888,11 +888,11 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
-        <span class="close-lightbox-modal">&times;</span>
+        <span class="close-lightbox-modal">×</span>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
+        <span class="close-notification" id="closeNotification">×</span>
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
@@ -928,42 +928,50 @@
             // --- DATA PRODUK ---
             const products = [
                 {
-                    id: "JM-2025-0102",
-                    category: "hasil-bumi", type: "reguler",
-                    seller: { name: "UD Jaya Makmur", link: "https://anekamarket.my.id" },
-                    badge: { text: "Best Seller", type: "promo" },
-                    title: "Jual Beli Hasil Bumi & Rempah-Rempah",
-                    code: "JM-2025-0102",
-                    priceVariations: [
-                        { name: "Jagung (per Karung)", price: 200000 },
-                        { name: "Jagung (per Kg)", price: 5000 },
-                        { name: "Beras (per Karung)", price: 300000 },
-                        { name: "Beras (per Kg)", price: 15000 },
-                        { name: "Kopi (per Kg)", price: 25000 },
-                        { name: "Kemiri (per Kg)", price: 30000 },
-                        { name: "Kacang (per Kg)", price: 20000 }
+                    "id": "MCU-2025-2830",
+                    "category": "snack",
+                    "type": "promo",
+                    "seller": {
+                        "name": "Mochi UMA",
+                        "link": "https://www.anekamarket.my.id/mochiuma"
+                    },
+                    "badge": {
+                        "text": "Promo Spesial",
+                        "type": "promo"
+                    },
+                    "title": "Promo Aneka Kue Lezat Mochi Uma",
+                    "code": "MCU-2025-2830",
+                    "priceVariations": [
+                        { "name": "Pancake Durian", "price": 10000 },
+                        { "name": "Mochi (3pcs)", "price": 10000 },
+                        { "name": "Cireng Ayam Suwir", "price": 10000 },
+                        { "name": "Corndog Coklat (isi 3)", "price": 10000 }
                     ],
-                    details: {
-                        description: "<strong>UD Jaya Makmur</strong> adalah pusat jual beli hasil bumi dan rempah-rempah berkualitas di Situbondo. Kami menyediakan berbagai komoditas pertanian seperti jagung, beras, kopi, kemiri, dan kacang dengan harga kompetitif, baik dalam partai besar (karungan) maupun eceran (per kilogram).",
-                        images: [
-                            "https://i.imgur.com/fjnwYfW.jpeg",
-                            "https://i.imgur.com/gK6tS9n.jpeg",
-                            "https://i.imgur.com/rL4YNDM.jpeg",
-                            "https://i.imgur.com/gMvL8Uj.jpeg"
+                    "details": {
+                        "description": "<br><strong>PROMO SPESIAL!</strong> Mochi UMA menghadirkan paket promo aneka kue lezat dengan harga spesial. Nikmati berbagai pilihan kue premium dengan diskon menarik untuk waktu terbatas. Setiap produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Jangan lewatkan kesempatan ini untuk menikmati kue berkualitas dengan harga terjangkau!",
+                        "images": [
+                            "https://i.imgur.com/TPSWsZw.jpeg",
+                            "https://i.imgur.com/dlK9kfP.jpeg",
+                            "https://i.imgur.com/JsXOHCO.jpeg",
+                            "https://i.imgur.com/kJDDUy4.jpeg"
                         ],
-                        location: "https://maps.app.goo.gl/uFpP1k7XvWg258W68", // <-- LOKASI DITAMBAHKAN DI SINI
-                        specs: [
-                            { label: "Kode UMKM", value: "JM-2025-0102" },
-                            { label: "Nama UMKM", value: "UD Jaya Makmur" },
-                            { label: "Pemilik", value: "Bapak Suwari" },
-                            { label: "Alamat", value: "Krajan, RT.02/RW.07, Battal, Panji, Situbondo" },
-                            { label: "Kontak", value: "085257377575" },
-                            { label: "Layanan", value: "Jual Beli Hasil Bumi & Rempah" },
-                            { label: "Produk Utama", value: "Jagung, Beras, Kopi, Kemiri, Kacang" },
-                            { label: "Catatan", value: "Harga dapat berubah sewaktu-waktu mengikuti kondisi pasar." }
+                        "location": "https://maps.app.goo.gl/q8wg1wZA5gVUGgKi6",
+                        "specs": [
+                            { "label": "Kode Promo", "value": "MCU-2025-2830" },
+                            { "label": "Nama UMKM", "value": "Mochi UMA" },
+                            { "label": "Pemilik", "value": "ULink" },
+                            { "label": "Alamat", "value": "Jl. Wijaya Kusuma Samping Bidan Ika" },
+                            { "label": "Kontak", "value": "089679013099 | nurilaneeh@gmail.com" },
+                            { "label": "Media Sosial", "value": "TikTok @mochi.uma3" },
+                            { "label": "Daftar Promo", "value": "• Pancake Durian hanya Rp10.000<br>• Mochi 3pcs Rp10.000<br>• Cireng Ayam Suwir Rp10.000<br>• Corndog Coklat isi 3 Rp10.000" },
+                            { "label": "Periode Promo", "value": "Periode dapat berubah sewaktu-waktu" },
+                            { "label": "Catatan", "value": "Harga bisa berubah sewaktu-waktu" }
                         ]
                     },
-                    contact: { whatsapp: "6285257377575", phone: "+6285257377575" }
+                    "contact": {
+                        "whatsapp": "6289679013099",
+                        "phone": "+6289679013099"
+                    }
                 }
             ];
 
