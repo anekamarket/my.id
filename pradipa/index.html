@@ -345,13 +345,14 @@
             color: var(--dark);
         }
         
-        .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
-        .gallery-actions button {
+        .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 10px; }
+        .gallery-actions button, .gallery-actions a {
             flex: 1; padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none;
         }
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
@@ -369,6 +370,19 @@
             color: white; box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
         }
         .gallery-actions .btn-order:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5); }
+        
+        /* NEW: Location Button Style */
+        .gallery-actions .btn-location {
+            background-color: #27ae60; /* Green */
+            color: white;
+            box-shadow: 0 4px 20px rgba(39, 174, 96, 0.3);
+        }
+        .gallery-actions .btn-location:hover {
+            background-color: #229954;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+        }
+        
         .gallery-actions .btn-detail {
             background-color: var(--light); color: var(--text-dark);
             border: 1px solid var(--border-color);
@@ -666,6 +680,8 @@
             .logo span { font-size: 2.4rem; }
             .tagline { font-size: 1.2rem; }
             .nav-links a { margin: 0 12px; }
+            .gallery-actions { flex-wrap: wrap; }
+            .gallery-actions button, .gallery-actions a { font-size: 0.9rem; padding: 12px 10px; }
         }
 
         @media (max-width: 768px) {
@@ -919,23 +935,33 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- DATA PRODUK (TELAH DIPERBARUI UNTUK PRADIPA) ---
+            // --- [UPDATED] DATA PRODUK ---
             const products = [
                 {
                     id: "PRD-2025-2688",
                     category: "fishery",
                     type: "promo",
-                    seller: { name: "PRADIPA", link: "https://www.anekamarket.my.id/pradipa" },
+                    seller: {
+                        name: "PRADIPA",
+                        link: "https://www.anekamarket.my.id/pradipa",
+                        locationLink: "https://share.google/u64LsJkdOpu18onam"
+                    },
                     badge: { text: "Promosi", type: "promo" },
+                    mainImage: "https://i.imgur.com/ru1FKXW.jpeg",
                     title: "Produk Hasil Laut Segar Pradipa",
                     code: "PRD-2025-2688",
+                    price: 30000,
+                    originalPrice: null,
+                    discount: null,
                     priceVariations: [
                         { name: "Ikan Bogek/Mendut (per kg)", price: 35000 },
                         { name: "Ikan Mangla/Swangi (per kg)", price: 30000 },
                         { name: "Ikan Sebelah/Sulfis (per kg)", price: 35000 }
                     ],
+                    units: ["kg", "ekor", "pack"],
+                    defaultUnit: "kg",
                     details: {
-                        description: "PRADIPA menghadirkan hasil laut segar langsung dari perairan Panarukan. Kami menyediakan berbagai jenis ikan berkualitas tinggi yang ditangkap dengan metode ramah lingkungan. Setiap produk kami melalui proses seleksi ketat untuk memastikan kesegaran dan kualitas terbaik untuk pelanggan. Dengan pengalaman bertahun-tahun di bidang hasil laut, kami berkomitmen memberikan produk terbaik dengan harga kompetitif.",
+                        description: "<br><b>PRADIPA</b> menghadirkan hasil laut segar langsung dari perairan Panarukan. Kami menyediakan berbagai jenis ikan berkualitas tinggi yang ditangkap dengan metode ramah lingkungan. Setiap produk kami melalui proses seleksi ketat untuk memastikan kesegaran dan kualitas terbaik untuk pelanggan. Dengan pengalaman bertahun-tahun di bidang hasil laut, kami berkomitmen memberikan produk terbaik dengan harga kompetitif.",
                         images: [
                             "https://i.imgur.com/n2AkesD.jpeg",
                             "https://i.imgur.com/tupfVCl.jpeg",
@@ -1186,6 +1212,10 @@
 
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
+                    // --- [NEW] Location Button HTML ---
+                    const locationButtonHTML = product.seller.locationLink ? 
+                        `<a href="${product.seller.locationLink}" target="_blank" rel="noopener noreferrer" class="btn-location"><i class="fas fa-map-marker-alt"></i> Lokasi</a>` : '';
+
                     productCard.innerHTML = `
                         ${badgeHTML}
                         <div class="swiper product-slider-main">
@@ -1204,6 +1234,7 @@
                             </div>
                             <div class="gallery-actions">
                                 <button class="btn-order"><i class="fas fa-file-invoice"></i> Pesan & Struk</button>
+                                ${locationButtonHTML}
                                 <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
                             </div>
                             <div class="gallery-detail-expanded">
