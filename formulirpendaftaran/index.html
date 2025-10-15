@@ -12,7 +12,8 @@
         :root {
             --primary-color: #3a7bd5;
             --secondary-color: #00d2ff;
-            --dark-color: #2c3e50;
+            /* [PERUBAHAN] Mengganti --dark-color menjadi warna terang */
+            --dark-color: #f8f9fa; 
             --gray-color: #8a8a8a;
             --light-color: #f8f9fa;
             --white-color: #ffffff;
@@ -26,17 +27,16 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* [PENYEMPURNAAN] Menggunakan font Poppins */
             font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* [PENYEMPURNAAN] Latar Belakang Gradien Animasi "Aurora" */
         body {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
+            /* [PERUBAHAN] Warna teks utama diubah ke --dark-color (yang sudah diganti jadi terang) */
             color: var(--dark-color);
             line-height: 1.6;
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -50,12 +50,11 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* [PENYEMPURNAAN] Desain "Glassmorphism" untuk Kontainer */
         .container {
             max-width: 800px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.15); /* Latar belakang semi-transparan */
-            backdrop-filter: blur(12px); /* Efek blur utama */
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
@@ -65,7 +64,7 @@
         }
 
         .header {
-            /* Latar belakang header dihilangkan agar menyatu dengan efek kaca */
+            /* [PERUBAHAN] Warna teks header diubah ke --dark-color (terang) */
             color: var(--dark-color);
             padding: 30px;
             text-align: center;
@@ -80,7 +79,8 @@
         .header p {
             font-size: 1rem;
             font-weight: 300;
-            color: #34495e;
+            /* [PERUBAHAN] Warna subjudul diubah agar sedikit redup dari judul utama */
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .logo-container {
@@ -114,6 +114,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            /* [PERUBAHAN] Warna label diubah ke --dark-color (terang) */
             color: var(--dark-color);
             font-size: 0.95rem;
         }
@@ -123,7 +124,6 @@
             color: var(--error-color);
         }
 
-        /* [PENYEMPURNAAN] Desain Ulang Form Input */
         input, select, textarea {
             width: 100%;
             padding: 14px 18px;
@@ -132,12 +132,14 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.2);
+            /* [PERUBAHAN] Warna teks di dalam input diubah ke --dark-color (terang) */
             color: var(--dark-color);
             font-weight: 400;
         }
         
+        /* [PERUBAHAN] Warna placeholder diubah menjadi putih transparan */
         input::placeholder, textarea::placeholder {
-            color: #555;
+            color: rgba(255, 255, 255, 0.7);
         }
 
         input:focus, select:focus, textarea:focus {
@@ -147,10 +149,11 @@
             box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.2);
         }
 
+        /* [PERUBAHAN] Warna teks pada input readonly diubah menjadi lebih terang */
         input[readonly] {
             background-color: rgba(0, 0, 0, 0.1);
             cursor: not-allowed;
-            color: var(--gray-color);
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .checkbox-group {
@@ -164,7 +167,6 @@
         .checkbox-group input { width: auto; margin-right: 12px; }
         .checkbox-group label { margin-bottom: 0; font-size: 0.95rem; }
 
-        /* [PENYEMPURNAAN] Desain Ulang Tombol */
         .btn {
             display: inline-block;
             padding: 15px 30px;
@@ -197,6 +199,7 @@
             box-shadow: none;
         }
 
+        /* [PERUBAHAN] Warna teks notifikasi diubah menjadi gelap agar kontras dengan latar belakang terang */
         .notification {
             position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
@@ -207,6 +210,7 @@
             text-align: center; z-index: 1000; display: none;
             max-width: 400px; width: 90%;
             animation: fadeIn 0.5s ease-out;
+            color: #2c3e50; /* Warna teks gelap */
         }
         
         .overlay {
