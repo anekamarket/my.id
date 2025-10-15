@@ -354,12 +354,13 @@
         }
         
         .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
-        .gallery-actions button {
+        .gallery-actions button, .gallery-actions a {
             flex: 1; padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none;
         }
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
@@ -377,6 +378,18 @@
             color: white; box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
         }
         .gallery-actions .btn-order:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5); }
+        
+        .gallery-actions .btn-location {
+            background-color: #f39c12;
+            color: white;
+            box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4);
+        }
+        .gallery-actions .btn-location:hover {
+            background-color: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.5);
+        }
+
         .gallery-actions .btn-detail {
             background-color: var(--light); color: var(--text-dark);
             border: 1px solid var(--border-color);
@@ -951,66 +964,7 @@
             
             // --- DATA PRODUK (TELAH DIPERBARUI) ---
             const products = [
-                {
-                    id: "WPU-2025-0610",
-                    category: "food",
-                    type: "promo",
-                    seller: { name: "Warung Pak Untung", link: "https://anekamarket.my.id/pakuntung" },
-                    badge: { text: "Diskon Spesial", type: "promo" },
-                    title: "Menu Bakaran Spesial Pak Untung",
-                    code: "WPU-2025-0610",
-                    priceVariations: [
-                        { name: "Paket Ikan Bakar Komplit", price: 30000, originalPrice: 50000 },
-                        { name: "Paket Cumi Bakar Komplit", price: 30000, originalPrice: 50000 },
-                        { name: "Paket Udang Bakar Komplit", price: 30000, originalPrice: 50000 },
-                        { name: "Ikan Super (1 org) - 2 ons", price: 25000 },
-                        { name: "Ikan Super (1 org) - 3 ons", price: 30000 },
-                        { name: "Ikan Super (1 org) - 4 ons", price: 35000 },
-                        { name: "Ikan Super (1 org) - 5 ons", price: 45000 },
-                        { name: "Ikan Super (1 org) - 6 ons", price: 55000 },
-                        { name: "Ikan Super (1 org) - 7 ons", price: 60000 },
-                        { name: "Ikan Super (1 org) - 8 ons", price: 70000 },
-                        { name: "Ikan Super (1 org) - 9 ons", price: 80000 },
-                        { name: "Ikan Super (1 org) - 1 kg", price: 90000 },
-                        { name: "Ikan Super (2 org) - 2 ons", price: 30000 },
-                        { name: "Ikan Super (2 org) - 3 ons", price: 40000 },
-                        { name: "Ikan Super (2 org) - 4 ons", price: 50000 },
-                        { name: "Ikan Super (2 org) - 5 ons", price: 60000 },
-                        { name: "Ikan Super (2 org) - 6 ons", price: 65000 },
-                        { name: "Ikan Super (2 org) - 7 ons", price: 75000 },
-                        { name: "Ikan Super (2 org) - 8 ons", price: 85000 },
-                        { name: "Ikan Super (2 org) - 9 ons", price: 95000 },
-                        { name: "Ikan Super (2 org) - 1 kg", price: 100000 }
-                    ],
-                    details: {
-                        description: "Rasakan sensasi kuliner pesisir yang tak terlupakan di Warung Pak Untung! Terletak strategis di dekat destinasi Wisata Kampung Kerapu, kami menyajikan hidangan laut bakar segar dengan bumbu rahasia yang meresap sempurna. Nikmati paket komplit promo kami yang ramah di kantong atau pilih sendiri ikan super segar dengan berbagai ukuran sesuai selera Anda. Sambal khas Pak Untung yang pedas dan segar akan menyempurnakan setiap suapan. Sempurna untuk makan siang setelah berwisata atau makan malam bersama keluarga. Ayo mampir dan buktikan sendiri kelezatannya!",
-                        images: [
-                            "https://i.imgur.com/1Mvj3cv.jpeg",
-                            "https://i.imgur.com/54G3vZ8.jpeg",
-                            "https://i.imgur.com/jSYOe6m.jpeg",
-                            "https://i.imgur.com/YqGxIMK.jpeg",
-                            "https://i.imgur.com/2tbgQnd.jpeg",
-                            "https://i.imgur.com/aSEVqAp.jpeg",
-                            "https://i.imgur.com/v1kqfUt.jpeg",
-                            "https://i.imgur.com/8XfYID8.jpeg",
-                            "https://i.imgur.com/QjUO7gc.jpeg",
-                            "https://i.imgur.com/NgAvdi7.jpeg",
-                            "https://i.imgur.com/MOahwIU.jpeg",
-                            "https://i.imgur.com/vTbwJGv.jpeg"
-                        ],
-                        specs: [
-                            { label: "Kode Produk", value: "WPU-2025-0610" },
-                            { label: "Gerai", value: "Warung Pak Untung" },
-                            { label: "Pemilik", value: "Mas Eko" },
-                            { label: "Alamat", value: "Jalan Raya Gundil, sebelah barat Wisata Kampung Kerapu (selatan jalan)" },
-                            { label: "Kontak", value: "083826231962" },
-                            { label: "Menu Promo", value: "Paket Komplit (Ikan/Cumi/Udang) hanya Rp 30.000" },
-                            { label: "Lauk Tambahan", value: "Ikan Super segar berbagai ukuran (harga terpisah)" },
-                            { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
-                        ]
-                    },
-                    contact: { whatsapp: "6283826231962", phone: "+6283826231962" }
-                }
+                {"id":"WPU-2025-0610","category":"food","type":"resto","seller":{"name":"Warung Pak Untung","link":"https://anekamarket.my.id/pakuntung","locationLink":"https://maps.app.goo.gl/6xMBrsLe2WmuKRWX9"},"badge":{"text":"Diskon Spesial","type":"promo"},"mainImage":"https://i.imgur.com/1Mvj3cv.jpeg","title":"Menu Bakaran Spesial Warung Pak Untung","code":"WPU-2025-0610","price":30000,"originalPrice":50000,"discount":"40% OFF","priceVariations":[{"name":"Paket Hemat Komplit","price":30000},{"name":"Ikan Super (1 org) - 2 ons","price":25000},{"name":"Ikan Super (1 org) - 3 ons","price":30000},{"name":"Ikan Super (1 org) - 4 ons","price":35000},{"name":"Ikan Super (1 org) - 5 ons","price":45000},{"name":"Ikan Super (1 org) - 6 ons","price":55000},{"name":"Ikan Super (1 org) - 7 ons","price":60000},{"name":"Ikan Super (1 org) - 8 ons","price":70000},{"name":"Ikan Super (1 org) - 9 ons","price":80000},{"name":"Ikan Super (1 org) - 1 kg","price":90000},{"name":"Ikan Super (2 org) - 2 ons","price":30000},{"name":"Ikan Super (2 org) - 3 ons","price":40000},{"name":"Ikan Super (2 org) - 4 ons","price":50000},{"name":"Ikan Super (2 org) - 5 ons","price":60000},{"name":"Ikan Super (2 org) - 6 ons","price":65000},{"name":"Ikan Super (2 org) - 7 ons","price":75000},{"name":"Ikan Super (2 org) - 8 ons","price":85000},{"name":"Ikan Super (2 org) - 9 ons","price":95000},{"name":"Ikan Super (2 org) - 1 kg","price":100000}],"units":["porsi","kg","ons","ekor"],"defaultUnit":"porsi","details":{"description":"<br><strong>Diskon Spesial: Nikmati Sensasi Kuliner Laut Bakar di Warung Pak Untung!</strong><br>Cari tempat makan yang bikin penasaran? Mampir ke <strong>Warung Pak Untung</strong>! Terletak strategis di dekat destinasi Wisata Kampung Kerapu, kami menyajikan hidangan laut bakar segar dengan bumbu rahasia yang meresap sempurna hingga ke dalam daging.<br><br>🔥 <strong>PROMO SPESIAL!</strong> Jangan lewatkan paket komplit kami yang super hemat! Cukup dengan <strong>Rp 30.000</strong> saja dari harga normal Rp 50.000, Anda sudah bisa menikmati hidangan lezat yang bikin ketahihan.<br><br>Ingin yang lebih spesial? Pilih sendiri <strong>ikan super segar</strong> kami dengan berbagai ukuran sesuai selera Anda, cocok untuk dinikmati sendiri atau beramai-ramai. Setiap hidangan disajikan dengan sambal khas Pak Untung yang pedasnya nendang dan segar, dijamin akan menyempurnakan setiap suapan Anda.","images":["https://i.imgur.com/54G3vZ8.jpeg","https://i.imgur.com/jSYOe6m.jpeg","https://i.imgur.com/YqGxIMK.jpeg","https://i.imgur.com/2tbgQnd.jpeg","https://i.imgur.com/aSEVqAp.jpeg","https://i.imgur.com/v1kqfUt.jpeg","https://i.imgur.com/8XfYID8.jpeg","https://i.imgur.com/QjUO7gc.jpeg","https://i.imgur.com/NgAvdi7.jpeg","https://i.imgur.com/MOahwIU.jpeg","https://i.imgur.com/vTbwJGv.jpeg"],"specs":[{"label":"Kode Promo","value":"WPU-2025-0610"},{"label":"Nama Gerai","value":"Warung Pak Untung"},{"label":"Pemilik","value":"Mas Eko"},{"label":"Alamat","value":"Jalan Raya Gundil, sebelah barat Wisata Kampung Kerapu (selatan jalan)"},{"label":"Kontak","value":"083826231962"},{"label":"Menu Promo","value":"• Paket Hemat Komplit <s>Rp50.000</s> <strong>Rp30.000</strong> (Diskon 40%)"},{"label":"Lauk Tambahan","value":"• Ikan Super (1 Orang) mulai dari Rp25.000<br>• Ikan Super (2 Orang) mulai dari Rp30.000"},{"label":"Catatan","value":"Harga dapat berubah sewaktu-waktu tanpa pemberitahuan."}]},"contact":{"whatsapp":"6283826231962","phone":"+6283826231962"}}
             ];
 
             const galleryGrid = document.getElementById('gallery-grid');
@@ -1252,6 +1206,9 @@
 
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
+                    const locationLink = product.seller.locationLink;
+                    const locationButtonHTML = locationLink ? `<a href="${locationLink}" target="_blank" rel="noopener noreferrer" class="btn-location"><i class="fas fa-map-marker-alt"></i> Lokasi</a>` : '';
+
                     productCard.innerHTML = `
                         ${badgeHTML}
                         <div class="swiper product-slider-main">
@@ -1270,6 +1227,7 @@
                             </div>
                             <div class="gallery-actions">
                                 <button class="btn-order"><i class="fas fa-file-invoice"></i> Pesan & Struk</button>
+                                ${locationButtonHTML}
                                 <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
                             </div>
                             <div class="gallery-detail-expanded">
