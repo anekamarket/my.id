@@ -343,12 +343,13 @@
         }
         
         .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
-        .gallery-actions button {
+        .gallery-actions button, .gallery-actions a {
             flex: 1; padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none;
         }
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
@@ -906,10 +907,17 @@
                     id: "RIC-2025-0810",
                     category: "snack",
                     type: "promo",
-                    seller: { name: "Rengginang Situbondo Ibu Ican", link: "https://anekamarket.my.id/ibuican" },
+                    seller: {
+                        name: "Regginang Situbondo Ibu Ican",
+                        link: "https://anekamarket.my.id/rengginang-situbondo-ibu-ican",
+                        locationLink: "https://www.google.com/maps?q=-7.6393021,113.9997534"
+                    },
                     badge: { text: "Harga Hemat", type: "promo" },
                     title: "RENGGINANG ANEKA RASA",
                     code: "RIC-2025-0810",
+                    price: 18000,
+                    originalPrice: 20000,
+                    discount: "10%",
                     priceVariations: [
                         { name: "Renggginang Rasa Terasi", price: 8000 },
                         { name: "Renggginang Rasa Bawang", price: 8000 },
@@ -917,8 +925,10 @@
                         { name: "Renggginang Rasa Cumi", price: 8000 },
                         { name: "Renggginang Rasa Mix", price: 19000 }
                     ],
+                    units: ["pack 450gram"],
+                    defaultUnit: "pack",
                     details: {
-                        description: "<b>Rengginang Gurih Renyah</b> – <strong>Cita Rasa Tradisional yang Tak Pernah Lekang oleh Waktu</strong>\n\nNikmati kelezatan rengginang khas Nusantara yang dibuat dari beras ketan pilihan, diproses secara higienis, dan digoreng hingga renyah sempurna. \n\nCocok sebagai camilan keluarga, teman minum teh, atau oleh-oleh khas yang menggugah selera. Tersedia dalam berbagai varian rasa: Terasi,bawang,Udang dan Cumi pasti ketagihan!",
+                        description: "<br><b>Rengginang Gurih Renyah</b> – <strong>Cita Rasa Tradisional yang Tak Pernah Lekang oleh Waktu</strong>\n\nNikmati kelezatan rengginang khas Nusantara yang dibuat dari beras ketan pilihan, diproses secara higienis, dan digoreng hingga renyah sempurna. \n\nCocok sebagai camilan keluarga, teman minum teh, atau oleh-oleh khas yang menggugah selera. Tersedia dalam berbagai varian rasa: Terasi,bawang,Udang dan Cumi pasti ketagihan!",
                         images: [
                             "https://i.imgur.com/H3Lc1Qt.jpeg",
                             "https://i.imgur.com/mtQc5pc.jpeg",
@@ -928,7 +938,7 @@
                         ],
                         specs: [
                             { label: "Kode Produk", value: "RIC-2025-0810" },
-                            { label: "Nama UMKM", value: "Rengginang Situbondo Ibu Ican" },
+                            { label: "Nama UMKM", value: "Regginang Situbondo Ibu Ican" },
                             { label: "Kontak", value: "082338341476" },
                             { label: "Daftar Harga", value: "• Rasa Terasi Rp 8.000<br>• Rasa Bawang Rp 8.000<br>• Rasa Udang Rp 8.000<br>• Rasa Cumi Rp 8.000<br>• Rasa Mix Rp 19.000" },
                             { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
@@ -1139,6 +1149,9 @@
                     productCard.id = `product-${product.id}`;
 
                     const badgeHTML = product.badge ? `<div class="product-badge">${product.badge.text}</div>` : '';
+                    
+                    const locationButtonHTML = product.seller && product.seller.locationLink ? 
+                        `<a href="${product.seller.locationLink}" target="_blank" rel="noopener noreferrer" class="btn-detail"><i class="fas fa-map-marker-alt"></i> Lokasi</a>` : '';
 
                     const priceVariationsHTML = product.priceVariations.map(v => `
                         <div class="price-variation-item" data-price="${v.price}" data-name="${v.name}">
@@ -1188,6 +1201,7 @@
                             <div class="gallery-actions">
                                 <button class="btn-order"><i class="fas fa-file-invoice"></i> Pesan & Struk</button>
                                 <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
+                                ${locationButtonHTML}
                             </div>
                             <div class="gallery-detail-expanded">
                                 <div thumbsSlider="" class="swiper product-slider-thumbs">
