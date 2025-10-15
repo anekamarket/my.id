@@ -344,7 +344,7 @@
         }
         
         .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
-        .gallery-actions button {
+        .gallery-actions button, .gallery-actions a {
             flex: 1; padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
@@ -919,13 +919,17 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // --- DATA PRODUK ---
+            // --- DATA PRODUK (UPDATED) ---
             const products = [
                 {
                     id: "BNJ-2025-3184",
                     category: "food",
                     type: "all",
-                    seller: { name: "Bu Nju", link: "https://anekamarket.my.id/bunju" },
+                    seller: { 
+                        name: "Bu Nju", 
+                        link: "https://anekamarket.my.id/bunju",
+                        locationLink: "https://maps.app.goo.gl/sZbdiBAtanBBLGFd9" 
+                    },
                     badge: { text: "Produk Lokal", type: "promo" },
                     title: "Ikan Kering & Terasi Puger Premium",
                     code: "BNJ-2025-3184",
@@ -937,9 +941,9 @@
                         { name: "Ikan Kering (polos)", price: 65000 }
                     ],
                     details: {
-                        description: "<strong>Bu Nju</strong> menghadirkan produk ikan kering dan terasi Puger berkualitas premium dari Panarukan. Terasi kami diproduksi secara tradisional dengan kualitas terbaik, memiliki aroma khas dan rasa gurih autentik. Ikan kering kami diproses secara higienis dengan dua varian: siap goreng (sudah berbumbu) dan polos (tanpa bumbu). Semua produk dibuat dengan bahan pilihan dan pengolahan yang menjaga cita rasa asli. Cocok untuk berbagai masakan rumahan hingga usaha kuliner.",
+                        description: "<br><strong>Bu Nju</strong> menghadirkan produk ikan kering dan terasi Puger berkualitas premium dari Panarukan. Terasi kami diproduksi secara tradisional dengan kualitas terbaik, memiliki aroma khas dan rasa gurih autentik. Ikan kering kami diproses secara higienis dengan dua varian: siap goreng (sudah berbumbu) dan polos (tanpa bumbu). Semua produk dibuat dengan bahan pilihan dan pengolahan yang menjaga cita rasa asli. Cocok untuk berbagai masakan rumahan hingga usaha kuliner.",
                         images: [
-                            "https://i.imgur.com/Ra4CZgd.jpeg",
+                            "https://i.imgur.com/Ra4CZgd.jpeg", // Main image
                             "https://i.imgur.com/CV57qDP.jpeg",
                             "https://i.imgur.com/ImPrZJw.jpeg",
                             "https://i.imgur.com/eFnhNYu.jpeg"
@@ -949,9 +953,9 @@
                             { label: "Nama UMKM", value: "Bu Nju" },
                             { label: "Pemilik", value: "Riqi" },
                             { label: "Alamat", value: "Karangsari, Desa Kilensari, Kecamatan Panarukan" },
-                            { label: "Kontak", value: "082327600708 | vaiper.blood22@gmail.com" },
+                            { label: "Kontak", value: "082327600708" },
+                            { label: "Email", value: "vaiper.blood22@gmail.com" },
                             { label: "Media Sosial", value: "TikTok @seesaretadek" },
-                            { label: "Daftar Harga", value: "• Terasi Puger 1kg: Rp80.000<br>• Terasi Puger 1ons: Rp8.000<br>• Terasi Puger ½ons: Rp4.000<br>• Ikan kering berbumbu: Rp70.000/kg<br>• Ikan kering polos: Rp60.000/kg" },
                             { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
                         ]
                     },
@@ -1190,6 +1194,9 @@
 
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
+                    const locationButtonHTML = (product.seller && product.seller.locationLink) ?
+                        `<a href="${product.seller.locationLink}" target="_blank" rel="noopener noreferrer" class="btn-detail" style="text-decoration: none;"><i class="fas fa-map-marker-alt"></i> Lokasi</a>` : '';
+
                     productCard.innerHTML = `
                         ${badgeHTML}
                         <div class="swiper product-slider-main">
@@ -1208,7 +1215,8 @@
                             </div>
                             <div class="gallery-actions">
                                 <button class="btn-order"><i class="fas fa-file-invoice"></i> Pesan & Struk</button>
-                                <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
+                                ${locationButtonHTML}
+                                <button class="btn-detail" data-action="toggle-details"><i class="fas fa-info-circle"></i> Detail</button>
                             </div>
                             <div class="gallery-detail-expanded">
                                 <div thumbsSlider="" class="swiper product-slider-thumbs">
@@ -1330,9 +1338,9 @@
                     updateCardTotal(card);
                 }
 
-                if (e.target.closest('.btn-detail')) {
+                if (e.target.closest('[data-action="toggle-details"]')) {
                     playSound();
-                    const btn = e.target.closest('.btn-detail');
+                    const btn = e.target.closest('[data-action="toggle-details"]');
                     const expandedContent = card.querySelector('.gallery-detail-expanded');
                     const isVisible = expandedContent.classList.toggle('visible');
                     btn.innerHTML = isVisible ? '<i class="fas fa-chevron-up"></i> Sembunyikan' : '<i class="fas fa-info-circle"></i> Detail';
