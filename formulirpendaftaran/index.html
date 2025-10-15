@@ -312,13 +312,24 @@
                         <option value="UMKM">UMKM</option>
                         <option value="Jasa Service HP">Jasa Service HP</option>
                         <option value="Kuliner">Kuliner</option>
+                        <option value="Warung atau Resto">Warung atau Resto</option>
+                        <option value="Cafe">Cafe</option>
                         <option value="Retail">Retail</option>
                         <option value="Pertanian">Pertanian</option>
                         <option value="Perikanan">Perikanan</option>
                         <option value="Kerajinan">Kerajinan</option>
+                        <option value="Jasa Transportasi">Jasa Transportasi</option>
+                        <option value="Wisata">Wisata</option>
+                        <option value="Hotel">Hotel</option>
                         <option value="Lainnya">Lainnya</option>
                     </select>
                     <div class="error-message" id="kategori_usaha-error">Kategori usaha harus dipilih</div>
+                </div>
+
+                <div class="form-group" id="lainnya_keterangan_group" style="display: none;">
+                    <label for="keterangan_lainnya" class="required">Keterangan Kategori Lainnya</label>
+                    <textarea id="keterangan_lainnya" name="keterangan_lainnya" rows="2" placeholder="Jelaskan kategori usaha Anda"></textarea>
+                    <div class="error-message" id="keterangan_lainnya-error">Keterangan harus diisi jika memilih 'Lainnya'</div>
                 </div>
                 
                 <div class="form-row">
@@ -379,74 +390,92 @@
             document.getElementById('id_permohonan').value = generateIdPermohonan();
             document.getElementById('tanggal_pendaftaran').value = setTanggalPendaftaran();
             
-            // Validasi form
+            // Elemen-elemen form
             const form = document.getElementById('registrationForm');
-            const requiredFields = form.querySelectorAll('[required]');
             const checkbox = document.getElementById('agree');
             const submitBtn = document.getElementById('submitBtn');
+            const kategoriSelect = document.getElementById('kategori_usaha');
+            const lainnyaGroup = document.getElementById('lainnya_keterangan_group');
+            const keteranganLainnya = document.getElementById('keterangan_lainnya');
+
+            // [MODIFIKASI] Event listener untuk kategori usaha
+            kategoriSelect.addEventListener('change', function() {
+                if (this.value === 'Lainnya') {
+                    lainnyaGroup.style.display = 'block';
+                    keteranganLainnya.setAttribute('required', 'required');
+                } else {
+                    lainnyaGroup.style.display = 'none';
+                    keteranganLainnya.removeAttribute('required');
+                    keteranganLainnya.value = ''; // Kosongkan field jika disembunyikan
+                    hideError(keteranganLainnya, document.getElementById('keterangan_lainnya-error'));
+                }
+                validateForm(); // Validasi ulang form setiap kali kategori berubah
+            });
             
             // Validasi real-time
-            form.addEventListener('input', function() {
-                validateForm();
-            });
+            form.addEventListener('input', validateForm);
             
             // Validasi checkbox
-            checkbox.addEventListener('change', function() {
-                validateForm();
-            });
+            checkbox.addEventListener('change', validateForm);
             
             function validateForm() {
                 let allValid = true;
+                // [MODIFIKASI] Ambil field yang required setiap kali validasi dijalankan
+                const requiredFields = form.querySelectorAll('[required]');
                 
-                // Validasi field wajib
                 requiredFields.forEach(field => {
                     const errorElement = document.getElementById(`${field.id}-error`);
-                    
-                    if (field.type === 'text' || field.type === 'textarea') {
+                    let isValid = true;
+                    let errorMessage = '';
+
+                    if (field.type === 'text' || field.tagName.toLowerCase() === 'textarea') {
                         if (field.value.trim() === '') {
-                            showError(field, errorElement, 'Field ini harus diisi');
-                            allValid = false;
-                        } else {
-                            hideError(field, errorElement);
+                           isValid = false;
+                           errorMessage = 'Field ini harus diisi';
                         }
                     }
                     
                     if (field.id === 'nik') {
                         if (field.value.length !== 16 || isNaN(field.value)) {
-                            showError(field, errorElement, 'NIK harus 16 digit angka');
-                            allValid = false;
-                        } else {
-                            hideError(field, errorElement);
+                            isValid = false;
+                            errorMessage = 'NIK harus 16 digit angka';
                         }
                     }
                     
                     if (field.id === 'whatsapp') {
                         const pattern = /^08[0-9]{8,}$/;
                         if (!pattern.test(field.value)) {
-                            showError(field, errorElement, 'Nomor WhatsApp harus dimulai dengan 08 dan minimal 10 digit');
-                            allValid = false;
-                        } else {
-                            hideError(field, errorElement);
+                           isValid = false;
+                           errorMessage = 'Nomor WhatsApp harus dimulai dengan 08 dan minimal 10 digit';
                         }
                     }
                     
-                    if (field.id === 'email' && field.value !== '') {
-                        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        if (!pattern.test(field.value)) {
-                            showError(field, errorElement, 'Format email tidak valid');
-                            allValid = false;
-                        } else {
-                            hideError(field, errorElement);
-                        }
+                    if (field.tagName.toLowerCase() === 'select' && field.value === '') {
+                        isValid = false;
+                        errorMessage = 'Field ini harus dipilih';
                     }
-                    
-                    if (field.tagName === 'SELECT' && field.value === '') {
-                        showError(field, errorElement, 'Field ini harus dipilih');
-                        allValid = false;
-                    } else if (field.tagName === 'SELECT' && field.value !== '') {
+
+                    if(isValid) {
                         hideError(field, errorElement);
+                    } else {
+                        showError(field, errorElement, errorMessage);
+                        allValid = false;
                     }
                 });
+                
+                // Validasi email secara terpisah karena tidak wajib
+                const emailField = document.getElementById('email');
+                if (emailField.value !== '') {
+                    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!pattern.test(emailField.value)) {
+                        showError(emailField, document.getElementById('email-error'), 'Format email tidak valid');
+                        allValid = false;
+                    } else {
+                        hideError(emailField, document.getElementById('email-error'));
+                    }
+                } else {
+                    hideError(emailField, document.getElementById('email-error'));
+                }
                 
                 // Cek apakah checkbox dicentang
                 if (!checkbox.checked) {
@@ -460,14 +489,18 @@
             }
             
             function showError(field, errorElement, message) {
-                field.style.borderColor = 'var(--error-color)';
-                errorElement.textContent = message;
-                errorElement.style.display = 'block';
+                if (field && errorElement) {
+                    field.style.borderColor = 'var(--error-color)';
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                }
             }
             
             function hideError(field, errorElement) {
-                field.style.borderColor = '#ddd';
-                errorElement.style.display = 'none';
+                if (field && errorElement) {
+                    field.style.borderColor = '#ddd';
+                    errorElement.style.display = 'none';
+                }
             }
             
             // Submit form
@@ -494,9 +527,15 @@
                 const email = document.getElementById('email').value || 'Tidak diisi';
                 const namaUsaha = document.getElementById('nama_usaha').value;
                 const alamatUsaha = document.getElementById('alamat_usaha').value;
-                const kategoriUsaha = document.getElementById('kategori_usaha').value;
+                let kategoriUsaha = document.getElementById('kategori_usaha').value;
                 const idPermohonan = document.getElementById('id_permohonan').value;
                 const tanggalPendaftaran = document.getElementById('tanggal_pendaftaran').value;
+
+                // [MODIFIKASI] Tambahkan keterangan jika kategori adalah "Lainnya"
+                if (kategoriUsaha === 'Lainnya') {
+                    const keterangan = document.getElementById('keterangan_lainnya').value;
+                    kategoriUsaha = `Lainnya (Keterangan: ${keterangan})`;
+                }
                 
                 // Format pesan WhatsApp
                 const message = `*PENDAFTARAN MITRA ANEKAMARKET*
@@ -528,9 +567,6 @@ Terima kasih telah bergabung dengan ANEKAMARKET!`;
                 
                 // Buka WhatsApp di tab baru
                 window.open(whatsappURL, '_blank');
-                
-                console.log('Data dikirim ke WhatsApp: 085647709114');
-                console.log('Pesan WhatsApp:', message);
             }
             
             // Tombol OK di notifikasi
