@@ -346,12 +346,13 @@
         }
         
         .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
-        .gallery-actions button {
+        .gallery-actions button, .gallery-actions a {
             flex: 1; padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none;
         }
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
@@ -928,7 +929,7 @@
                     id: "UDJ-2025-3038",
                     category: "agriculture",
                     type: "all",
-                    seller: { name: "UD Jaya Makmur", link: "https://anekamarket.my.id/jayamakmur" },
+                    seller: { name: "UD Jaya Makmur", link: "https://anekamarket.my.id/jayamakmur", locationLink: "https://maps.app.goo.gl/9K9YW9tp8ntFTAMo9" },
                     badge: { text: "Grosir", type: "rental" },
                     title: "Garam Krosok Geo Membran Premium",
                     code: "UDJ-2025-3038",
@@ -937,7 +938,7 @@
                         { name: "3.5 Ton (Minimal Order)", price: 8750000 }
                     ],
                     details: {
-                        description: "<strong>UD Jaya Makmur</strong> menghadirkan garam krosok geo membran premium berkualitas tinggi dari Panarukan. Garam kami diproduksi dengan metode geo membran yang menghasilkan garam dengan kadar NaCl tinggi (minimal 95%) dan rendah pengotor. Kami menyediakan garam dengan kualitas konsumsi dan industri, dikemas secara higienis dan siap dikirim ke seluruh Indonesia. Minimal pembelian 3.500 kg dengan layanan pengantaran langsung ke lokasi Anda. Garam kami cocok untuk berbagai kebutuhan mulai dari industri, rumah tangga, hingga pengolahan makanan. Anda juga bisa order ke Nomor Whatsapp : 082244014323",
+                        description: "<br><strong>UD Jaya Makmur</strong> menghadirkan garam krosok geo membran premium berkualitas tinggi dari Panarukan. Garam kami diproduksi dengan metode geo membran yang menghasilkan garam dengan kadar NaCl tinggi (minimal 95%) dan rendah pengotor. Kami menyediakan garam dengan kualitas konsumsi dan industri, dikemas secara higgienie dan siap dikirim ke seluruh Indonesia. Minimal pembelian 3.500 kg dengan layanan pengantaran langsung ke lokasi Anda. Garam kami cocok untuk berbagai kebutuhan mulai dari industri, rumah tangga, hingga pengolahan makanan. ",
                         images: [
                             "https://i.imgur.com/fjnwYfW.jpeg",
                             "https://i.imgur.com/WFbAET3.jpeg",
@@ -1191,6 +1192,9 @@
 
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
+                    const locationButtonHTML = product.seller.locationLink ? 
+                        `<a href="${product.seller.locationLink}" target="_blank" rel="noopener noreferrer" class="btn-detail"><i class="fas fa-map-marker-alt"></i> Lokasi</a>` : '';
+
                     productCard.innerHTML = `
                         ${badgeHTML}
                         <div class="swiper product-slider-main">
@@ -1209,6 +1213,7 @@
                             </div>
                             <div class="gallery-actions">
                                 <button class="btn-order"><i class="fas fa-file-invoice"></i> Pesan & Struk</button>
+                                ${locationButtonHTML}
                                 <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
                             </div>
                             <div class="gallery-detail-expanded">
@@ -1332,6 +1337,8 @@
                 }
 
                 if (e.target.closest('.btn-detail')) {
+                    // Make sure not to trigger this for the location link if it has the same class
+                    if(e.target.closest('a.btn-detail')) return;
                     playSound();
                     const btn = e.target.closest('.btn-detail');
                     const expandedContent = card.querySelector('.gallery-detail-expanded');
