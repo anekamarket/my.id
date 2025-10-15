@@ -16,8 +16,8 @@
             --white-color: #ffffff;
             --success-color: #28a745;
             --error-color: #dc3545;
-            --border-radius: 8px;
-            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px; /* Diperhalus */
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Dibuat lebih lembut */
         }
 
         * {
@@ -28,7 +28,8 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f4f7fa 0%, #d6e4f3 100%);
+            background-color: #e0eafc;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -39,7 +40,19 @@
             line-height: 1.6;
         }
 
+        /* [PERBAIKAN] Latar Belakang Partikel */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
         .container {
+            position: relative; /* Agar di atas particles */
+            z-index: 1;
             max-width: 800px;
             width: 100%;
             background-color: var(--white-color);
@@ -47,18 +60,22 @@
             box-shadow: var(--box-shadow);
             overflow: hidden;
             margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
+        /* [PERBAIKAN] Desain Ulang Header (Kop) */
         .header {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(90deg, #2c3e50, #4b6cb7); /* Gradien baru yang kontras */
             color: var(--white-color);
-            padding: 25px 30px;
+            padding: 30px;
             text-align: center;
         }
 
         .header h1 {
             font-size: 1.8rem;
             margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px; /* Spasi huruf untuk estetika */
         }
 
         .header p {
@@ -76,10 +93,11 @@
         .logo-img {
             max-width: 180px;
             height: auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2)); /* Efek bayangan pada logo */
         }
 
         .form-container {
-            padding: 30px;
+            padding: 30px 40px;
         }
 
         .form-group {
@@ -113,13 +131,15 @@
             border: 1px solid #ddd;
             border-radius: var(--border-radius);
             font-size: 1rem;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease-in-out; /* Transisi diperhalus */
+            background-color: #fdfdfd;
         }
 
         input:focus, select:focus, textarea:focus {
             border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(13, 71, 161, 0.2);
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15);
+            transform: scale(1.01);
         }
 
         input[readonly] {
@@ -152,24 +172,27 @@
             padding: 14px 28px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            font-weight: 600; /* Dibuat lebih tebal */
+            transition: all 0.4s ease;
             cursor: pointer;
             border: none;
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-align: center;
             width: 100%;
         }
 
+        /* [PERBAIKAN] Tombol dengan Gradien Animasi */
         .btn-primary {
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             color: var(--white-color);
-            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.4);
+            background: linear-gradient(90deg, #1D2B64, #F8CDDA, #1D2B64);
+            background-size: 250% auto;
+            box-shadow: 0 5px 20px rgba(29, 43, 100, 0.4);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.5);
+            background-position: right center; /* Menggerakkan gradien */
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(29, 43, 100, 0.5);
         }
 
         .btn-primary:disabled {
@@ -177,6 +200,8 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
+            background-size: 100% auto;
+            background-position: initial;
         }
 
         .btn-success {
@@ -203,6 +228,12 @@
             display: none;
             max-width: 400px;
             width: 90%;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -40%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
         }
 
         .notification h2 {
@@ -221,7 +252,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
             z-index: 999;
             display: none;
         }
@@ -238,11 +270,9 @@
                 flex-direction: column;
                 gap: 0;
             }
-            
             .header h1 {
                 font-size: 1.5rem;
             }
-            
             .form-container {
                 padding: 20px;
             }
@@ -250,6 +280,8 @@
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
+
     <div class="container">
         <div class="header">
             <div class="logo-container">
@@ -361,8 +393,30 @@
         <button class="btn btn-success" id="okButton">OK</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Inisialisasi Latar Belakang Partikel
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#757575" },
+                    "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 } },
+                    "opacity": { "value": 0.5, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } },
+                    "size": { "value": 3, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#757575", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                    "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 200, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } }
+                },
+                "retina_detect": true
+            });
+
+            // --- Sisa skrip fungsionalitas formulir (tidak diubah) ---
+            
             // Generate ID Permohonan
             function generateIdPermohonan() {
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -398,7 +452,6 @@
             const lainnyaGroup = document.getElementById('lainnya_keterangan_group');
             const keteranganLainnya = document.getElementById('keterangan_lainnya');
 
-            // [MODIFIKASI] Event listener untuk kategori usaha
             kategoriSelect.addEventListener('change', function() {
                 if (this.value === 'Lainnya') {
                     lainnyaGroup.style.display = 'block';
@@ -406,21 +459,17 @@
                 } else {
                     lainnyaGroup.style.display = 'none';
                     keteranganLainnya.removeAttribute('required');
-                    keteranganLainnya.value = ''; // Kosongkan field jika disembunyikan
+                    keteranganLainnya.value = '';
                     hideError(keteranganLainnya, document.getElementById('keterangan_lainnya-error'));
                 }
-                validateForm(); // Validasi ulang form setiap kali kategori berubah
+                validateForm();
             });
             
-            // Validasi real-time
             form.addEventListener('input', validateForm);
-            
-            // Validasi checkbox
             checkbox.addEventListener('change', validateForm);
             
             function validateForm() {
                 let allValid = true;
-                // [MODIFIKASI] Ambil field yang required setiap kali validasi dijalankan
                 const requiredFields = form.querySelectorAll('[required]');
                 
                 requiredFields.forEach(field => {
@@ -463,7 +512,6 @@
                     }
                 });
                 
-                // Validasi email secara terpisah karena tidak wajib
                 const emailField = document.getElementById('email');
                 if (emailField.value !== '') {
                     const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -477,12 +525,10 @@
                     hideError(emailField, document.getElementById('email-error'));
                 }
                 
-                // Cek apakah checkbox dicentang
                 if (!checkbox.checked) {
                     allValid = false;
                 }
                 
-                // Aktifkan atau nonaktifkan tombol submit
                 submitBtn.disabled = !allValid;
                 
                 return allValid;
@@ -503,23 +549,17 @@
                 }
             }
             
-            // Submit form
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
                 
                 if (validateForm()) {
-                    // Kirim data ke WhatsApp
                     sendWhatsApp();
-                    
-                    // Tampilkan notifikasi sukses
                     document.getElementById('overlay').style.display = 'block';
                     document.getElementById('successNotification').style.display = 'block';
                 }
             });
             
-            // Fungsi untuk mengirim data ke WhatsApp
             function sendWhatsApp() {
-                // Ambil semua data dari form
                 const nama = document.getElementById('nama').value;
                 const nik = document.getElementById('nik').value;
                 const alamat = document.getElementById('alamat').value;
@@ -531,13 +571,11 @@
                 const idPermohonan = document.getElementById('id_permohonan').value;
                 const tanggalPendaftaran = document.getElementById('tanggal_pendaftaran').value;
 
-                // [MODIFIKASI] Tambahkan keterangan jika kategori adalah "Lainnya"
                 if (kategoriUsaha === 'Lainnya') {
                     const keterangan = document.getElementById('keterangan_lainnya').value;
                     kategoriUsaha = `Lainnya (Keterangan: ${keterangan})`;
                 }
                 
-                // Format pesan WhatsApp
                 const message = `*PENDAFTARAN MITRA ANEKAMARKET*
 
 *Data Pribadi:*
@@ -559,22 +597,14 @@
 _Semua data di atas telah diverifikasi dan sesuai dengan dokumen asli._
 Terima kasih telah bergabung dengan ANEKAMARKET!`;
                 
-                // Encode pesan untuk URL
                 const encodedMessage = encodeURIComponent(message);
-                
-                // Buat URL WhatsApp
                 const whatsappURL = `https://wa.me/6285647709114?text=${encodedMessage}`;
-                
-                // Buka WhatsApp di tab baru
                 window.open(whatsappURL, '_blank');
             }
             
-            // Tombol OK di notifikasi
             document.getElementById('okButton').addEventListener('click', function() {
                 document.getElementById('overlay').style.display = 'none';
                 document.getElementById('successNotification').style.display = 'none';
-                
-                // Redirect ke anekamarket.my.id
                 window.location.href = 'https://www.anekamarket.my.id';
             });
         });
