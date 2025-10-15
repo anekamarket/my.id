@@ -5,94 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulir Pendaftaran Mitra ANEKAMARKET</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #0D47A1;
-            --secondary-color: #1976D2;
-            --accent-color: #FFC107;
-            --dark-color: #1a1a1a;
-            --gray-color: #757575;
-            --light-gray-bg: #f8f9fa;
+            --primary-color: #3a7bd5;
+            --secondary-color: #00d2ff;
+            --dark-color: #2c3e50;
+            --gray-color: #8a8a8a;
+            --light-color: #f8f9fa;
             --white-color: #ffffff;
             --success-color: #28a745;
-            --error-color: #dc3545;
-            --border-radius: 12px;
-            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --error-color: #e74c3c;
+            --border-radius: 15px;
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* [PENYEMPURNAAN] Menggunakan font Poppins */
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        /* [PENYEMPURNAAN] Latar Belakang Gradien Animasi "Aurora" */
         body {
-            background-color: #e0eafc;
-            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
             color: var(--dark-color);
             line-height: 1.6;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
         }
 
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
+        /* [PENYEMPURNAAN] Desain "Glassmorphism" untuk Kontainer */
         .container {
-            position: relative;
-            z-index: 1;
             max-width: 800px;
             width: 100%;
-            background-color: var(--white-color);
+            background: rgba(255, 255, 255, 0.15); /* Latar belakang semi-transparan */
+            backdrop-filter: blur(12px); /* Efek blur utama */
+            -webkit-backdrop-filter: blur(12px);
             border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             overflow: hidden;
             margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
-        /* [PERBAIKAN] Desain Ulang Header dengan Warna Terang */
         .header {
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); /* Gradien biru cerah */
-            color: var(--dark-color); /* Teks diubah menjadi gelap agar terbaca */
+            /* Latar belakang header dihilangkan agar menyatu dengan efek kaca */
+            color: var(--dark-color);
             padding: 30px;
             text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
         }
 
         .header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
+            font-size: 1.9rem;
             font-weight: 600;
-            letter-spacing: 0.5px;
         }
 
         .header p {
-            opacity: 0.9;
             font-size: 1rem;
+            font-weight: 300;
+            color: #34495e;
         }
 
         .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .logo-img {
             max-width: 180px;
             height: auto;
-            /* Filter bayangan lebih cocok untuk latar terang */
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
@@ -101,7 +98,7 @@
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .form-row {
@@ -118,6 +115,7 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: var(--dark-color);
+            font-size: 0.95rem;
         }
 
         .required::after {
@@ -125,25 +123,32 @@
             color: var(--error-color);
         }
 
+        /* [PENYEMPURNAAN] Desain Ulang Form Input */
         input, select, textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
             font-size: 1rem;
-            transition: all 0.3s ease-in-out;
-            background-color: #fdfdfd;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--dark-color);
+            font-weight: 400;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: #555;
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: var(--primary-color);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.15);
-            transform: scale(1.01);
+            border-color: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.2);
         }
 
         input[readonly] {
-            background-color: var(--light-gray-bg);
+            background-color: rgba(0, 0, 0, 0.1);
             cursor: not-allowed;
             color: var(--gray-color);
         }
@@ -153,27 +158,20 @@
             align-items: center;
             margin: 25px 0;
             padding: 15px;
-            background-color: var(--light-gray-bg);
-            border-radius: var(--border-radius);
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
         }
+        .checkbox-group input { width: auto; margin-right: 12px; }
+        .checkbox-group label { margin-bottom: 0; font-size: 0.95rem; }
 
-        .checkbox-group input {
-            width: auto;
-            margin-right: 10px;
-        }
-
-        .checkbox-group label {
-            margin-bottom: 0;
-            font-size: 0.95rem;
-        }
-
+        /* [PENYEMPURNAAN] Desain Ulang Tombol */
         .btn {
             display: inline-block;
-            padding: 14px 28px;
+            padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
             font-size: 1.05rem;
@@ -182,16 +180,14 @@
         }
 
         .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             color: var(--white-color);
-            background: linear-gradient(90deg, #1D2B64, #F8CDDA, #1D2B64);
-            background-size: 250% auto;
-            box-shadow: 0 5px 20px rgba(29, 43, 100, 0.4);
+            box-shadow: 0 6px 20px rgba(58, 123, 213, 0.4);
         }
 
         .btn-primary:hover {
-            background-position: right center;
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(29, 43, 100, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(58, 123, 213, 0.6);
         }
 
         .btn-primary:disabled {
@@ -199,94 +195,50 @@
             cursor: not-allowed;
             transform: none;
             box-shadow: none;
-            background-size: 100% auto;
-            background-position: initial;
-        }
-
-        .btn-success {
-            background-color: var(--success-color);
-            color: var(--white-color);
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-            transform: translateY(-3px);
         }
 
         .notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
+            position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            background-color: var(--white-color);
+            background: var(--light-color);
             padding: 40px;
             border-radius: var(--border-radius);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            z-index: 1000;
-            display: none;
-            max-width: 400px;
-            width: 90%;
+            text-align: center; z-index: 1000; display: none;
+            max-width: 400px; width: 90%;
             animation: fadeIn 0.5s ease-out;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -40%); }
-            to { opacity: 1; transform: translate(-50%, -50%); }
-        }
-
-        .notification h2 {
-            color: var(--success-color);
-            margin-bottom: 15px;
-        }
-
-        .notification p {
-            margin-bottom: 25px;
-            font-size: 1.1rem;
-        }
-
+        
         .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
             background-color: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(5px);
-            z-index: 999;
-            display: none;
+            z-index: 999; display: none;
         }
 
         .error-message {
             color: var(--error-color);
             font-size: 0.85rem;
             margin-top: 5px;
+            font-weight: 500;
             display: none;
         }
 
         @media (max-width: 768px) {
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            .header h1 {
-                font-size: 1.5rem;
-            }
-            .form-container {
-                padding: 20px;
-            }
+            .form-row { flex-direction: column; gap: 0; }
+            .header h1 { font-size: 1.5rem; }
+            .form-container { padding: 20px; }
         }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-
     <div class="container">
         <div class="header">
             <div class="logo-container">
                 <img src="https://raw.githubusercontent.com/anekamarket/my.id/refs/heads/main/LOGO%20UMKM%20SITUBONDO.png" alt="ANEKAMARKET Logo" class="logo-img">
             </div>
-            <h1>Formulir Pendaftaran Mitra ANEKAMARKET</h1>
+            <h1>Formulir Pendaftaran Mitra</h1>
             <p>Bergabunglah dengan komunitas bisnis terdepan di Situbondo</p>
         </div>
         
@@ -295,45 +247,45 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="nama" class="required">Nama (sesuai KTP)</label>
-                        <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap sesuai KTP" required>
-                        <div class="error-message" id="nama-error">Nama harus diisi</div>
+                        <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+                        <div class="error-message" id="nama-error"></div>
                     </div>
                     <div class="form-group">
                         <label for="nik" class="required">NIK (Nomor KTP)</label>
                         <input type="text" id="nik" name="nik" placeholder="Masukkan 16 digit NIK" required maxlength="16">
-                        <div class="error-message" id="nik-error">NIK harus 16 digit angka</div>
+                        <div class="error-message" id="nik-error"></div>
                     </div>
                 </div>
                 
                 <div class="form-group">
                     <label for="alamat" class="required">Alamat (sesuai KTP)</label>
-                    <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap sesuai KTP" required></textarea>
-                    <div class="error-message" id="alamat-error">Alamat harus diisi</div>
+                    <textarea id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap" required></textarea>
+                    <div class="error-message" id="alamat-error"></div>
                 </div>
                 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="whatsapp" class="required">Nomor WhatsApp</label>
-                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="08XXXXXXXXX" required pattern="08[0-9]{8,}">
-                        <div class="error-message" id="whatsapp-error">Nomor WhatsApp harus dimulai dengan 08 dan minimal 10 digit</div>
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 081234567890" required>
+                        <div class="error-message" id="whatsapp-error"></div>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" id="email" name="email" placeholder="contoh@gmail.com">
-                        <div class="error-message" id="email-error">Format email tidak valid</div>
+                        <div class="error-message" id="email-error"></div>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="nama_usaha" class="required">Nama Usaha</label>
+                    <label for="nama_usaha" class="required">Nama Usaha / Brand</label>
                     <input type="text" id="nama_usaha" name="nama_usaha" placeholder="Contoh: Cafe Bintang" required>
-                    <div class="error-message" id="nama_usaha-error">Nama usaha harus diisi</div>
+                    <div class="error-message" id="nama_usaha-error"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="alamat_usaha" class="required">Alamat Usaha</label>
-                    <textarea id="alamat_usaha" name="alamat_usaha" rows="3" placeholder="Contoh: Jl. Cinta Desa Hati Kecamatan Jantung" required></textarea>
-                    <div class="error-message" id="alamat_usaha-error">Alamat usaha harus diisi</div>
+                    <textarea id="alamat_usaha" name="alamat_usaha" rows="3" placeholder="Masukkan alamat lengkap usaha" required></textarea>
+                    <div class="error-message" id="alamat_usaha-error"></div>
                 </div>
                 
                 <div class="form-group">
@@ -354,13 +306,13 @@
                         <option value="Hotel">Hotel</option>
                         <option value="Lainnya">Lainnya</option>
                     </select>
-                    <div class="error-message" id="kategori_usaha-error">Kategori usaha harus dipilih</div>
+                    <div class="error-message" id="kategori_usaha-error"></div>
                 </div>
 
                 <div class="form-group" id="lainnya_keterangan_group" style="display: none;">
                     <label for="keterangan_lainnya" class="required">Keterangan Kategori Lainnya</label>
                     <textarea id="keterangan_lainnya" name="keterangan_lainnya" rows="2" placeholder="Jelaskan kategori usaha Anda"></textarea>
-                    <div class="error-message" id="keterangan_lainnya-error">Keterangan harus diisi jika memilih 'Lainnya'</div>
+                    <div class="error-message" id="keterangan_lainnya-error"></div>
                 </div>
                 
                 <div class="form-row">
@@ -376,10 +328,10 @@
                 
                 <div class="checkbox-group">
                     <input type="checkbox" id="agree" name="agree">
-                    <label for="agree">Saya menyetujui untuk mengirim data tersebut</label>
+                    <label for="agree">Saya menyatakan data yang diisi adalah benar dan menyetujuinya</label>
                 </div>
                 
-                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Kirim Data</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn" disabled>Kirim Pendaftaran</button>
             </form>
         </div>
     </div>
@@ -387,34 +339,14 @@
     <div class="overlay" id="overlay"></div>
     
     <div class="notification" id="successNotification">
-        <h2>Terima Kasih!</h2>
-        <p>Terima kasih telah bergabung dan menjadi Mitra ANEKAMARKET</p>
+        <h2>Pendaftaran Berhasil!</h2>
+        <p>Terima kasih telah bergabung menjadi Mitra ANEKAMARKET.</p>
         <button class="btn btn-success" id="okButton">OK</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // [PERBAIKAN] Konfigurasi Partikel dengan Warna Putih
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                    "color": { "value": "#ffffff" }, /* Warna partikel diubah */
-                    "shape": { "type": "circle", "stroke": { "width": 0, "color": "#000000" }, "polygon": { "nb_sides": 5 } },
-                    "opacity": { "value": 0.5, "random": false, "anim": { "enable": false, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                    "size": { "value": 3, "random": true, "anim": { "enable": false, "speed": 40, "size_min": 0.1, "sync": false } },
-                    "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 }, /* Warna garis diubah */
-                    "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false, "attract": { "enable": false, "rotateX": 600, "rotateY": 1200 } }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                    "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 }, "repulse": { "distance": 200, "duration": 0.4 }, "push": { "particles_nb": 4 }, "remove": { "particles_nb": 2 } }
-                },
-                "retina_detect": true
-            });
-
-            // --- Sisa skrip fungsionalitas formulir (tidak diubah) ---
+            // --- Sisa skrip fungsionalitas formulir (tidak diubah dari versi sebelumnya) ---
             
             function generateIdPermohonan() {
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -429,12 +361,12 @@
                 const now = new Date();
                 const options = { 
                     day: '2-digit', 
-                    month: '2-digit', 
+                    month: 'long', 
                     year: 'numeric',
                     hour: '2-digit',
                     minute: '2-digit'
                 };
-                return now.toLocaleDateString('id-ID', options) + ' WIB';
+                return now.toLocaleDateString('id-ID', options);
             }
             
             document.getElementById('id_permohonan').value = generateIdPermohonan();
@@ -455,7 +387,7 @@
                     lainnyaGroup.style.display = 'none';
                     keteranganLainnya.removeAttribute('required');
                     keteranganLainnya.value = '';
-                    hideError(keteranganLainnya, document.getElementById('keterangan_lainnya-error'));
+                    hideError(keteranganLainnya);
                 }
                 validateForm();
             });
@@ -468,56 +400,49 @@
                 const requiredFields = form.querySelectorAll('[required]');
                 
                 requiredFields.forEach(field => {
-                    const errorElement = document.getElementById(`${field.id}-error`);
                     let isValid = true;
                     let errorMessage = '';
 
                     if (field.type === 'text' || field.tagName.toLowerCase() === 'textarea') {
                         if (field.value.trim() === '') {
                            isValid = false;
-                           errorMessage = 'Field ini harus diisi';
+                           errorMessage = 'Field ini wajib diisi.';
                         }
                     }
                     
                     if (field.id === 'nik') {
-                        if (field.value.length !== 16 || isNaN(field.value)) {
+                        if (!/^\d{16}$/.test(field.value)) {
                             isValid = false;
-                            errorMessage = 'NIK harus 16 digit angka';
+                            errorMessage = 'NIK harus terdiri dari 16 digit angka.';
                         }
                     }
                     
                     if (field.id === 'whatsapp') {
-                        const pattern = /^08[0-9]{8,}$/;
-                        if (!pattern.test(field.value)) {
+                        if (!/^08[0-9]{8,13}$/.test(field.value)) {
                            isValid = false;
-                           errorMessage = 'Nomor WhatsApp harus dimulai dengan 08 dan minimal 10 digit';
+                           errorMessage = 'Format No. WhatsApp salah. Contoh: 081234567890.';
                         }
                     }
                     
                     if (field.tagName.toLowerCase() === 'select' && field.value === '') {
                         isValid = false;
-                        errorMessage = 'Field ini harus dipilih';
+                        errorMessage = 'Anda harus memilih salah satu kategori.';
                     }
 
                     if(isValid) {
-                        hideError(field, errorElement);
+                        hideError(field);
                     } else {
-                        showError(field, errorElement, errorMessage);
+                        showError(field, errorMessage);
                         allValid = false;
                     }
                 });
                 
                 const emailField = document.getElementById('email');
-                if (emailField.value !== '') {
-                    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    if (!pattern.test(emailField.value)) {
-                        showError(emailField, document.getElementById('email-error'), 'Format email tidak valid');
-                        allValid = false;
-                    } else {
-                        hideError(emailField, document.getElementById('email-error'));
-                    }
+                if (emailField.value !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailField.value)) {
+                    showError(emailField, 'Format email tidak valid.');
+                    allValid = false;
                 } else {
-                    hideError(emailField, document.getElementById('email-error'));
+                    hideError(emailField);
                 }
                 
                 if (!checkbox.checked) {
@@ -525,28 +450,28 @@
                 }
                 
                 submitBtn.disabled = !allValid;
-                
                 return allValid;
             }
             
-            function showError(field, errorElement, message) {
-                if (field && errorElement) {
+            function showError(field, message) {
+                const errorElement = document.getElementById(`${field.id}-error`);
+                if (errorElement) {
                     field.style.borderColor = 'var(--error-color)';
                     errorElement.textContent = message;
                     errorElement.style.display = 'block';
                 }
             }
             
-            function hideError(field, errorElement) {
-                if (field && errorElement) {
-                    field.style.borderColor = '#ddd';
+            function hideError(field) {
+                const errorElement = document.getElementById(`${field.id}-error`);
+                if (errorElement) {
+                    field.style.borderColor = 'rgba(255, 255, 255, 0.3)';
                     errorElement.style.display = 'none';
                 }
             }
             
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
                 if (validateForm()) {
                     sendWhatsApp();
                     document.getElementById('overlay').style.display = 'block';
@@ -589,8 +514,8 @@
 • ID Permohonan: ${idPermohonan}
 • Tanggal Pendaftaran: ${tanggalPendaftaran}
 
-_Semua data di atas telah diverifikasi dan sesuai dengan dokumen asli._
-Terima kasih telah bergabung dengan ANEKAMARKET!`;
+_Saya menyatakan bahwa semua data di atas adalah benar dan dapat dipertanggungjawabkan._
+Terima kasih telah mendaftar di ANEKAMARKET!`;
                 
                 const encodedMessage = encodeURIComponent(message);
                 const whatsappURL = `https://wa.me/6285647709114?text=${encodedMessage}`;
