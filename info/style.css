@@ -188,7 +188,6 @@ footer { background: var(--dark-blue); color: #bdc3c7; padding: 60px 0 20px; }
         flex-direction: column;
         text-align: center;
         box-shadow: var(--shadow-medium);
-        /* PENYEMPURNAAN: Transisi untuk menu mobile */
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.5s ease-in-out;
@@ -203,4 +202,15 @@ footer { background: var(--dark-blue); color: #bdc3c7; padding: 60px 0 20px; }
     .hero-content { text-align: center; }
     .job-item { flex-direction: column; align-items: flex-start; gap: 10px; }
     .job-item .btn { margin-top: 15px; }
+}
+
+/* --- Penyempurnaan Tambahan --- */
+.mobile-menu-toggle i {
+    transition: transform 0.3s ease-in-out;
+}
+
+.btn:focus-visible, a:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
 }
