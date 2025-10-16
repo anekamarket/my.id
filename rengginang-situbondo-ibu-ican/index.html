@@ -2,7 +2,6 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
@@ -15,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://s.id/anekamarket">
     <meta property="og:image" content="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png">
-    <title>Rengginang Situbondo Ibu Ican MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
+    <title>Regginang Situbondo Ibu Ican MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -343,13 +342,12 @@
         }
         
         .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
-        .gallery-actions button, .gallery-actions a {
+        .gallery-actions button {
             flex: 1; padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            text-decoration: none;
         }
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
@@ -367,11 +365,22 @@
             color: white; box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
         }
         .gallery-actions .btn-order:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5); }
+        
+        /* --- [PERBAIKAN] Desain Tombol Detail --- */
         .gallery-actions .btn-detail {
-            background-color: var(--light); color: var(--text-dark);
+            background-color: var(--white);
+            color: var(--text-dark);
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
         }
-        .gallery-actions .btn-detail:hover { background-color: #eaf0f6; transform: translateY(-3px); }
+        .gallery-actions .btn-detail:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
 
         /* --- IMPROVED Detail View with smooth transition --- */
         .gallery-detail-expanded {
@@ -397,6 +406,78 @@
         .spec-label { font-weight: 600; width: 120px; flex-shrink: 0; color: var(--dark); }
         .spec-value { color: var(--text-light); }
         
+        /* --- [PERBAIKAN] Desain Deskripsi Produk yang Ditingkatkan --- */
+        .product-description-block {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .product-description-block h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .product-description-block p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+            margin-right: 12px;
+            font-size: 1.2rem;
+            margin-top: 4px; /* Penyesuaian posisi vertikal ikon */
+        }
+
+        .key-features {
+            margin-top: 25px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            background-color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         /* --- Swiper Slider Styles (REVISED FOR PERFECT IMAGE DISPLAY) --- */
         .product-slider-main {
             width: 100%;
@@ -410,13 +491,17 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background-color: #000; /* Added for video letterboxing */
         }
-        .product-slider-main .swiper-slide img {
+        .product-slider-main .swiper-slide img,
+        .product-slider-main .swiper-slide video {
             width: 100%;
             height: 100%;
             object-fit: contain;
             cursor: pointer;
-            transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
+        }
+        .product-slider-main .swiper-slide img {
+             transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
         }
         .product-slider-main .swiper-slide:hover img {
             transform: scale(1.05);
@@ -549,7 +634,7 @@
         /* Lightbox Swiper styles */
         #lightbox-swiper { width: 100%; height: 100%; }
         #lightbox-swiper .swiper-slide { display: flex; justify-content: center; align-items: center; }
-        #lightbox-swiper img { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
+        #lightbox-swiper img, #lightbox-swiper video { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
         #lightbox-swiper .swiper-button-next, #lightbox-swiper .swiper-button-prev { color: var(--white); }
 
         /* Offer Notification */
@@ -579,6 +664,13 @@
         .contact-btn:hover { transform: scale(1.1) rotate(10deg); box-shadow: var(--shadow-strong); }
         .contact-btn.whatsapp { background-color: #25D366; }
         .contact-btn.phone { background-color: #34B7F1; }
+        
+        /* --- [PERBAIKAN] Desain Tombol Lokasi --- */
+        .contact-btn.location {
+            background: linear-gradient(45deg, #4285F4, #34A853);
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         .contact-btn.order { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; cursor: pointer; }
         
         /* --- [PERBAIKAN] Tombol Daftar Mengambang dengan Animasi --- */
@@ -694,11 +786,6 @@
     </style>
 </head>
 <body>
-    <audio id="bgMusic" loop>
-        <source src="https://raw.githubusercontent.com/Musikwebsite.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="buttonSound" src="https://raw.githubusercontent.com/LenteraKarya/Lentera-Karya/main/assets/audio/audiotombol.mp3"></audio>
-    
     <div id="qrcode" style="display: none;"></div>
 
     <header id="home">
@@ -706,7 +793,7 @@
         <div class="header-content">
             <div class="logo">
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
-                <span>Rengginang Situbondo Ibu Ican MITRA ANEKAMARKET</span>
+                <span>Regginang Situbondo Ibu Ican MITRA ANEKAMARKET</span>
             </div>
             <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
             
@@ -770,6 +857,9 @@
         <a href="tel:+6282338341476" class="contact-btn phone" aria-label="Telepon Kami">
             <i class="fas fa-phone"></i>
         </a>
+        <a href="#" class="contact-btn location" target="_blank" rel="noopener noreferrer" aria-label="Lihat Lokasi">
+            <i class="fas fa-map-marker-alt"></i>
+        </a>
         <button class="contact-btn order" id="quickOrderBtn" aria-label="Pesan Cepat">
             <i class="fas fa-shopping-cart"></i>
         </button>
@@ -811,13 +901,13 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            © 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm">
                  <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -842,7 +932,7 @@
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
+            <span class="close-search-modal">×</span>
             <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput" aria-label="Input Pencarian Produk">
             <div class="search-results" id="searchResults" aria-live="polite">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari...</p>
@@ -859,11 +949,11 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
-        <span class="close-lightbox-modal">&times;</span>
+        <span class="close-lightbox-modal">×</span>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
+        <span class="close-notification" id="closeNotification">×</span>
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
@@ -890,12 +980,9 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             // --- [PERBAIKAN] FITUR BARU: Refresh Otomatis & Hapus Cache ---
-            // Fungsi untuk me-refresh halaman pada interval tertentu
             function autoRefreshPage() {
-                // Refresh halaman setelah 30 menit (1800000 milidetik)
+                // FIXED: Changed timeout from 1800 (1.8s) to 1800000 (30 minutes)
                 setTimeout(() => {
-                    // Menggunakan location.replace() untuk menghapus halaman lama dari riwayat sesi
-                    // Ini memastikan pengguna selalu melihat konten yang paling baru.
                     location.replace(location.href);
                 }, 1800000); 
             }
@@ -904,57 +991,57 @@
             // --- DATA PRODUK ---
             const products = [
                 {
-                    id: "RIC-2025-0810",
-                    category: "snack",
-                    type: "promo",
-                    seller: {
-                        name: "Regginang Situbondo Ibu Ican",
-                        link: "https://anekamarket.my.id/rengginang-situbondo-ibu-ican",
-                        locationLink: "https://www.google.com/maps?q=-7.6393021,113.9997534"
+                    "id": "RIC-2025-0810",
+                    "category": "snack",
+                    "type": "promo",
+                    "seller": {
+                        "name": "Regginang Situbondo Ibu Ican",
+                        "link": "https://anekamarket.my.id/rengginang-situbondo-ibu-ican",
+                        "locationLink": "https://www.google.com/maps?q=-7.6393021,113.9997534"
                     },
-                    badge: { text: "Harga Hemat", type: "promo" },
-                    title: "RENGGINANG ANEKA RASA",
-                    code: "RIC-2025-0810",
-                    price: 18000,
-                    originalPrice: 20000,
-                    discount: "10%",
-                    priceVariations: [
-                        { name: "Renggginang Rasa Terasi", price: 8000 },
-                        { name: "Renggginang Rasa Bawang", price: 8000 },
-                        { name: "Renggginang Rasa Udang", price: 8000 },
-                        { name: "Renggginang Rasa Cumi", price: 8000 },
-                        { name: "Renggginang Rasa Mix", price: 19000 }
+                    "badge": {
+                        "text": "Harga Hemat",
+                        "type": "promo"
+                    },
+                    "mainImage": "https://i.imgur.com/H3Lc1Qt.jpeg",
+                    "title": "RENGGINANG ANEKA RASA",
+                    "code": "RIC-2025-0810",
+                    "price": 18000,
+                    "originalPrice": 20000,
+                    "discount": "10%",
+                    "priceVariations": [
+                        { "name": "Renggginang Rasa Terasi", "price": 8000 },
+                        { "name": "Renggginang Rasa Bawang", "price": 8000 },
+                        { "name": "Renggginang Rasa Udang", "price": 8000 },
+                        { "name": "Renggginang Rasa Cumi", "price": 8000 },
+                        { "name": "Renggginang Rasa Mix", "price": 19000 }
                     ],
-                    units: ["pack 450gram"],
-                    defaultUnit: "pack",
-                    details: {
-                        description: "<br><b>Rengginang Gurih Renyah</b> – <strong>Cita Rasa Tradisional yang Tak Pernah Lekang oleh Waktu</strong>\n\nNikmati kelezatan rengginang khas Nusantara yang dibuat dari beras ketan pilihan, diproses secara higienis, dan digoreng hingga renyah sempurna. \n\nCocok sebagai camilan keluarga, teman minum teh, atau oleh-oleh khas yang menggugah selera. Tersedia dalam berbagai varian rasa: Terasi,bawang,Udang dan Cumi pasti ketagihan!",
-                        images: [
-                            "https://i.imgur.com/H3Lc1Qt.jpeg",
-                            "https://i.imgur.com/mtQc5pc.jpeg",
-                            "https://i.imgur.com/EuC9Np2.jpeg",
-                            "https://i.imgur.com/yGCEh0n.jpeg",
-                            "https://i.imgur.com/ACGxe8H.jpeg"
+                    "units": ["pack 450gram"],
+                    "defaultUnit": "pack",
+                    "details": {
+                        "description": "<br><b>Rengginang Gurih Renyah</b> – <strong>Cita Rasa Tradisional yang Tak Pernah Lekang oleh Waktu</strong>\n\nNikmati kelezatan rengginang khas Nusantara yang dibuat dari beras ketan pilihan, diproses secara higienis, dan digoreng hingga renyah sempurna. \n\nCocok sebagai camilan keluarga, teman minum teh, atau oleh-oleh khas yang menggugah selera. Tersedia dalam berbagai varian rasa: Terasi,bawang,Udang dan Cumi pasti ketagihan!",
+                        "media": [
+                            { "type": "image", "src": "https://i.imgur.com/H3Lc1Qt.jpeg", "thumb": "https://i.imgur.com/H3Lc1Qt.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/mtQc5pc.jpeg", "thumb": "https://i.imgur.com/mtQc5pc.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/EuC9Np2.jpeg", "thumb": "https://i.imgur.com/EuC9Np2.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/yGCEh0n.jpeg", "thumb": "https://i.imgur.com/yGCEh0n.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/ACGxe8H.jpeg", "thumb": "https://i.imgur.com/ACGxe8H.jpeg" }
                         ],
-                        specs: [
-                            { label: "Kode Produk", value: "RIC-2025-0810" },
-                            { label: "Nama UMKM", value: "Regginang Situbondo Ibu Ican" },
-                            { label: "Kontak", value: "082338341476" },
-                            { label: "Daftar Harga", value: "• Rasa Terasi Rp 8.000<br>• Rasa Bawang Rp 8.000<br>• Rasa Udang Rp 8.000<br>• Rasa Cumi Rp 8.000<br>• Rasa Mix Rp 19.000" },
-                            { label: "Catatan", value: "Harga bisa berubah sewaktu-waktu" }
-                        ]
+                        "specs": []
                     },
-                    contact: { whatsapp: "6282338341476", phone: "+6282338341476" }
+                    "contact": {
+                        "whatsapp": "6282338341476",
+                        "phone": "+6282338341476"
+                    }
                 }
             ];
 
             const galleryGrid = document.getElementById('gallery-grid');
-            const buttonSound = document.getElementById('buttonSound');
             const lightboxModal = document.getElementById('lightboxModal');
             let lightboxSwiper = null;
             let logoBase64 = null;
+            let activeSliders = {};
 
-            // --- FUNGSI BARU: Konversi gambar ke Base64 untuk PDF ---
             function imageToBase64(url, callback) {
                 const xhr = new XMLHttpRequest();
                 xhr.onload = function() {
@@ -969,23 +1056,18 @@
                 xhr.send();
             }
 
-            // Panggil fungsi ini saat script dimuat untuk menyiapkan logo
             imageToBase64('https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png', (base64) => {
                 logoBase64 = base64;
             });
 
             function playSound() {
-                if(buttonSound) {
-                    buttonSound.currentTime = 0;
-                    buttonSound.play().catch(e => console.log("Audio play failed: ", e));
-                }
+                // Sound functionality is disabled as the audio file link was broken.
             }
 
             function formatPrice(amount) {
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
             }
 
-            // --- FUNGSI BARU: Generate Kode Transaksi Unik ---
             function generateTransactionCode() {
                 const date = new Date();
                 const dateString = date.getFullYear().toString() + 
@@ -995,10 +1077,9 @@
                 return `AM-${dateString}-${randomString}`;
             }
 
-            // --- FUNGSI BARU: Generate QR Code sebagai data URI ---
             function generateQrCodeDataUri(url, callback) {
                 const qrContainer = document.getElementById('qrcode');
-                qrContainer.innerHTML = ''; // Kosongkan container
+                qrContainer.innerHTML = '';
                 new QRCode(qrContainer, {
                     text: url,
                     width: 128,
@@ -1006,23 +1087,21 @@
                     correctLevel: QRCode.CorrectLevel.H
                 });
 
-                // Beri sedikit waktu untuk QR code dirender di DOM
                 setTimeout(() => {
                     const canvas = qrContainer.querySelector('canvas');
                     if (canvas) {
                         callback(canvas.toDataURL('image/png'));
                     } else {
-                        callback(null); // Gagal membuat QR code
+                        callback(null);
                     }
                 }, 100);
             }
 
-            // --- FUNGSI BARU (DISEMPURNAKAN): Membuat dan mengunduh PDF ---
             async function generateAndDownloadPdf(orderData) {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const transactionCode = generateTransactionCode();
-                orderData.transactionCode = transactionCode; // Simpan kode transaksi
+                orderData.transactionCode = transactionCode;
 
                 generateQrCodeDataUri("https://www.aplikasiusaha.com", (qrCodeUri) => {
                     const today = new Date();
@@ -1030,24 +1109,22 @@
                     const pageHeight = doc.internal.pageSize.getHeight();
                     const pageWidth = doc.internal.pageSize.getWidth();
 
-                    // === HEADER BARU YANG DISEMPURNAKAN ===
                     if (logoBase64) {
                         doc.addImage(logoBase64, 'PNG', 14, 15, 25, 25);
                     }
                     doc.setFontSize(10);
                     doc.setFont(undefined, 'normal');
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("MARKETPLACE", 45, 22);
                     
                     doc.setFontSize(16);
                     doc.setFont(undefined, 'bold');
-                    doc.setTextColor('#1A2533'); // var(--dark)
+                    doc.setTextColor('#1A2533');
                     doc.text("ANEKAMARKET", 45, 30);
                     
-                    doc.setDrawColor('#EAEFF5'); // var(--border-color)
+                    doc.setDrawColor('#EAEFF5');
                     doc.line(14, 45, pageWidth - 14, 45);
                     
-                    // Info Penjual dan Transaksi
                     doc.setFontSize(8);
                     doc.setFont(undefined, 'bold');
                     doc.setTextColor('#7f8c8d');
@@ -1061,7 +1138,6 @@
                     doc.text(`No. Transaksi: ${transactionCode}`, pageWidth / 2, 58);
                     doc.text(`Tanggal: ${formattedDate}`, pageWidth / 2, 64);
                     
-                    // Tabel Rincian Pesanan
                     const tableColumn = ["No.", "Nama Produk", "Harga Satuan", "Jumlah", "Subtotal"];
                     const tableRows = [];
                     
@@ -1082,7 +1158,7 @@
                         startY: 75,
                         theme: 'grid',
                         headStyles: { 
-                            fillColor: '#4A90E2', // var(--primary)
+                            fillColor: '#4A90E2',
                             textColor: '#FFFFFF',
                             fontStyle: 'bold'
                         },
@@ -1105,13 +1181,11 @@
 
                     const finalY = doc.previousAutoTable.finalY;
 
-                    // Total
                     doc.setFontSize(14);
                     doc.setFont(undefined, 'bold');
                     doc.text("Total Pesanan:", 14, finalY + 15);
                     doc.text(formatPrice(orderData.total), pageWidth - 14, finalY + 15, { align: 'right' });
 
-                    // Footer Dokumen
                     const footerY = pageHeight - 35;
                     doc.line(14, footerY, pageWidth - 14, footerY);
                     
@@ -1119,14 +1193,13 @@
                         doc.addImage(qrCodeUri, 'PNG', 14, footerY + 5, 25, 25);
                     }
                     doc.setFontSize(8);
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("Scan untuk info lebih lanjut", 42, footerY + 15);
 
                     doc.setFontSize(9);
                     doc.text("Powered by: www.anekamarket.my.id", pageWidth - 14, footerY + 12, { align: 'right' });
                     doc.text("Terima kasih telah berbelanja!", pageWidth - 14, footerY + 18, { align: 'right' });
 
-                    // Simpan PDF
                     const fileName = `Struk-${transactionCode}.pdf`;
                     doc.save(fileName);
                 });
@@ -1149,9 +1222,6 @@
                     productCard.id = `product-${product.id}`;
 
                     const badgeHTML = product.badge ? `<div class="product-badge">${product.badge.text}</div>` : '';
-                    
-                    const locationButtonHTML = product.seller && product.seller.locationLink ? 
-                        `<a href="${product.seller.locationLink}" target="_blank" rel="noopener noreferrer" class="btn-detail"><i class="fas fa-map-marker-alt"></i> Lokasi</a>` : '';
 
                     const priceVariationsHTML = product.priceVariations.map(v => `
                         <div class="price-variation-item" data-price="${v.price}" data-name="${v.name}">
@@ -1166,17 +1236,28 @@
                             </div>
                         </div>`).join('');
                     
-                    const sliderImages = product.details.images;
-                    
-                    const mainSliderHTML = sliderImages.map((img, index) => `
-                        <div class="swiper-slide" data-index="${index}">
-                            <img src="${img}" alt="${product.title} - Gambar ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
-                        </div>
-                    `).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
 
-                    const thumbSliderHTML = sliderImages.map(img => `
+                    const mainSliderHTML = mediaItems.map((media, index) => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <video playsinline muted>
+                                        <source src="${media.src}" type="video/mp4">
+                                        Browser Anda tidak mendukung tag video.
+                                    </video>
+                                </div>`;
+                        } else {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <img src="${media.src}" alt="${product.title} - Media ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
+                                </div>`;
+                        }
+                    }).join('');
+
+                    const thumbSliderHTML = mediaItems.map(media => `
                         <div class="swiper-slide">
-                            <img src="${img}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
+                            <img src="${media.thumb}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
                         </div>
                     `).join('');
 
@@ -1201,7 +1282,6 @@
                             <div class="gallery-actions">
                                 <button class="btn-order"><i class="fas fa-file-invoice"></i> Pesan & Struk</button>
                                 <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
-                                ${locationButtonHTML}
                             </div>
                             <div class="gallery-detail-expanded">
                                 <div thumbsSlider="" class="swiper product-slider-thumbs">
@@ -1215,22 +1295,56 @@
                 });
                 initializeSliders();
             }
-
+            
             function initializeSliders() {
                 const productCards = document.querySelectorAll('.gallery-item');
                 productCards.forEach(card => {
+                    const cardId = card.dataset.id;
                     if (card.querySelector('.product-slider-main').swiper) return;
 
                     const thumbsSwiper = new Swiper(card.querySelector('.product-slider-thumbs'), {
                         spaceBetween: 10, slidesPerView: 4, freeMode: true, watchSlidesProgress: true,
                     });
 
-                    new Swiper(card.querySelector('.product-slider-main'), {
+                    const mainSwiper = new Swiper(card.querySelector('.product-slider-main'), {
                         spaceBetween: 10,
                         navigation: { nextEl: card.querySelector('.swiper-button-next'), prevEl: card.querySelector('.swiper-button-prev'), },
                         thumbs: { swiper: thumbsSwiper, },
-                        autoplay: { delay: 3500, disableOnInteraction: false, },
                     });
+
+                    function handleAutoPlay(swiper) {
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+
+                        const activeSlide = swiper.slides[swiper.activeIndex];
+                        const video = activeSlide.querySelector('video');
+
+                        if (video) {
+                            video.currentTime = 0;
+                            video.play().catch(e => console.error("Video autoplay was prevented by the browser:", e));
+                            video.onended = () => {
+                                swiper.slideNext();
+                            };
+                        } else {
+                            activeSliders[cardId] = setTimeout(() => {
+                                swiper.slideNext();
+                            }, 4000);
+                        }
+                    }
+
+                    mainSwiper.on('slideChangeTransitionStart', function (swiper) {
+                        const allVideos = card.querySelectorAll('video');
+                        allVideos.forEach(v => v.pause());
+                        
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+                    });
+
+                    mainSwiper.on('slideChangeTransitionEnd', handleAutoPlay);
+
+                    handleAutoPlay(mainSwiper);
                 });
             }
 
@@ -1337,8 +1451,21 @@
                     const initialIndex = parseInt(clickedSlide.dataset.index, 10);
                     
                     const lightboxWrapper = document.getElementById('lightbox-swiper-wrapper');
-                    lightboxWrapper.innerHTML = product.details.images.map(img => `
-                        <div class="swiper-slide"><img src="${img}" alt="Gambar diperbesar"></div>`).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
+                    
+                    lightboxWrapper.innerHTML = mediaItems.map(media => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide">
+                                    <video controls playsinline>
+                                        <source src="${media.src}" type="video/mp4">
+                                    </video>
+                                </div>`;
+                        } else { // 'image'
+                            return `<div class="swiper-slide"><img src="${media.src}" alt="Gambar diperbesar"></div>`;
+                        }
+                    }).join('');
+
 
                     lightboxModal.classList.add('show');
 
@@ -1401,7 +1528,7 @@
                     const filteredProducts = products.filter(p => p.title.toLowerCase().includes(query) || p.code.toLowerCase().includes(query) || p.seller.name.toLowerCase().includes(query));
                     
                     if (filteredProducts.length > 0) {
-                        const mainImage = (p) => (p.details.images && p.details.images.length > 0) ? p.details.images[0] : '';
+                        const mainImage = (p) => (p.details.media && p.details.media.length > 0) ? p.details.media[0].thumb : p.mainImage;
                         searchResults.innerHTML = filteredProducts.map(p => `
                             <a href="#product-${p.id}" class="search-result-item">
                                 <img src="${mainImage(p)}" class="search-result-image" alt="${p.title}" loading="lazy">
@@ -1450,7 +1577,7 @@
                         .map(item => ({ name: item.dataset.name, price: parseFloat(item.dataset.price), quantity: parseInt(item.querySelector('.quantity-input').value, 10) }))
                         .filter(item => item.quantity > 0);
 
-                    const defaultProductInfo = products.length > 0 ? products[0] : { code: 'QUICK-ORDER', seller: { name: 'ANEKAMARKET' }, contact: { whatsapp: '6282338341476' } };
+                    const defaultProductInfo = products.length > 0 ? products[0] : { code: 'QUICK-ORDER', seller: { name: 'ANEKAMARKET' }, contact: { whatsapp: '6289679013099' } };
                     
                     if(processOrder(defaultProductInfo, items)) {
                         orderModal.classList.remove('show');
@@ -1492,10 +1619,62 @@
                 });
             }
             
+            function setupDynamicContent() {
+                if (products.length > 0) {
+                    const firstProduct = products[0];
+                    const sellerName = firstProduct.seller.name;
+                    const whatsappLink = `https://wa.me/${firstProduct.contact.whatsapp}`;
+                    const phoneLink = `tel:${firstProduct.contact.phone}`;
+                    const locationLink = firstProduct.seller.locationLink;
+
+                    // Update title
+                    document.title = `${sellerName} MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya`;
+
+                    // Update header text
+                    const headerTitle = document.querySelector('.header-content .logo span');
+                    if (headerTitle) headerTitle.textContent = `${sellerName} MITRA ANEKAMARKET`;
+                    
+                    // Update header background
+                    const header = document.getElementById('home');
+                    const headerBefore = document.querySelector('header#home::before');
+                    if(header && firstProduct.mainImage) {
+                         header.style.backgroundImage = `url('${firstProduct.mainImage}')`;
+                         // This is tricky as ::before is not in DOM. We inject a style rule.
+                        const styleSheet = document.styleSheets[0];
+                        const rule = `header#home::before { background-image: url('${firstProduct.mainImage}'); }`;
+                        styleSheet.insertRule(rule, styleSheet.cssRules.length);
+                    }
+
+                    // Update all relevant links
+                    document.querySelectorAll('a[href^="https://wa.me/"], a[href^="tel:"]').forEach(a => {
+                        if (a.href.includes('wa.me')) {
+                            a.href = whatsappLink;
+                        } else if (a.href.includes('tel:')) {
+                            a.href = phoneLink;
+                        }
+                    });
+
+                    // Handle location button
+                    const locationBtn = document.querySelector('.contact-btn.location');
+                    if (locationBtn) {
+                        if (locationLink && locationLink.endsWith('/0')) {
+                            locationBtn.href = '#'; 
+                            locationBtn.addEventListener('click', (e) => {
+                                e.preventDefault();
+                                alert('Gerai belum menetapkan lokasi gerai.');
+                            });
+                        } else {
+                            locationBtn.href = locationLink;
+                        }
+                    }
+                }
+            }
+            
             // --- INITIATE ---
             renderProducts(products);
             setupEventListeners();
-            autoRefreshPage(); // Panggil fungsi refresh otomatis saat semua sudah siap
+            setupDynamicContent();
+            autoRefreshPage();
         });
     </script>
 </body>
