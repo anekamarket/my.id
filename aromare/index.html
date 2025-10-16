@@ -406,6 +406,78 @@
         .spec-label { font-weight: 600; width: 120px; flex-shrink: 0; color: var(--dark); }
         .spec-value { color: var(--text-light); }
         
+        /* --- [PERBAIKAN] Desain Deskripsi Produk yang Ditingkatkan --- */
+        .product-description-block {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .product-description-block h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .product-description-block p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+            margin-right: 12px;
+            font-size: 1.2rem;
+            margin-top: 4px; /* Penyesuaian posisi vertikal ikon */
+        }
+
+        .key-features {
+            margin-top: 25px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            background-color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         /* --- Swiper Slider Styles (REVISED FOR PERFECT IMAGE DISPLAY) --- */
         .product-slider-main {
             width: 100%;
@@ -946,7 +1018,38 @@
                     "units": ["Bungkus"],
                     "defaultUnit": "Gram",
                     "details": {
-                        "description": "<strong>🐟 Pempek Aromare – Cita Rasa Palembang dalam Satu Kemasan</strong>\n<br>\nNikmati kelezatan autentik khas Palembang dengan Pempek Aromare, sajian pempek ikan tenggiri berkualitas dalam bentuk frozen food praktis. Satu kemasan berisi 4 varian favorit:\n\n<b>- Adaan – gurih dan beraroma rempah\n- Lenjer – tekstur kenyal yang klasik\n- Kulit – rasa khas dengan sentuhan renyah\n- Kapal Selam Mini – Gurih Nikmat\n</b>\n💧Dilengkapi dengan pilihan kuah cuko khas Palembang:\n<b>- Pedas 🔥 – untuk pencinta sensasi ekstra\n- Sedang – pas di lidah semua kalangan\n- Tidak Pedas – tetap nikmat tanpa rasa menyengat</b>\n\n<i>📦 Berat bersih: 190 gram</i>\n<b>❄️ Cocok untuk stok di freezer, tinggal goreng dan sajikan!</b>\n",
+                        "description": `
+                            <div class="product-description-block">
+                                <p><strong>🐟 Cita Rasa Palembang dalam Satu Kemasan Praktis</strong></p>
+                                <p>Nikmati kelezatan autentik khas Palembang dengan Pempek Aromare. Dibuat dari ikan tenggiri berkualitas dan disajikan dalam bentuk frozen food yang praktis untuk Anda.</p>
+                                
+                                <h4>Varian Isi Paket:</h4>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check-circle"></i> <strong>Adaan:</strong> Gurih dan kaya aroma rempah.</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>Lenjer:</strong> Tekstur kenyal yang klasik dan lezat.</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>Kulit:</strong> Rasa khas dengan sentuhan renyah.</li>
+                                    <li><i class="fas fa-check-circle"></i> <strong>Kapal Selam Mini:</strong> Gurih dengan isian nikmat.</li>
+                                </ul>
+
+                                <h4>Pilihan Kuah Cuko:</h4>
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-fire"></i> <strong>Pedas:</strong> Untuk pencinta sensasi ekstra.</li>
+                                    <li><i class="fas fa-pepper-hot"></i> <strong>Sedang:</strong> Keseimbangan rasa yang pas di lidah.</li>
+                                    <li><i class="fas fa-leaf"></i> <strong>Tidak Pedas:</strong> Tetap nikmat tanpa rasa menyengat.</li>
+                                </ul>
+                                
+                                <div class="key-features">
+                                    <div class="feature-item">
+                                        <i class="fas fa-box-open"></i>
+                                        <span><strong>Berat Bersih:</strong> 190 gram</span>
+                                    </div>
+                                    <div class="feature-item">
+                                        <i class="fas fa-snowflake"></i>
+                                        <span><strong>Penyimpanan:</strong> Cocok untuk stok di freezer, tinggal goreng dan sajikan!</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `,
                         "media": [
                             { "type": "image", "src": "https://i.imgur.com/2pw5SOS.jpeg", "thumb": "https://i.imgur.com/2pw5SOS.jpeg" },
                             { "type": "image", "src": "https://i.imgur.com/yornurz.jpeg", "thumb": "https://i.imgur.com/yornurz.jpeg" },
