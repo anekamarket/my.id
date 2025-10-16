@@ -2,21 +2,19 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas.">
-    <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir, perikanan, ikan segar, kuliner, warung makan">
+    <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir">
     <meta name="author" content="ANEKAMARKET">
     <meta property="og:title" content="ANEKAMARKET | Platform Jual Beli Online Terpercaya">
     <meta property="og:description" content="Semua Bisa Jualan & Semua Bisa Pesan - Platform lengkap untuk kebutuhan jual beli online Anda">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://s.id/anekamarket">
     <meta property="og:image" content="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png">
-    <title>WARUNG PAK UNTUNG MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
+    <title>Warung Pak Untung MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -78,7 +76,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: url('https://i.imgur.com/ru1FKXW.jpeg') no-repeat center center/cover;
+            background: url('https://i.imgur.com/1Mvj3cv.jpeg') no-repeat center center/cover;
             overflow: hidden;
         }
         
@@ -87,7 +85,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://i.imgur.com/ru1FKXW.jpeg') no-repeat center center/cover;
+            background: url('https://i.imgur.com/1Mvj3cv.jpeg') no-repeat center center/cover;
             animation: kenburns 20s ease-in-out infinite alternate;
         }
         @keyframes kenburns {
@@ -317,16 +315,6 @@
         .price-variation-info { flex-grow: 1; }
         .price-variation-name { font-weight: 500; font-size: 1.05rem; }
         .price-variation-value { font-size: 1.2rem; font-weight: 700; color: var(--primary); }
-        
-        /* Styling untuk harga diskon */
-        .price-variation-value .original-price {
-            text-decoration: line-through;
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-right: 8px;
-            font-weight: 400;
-        }
-
         .quantity-controls { display: flex; align-items: center; }
         .quantity-btn {
             width: 36px; height: 36px;
@@ -354,13 +342,12 @@
         }
         
         .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
-        .gallery-actions button, .gallery-actions a {
+        .gallery-actions button {
             flex: 1; padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
-            text-decoration: none;
         }
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
@@ -379,22 +366,21 @@
         }
         .gallery-actions .btn-order:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5); }
         
-        .gallery-actions .btn-location {
-            background-color: #f39c12;
-            color: white;
-            box-shadow: 0 4px 20px rgba(243, 156, 18, 0.4);
-        }
-        .gallery-actions .btn-location:hover {
-            background-color: #e67e22;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(243, 156, 18, 0.5);
-        }
-
+        /* --- [PERBAIKAN] Desain Tombol Detail --- */
         .gallery-actions .btn-detail {
-            background-color: var(--light); color: var(--text-dark);
+            background-color: var(--white);
+            color: var(--text-dark);
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
         }
-        .gallery-actions .btn-detail:hover { background-color: #eaf0f6; transform: translateY(-3px); }
+        .gallery-actions .btn-detail:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
 
         /* --- IMPROVED Detail View with smooth transition --- */
         .gallery-detail-expanded {
@@ -420,6 +406,78 @@
         .spec-label { font-weight: 600; width: 120px; flex-shrink: 0; color: var(--dark); }
         .spec-value { color: var(--text-light); }
         
+        /* --- [PERBAIKAN] Desain Deskripsi Produk yang Ditingkatkan --- */
+        .product-description-block {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .product-description-block h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .product-description-block p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+            margin-right: 12px;
+            font-size: 1.2rem;
+            margin-top: 4px; /* Penyesuaian posisi vertikal ikon */
+        }
+
+        .key-features {
+            margin-top: 25px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            background-color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         /* --- Swiper Slider Styles (REVISED FOR PERFECT IMAGE DISPLAY) --- */
         .product-slider-main {
             width: 100%;
@@ -433,13 +491,17 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background-color: #000; /* Added for video letterboxing */
         }
-        .product-slider-main .swiper-slide img {
+        .product-slider-main .swiper-slide img,
+        .product-slider-main .swiper-slide video {
             width: 100%;
             height: 100%;
             object-fit: contain;
             cursor: pointer;
-            transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
+        }
+        .product-slider-main .swiper-slide img {
+             transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
         }
         .product-slider-main .swiper-slide:hover img {
             transform: scale(1.05);
@@ -572,7 +634,7 @@
         /* Lightbox Swiper styles */
         #lightbox-swiper { width: 100%; height: 100%; }
         #lightbox-swiper .swiper-slide { display: flex; justify-content: center; align-items: center; }
-        #lightbox-swiper img { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
+        #lightbox-swiper img, #lightbox-swiper video { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
         #lightbox-swiper .swiper-button-next, #lightbox-swiper .swiper-button-prev { color: var(--white); }
 
         /* Offer Notification */
@@ -602,8 +664,54 @@
         .contact-btn:hover { transform: scale(1.1) rotate(10deg); box-shadow: var(--shadow-strong); }
         .contact-btn.whatsapp { background-color: #25D366; }
         .contact-btn.phone { background-color: #34B7F1; }
+        
+        /* --- [PERBAIKAN] Desain Tombol Lokasi --- */
+        .contact-btn.location {
+            background: linear-gradient(45deg, #4285F4, #34A853);
+        }
+        .contact-btn.location.disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         .contact-btn.order { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; cursor: pointer; }
         
+        /* --- [PERBAIKAN] Tombol Daftar Mengambang dengan Animasi --- */
+        .contact-btn.register-btn {
+            background: #e91e63; /* Warna pink yang mencolok */
+            position: relative; /* Diperlukan untuk pseudo-element ::before */
+            z-index: 1; /* Memastikan ikon tetap di atas animasi */
+        }
+        .register-btn::before {
+            content: '';
+            position: absolute;
+            z-index: -1; /* Ditempatkan di belakang ikon tombol */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #e91e63; /* Warna yang sama dengan tombol */
+            animation: pulse-wave 2.5s infinite; /* Terapkan animasi */
+        }
+        @keyframes pulse-wave {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+            70% {
+                transform: scale(2.5); /* Gelombang menyebar lebih besar */
+                opacity: 0;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+
         /* NEW: Back to Top Button */
         .back-to-top {
             position: fixed;
@@ -636,51 +744,6 @@
             background-color: var(--primary-dark);
             transform: scale(1.1);
         }
-        
-        /* --- [PERBAIKAN] NEW: Floating Register Button --- */
-        .floating-register-btn {
-            position: fixed;
-            bottom: 85px; /* Diposisikan di atas tombol back-to-top */
-            right: 20px;
-            z-index: 999;
-            width: 65px;
-            height: 65px;
-            background: linear-gradient(45deg, #ff4757, #ff6b81); /* Warna gradien merah yang mencolok */
-            color: var(--white);
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.5);
-            text-decoration: none;
-            animation: pulse-effect 2s infinite;
-            transition: all 0.3s ease;
-        }
-
-        .floating-register-btn:hover {
-            transform: scale(1.1);
-            animation-play-state: paused; /* Jeda animasi saat hover agar mudah diklik */
-        }
-        
-        /* Animasi denyut/gelombang sinyal */
-        @keyframes pulse-effect {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 20px rgba(255, 71, 87, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
-            }
-        }
-
 
         /* --- Responsive Styles --- */
         @media (max-width: 992px) {
@@ -711,14 +774,6 @@
             .footer-container { text-align: center; }
             .footer-col h3::after { left: 50%; transform: translateX(-50%); }
             .back-to-top { width: 45px; height: 45px; font-size: 1.3rem; }
-            /* [PERBAIKAN] Penyesuaian posisi tombol mengambang */
-            .floating-register-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 1.6rem;
-                bottom: 75px; 
-                right: 20px;
-            }
         }
         
         @media (max-width: 480px) {
@@ -732,23 +787,10 @@
             .offer-notification { width: calc(100% - 20px); bottom: 10px; right: 10px; }
              .contact-bar { left: 10px; bottom: 10px; }
              .contact-btn { width: 50px; height: 50px; font-size: 1.5rem; }
-             /* [PERBAIKAN] Penyesuaian posisi tombol mengambang */
-             .floating-register-btn {
-                width: 55px;
-                height: 55px;
-                font-size: 1.5rem;
-                bottom: 70px; 
-                right: 10px;
-             }
         }
     </style>
 </head>
 <body>
-    <audio id="bgMusic" loop>
-        <source src="https://raw.githubusercontent.com/Musikwebsite.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="buttonSound" src="https://raw.githubusercontent.com/LenteraKarya/Lentera-Karya/main/assets/audio/audiotombol.mp3"></audio>
-    
     <div id="qrcode" style="display: none;"></div>
 
     <header id="home">
@@ -756,7 +798,7 @@
         <div class="header-content">
             <div class="logo">
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
-                <span>WARUNG PAK UNTUNG MITRA ANEKAMARKET</span>
+                <span>Warung Pak Untung MITRA ANEKAMARKET</span>
             </div>
             <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
             
@@ -811,11 +853,17 @@
     </main>
     
     <div class="contact-bar">
+        <a href="https://www.aplikasiusaha.com/notagratis" class="contact-btn register-btn" target="_blank" rel="noopener noreferrer" aria-label="Daftar Sekarang Juga">
+            <i class="fas fa-cash-register"></i>
+        </a>
         <a href="https://wa.me/6283826231962" class="contact-btn whatsapp" target="_blank" aria-label="Hubungi via WhatsApp">
             <i class="fab fa-whatsapp"></i>
         </a>
         <a href="tel:+6283826231962" class="contact-btn phone" aria-label="Telepon Kami">
             <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://maps.app.goo.gl/6xMBrsLe2WmuKRWX9" id="location-btn" class="contact-btn location" target="_blank" rel="noopener noreferrer" aria-label="Lihat Lokasi">
+            <i class="fas fa-map-marker-alt"></i>
         </a>
         <button class="contact-btn order" id="quickOrderBtn" aria-label="Pesan Cepat">
             <i class="fas fa-shopping-cart"></i>
@@ -824,10 +872,6 @@
 
     <a href="#home" class="back-to-top" aria-label="Kembali ke atas">
         <i class="fas fa-arrow-up"></i>
-    </a>
-
-    <a href="https://www.aplikasiusaha.com/notagratis" target="_blank" class="floating-register-btn" aria-label="Daftar Sekarang">
-        <i class="fas fa-cash-register"></i>
     </a>
     
     <footer>
@@ -862,13 +906,13 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            © 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm">
                  <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -893,7 +937,7 @@
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
+            <span class="close-search-modal">×</span>
             <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput" aria-label="Input Pencarian Produk">
             <div class="search-results" id="searchResults" aria-live="polite">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari...</p>
@@ -910,11 +954,11 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
-        <span class="close-lightbox-modal">&times;</span>
+        <span class="close-lightbox-modal">×</span>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
+        <span class="close-notification" id="closeNotification">×</span>
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
@@ -938,42 +982,102 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
     <script>
-        // --- [PERBAIKAN] Sistem Refresh Cerdas ---
-        // Sistem ini akan menyegarkan halaman jika pengguna kembali ke tab 
-        // setelah tidak aktif selama jangka waktu tertentu (misalnya, 5 menit).
-        // Hal ini memastikan data yang ditampilkan selalu yang terbaru tanpa
-        // mengganggu pengguna saat mereka sedang aktif di halaman.
-        (() => {
-            let hiddenTime;
-            const REFRESH_AFTER_MILLISECONDS = 300000; // 5 menit (300 * 1000 ms)
+        document.addEventListener('DOMContentLoaded', () => {
 
-            document.addEventListener('visibilitychange', () => {
-                if (document.visibilityState === 'hidden') {
-                    hiddenTime = new Date().getTime();
-                } else if (document.visibilityState === 'visible') {
-                    if (hiddenTime && (new Date().getTime() - hiddenTime > REFRESH_AFTER_MILLISECONDS)) {
-                        // Jika tab tidak aktif selama lebih dari 5 menit, segarkan halaman.
-                        // Parameter 'true' memaksa reload dari server, mengabaikan cache.
-                        location.reload(true); 
+            // --- [PERBAIKAN] FITUR BARU: Refresh Otomatis & Hapus Cache ---
+            function autoRefreshPage() {
+                // FIXED: Changed timeout from 1800 (1.8s) to 1800000 (30 minutes)
+                setTimeout(() => {
+                    location.replace(location.href);
+                }, 1800000); 
+            }
+            // --- [AKHIR PERBAIKAN] ---
+            
+            // --- DATA PRODUK ---
+            const products = [
+                {
+                    "id": "WPU-2025-0610",
+                    "category": "food",
+                    "type": "resto",
+                    "seller": {
+                        "name": "Warung Pak Untung",
+                        "link": "https://anekamarket.my.id/pakuntung",
+                        "locationLink": "https://maps.app.goo.gl/6xMBrsLe2WmuKRWX9"
+                    },
+                    "badge": {
+                        "text": "Diskon Spesial",
+                        "type": "promo"
+                    },
+                    "mainImage": "https://i.imgur.com/1Mvj3cv.jpeg",
+                    "title": "Menu Bakaran Spesial Warung Pak Untung",
+                    "code": "WPU-2025-0610",
+                    "price": 30000,
+                    "originalPrice": 50000,
+                    "discount": "40% OFF",
+                    "priceVariations": [
+                        {"name": "Paket Hemat Komplit", "price": 30000},
+                        {"name": "Ikan Super (1 org) - 2 ons", "price": 25000},
+                        {"name": "Ikan Super (1 org) - 3 ons", "price": 30000},
+                        {"name": "Ikan Super (1 org) - 4 ons", "price": 35000},
+                        {"name": "Ikan Super (1 org) - 5 ons", "price": 45000},
+                        {"name": "Ikan Super (1 org) - 6 ons", "price": 55000},
+                        {"name": "Ikan Super (1 org) - 7 ons", "price": 60000},
+                        {"name": "Ikan Super (1 org) - 8 ons", "price": 70000},
+                        {"name": "Ikan Super (1 org) - 9 ons", "price": 80000},
+                        {"name": "Ikan Super (1 org) - 1 kg", "price": 90000},
+                        {"name": "Ikan Super (2 org) - 2 ons", "price": 30000},
+                        {"name": "Ikan Super (2 org) - 3 ons", "price": 40000},
+                        {"name": "Ikan Super (2 org) - 4 ons", "price": 50000},
+                        {"name": "Ikan Super (2 org) - 5 ons", "price": 60000},
+                        {"name": "Ikan Super (2 org) - 6 ons", "price": 65000},
+                        {"name": "Ikan Super (2 org) - 7 ons", "price": 75000},
+                        {"name": "Ikan Super (2 org) - 8 ons", "price": 85000},
+                        {"name": "Ikan Super (2 org) - 9 ons", "price": 95000},
+                        {"name": "Ikan Super (2 org) - 1 kg", "price": 100000}
+                    ],
+                    "units": ["porsi", "kg", "ons", "ekor"],
+                    "defaultUnit": "porsi",
+                    "details": {
+                        "description": "<br><strong>Diskon Spesial: Nikmati Sensasi Kuliner Laut Bakar di Warung Pak Untung!</strong><br>Cari tempat makan yang bikin penasaran? Mampir ke <strong>Warung Pak Untung</strong>! Terletak strategis di dekat destinasi Wisata Kampung Kerapu, kami menyajikan hidangan laut bakar segar dengan bumbu rahasia yang meresap sempurna hingga ke dalam daging.<br><br>🔥 <strong>PROMO SPESIAL!</strong> Jangan lewatkan paket komplit kami yang super hemat! Cukup dengan <strong>Rp 30.000</strong> saja dari harga normal Rp 50.000, Anda sudah bisa menikmati hidangan lezat yang bikin ketahihan.<br><br>Ingin yang lebih spesial? Pilih sendiri <strong>ikan super segar</strong> kami dengan berbagai ukuran sesuai selera Anda, cocok untuk dinikmati sendiri atau beramai-ramai. Setiap hidangan disajikan dengan sambal khas Pak Untung yang pedasnya nendang dan segar, dijamin akan menyempurnakan setiap suapan Anda.",
+                        "media": [
+                            { "type": "image", "src": "https://i.imgur.com/1Mvj3cv.jpeg", "thumb": "https://i.imgur.com/1Mvj3cv.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/54G3vZ8.jpeg", "thumb": "https://i.imgur.com/54G3vZ8.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/jSYOe6m.jpeg", "thumb": "https://i.imgur.com/jSYOe6m.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/YqGxIMK.jpeg", "thumb": "https://i.imgur.com/YqGxIMK.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/2tbgQnd.jpeg", "thumb": "https://i.imgur.com/2tbgQnd.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/aSEVqAp.jpeg", "thumb": "https://i.imgur.com/aSEVqAp.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/v1kqfUt.jpeg", "thumb": "https://i.imgur.com/v1kqfUt.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/8XfYID8.jpeg", "thumb": "https://i.imgur.com/8XfYID8.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/QjUO7gc.jpeg", "thumb": "https://i.imgur.com/QjUO7gc.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/NgAvdi7.jpeg", "thumb": "https://i.imgur.com/NgAvdi7.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/MOahwIU.jpeg", "thumb": "https://i.imgur.com/MOahwIU.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/vTbwJGv.jpeg", "thumb": "https://i.imgur.com/vTbwJGv.jpeg" }
+                        ],
+                        "specs": [
+                            {"label":"Kode Promo","value":"WPU-2025-0610"},
+                            {"label":"Nama Gerai","value":"Warung Pak Untung"},
+                            {"label":"Pemilik","value":"Mas Eko"},
+                            {"label":"Alamat","value":"Jalan Raya Gundil, sebelah barat Wisata Kampung Kerapu (selatan jalan)"},
+                            {"label":"Kontak","value":"083826231962"},
+                            {"label":"Menu Promo","value":"• Paket Hemat Komplit <s>Rp50.000</s> <strong>Rp30.000</strong> (Diskon 40%)"},
+                            {"label":"Lauk Tambahan","value":"• Ikan Super (1 Orang) mulai dari Rp25.000<br>• Ikan Super (2 Orang) mulai dari Rp30.000"},
+                            {"label":"Catatan","value":"Harga dapat berubah sewaktu-waktu tanpa pemberitahuan."}
+                        ]
+                    },
+                    "contact": {
+                        "whatsapp": "6283826231962",
+                        "phone": "+6283826231962"
                     }
                 }
-            });
-        })();
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            
-            // --- DATA PRODUK (TELAH DIPERBARUI) ---
-            const products = [
-                {"id":"WPU-2025-0610","category":"food","type":"resto","seller":{"name":"Warung Pak Untung","link":"https://anekamarket.my.id/pakuntung","locationLink":"https://maps.app.goo.gl/6xMBrsLe2WmuKRWX9"},"badge":{"text":"Diskon Spesial","type":"promo"},"mainImage":"https://i.imgur.com/1Mvj3cv.jpeg","title":"Menu Bakaran Spesial Warung Pak Untung","code":"WPU-2025-0610","price":30000,"originalPrice":50000,"discount":"40% OFF","priceVariations":[{"name":"Paket Hemat Komplit","price":30000},{"name":"Ikan Super (1 org) - 2 ons","price":25000},{"name":"Ikan Super (1 org) - 3 ons","price":30000},{"name":"Ikan Super (1 org) - 4 ons","price":35000},{"name":"Ikan Super (1 org) - 5 ons","price":45000},{"name":"Ikan Super (1 org) - 6 ons","price":55000},{"name":"Ikan Super (1 org) - 7 ons","price":60000},{"name":"Ikan Super (1 org) - 8 ons","price":70000},{"name":"Ikan Super (1 org) - 9 ons","price":80000},{"name":"Ikan Super (1 org) - 1 kg","price":90000},{"name":"Ikan Super (2 org) - 2 ons","price":30000},{"name":"Ikan Super (2 org) - 3 ons","price":40000},{"name":"Ikan Super (2 org) - 4 ons","price":50000},{"name":"Ikan Super (2 org) - 5 ons","price":60000},{"name":"Ikan Super (2 org) - 6 ons","price":65000},{"name":"Ikan Super (2 org) - 7 ons","price":75000},{"name":"Ikan Super (2 org) - 8 ons","price":85000},{"name":"Ikan Super (2 org) - 9 ons","price":95000},{"name":"Ikan Super (2 org) - 1 kg","price":100000}],"units":["porsi","kg","ons","ekor"],"defaultUnit":"porsi","details":{"description":"<br><strong>Diskon Spesial: Nikmati Sensasi Kuliner Laut Bakar di Warung Pak Untung!</strong><br>Cari tempat makan yang bikin penasaran? Mampir ke <strong>Warung Pak Untung</strong>! Terletak strategis di dekat destinasi Wisata Kampung Kerapu, kami menyajikan hidangan laut bakar segar dengan bumbu rahasia yang meresap sempurna hingga ke dalam daging.<br><br>🔥 <strong>PROMO SPESIAL!</strong> Jangan lewatkan paket komplit kami yang super hemat! Cukup dengan <strong>Rp 30.000</strong> saja dari harga normal Rp 50.000, Anda sudah bisa menikmati hidangan lezat yang bikin ketahihan.<br><br>Ingin yang lebih spesial? Pilih sendiri <strong>ikan super segar</strong> kami dengan berbagai ukuran sesuai selera Anda, cocok untuk dinikmati sendiri atau beramai-ramai. Setiap hidangan disajikan dengan sambal khas Pak Untung yang pedasnya nendang dan segar, dijamin akan menyempurnakan setiap suapan Anda.","images":["https://i.imgur.com/54G3vZ8.jpeg","https://i.imgur.com/jSYOe6m.jpeg","https://i.imgur.com/YqGxIMK.jpeg","https://i.imgur.com/2tbgQnd.jpeg","https://i.imgur.com/aSEVqAp.jpeg","https://i.imgur.com/v1kqfUt.jpeg","https://i.imgur.com/8XfYID8.jpeg","https://i.imgur.com/QjUO7gc.jpeg","https://i.imgur.com/NgAvdi7.jpeg","https://i.imgur.com/MOahwIU.jpeg","https://i.imgur.com/vTbwJGv.jpeg"],"specs":[{"label":"Kode Promo","value":"WPU-2025-0610"},{"label":"Nama Gerai","value":"Warung Pak Untung"},{"label":"Pemilik","value":"Mas Eko"},{"label":"Alamat","value":"Jalan Raya Gundil, sebelah barat Wisata Kampung Kerapu (selatan jalan)"},{"label":"Kontak","value":"083826231962"},{"label":"Menu Promo","value":"• Paket Hemat Komplit <s>Rp50.000</s> <strong>Rp30.000</strong> (Diskon 40%)"},{"label":"Lauk Tambahan","value":"• Ikan Super (1 Orang) mulai dari Rp25.000<br>• Ikan Super (2 Orang) mulai dari Rp30.000"},{"label":"Catatan","value":"Harga dapat berubah sewaktu-waktu tanpa pemberitahuan."}]},"contact":{"whatsapp":"6283826231962","phone":"+6283826231962"}}
             ];
 
+
             const galleryGrid = document.getElementById('gallery-grid');
-            const buttonSound = document.getElementById('buttonSound');
             const lightboxModal = document.getElementById('lightboxModal');
             let lightboxSwiper = null;
             let logoBase64 = null;
+            let activeSliders = {};
 
-            // --- FUNGSI BARU: Konversi gambar ke Base64 untuk PDF ---
             function imageToBase64(url, callback) {
                 const xhr = new XMLHttpRequest();
                 xhr.onload = function() {
@@ -988,23 +1092,18 @@
                 xhr.send();
             }
 
-            // Panggil fungsi ini saat script dimuat untuk menyiapkan logo
             imageToBase64('https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png', (base64) => {
                 logoBase64 = base64;
             });
 
             function playSound() {
-                if(buttonSound) {
-                    buttonSound.currentTime = 0;
-                    buttonSound.play().catch(e => console.log("Audio play failed: ", e));
-                }
+                // Sound functionality is disabled as the audio file link was broken.
             }
 
             function formatPrice(amount) {
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
             }
 
-            // --- FUNGSI BARU: Generate Kode Transaksi Unik ---
             function generateTransactionCode() {
                 const date = new Date();
                 const dateString = date.getFullYear().toString() + 
@@ -1014,10 +1113,9 @@
                 return `AM-${dateString}-${randomString}`;
             }
 
-            // --- FUNGSI BARU: Generate QR Code sebagai data URI ---
             function generateQrCodeDataUri(url, callback) {
                 const qrContainer = document.getElementById('qrcode');
-                qrContainer.innerHTML = ''; // Kosongkan container
+                qrContainer.innerHTML = '';
                 new QRCode(qrContainer, {
                     text: url,
                     width: 128,
@@ -1025,23 +1123,21 @@
                     correctLevel: QRCode.CorrectLevel.H
                 });
 
-                // Beri sedikit waktu untuk QR code dirender di DOM
                 setTimeout(() => {
                     const canvas = qrContainer.querySelector('canvas');
                     if (canvas) {
                         callback(canvas.toDataURL('image/png'));
                     } else {
-                        callback(null); // Gagal membuat QR code
+                        callback(null);
                     }
                 }, 100);
             }
 
-            // --- FUNGSI BARU (DISEMPURNAKAN): Membuat dan mengunduh PDF ---
             async function generateAndDownloadPdf(orderData) {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const transactionCode = generateTransactionCode();
-                orderData.transactionCode = transactionCode; // Simpan kode transaksi
+                orderData.transactionCode = transactionCode;
 
                 generateQrCodeDataUri("https://www.aplikasiusaha.com", (qrCodeUri) => {
                     const today = new Date();
@@ -1049,24 +1145,22 @@
                     const pageHeight = doc.internal.pageSize.getHeight();
                     const pageWidth = doc.internal.pageSize.getWidth();
 
-                    // === HEADER BARU YANG DISEMPURNAKAN ===
                     if (logoBase64) {
                         doc.addImage(logoBase64, 'PNG', 14, 15, 25, 25);
                     }
                     doc.setFontSize(10);
                     doc.setFont(undefined, 'normal');
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("MARKETPLACE", 45, 22);
                     
                     doc.setFontSize(16);
                     doc.setFont(undefined, 'bold');
-                    doc.setTextColor('#1A2533'); // var(--dark)
+                    doc.setTextColor('#1A2533');
                     doc.text("ANEKAMARKET", 45, 30);
                     
-                    doc.setDrawColor('#EAEFF5'); // var(--border-color)
+                    doc.setDrawColor('#EAEFF5');
                     doc.line(14, 45, pageWidth - 14, 45);
                     
-                    // Info Penjual dan Transaksi
                     doc.setFontSize(8);
                     doc.setFont(undefined, 'bold');
                     doc.setTextColor('#7f8c8d');
@@ -1080,7 +1174,6 @@
                     doc.text(`No. Transaksi: ${transactionCode}`, pageWidth / 2, 58);
                     doc.text(`Tanggal: ${formattedDate}`, pageWidth / 2, 64);
                     
-                    // Tabel Rincian Pesanan
                     const tableColumn = ["No.", "Nama Produk", "Harga Satuan", "Jumlah", "Subtotal"];
                     const tableRows = [];
                     
@@ -1101,7 +1194,7 @@
                         startY: 75,
                         theme: 'grid',
                         headStyles: { 
-                            fillColor: '#4A90E2', // var(--primary)
+                            fillColor: '#4A90E2',
                             textColor: '#FFFFFF',
                             fontStyle: 'bold'
                         },
@@ -1124,13 +1217,11 @@
 
                     const finalY = doc.previousAutoTable.finalY;
 
-                    // Total
                     doc.setFontSize(14);
                     doc.setFont(undefined, 'bold');
                     doc.text("Total Pesanan:", 14, finalY + 15);
                     doc.text(formatPrice(orderData.total), pageWidth - 14, finalY + 15, { align: 'right' });
 
-                    // Footer Dokumen
                     const footerY = pageHeight - 35;
                     doc.line(14, footerY, pageWidth - 14, footerY);
                     
@@ -1138,14 +1229,13 @@
                         doc.addImage(qrCodeUri, 'PNG', 14, footerY + 5, 25, 25);
                     }
                     doc.setFontSize(8);
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("Scan untuk info lebih lanjut", 42, footerY + 15);
 
                     doc.setFontSize(9);
                     doc.text("Powered by: www.anekamarket.my.id", pageWidth - 14, footerY + 12, { align: 'right' });
                     doc.text("Terima kasih telah berbelanja!", pageWidth - 14, footerY + 18, { align: 'right' });
 
-                    // Simpan PDF
                     const fileName = `Struk-${transactionCode}.pdf`;
                     doc.save(fileName);
                 });
@@ -1169,46 +1259,46 @@
 
                     const badgeHTML = product.badge ? `<div class="product-badge">${product.badge.text}</div>` : '';
 
-                    const priceVariationsHTML = product.priceVariations.map(v => {
-                        let priceDisplay = '';
-                        if (v.originalPrice) {
-                            priceDisplay = `<span class="original-price">${formatPrice(v.originalPrice)}</span> ${formatPrice(v.price)}`;
-                        } else {
-                            priceDisplay = formatPrice(v.price);
-                        }
-                        return `
+                    const priceVariationsHTML = product.priceVariations.map(v => `
                         <div class="price-variation-item" data-price="${v.price}" data-name="${v.name}">
                             <div class="price-variation-info">
                                 <span class="price-variation-name">${v.name}</span>
-                                <div class="price-variation-value">${priceDisplay}</div>
+                                <div class="price-variation-value">${formatPrice(v.price)}</div>
                             </div>
                             <div class="quantity-controls">
                                 <button class="quantity-btn minus" aria-label="Kurangi jumlah ${v.name}">-</button>
                                 <input type="number" class="quantity-input" value="0" min="0" readonly aria-label="Jumlah ${v.name}">
                                 <button class="quantity-btn plus" aria-label="Tambah jumlah ${v.name}">+</button>
                             </div>
-                        </div>`;
-                    }).join('');
+                        </div>`).join('');
                     
-                    const sliderImages = product.details.images;
-                    
-                    const mainSliderHTML = sliderImages.map((img, index) => `
-                        <div class="swiper-slide" data-index="${index}">
-                            <img src="${img}" alt="${product.title} - Gambar ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
-                        </div>
-                    `).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
 
-                    const thumbSliderHTML = sliderImages.map(img => `
+                    const mainSliderHTML = mediaItems.map((media, index) => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <video playsinline muted>
+                                        <source src="${media.src}" type="video/mp4">
+                                        Browser Anda tidak mendukung tag video.
+                                    </video>
+                                </div>`;
+                        } else {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <img src="${media.src}" alt="${product.title} - Media ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
+                                </div>`;
+                        }
+                    }).join('');
+
+                    const thumbSliderHTML = mediaItems.map(media => `
                         <div class="swiper-slide">
-                            <img src="${img}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
+                            <img src="${media.thumb}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
                         </div>
                     `).join('');
 
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
-                    const locationLink = product.seller.locationLink;
-                    const locationButtonHTML = locationLink ? `<a href="${locationLink}" target="_blank" rel="noopener noreferrer" class="btn-location"><i class="fas fa-map-marker-alt"></i> Lokasi</a>` : '';
-
                     productCard.innerHTML = `
                         ${badgeHTML}
                         <div class="swiper product-slider-main">
@@ -1227,7 +1317,6 @@
                             </div>
                             <div class="gallery-actions">
                                 <button class="btn-order"><i class="fas fa-file-invoice"></i> Pesan & Struk</button>
-                                ${locationButtonHTML}
                                 <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
                             </div>
                             <div class="gallery-detail-expanded">
@@ -1242,22 +1331,56 @@
                 });
                 initializeSliders();
             }
-
+            
             function initializeSliders() {
                 const productCards = document.querySelectorAll('.gallery-item');
                 productCards.forEach(card => {
+                    const cardId = card.dataset.id;
                     if (card.querySelector('.product-slider-main').swiper) return;
 
                     const thumbsSwiper = new Swiper(card.querySelector('.product-slider-thumbs'), {
                         spaceBetween: 10, slidesPerView: 4, freeMode: true, watchSlidesProgress: true,
                     });
 
-                    new Swiper(card.querySelector('.product-slider-main'), {
+                    const mainSwiper = new Swiper(card.querySelector('.product-slider-main'), {
                         spaceBetween: 10,
                         navigation: { nextEl: card.querySelector('.swiper-button-next'), prevEl: card.querySelector('.swiper-button-prev'), },
                         thumbs: { swiper: thumbsSwiper, },
-                        autoplay: { delay: 3500, disableOnInteraction: false, },
                     });
+
+                    function handleAutoPlay(swiper) {
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+
+                        const activeSlide = swiper.slides[swiper.activeIndex];
+                        const video = activeSlide.querySelector('video');
+
+                        if (video) {
+                            video.currentTime = 0;
+                            video.play().catch(e => console.error("Video autoplay was prevented by the browser:", e));
+                            video.onended = () => {
+                                swiper.slideNext();
+                            };
+                        } else {
+                            activeSliders[cardId] = setTimeout(() => {
+                                swiper.slideNext();
+                            }, 4000);
+                        }
+                    }
+
+                    mainSwiper.on('slideChangeTransitionStart', function (swiper) {
+                        const allVideos = card.querySelectorAll('video');
+                        allVideos.forEach(v => v.pause());
+                        
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+                    });
+
+                    mainSwiper.on('slideChangeTransitionEnd', handleAutoPlay);
+
+                    handleAutoPlay(mainSwiper);
                 });
             }
 
@@ -1278,17 +1401,11 @@
                 products.forEach(product => {
                     content += `<h4 style="margin-bottom: 10px; margin-top: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px;">${product.seller.name}</h4>`;
                     product.priceVariations.forEach(v => {
-                        let priceDisplay = '';
-                        if (v.originalPrice) {
-                            priceDisplay = `<span class="original-price" style="text-decoration: line-through; color: #7f8c8d; font-size: 0.9rem; margin-right: 8px;">${formatPrice(v.originalPrice)}</span> ${formatPrice(v.price)}`;
-                        } else {
-                            priceDisplay = formatPrice(v.price);
-                        }
                         content += `
                         <div class="price-variation-item" data-price="${v.price}" data-name="${v.name}">
                             <div class="price-variation-info">
                                 <span class="price-variation-name">${v.name}</span>
-                                <div class="price-variation-value">${priceDisplay}</div>
+                                <div class="price-variation-value">${formatPrice(v.price)}</div>
                             </div>
                             <div class="quantity-controls">
                                 <button type="button" class="quantity-btn minus" aria-label="Kurangi jumlah ${v.name}">-</button>
@@ -1370,8 +1487,21 @@
                     const initialIndex = parseInt(clickedSlide.dataset.index, 10);
                     
                     const lightboxWrapper = document.getElementById('lightbox-swiper-wrapper');
-                    lightboxWrapper.innerHTML = product.details.images.map(img => `
-                        <div class="swiper-slide"><img src="${img}" alt="Gambar diperbesar"></div>`).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
+                    
+                    lightboxWrapper.innerHTML = mediaItems.map(media => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide">
+                                    <video controls playsinline>
+                                        <source src="${media.src}" type="video/mp4">
+                                    </video>
+                                </div>`;
+                        } else { // 'image'
+                            return `<div class="swiper-slide"><img src="${media.src}" alt="Gambar diperbesar"></div>`;
+                        }
+                    }).join('');
+
 
                     lightboxModal.classList.add('show');
 
@@ -1396,6 +1526,21 @@
                          orderButton.classList.add('shake-animation');
                          setTimeout(() => orderButton.classList.remove('shake-animation'), 500);
                     }
+                }
+            }
+            
+            // --- FUNGSI BARU UNTUK CEK LOKASI ---
+            function checkLocation() {
+                const locationBtn = document.getElementById('location-btn');
+                if (locationBtn && locationBtn.href.endsWith('/0')) {
+                    // Beri notifikasi
+                    alert('PERHATIAN: Gerai ini belum menetapkan lokasi di Google Maps.');
+                    
+                    // Nonaktifkan tombol
+                    locationBtn.classList.add('disabled');
+                    locationBtn.removeAttribute('href');
+                    locationBtn.setAttribute('aria-label', 'Lokasi belum diatur');
+                    locationBtn.onclick = (e) => e.preventDefault();
                 }
             }
 
@@ -1434,7 +1579,7 @@
                     const filteredProducts = products.filter(p => p.title.toLowerCase().includes(query) || p.code.toLowerCase().includes(query) || p.seller.name.toLowerCase().includes(query));
                     
                     if (filteredProducts.length > 0) {
-                        const mainImage = (p) => (p.details.images && p.details.images.length > 0) ? p.details.images[0] : '';
+                        const mainImage = (p) => (p.details.media && p.details.media.length > 0) ? p.details.media[0].thumb : p.mainImage;
                         searchResults.innerHTML = filteredProducts.map(p => `
                             <a href="#product-${p.id}" class="search-result-item">
                                 <img src="${mainImage(p)}" class="search-result-image" alt="${p.title}" loading="lazy">
@@ -1478,28 +1623,11 @@
                 document.getElementById('quickOrderForm').addEventListener('submit', (e) => {
                     e.preventDefault();
                     playSound();
-                    
-                    // Mengumpulkan item dari semua produk yang ada di modal
-                    const allItems = [];
-                    products.forEach(product => {
-                        const productItems = Array.from(orderModal.querySelectorAll(`.price-variation-item[data-name*="${product.seller.name}"], .price-variation-item`))
-                            .map(item => ({
-                                name: item.dataset.name,
-                                price: parseFloat(item.dataset.price),
-                                quantity: parseInt(item.querySelector('.quantity-input').value, 10),
-                                // Tentukan produk berdasarkan nama atau atribut lain jika perlu
-                                productId: product.id 
-                            }))
-                            .filter(item => item.quantity > 0);
-                        
-                        // Asumsi sederhana: semua item pesanan cepat ditujukan ke kontak default
-                    });
 
                     const items = Array.from(orderModal.querySelectorAll('.price-variation-item'))
                         .map(item => ({ name: item.dataset.name, price: parseFloat(item.dataset.price), quantity: parseInt(item.querySelector('.quantity-input').value, 10) }))
                         .filter(item => item.quantity > 0);
 
-                    // Untuk Pesan Cepat, kita bisa gunakan info kontak default atau dari produk pertama
                     const defaultProductInfo = products.length > 0 ? products[0] : { code: 'QUICK-ORDER', seller: { name: 'ANEKAMARKET' }, contact: { whatsapp: '6283826231962' } };
                     
                     if(processOrder(defaultProductInfo, items)) {
@@ -1511,12 +1639,7 @@
                     }
                 });
 
-                // --- [PERBAIKAN] Event Listener untuk Tombol Mengambang Baru ---
-                const registerBtn = document.querySelector('.floating-register-btn');
-                if(registerBtn) {
-                    registerBtn.addEventListener('click', playSound);
-                }
-                
+
                 const offerNotification = document.getElementById('offerNotification');
                 if (offerNotification) {
                     setTimeout(() => offerNotification.classList.add('show'), 5000);
@@ -1550,6 +1673,8 @@
             // --- INITIATE ---
             renderProducts(products);
             setupEventListeners();
+            checkLocation(); // Panggil fungsi cek lokasi
+            autoRefreshPage();
         });
     </script>
 </body>
