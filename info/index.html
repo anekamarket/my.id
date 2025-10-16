@@ -11,17 +11,400 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.anekamarket.my.id">
     <meta property="og:image" content="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80">
+    
     <title>Lentera Karya Situbondo - Pusat Informasi Bisnis Anda</title>
     
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" type="image/png">
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* === PENYEMPURNAAN: ROOT VARIABLES === */
+        :root {
+            --primary-color: #3498db;
+            --primary-hover: #2980b9;
+            --secondary-color: #2ecc71;
+            --secondary-hover: #27ae60;
+            --dark-blue: #2c3e50;
+            --light-gray: #f8f9fa;
+            --white: #ffffff;
+            --text-color: #555;
+            --heading-font: 'Montserrat', sans-serif;
+            --body-font: 'Roboto', sans-serif;
+            --shadow-soft: 0 4px 15px rgba(0,0,0,0.06);
+            --shadow-medium: 0 8px 30px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+            --transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --primary-gradient: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+        }
+
+        /* === PENYEMPURNAAN: PRELOADER === */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #e0e0e0;
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* === PENYEMPURNAAN: GLOBAL & BASE STYLES === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--body-font);
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+        .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+        .section { padding: 100px 0; }
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            font-family: var(--heading-font);
+            font-size: 2.8rem;
+            color: var(--dark-blue);
+            font-weight: 700;
+        }
+        .section-title span { color: var(--primary-color); }
+        .bg-light { background-color: var(--light-gray); }
+
+        /* === PENYEMPURNAAN: ANIMASI SCROLL === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* === PENYEMPURNAAN: NAVBAR / HEADER === */
+        #navbar {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 18px 0;
+            box-shadow: none; /* Shadow on scroll only */
+            transition: all var(--transition);
+        }
+        #navbar.scrolled {
+            padding: 12px 0;
+            box-shadow: var(--shadow-medium);
+        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { font-family: var(--heading-font); font-weight: 700; font-size: 1.8rem; color: var(--dark-blue); text-decoration: none; }
+        .nav-logo i { color: var(--primary-color); margin-right: 10px; transition: transform var(--transition); }
+        .nav-logo:hover i { transform: rotate(360deg) scale(1.2); }
+        .nav-links { display: flex; list-style: none; align-items: center; }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 20px;
+            font-weight: 500;
+            transition: color var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width var(--transition);
+        }
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+        .mobile-menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--dark-blue); }
+
+        /* === PENYEMPURNAAN: HERO SECTION === */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            color: var(--white);
+            background: linear-gradient(rgba(44, 62, 80, 0.75), rgba(44, 62, 80, 0.6)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1632&q=80') no-repeat center center/cover;
+            background-attachment: fixed; /* Parallax effect */
+        }
+        .hero-content { max-width: 750px; }
+        .hero-content h1 {
+            font-family: var(--heading-font);
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        .hero-content p {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        /* === PENYEMPURNAAN: BUTTONS === */
+        .btn {
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--heading-font);
+            display: inline-block;
+            transition: all var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+        }
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        /* === PENYEMPURNAAN: CARD STYLE (Layanan) === */
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            padding: 40px;
+            text-align: center;
+            transition: all var(--transition);
+            border-top: 4px solid transparent;
+        }
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-medium);
+            border-top-color: var(--primary-color);
+        }
+        .card-icon {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card h3 {
+            font-family: var(--heading-font);
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+        }
+
+        /* === PENYEMPURNAAN: GRID LAYOUT === */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px; }
+
+        /* === PENYEMPURNAAN: ITEM CARD (Produk/Berita) === */
+        .item-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+            transition: all var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+        .item-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-medium);
+        }
+        .item-card-img-container {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+        }
+        .item-card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .item-card:hover img {
+            transform: scale(1.1);
+        }
+        .item-card-content { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; }
+        .item-card-content h3 { font-family: var(--heading-font); font-size: 1.4rem; color: var(--dark-blue); margin-bottom: 15px; }
+        .item-card-content .meta { font-size: 0.9rem; color: #999; margin-bottom: 15px; }
+        .item-card-content .meta span { margin-right: 15px; }
+        .item-card-content .meta i { margin-right: 8px; color: var(--primary-color); }
+        .item-card-content .btn { margin-top: auto; }
+
+        /* === PENYEMPURNAAN: CAREERS SECTION === */
+        .job-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-soft);
+            margin-bottom: 25px;
+            transition: all var(--transition);
+            border-left: 5px solid var(--light-gray);
+        }
+        .job-item:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-medium);
+            border-left-color: var(--primary-color);
+        }
+        .job-item-info h3 { font-family: var(--heading-font); font-size: 1.5rem; color: var(--dark-blue); }
+        .job-item-info p { margin: 8px 0 0; color: #777; }
+        .job-item-info p i { margin-right: 8px; }
+
+        /* === PENYEMPURNAAN: CONTACT SECTION === */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; align-items: flex-start; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 15px; margin-bottom: 20px;
+            border: 1px solid #ddd; border-radius: 8px;
+            font-family: var(--body-font); font-size: 1rem;
+            transition: all var(--transition);
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.25);
+        }
+        .contact-info h3 {
+            font-family: var(--heading-font); font-size: 1.8rem;
+            color: var(--dark-blue); margin-bottom: 20px;
+        }
+        .contact-info p { margin-bottom: 25px; font-size: 1.1rem; display: flex; align-items: center; }
+        .contact-info i { color: var(--primary-color); font-size: 1.3rem; width: 40px; text-align: center; margin-right: 15px; }
+
+        /* === PENYEMPURNAAN: FOOTER === */
+        footer { background: var(--dark-blue); color: #bdc3c7; padding: 80px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 60px; }
+        .footer-col h4 { font-family: var(--heading-font); color: var(--white); font-size: 1.4rem; margin-bottom: 25px; position: relative; padding-bottom: 10px; }
+        .footer-col h4::after {
+            content: ''; position: absolute; left: 0; bottom: 0;
+            width: 40px; height: 2px; background: var(--primary-color);
+        }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #bdc3c7; text-decoration: none; transition: all var(--transition); display: inline-block; }
+        .footer-links a:hover { color: var(--white); transform: translateX(5px); }
+        .social-icons a { color: #bdc3c7; font-size: 1.5rem; margin-right: 15px; transition: color var(--transition); }
+        .social-icons a:hover { color: var(--primary-color); transform: scale(1.2); }
+        .copyright { text-align: center; border-top: 1px solid #34495e; padding-top: 30px; font-size: 0.9rem; }
+        .copyright a { color: var(--white); text-decoration: none; font-weight: 500; }
+
+        /* === PENYEMPURNAAN: SCROLL TO TOP BUTTON === */
+        #scrollToTopBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-medium);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            z-index: 999;
+        }
+        #scrollToTopBtn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #scrollToTopBtn:hover {
+            transform: scale(1.1);
+        }
+
+        /* === PENYEMPURNAAN: RESPONSIVE DESIGN === */
+        @media(max-width: 992px) {
+            .hero-content h1 { font-size: 3rem; }
+            .section-title { font-size: 2.4rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .contact-info { margin-bottom: 40px; }
+        }
+        @media(max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                top: 100%; left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                text-align: center;
+                box-shadow: var(--shadow-medium);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out;
+                padding: 0;
+            }
+            .nav-links.active {
+                max-height: 500px;
+                padding: 10px 0;
+            }
+            .nav-links li { border-top: 1px solid var(--light-gray); width: 100%; }
+            .nav-links a { padding: 18px; display: block; width: 100%; margin: 0; }
+            .mobile-menu-toggle { display: block; }
+            .hero-content { text-align: center; }
+            .hero-content p { margin-left: auto; margin-right: auto; }
+            .job-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .job-item .btn { margin-top: 15px; }
+        }
+    </style>
 </head>
 <body>
+
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
 
     <header id="navbar">
         <nav class="container nav-container">
@@ -53,19 +436,21 @@
         
         <section id="services" class="section bg-light">
             <div class="container">
-                <h2 class="section-title">Layanan <span>Kami</span></h2>
+                <div class="reveal">
+                    <h2 class="section-title">Layanan <span>Kami</span></h2>
+                </div>
                 <div class="grid-3">
-                    <div class="card">
+                    <div class="card reveal" style="transition-delay: 0.1s;">
                         <i class="fas fa-store card-icon"></i>
                         <h3>Informasi Usaha</h3>
                         <p>Publikasikan grand opening, promosi, atau profil usaha Anda untuk menjangkau lebih banyak pelanggan di Situbondo.</p>
                     </div>
-                    <div class="card">
+                    <div class="card reveal" style="transition-delay: 0.2s;">
                         <i class="fas fa-box-open card-icon"></i>
                         <h3>Katalog Produk</h3>
                         <p>Tampilkan produk-produk terbaik Anda dalam galeri yang menarik dan mudah diakses oleh calon pembeli.</p>
                     </div>
-                    <div class="card">
+                    <div class="card reveal" style="transition-delay: 0.3s;">
                         <i class="fas fa-briefcase card-icon"></i>
                         <h3>Pusat Karir</h3>
                         <p>Temukan talenta-talenta lokal berbakat atau cari pekerjaan impian Anda melalui platform karir kami.</p>
@@ -76,33 +461,41 @@
 
         <section id="products" class="section">
             <div class="container">
-                <h2 class="section-title">Produk <span>Unggulan</span></h2>
+                <div class="reveal">
+                    <h2 class="section-title">Produk <span>Unggulan</span></h2>
+                </div>
                 <div class="grid-3">
-                    <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=60" alt="Sepasang sepatu sneakers wanita berwarna-warni">
+                    <div class="item-card reveal" style="transition-delay: 0.1s;">
+                        <div class="item-card-img-container">
+                            <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=60" alt="Sepasang sepatu sneakers wanita berwarna-warni">
+                        </div>
                         <div class="item-card-content">
                             <h3>Sepatu Sneakers Modern</h3>
                             <p class="meta"><span><i class="fas fa-tag"></i>Fashion</span></p>
                             <p>Desain trendy dan nyaman untuk aktivitas sehari-hari. Tersedia dalam berbagai warna dan ukuran.</p>
-                            <a href="#" class="btn btn-secondary" style="margin-top:15px;">Lihat Detail</a>
+                            <a href="#" class="btn btn-secondary">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ab?auto=format&fit=crop&w=800&q=60" alt="Biji kopi robusta segar di dalam karung goni">
+                    <div class="item-card reveal" style="transition-delay: 0.2s;">
+                        <div class="item-card-img-container">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ab?auto=format&fit=crop&w=800&q=60" alt="Biji kopi robusta segar di dalam karung goni">
+                        </div>
                         <div class="item-card-content">
                             <h3>Kopi Robusta Situbondo</h3>
                              <p class="meta"><span><i class="fas fa-tag"></i>Kuliner</span></p>
                             <p>Biji kopi pilihan dari perkebunan lokal dengan aroma dan cita rasa yang khas dan kuat.</p>
-                            <a href="#" class="btn btn-secondary" style="margin-top:15px;">Lihat Detail</a>
+                            <a href="#" class="btn btn-secondary">Lihat Detail</a>
                         </div>
                     </div>
-                    <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=60" alt="Tampilan layar smartphone yang menunjukkan analisis media sosial">
+                    <div class="item-card reveal" style="transition-delay: 0.3s;">
+                        <div class="item-card-img-container">
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=60" alt="Tampilan layar smartphone yang menunjukkan analisis media sosial">
+                        </div>
                         <div class="item-card-content">
                             <h3>Layanan Digital Marketing</h3>
                             <p class="meta"><span><i class="fas fa-tag"></i>Jasa</span></p>
                             <p>Tingkatkan visibilitas bisnis Anda di dunia digital dengan strategi pemasaran yang efektif.</p>
-                            <a href="#" class="btn btn-secondary" style="margin-top:15px;">Lihat Detail</a>
+                            <a href="#" class="btn btn-secondary">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -111,26 +504,34 @@
 
         <section id="news" class="section bg-light">
             <div class="container">
-                <h2 class="section-title">Berita & <span>Informasi</span></h2>
+                <div class="reveal">
+                    <h2 class="section-title">Berita & <span>Informasi</span></h2>
+                </div>
                  <div class="grid-3">
-                    <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&w=800&q=60" alt="Bagian depan cafe dengan papan tulis bertuliskan 'Grand Opening'">
+                    <div class="item-card reveal" style="transition-delay: 0.1s;">
+                        <div class="item-card-img-container">
+                            <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&w=800&q=60" alt="Bagian depan cafe dengan papan tulis bertuliskan 'Grand Opening'">
+                        </div>
                         <div class="item-card-content">
                              <p class="meta"><span><i class="far fa-calendar-alt"></i> 16 Okt 2025</span></p>
                             <h3>Grand Opening Cafe "Senja"</h3>
                             <p>Telah dibuka cafe baru dengan konsep industrial di pusat kota. Nikmati diskon 50% selama minggu pertama!</p>
                         </div>
                     </div>
-                     <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=60" alt="Surat kabar dengan berita utama tentang bisnis digital">
+                     <div class="item-card reveal" style="transition-delay: 0.2s;">
+                        <div class="item-card-img-container">
+                            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=60" alt="Surat kabar dengan berita utama tentang bisnis digital">
+                        </div>
                         <div class="item-card-content">
                             <p class="meta"><span><i class="far fa-calendar-alt"></i> 15 Nov 2025</span></p>
                             <h3>Workshop UMKM Go Digital</h3>
                             <p>Lentera Karya akan mengadakan workshop gratis untuk para pelaku UMKM yang ingin go digital.</p>
                         </div>
                     </div>
-                     <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60" alt="Tim kerja sedang berdiskusi di sekitar meja dengan laptop">
+                     <div class="item-card reveal" style="transition-delay: 0.3s;">
+                        <div class="item-card-img-container">
+                            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60" alt="Tim kerja sedang berdiskusi di sekitar meja dengan laptop">
+                        </div>
                         <div class="item-card-content">
                              <p class="meta"><span><i class="far fa-calendar-alt"></i> 01 Des 2025</span></p>
                             <h3>Kerjasama Baru dengan Logistik Lokal</h3>
@@ -143,22 +544,24 @@
 
         <section id="careers" class="section">
             <div class="container">
-                <h2 class="section-title">Peluang <span>Karir</span></h2>
-                 <div class="job-item">
+                <div class="reveal">
+                    <h2 class="section-title">Peluang <span>Karir</span></h2>
+                </div>
+                 <div class="job-item reveal" style="transition-delay: 0.1s;">
                      <div class="job-item-info">
                          <h3>Digital Marketing Specialist</h3>
                          <p><i class="fas fa-map-marker-alt"></i> Situbondo | <i class="fas fa-building"></i> Aneka Market ID</p>
                      </div>
                      <a href="https://wa.me/6281336314392" class="btn btn-primary">Lamar Sekarang</a>
                  </div>
-                 <div class="job-item">
+                 <div class="job-item reveal" style="transition-delay: 0.2s;">
                      <div class="job-item-info">
                          <h3>Barista & Kasir</h3>
                          <p><i class="fas fa-map-marker-alt"></i> Situbondo | <i class="fas fa-building"></i> Cafe Senja</p>
                      </div>
                      <a href="https://wa.me/6281336314392" class="btn btn-primary">Lamar Sekarang</a>
                  </div>
-                 <div class="no-jobs" style="text-align: center; margin-top: 40px;">
+                 <div class="no-jobs reveal" style="text-align: center; margin-top: 50px;" style="transition-delay: 0.3s;">
                     <p>Saat ini belum ada posisi lain yang tersedia. Cek kembali halaman ini secara berkala.</p>
                     <a href="https://wa.me/6281336314392" class="btn btn-secondary" style="margin-top: 15px;">Kirim CV Anda</a>
                  </div>
@@ -167,16 +570,18 @@
 
         <section id="contact" class="section bg-light">
             <div class="container">
-                <h2 class="section-title">Hubungi <span>Kami</span></h2>
+                <div class="reveal">
+                    <h2 class="section-title">Hubungi <span>Kami</span></h2>
+                </div>
                 <div class="contact-grid">
-                    <div class="contact-info">
+                    <div class="contact-info reveal" style="transition-delay: 0.1s;">
                         <h3>Punya Pertanyaan atau Ingin Bergabung?</h3>
                         <p>Jangan ragu untuk menghubungi kami. Tim kami siap membantu Anda untuk mempublikasikan informasi bisnis atau menjawab pertanyaan Anda.</p>
                         <p><i class="fas fa-map-marker-alt"></i> Jl. Pahlawan No. 88, Situbondo, Jawa Timur</p>
                         <p><i class="fas fa-phone"></i> +62 813-3631-4392</p>
                         <p><i class="fas fa-envelope"></i> info@lenterakarya.com</p>
                     </div>
-                    <form action="https://formspree.io/f/your-unique-id" method="POST" class="contact-form">
+                    <form action="https://formspree.io/f/your-unique-id" method="POST" class="contact-form reveal" style="transition-delay: 0.2s;">
                         <input type="text" name="name" placeholder="Nama Anda" required>
                         <input type="email" name="email" placeholder="Email Anda" required>
                         <textarea name="message" rows="6" placeholder="Pesan Anda" required></textarea>
@@ -221,6 +626,116 @@
         </div>
     </footer>
     
-    <script src="script.js"></script>
+    <button id="scrollToTopBtn" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // === ELEMEN DOM ===
+            const preloader = document.getElementById('preloader');
+            const navbar = document.getElementById('navbar');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const navLinks = document.getElementById('navLinks');
+            const allNavLinks = navLinks.querySelectorAll('a');
+            const sections = document.querySelectorAll('main section');
+            const menuIcon = mobileMenuToggle.querySelector('i');
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            const revealElements = document.querySelectorAll('.reveal');
+
+            // === PENYEMPURNAAN: FUNGSI PRELOADER ===
+            window.addEventListener('load', () => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            });
+
+            // === FUNGSI MENU MOBILE ===
+            const toggleMobileMenu = () => {
+                const isMenuOpen = navLinks.classList.toggle('active');
+                mobileMenuToggle.setAttribute('aria-expanded', isMenuOpen);
+
+                if (isMenuOpen) {
+                    mobileMenuToggle.setAttribute('aria-label', 'Tutup Menu');
+                    menuIcon.classList.replace('fa-bars', 'fa-xmark');
+                } else {
+                    mobileMenuToggle.setAttribute('aria-label', 'Buka Menu');
+                    menuIcon.classList.replace('fa-xmark', 'fa-bars');
+                }
+            };
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        toggleMobileMenu();
+                    }
+                });
+            });
+
+            // === EFEK NAVBAR & SCROLL TO TOP SAAT SCROLL ===
+            const handleScroll = () => {
+                // Navbar effect
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                // Scroll to top button visibility
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('show');
+                } else {
+                    scrollToTopBtn.classList.remove('show');
+                }
+            };
+            window.addEventListener('scroll', handleScroll);
+            
+            // === PENYEMPURNAAN: FUNGSI TOMBOL SCROLL TO TOP ===
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // === PENANDA NAVIGASI AKTIF (INTERSECTION OBSERVER) ===
+            const navObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.6
+            };
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentSectionId = entry.target.id;
+                        allNavLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === currentSectionId) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, navObserverOptions);
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // === PENYEMPURNAAN: ANIMASI FADE-IN SAAT SCROLL (INTERSECTION OBSERVER) ===
+            const revealObserverOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); // Hanya animasikan sekali
+                    }
+                });
+            }, revealObserverOptions);
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
