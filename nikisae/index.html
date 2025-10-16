@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://s.id/anekamarket">
     <meta property="og:image" content="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png">
-    <title>Niki Sae MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
+    <title>nikisae MITRA ANEKAMARKET | Platform Jual Beli Online Terpercaya</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -365,11 +365,22 @@
             color: white; box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
         }
         .gallery-actions .btn-order:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5); }
+        
+        /* --- [PERBAIKAN] Desain Tombol Detail --- */
         .gallery-actions .btn-detail {
-            background-color: var(--light); color: var(--text-dark);
+            background-color: var(--white);
+            color: var(--text-dark);
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
         }
-        .gallery-actions .btn-detail:hover { background-color: #eaf0f6; transform: translateY(-3px); }
+        .gallery-actions .btn-detail:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
 
         /* --- IMPROVED Detail View with smooth transition --- */
         .gallery-detail-expanded {
@@ -395,6 +406,78 @@
         .spec-label { font-weight: 600; width: 120px; flex-shrink: 0; color: var(--dark); }
         .spec-value { color: var(--text-light); }
         
+        /* --- [PERBAIKAN] Desain Deskripsi Produk yang Ditingkatkan --- */
+        .product-description-block {
+            font-size: 1rem;
+            color: var(--text-dark);
+        }
+
+        .product-description-block h4 {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .product-description-block p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+
+        .feature-list i {
+            color: var(--primary);
+            margin-right: 12px;
+            font-size: 1.2rem;
+            margin-top: 4px; /* Penyesuaian posisi vertikal ikon */
+        }
+
+        .key-features {
+            margin-top: 25px;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-item i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            background-color: var(--light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         /* --- Swiper Slider Styles (REVISED FOR PERFECT IMAGE DISPLAY) --- */
         .product-slider-main {
             width: 100%;
@@ -408,13 +491,17 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            background-color: #000; /* Added for video letterboxing */
         }
-        .product-slider-main .swiper-slide img {
+        .product-slider-main .swiper-slide img,
+        .product-slider-main .swiper-slide video {
             width: 100%;
             height: 100%;
             object-fit: contain;
             cursor: pointer;
-            transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
+        }
+        .product-slider-main .swiper-slide img {
+             transition: transform 0.4s ease; /* REFINEMENT: Zoom effect on hover */
         }
         .product-slider-main .swiper-slide:hover img {
             transform: scale(1.05);
@@ -547,7 +634,7 @@
         /* Lightbox Swiper styles */
         #lightbox-swiper { width: 100%; height: 100%; }
         #lightbox-swiper .swiper-slide { display: flex; justify-content: center; align-items: center; }
-        #lightbox-swiper img { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
+        #lightbox-swiper img, #lightbox-swiper video { max-width: 90vw; max-height: 85vh; width: auto; height: auto; object-fit: contain; }
         #lightbox-swiper .swiper-button-next, #lightbox-swiper .swiper-button-prev { color: var(--white); }
 
         /* Offer Notification */
@@ -577,6 +664,13 @@
         .contact-btn:hover { transform: scale(1.1) rotate(10deg); box-shadow: var(--shadow-strong); }
         .contact-btn.whatsapp { background-color: #25D366; }
         .contact-btn.phone { background-color: #34B7F1; }
+        
+        /* --- [PERBAIKAN] Desain Tombol Lokasi --- */
+        .contact-btn.location {
+            background: linear-gradient(45deg, #4285F4, #34A853);
+        }
+        /* --- [AKHIR PERBAIKAN] --- */
+        
         .contact-btn.order { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; cursor: pointer; }
         
         /* --- [PERBAIKAN] Tombol Daftar Mengambang dengan Animasi --- */
@@ -692,11 +786,6 @@
     </style>
 </head>
 <body>
-    <audio id="bgMusic" loop>
-        <source src="https://raw.githubusercontent.com/Musikwebsite.mp3" type="audio/mpeg">
-    </audio>
-    <audio id="buttonSound" src="https://raw.githubusercontent.com/LenteraKarya/Lentera-Karya/main/assets/audio/audiotombol.mp3"></audio>
-    
     <div id="qrcode" style="display: none;"></div>
 
     <header id="home">
@@ -704,7 +793,7 @@
         <div class="header-content">
             <div class="logo">
                 <img src="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" alt="ANEKAMARKET Logo">
-                <span>Niki Sae MITRA ANEKAMARKET</span>
+                <span>nikisae MITRA ANEKAMARKET</span>
             </div>
             <p class="tagline">Semua Bisa Jualan & Semua Bisa Pesan</p>
             
@@ -768,6 +857,9 @@
         <a href="tel:+6285731247566" class="contact-btn phone" aria-label="Telepon Kami">
             <i class="fas fa-phone"></i>
         </a>
+        <a href="#" class="contact-btn location" id="locationLink" target="_blank" rel="noopener noreferrer" aria-label="Lihat Lokasi">
+            <i class="fas fa-map-marker-alt"></i>
+        </a>
         <button class="contact-btn order" id="quickOrderBtn" aria-label="Pesan Cepat">
             <i class="fas fa-shopping-cart"></i>
         </button>
@@ -809,13 +901,13 @@
         </div>
         
         <div class="copyright">
-            &copy; 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
+            © 2025 ANEKAMARKET. Semua hak dilindungi. | <a href="#">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
         </div>
     </footer>
     
     <div class="modal" id="orderModal">
         <div class="modal-content">
-            <span class="close-modal">&times;</span>
+            <span class="close-modal">×</span>
             <h2>Pesan Cepat</h2>
             <form id="quickOrderForm">
                  <input type="hidden" name="_subject" value="Pesan Cepat dari Website">
@@ -840,7 +932,7 @@
     
     <div class="search-modal" id="searchModal">
         <div class="search-modal-content">
-            <span class="close-search-modal">&times;</span>
+            <span class="close-search-modal">×</span>
             <input type="text" class="search-modal-input" placeholder="Ketik untuk mencari produk..." id="searchModalInput" aria-label="Input Pencarian Produk">
             <div class="search-results" id="searchResults" aria-live="polite">
                 <p class="search-results-placeholder">Mulai ketik untuk mencari...</p>
@@ -857,11 +949,11 @@
                 <div class="swiper-button-prev"></div>
             </div>
         </div>
-        <span class="close-lightbox-modal">&times;</span>
+        <span class="close-lightbox-modal">×</span>
     </div>
 
     <div class="offer-notification" id="offerNotification">
-        <span class="close-notification" id="closeNotification">&times;</span>
+        <span class="close-notification" id="closeNotification">×</span>
         <div class="notification-content active" id="notificationStep1">
             <h4>Punya bisnis atau usaha? 🚀 Ingin menjangkau lebih banyak pelanggan?</h4>
             <div class="notification-buttons">
@@ -888,12 +980,9 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             // --- [PERBAIKAN] FITUR BARU: Refresh Otomatis & Hapus Cache ---
-            // Fungsi untuk me-refresh halaman pada interval tertentu
             function autoRefreshPage() {
-                // Refresh halaman setelah 30 menit (1800000 milidetik)
+                // FIXED: Changed timeout from 1800 (1.8s) to 1800000 (30 minutes)
                 setTimeout(() => {
-                    // Menggunakan location.replace() untuk menghapus halaman lama dari riwayat sesi
-                    // Ini memastikan pengguna selalu melihat konten yang paling baru.
                     location.replace(location.href);
                 }, 1800000); 
             }
@@ -906,39 +995,48 @@
                     "category": "food",
                     "type": "promo",
                     "seller": {
-                        "name": "Niki Sae",
-                        "link": "https://www.anekamarket.my.id/nikisae"
+                        "name": "nikisae",
+                        "link": "https://www.anekamarket.my.id/nikisae",
+                        "locationLink": null
                     },
                     "badge": {
                         "text": "Promo Spesial",
                         "type": "promo"
                     },
                     "mainImage": "https://i.imgur.com/y8r14Z3.jpeg",
-                    "title": "Promo Frozen Food Homemade Niki Sae",
+                    "title": "Promo Frozen Food Homemade nikisae Sae",
                     "code": "NS-2025-3348",
                     "price": 12000,
                     "originalPrice": 15000,
                     "discount": "20% OFF",
                     "priceVariations": [
-                        { "name": "Pempek", "price": 12000, "original": 15000 },
-                        { "name": "Tahu Walik", "price": 11000, "original": 13750 },
-                        { "name": "Nugget Ikan/Ayam", "price": 12000, "original": 15000 },
-                        { "name": "Dragon Stick", "price": 12000, "original": 15000 },
-                        { "name": "Otak-Otak Ikan", "price": 12000, "original": 15000 }
+                        { "name": "Pempek", "price": 12000 },
+                        { "name": "Tahu Walik", "price": 11000 },
+                        { "name": "Nugget Ikan/Ayam", "price": 12000 },
+                        { "name": "Dragon Stick", "price": 12000 },
+                        { "name": "Otak-Otak Ikan", "price": 12000 }
                     ],
                     "units": ["pcs", "pack", "set", "lusin"],
                     "defaultUnit": "pcs",
                     "details": {
-                        "description": "<strong>PROMO SPESIAL!</strong> Niki Sae dari Dapur Yunna menghadirkan promo frozen food homemade dengan kualitas terbaik. Semua produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik. Produk kami termasuk Pempek, Tahu Walik, Otak-Otak Ikan, Nugget Ikan dan Ayam, serta Dragon Stick. Setiap produk dibuat dengan standar kebersihan tinggi dan rasa yang konsisten. Nikmati diskon spesial untuk pembelian selama periode promo! Bonus gratis ongkir untuk pembelian di atas Rp100.000.",
-                        "images": [
-                            "https://i.imgur.com/RP8HTMb.jpeg",
-                            "https://i.imgur.com/GWXfEGJ.jpeg",
-                            "https://i.imgur.com/WSB6cXr.jpeg",
-                            "https://i.imgur.com/ubU63gJ.jpeg"
+                        "description": `
+                            <div class="product-description-block">
+                                <h4>PROMO SPESIAL!</h4>
+                                <p>nikisae Sae dari Dapur Yunna menghadirkan promo frozen food homemade dengan kualitas terbaik. Semua produk dibuat dengan bahan pilihan dan teknik khusus untuk menjamin cita rasa autentik.</p>
+                                <p>Produk kami termasuk Pempek, Tahu Walik, Otak-Otak Ikan, Nugget Ikan dan Ayam, serta Dragon Stick. Setiap produk dibuat dengan standar kebersihan tinggi dan rasa yang konsisten.</p>
+                                <p>Nikmati diskon spesial untuk pembelian selama periode promo! Bonus gratis ongkir untuk pembelian di atas Rp100.000.</p>
+                            </div>
+                        `,
+                        "media": [
+                            { "type": "image", "src": "https://i.imgur.com/y8r14Z3.jpeg", "thumb": "https://i.imgur.com/y8r14Z3.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/RP8HTMb.jpeg", "thumb": "https://i.imgur.com/RP8HTMb.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/GWXfEGJ.jpeg", "thumb": "https://i.imgur.com/GWXfEGJ.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/WSB6cXr.jpeg", "thumb": "https://i.imgur.com/WSB6cXr.jpeg" },
+                            { "type": "image", "src": "https://i.imgur.com/ubU63gJ.jpeg", "thumb": "https://i.imgur.com/ubU63gJ.jpeg" }
                         ],
                         "specs": [
                             { "label": "Kode Promo", "value": "NS-2025-3348" },
-                            { "label": "Nama UMKM", "value": "Niki Sae Pempek dan Tahu walik" },
+                            { "label": "Nama UMKM", "value": "nikisae Sae Pempek dan Tahu walik" },
                             { "label": "Pemilik", "value": "Yuliana Mulyaningtyas" },
                             { "label": "Alamat", "value": "Perum Graha Sultan Raya 1 blok G. 61, Panji" },
                             { "label": "Kontak", "value": "085731247566" },
@@ -956,12 +1054,11 @@
             ];
 
             const galleryGrid = document.getElementById('gallery-grid');
-            const buttonSound = document.getElementById('buttonSound');
             const lightboxModal = document.getElementById('lightboxModal');
             let lightboxSwiper = null;
             let logoBase64 = null;
+            let activeSliders = {};
 
-            // --- FUNGSI BARU: Konversi gambar ke Base64 untuk PDF ---
             function imageToBase64(url, callback) {
                 const xhr = new XMLHttpRequest();
                 xhr.onload = function() {
@@ -976,23 +1073,18 @@
                 xhr.send();
             }
 
-            // Panggil fungsi ini saat script dimuat untuk menyiapkan logo
             imageToBase64('https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png', (base64) => {
                 logoBase64 = base64;
             });
 
             function playSound() {
-                if(buttonSound) {
-                    buttonSound.currentTime = 0;
-                    buttonSound.play().catch(e => console.log("Audio play failed: ", e));
-                }
+                // Sound functionality is disabled as the audio file link was broken.
             }
 
             function formatPrice(amount) {
                 return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(amount);
             }
 
-            // --- FUNGSI BARU: Generate Kode Transaksi Unik ---
             function generateTransactionCode() {
                 const date = new Date();
                 const dateString = date.getFullYear().toString() + 
@@ -1002,10 +1094,9 @@
                 return `AM-${dateString}-${randomString}`;
             }
 
-            // --- FUNGSI BARU: Generate QR Code sebagai data URI ---
             function generateQrCodeDataUri(url, callback) {
                 const qrContainer = document.getElementById('qrcode');
-                qrContainer.innerHTML = ''; // Kosongkan container
+                qrContainer.innerHTML = '';
                 new QRCode(qrContainer, {
                     text: url,
                     width: 128,
@@ -1013,23 +1104,21 @@
                     correctLevel: QRCode.CorrectLevel.H
                 });
 
-                // Beri sedikit waktu untuk QR code dirender di DOM
                 setTimeout(() => {
                     const canvas = qrContainer.querySelector('canvas');
                     if (canvas) {
                         callback(canvas.toDataURL('image/png'));
                     } else {
-                        callback(null); // Gagal membuat QR code
+                        callback(null);
                     }
                 }, 100);
             }
 
-            // --- FUNGSI BARU (DISEMPURNAKAN): Membuat dan mengunduh PDF ---
             async function generateAndDownloadPdf(orderData) {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 const transactionCode = generateTransactionCode();
-                orderData.transactionCode = transactionCode; // Simpan kode transaksi
+                orderData.transactionCode = transactionCode;
 
                 generateQrCodeDataUri("https://www.aplikasiusaha.com", (qrCodeUri) => {
                     const today = new Date();
@@ -1037,24 +1126,22 @@
                     const pageHeight = doc.internal.pageSize.getHeight();
                     const pageWidth = doc.internal.pageSize.getWidth();
 
-                    // === HEADER BARU YANG DISEMPURNAKAN ===
                     if (logoBase64) {
                         doc.addImage(logoBase64, 'PNG', 14, 15, 25, 25);
                     }
                     doc.setFontSize(10);
                     doc.setFont(undefined, 'normal');
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("MARKETPLACE", 45, 22);
                     
                     doc.setFontSize(16);
                     doc.setFont(undefined, 'bold');
-                    doc.setTextColor('#1A2533'); // var(--dark)
+                    doc.setTextColor('#1A2533');
                     doc.text("ANEKAMARKET", 45, 30);
                     
-                    doc.setDrawColor('#EAEFF5'); // var(--border-color)
+                    doc.setDrawColor('#EAEFF5');
                     doc.line(14, 45, pageWidth - 14, 45);
                     
-                    // Info Penjual dan Transaksi
                     doc.setFontSize(8);
                     doc.setFont(undefined, 'bold');
                     doc.setTextColor('#7f8c8d');
@@ -1068,7 +1155,6 @@
                     doc.text(`No. Transaksi: ${transactionCode}`, pageWidth / 2, 58);
                     doc.text(`Tanggal: ${formattedDate}`, pageWidth / 2, 64);
                     
-                    // Tabel Rincian Pesanan
                     const tableColumn = ["No.", "Nama Produk", "Harga Satuan", "Jumlah", "Subtotal"];
                     const tableRows = [];
                     
@@ -1089,7 +1175,7 @@
                         startY: 75,
                         theme: 'grid',
                         headStyles: { 
-                            fillColor: '#4A90E2', // var(--primary)
+                            fillColor: '#4A90E2',
                             textColor: '#FFFFFF',
                             fontStyle: 'bold'
                         },
@@ -1112,13 +1198,11 @@
 
                     const finalY = doc.previousAutoTable.finalY;
 
-                    // Total
                     doc.setFontSize(14);
                     doc.setFont(undefined, 'bold');
                     doc.text("Total Pesanan:", 14, finalY + 15);
                     doc.text(formatPrice(orderData.total), pageWidth - 14, finalY + 15, { align: 'right' });
 
-                    // Footer Dokumen
                     const footerY = pageHeight - 35;
                     doc.line(14, footerY, pageWidth - 14, footerY);
                     
@@ -1126,19 +1210,17 @@
                         doc.addImage(qrCodeUri, 'PNG', 14, footerY + 5, 25, 25);
                     }
                     doc.setFontSize(8);
-                    doc.setTextColor('#7f8c8d'); // var(--text-light)
+                    doc.setTextColor('#7f8c8d');
                     doc.text("Scan untuk info lebih lanjut", 42, footerY + 15);
 
                     doc.setFontSize(9);
                     doc.text("Powered by: www.anekamarket.my.id", pageWidth - 14, footerY + 12, { align: 'right' });
                     doc.text("Terima kasih telah berbelanja!", pageWidth - 14, footerY + 18, { align: 'right' });
 
-                    // Simpan PDF
                     const fileName = `Struk-${transactionCode}.pdf`;
                     doc.save(fileName);
                 });
             }
-
 
             function renderProducts(productsToRender) {
                 if (!galleryGrid) return;
@@ -1170,17 +1252,28 @@
                             </div>
                         </div>`).join('');
                     
-                    const sliderImages = product.details.images;
-                    
-                    const mainSliderHTML = sliderImages.map((img, index) => `
-                        <div class="swiper-slide" data-index="${index}">
-                            <img src="${img}" alt="${product.title} - Gambar ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
-                        </div>
-                    `).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
 
-                    const thumbSliderHTML = sliderImages.map(img => `
+                    const mainSliderHTML = mediaItems.map((media, index) => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <video playsinline muted>
+                                        <source src="${media.src}" type="video/mp4">
+                                        Browser Anda tidak mendukung tag video.
+                                    </video>
+                                </div>`;
+                        } else {
+                            return `
+                                <div class="swiper-slide" data-index="${index}">
+                                    <img src="${media.src}" alt="${product.title} - Media ${index + 1}" loading="lazy" onerror="this.src='${placeholderImg}';">
+                                </div>`;
+                        }
+                    }).join('');
+
+                    const thumbSliderHTML = mediaItems.map(media => `
                         <div class="swiper-slide">
-                            <img src="${img}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
+                            <img src="${media.thumb}" alt="Thumbnail" loading="lazy" onerror="this.src='${placeholderImg}';">
                         </div>
                     `).join('');
 
@@ -1218,22 +1311,56 @@
                 });
                 initializeSliders();
             }
-
+            
             function initializeSliders() {
                 const productCards = document.querySelectorAll('.gallery-item');
                 productCards.forEach(card => {
+                    const cardId = card.dataset.id;
                     if (card.querySelector('.product-slider-main').swiper) return;
 
                     const thumbsSwiper = new Swiper(card.querySelector('.product-slider-thumbs'), {
                         spaceBetween: 10, slidesPerView: 4, freeMode: true, watchSlidesProgress: true,
                     });
 
-                    new Swiper(card.querySelector('.product-slider-main'), {
+                    const mainSwiper = new Swiper(card.querySelector('.product-slider-main'), {
                         spaceBetween: 10,
                         navigation: { nextEl: card.querySelector('.swiper-button-next'), prevEl: card.querySelector('.swiper-button-prev'), },
                         thumbs: { swiper: thumbsSwiper, },
-                        autoplay: { delay: 3500, disableOnInteraction: false, },
                     });
+
+                    function handleAutoPlay(swiper) {
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+
+                        const activeSlide = swiper.slides[swiper.activeIndex];
+                        const video = activeSlide.querySelector('video');
+
+                        if (video) {
+                            video.currentTime = 0;
+                            video.play().catch(e => console.error("Video autoplay was prevented by the browser:", e));
+                            video.onended = () => {
+                                swiper.slideNext();
+                            };
+                        } else {
+                            activeSliders[cardId] = setTimeout(() => {
+                                swiper.slideNext();
+                            }, 4000);
+                        }
+                    }
+
+                    mainSwiper.on('slideChangeTransitionStart', function (swiper) {
+                        const allVideos = card.querySelectorAll('video');
+                        allVideos.forEach(v => v.pause());
+                        
+                        if (activeSliders[cardId]) {
+                            clearTimeout(activeSliders[cardId]);
+                        }
+                    });
+
+                    mainSwiper.on('slideChangeTransitionEnd', handleAutoPlay);
+
+                    handleAutoPlay(mainSwiper);
                 });
             }
 
@@ -1340,8 +1467,21 @@
                     const initialIndex = parseInt(clickedSlide.dataset.index, 10);
                     
                     const lightboxWrapper = document.getElementById('lightbox-swiper-wrapper');
-                    lightboxWrapper.innerHTML = product.details.images.map(img => `
-                        <div class="swiper-slide"><img src="${img}" alt="Gambar diperbesar"></div>`).join('');
+                    const mediaItems = product.details.media && product.details.media.length > 0 ? product.details.media : [{type: 'image', src: product.mainImage, thumb: product.mainImage }];
+                    
+                    lightboxWrapper.innerHTML = mediaItems.map(media => {
+                        if (media.type === 'video') {
+                            return `
+                                <div class="swiper-slide">
+                                    <video controls playsinline>
+                                        <source src="${media.src}" type="video/mp4">
+                                    </video>
+                                </div>`;
+                        } else { // 'image'
+                            return `<div class="swiper-slide"><img src="${media.src}" alt="Gambar diperbesar"></div>`;
+                        }
+                    }).join('');
+
 
                     lightboxModal.classList.add('show');
 
@@ -1404,7 +1544,7 @@
                     const filteredProducts = products.filter(p => p.title.toLowerCase().includes(query) || p.code.toLowerCase().includes(query) || p.seller.name.toLowerCase().includes(query));
                     
                     if (filteredProducts.length > 0) {
-                        const mainImage = (p) => (p.details.images && p.details.images.length > 0) ? p.details.images[0] : '';
+                        const mainImage = (p) => (p.details.media && p.details.media.length > 0) ? p.details.media[0].thumb : p.mainImage;
                         searchResults.innerHTML = filteredProducts.map(p => `
                             <a href="#product-${p.id}" class="search-result-item">
                                 <img src="${mainImage(p)}" class="search-result-image" alt="${p.title}" loading="lazy">
@@ -1495,10 +1635,28 @@
                 });
             }
             
+            // --- NEW: Handle Location Link ---
+            function handleLocation() {
+                const locationBtn = document.getElementById('locationLink');
+                if (!locationBtn || !products || products.length === 0) return;
+
+                const seller = products[0].seller;
+                if (seller.locationLink) {
+                    locationBtn.href = seller.locationLink;
+                } else {
+                    locationBtn.href = "#"; // Prevent navigation
+                    locationBtn.addEventListener('click', (e) => {
+                        e.preventDefault(); // Stop the default link behavior
+                        alert('Gerai belum menetapkan lokasi.');
+                    });
+                }
+            }
+            
             // --- INITIATE ---
             renderProducts(products);
             setupEventListeners();
-            autoRefreshPage(); // Panggil fungsi refresh otomatis saat semua sudah siap
+            handleLocation(); // Call the new function
+            autoRefreshPage();
         });
     </script>
 </body>
