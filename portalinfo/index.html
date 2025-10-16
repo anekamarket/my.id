@@ -13,202 +13,18 @@
     <meta property="og:image" content="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80">
     <title>Lentera Karya Situbondo - Pusat Informasi Bisnis Anda</title>
     
+    <link rel="stylesheet" href="style.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="https://raw.githubusercontent.com/LKS-88/anekamarket/refs/heads/main/Logo-Anekamarketku.png" type="image/png">
-    
-    <style>
-        :root {
-            --primary-color: #3498db; /* Biru Profesional */
-            --secondary-color: #2ecc71; /* Hijau Segar */
-            --dark-blue: #2c3e50; /* Biru Tua untuk Teks */
-            --light-gray: #f8f9fa; /* Latar Belakang Section */
-            --white: #ffffff;
-            --text-color: #555;
-            --heading-font: 'Montserrat', sans-serif;
-            --body-font: 'Roboto', sans-serif;
-            --shadow-light: 0 5px 15px rgba(0,0,0,0.08);
-            --shadow-medium: 0 8px 30px rgba(0,0,0,0.12);
-            --border-radius: 12px;
-            --transition: 0.3s ease-in-out;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: var(--body-font);
-            background-color: var(--white);
-            color: var(--text-color);
-            line-height: 1.8;
-        }
-
-        .container { max-width: 1140px; margin: auto; padding: 0 20px; }
-        .section { padding: 80px 0; }
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-            font-family: var(--heading-font);
-            font-size: 2.8rem;
-            color: var(--dark-blue);
-            font-weight: 700;
-        }
-        .section-title span { color: var(--primary-color); }
-        .bg-light { background-color: var(--light-gray); }
-
-        /* --- Navbar --- */
-        #navbar {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            box-shadow: var(--shadow-light);
-            transition: all var(--transition);
-        }
-        #navbar.scrolled { padding: 10px 0; }
-        .nav-container { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { font-family: var(--heading-font); font-weight: 700; font-size: 1.8rem; color: var(--dark-blue); text-decoration: none; }
-        .nav-logo i { color: var(--primary-color); margin-right: 10px; }
-        .nav-links { display: flex; list-style: none; }
-        .nav-links a { color: var(--text-color); text-decoration: none; margin: 0 18px; font-weight: 500; transition: color var(--transition); }
-        .nav-links a:hover, .nav-links a.active { color: var(--primary-color); }
-        .mobile-menu-toggle { display: none; font-size: 1.8rem; background: none; border: none; cursor: pointer; color: var(--dark-blue); }
-
-        /* --- Hero Section --- */
-        #hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            text-align: left;
-            color: var(--white);
-            background: linear-gradient(rgba(44, 62, 80, 0.7), rgba(44, 62, 80, 0.5)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1632&q=80') no-repeat center center/cover;
-        }
-        .hero-content { max-width: 700px; }
-        .hero-content h1 {
-            font-family: var(--heading-font);
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.3;
-        }
-        .hero-content p { font-size: 1.2rem; margin-bottom: 30px; font-weight: 300; }
-        .btn {
-            padding: 14px 32px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            transition: all var(--transition);
-            border: 2px solid transparent;
-        }
-        .btn-primary { background-color: var(--primary-color); color: var(--white); }
-        .btn-primary:hover { background-color: #2980b9; transform: translateY(-3px); }
-        .btn-secondary { background-color: var(--secondary-color); color: var(--white); }
-        .btn-secondary:hover { background-color: #27ae60; transform: translateY(-3px); }
-
-        /* --- Card Style --- */
-        .card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-light);
-            padding: 30px;
-            text-align: center;
-            transition: all var(--transition);
-        }
-        .card:hover { transform: translateY(-10px); box-shadow: var(--shadow-medium); }
-        .card-icon { font-size: 3.5rem; color: var(--primary-color); margin-bottom: 20px; }
-        .card h3 { font-family: var(--heading-font); font-size: 1.5rem; color: var(--dark-blue); margin-bottom: 15px; }
-
-        /* --- Grid Layout --- */
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-
-        /* --- Product/News Card --- */
-        .item-card {
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-light);
-            overflow: hidden;
-            transition: all var(--transition);
-        }
-        .item-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-medium); }
-        .item-card img { width: 100%; height: 220px; object-fit: cover; }
-        .item-card-content { padding: 25px; }
-        .item-card-content h3 { font-family: var(--heading-font); font-size: 1.4rem; color: var(--dark-blue); margin-bottom: 15px; }
-        .item-card-content .meta { font-size: 0.9rem; color: #999; margin-bottom: 15px; }
-        .item-card-content .meta span { margin-right: 15px; }
-        .item-card-content .meta i { margin-right: 5px; color: var(--primary-color); }
-
-        /* --- Lowongan/Careers Section --- */
-        .job-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--white);
-            padding: 25px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-light);
-            margin-bottom: 20px;
-            transition: all var(--transition);
-        }
-        .job-item:hover { transform: translateX(10px); box-shadow: var(--shadow-medium); }
-        .job-item-info h3 { font-family: var(--heading-font); font-size: 1.5rem; color: var(--dark-blue); }
-        .job-item-info p { margin: 5px 0 0; color: #777; }
-
-        /* --- Contact Section --- */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: var(--body-font);
-        }
-        .contact-info p { margin-bottom: 20px; font-size: 1.1rem; }
-        .contact-info i { color: var(--primary-color); font-size: 1.2rem; width: 30px; }
-
-        /* --- Footer --- */
-        footer { background: var(--dark-blue); color: #bdc3c7; padding: 60px 0 20px; }
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
-        .footer-col h4 { font-family: var(--heading-font); color: var(--white); font-size: 1.3rem; margin-bottom: 20px; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: #bdc3c7; text-decoration: none; transition: all var(--transition); }
-        .footer-links a:hover { color: var(--white); padding-left: 5px; }
-        .social-icons a { color: #bdc3c7; font-size: 1.5rem; margin-right: 15px; transition: color var(--transition); }
-        .social-icons a:hover { color: var(--primary-color); }
-        .copyright { text-align: center; border-top: 1px solid #34495e; padding-top: 20px; }
-        .copyright a { color: var(--white); text-decoration: none; }
-
-        /* --- Responsive Design --- */
-        @media(max-width: 992px) {
-            .hero-content h1 { font-size: 2.8rem; }
-            .section-title { font-size: 2.4rem; }
-            .contact-grid { grid-template-columns: 1fr; }
-        }
-        @media(max-width: 768px) {
-            .nav-links {
-                display: none; position: absolute; top: 100%; left: 0;
-                width: 100%; background: var(--white);
-                flex-direction: column; text-align: center;
-                box-shadow: var(--shadow-medium);
-            }
-            .nav-links.active { display: flex; }
-            .nav-links li { border-top: 1px solid var(--light-gray); }
-            .nav-links a { padding: 15px; display: block; width: 100%; margin: 0; }
-            .mobile-menu-toggle { display: block; }
-            .hero-content { text-align: center; }
-            .job-item { flex-direction: column; align-items: flex-start; }
-            .job-item .btn { margin-top: 15px; }
-        }
-    </style>
 </head>
 <body>
 
-    <nav id="navbar">
-        <div class="container nav-container">
+    <header id="navbar">
+        <nav class="container nav-container">
             <a href="#hero" class="nav-logo"><i class="fas fa-lightbulb"></i>Lentera Karya</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#hero" class="active">Beranda</a></li>
@@ -218,21 +34,23 @@
                 <li><a href="#careers">Karir</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
-            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
-        </div>
-    </nav>
-    
-    <section id="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Platform Terpadu Untuk Bisnis Lokal di Situbondo</h1>
-                <p>Temukan semua yang Anda butuhkan: mulai dari produk unggulan, layanan profesional, hingga informasi terbaru dan peluang karir dari mitra bisnis terpercaya.</p>
-                <a href="#services" class="btn btn-primary">Jelajahi Sekarang</a>
-            </div>
-        </div>
-    </section>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Buka Menu" aria-expanded="false" aria-controls="navLinks">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
     
     <main>
+        <section id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Platform Terpadu Untuk Bisnis Lokal di Situbondo</h1>
+                    <p>Temukan semua yang Anda butuhkan: mulai dari produk unggulan, layanan profesional, hingga informasi terbaru dan peluang karir dari mitra bisnis terpercaya.</p>
+                    <a href="#services" class="btn btn-primary">Jelajahi Sekarang</a>
+                </div>
+            </div>
+        </section>
+        
         <section id="services" class="section bg-light">
             <div class="container">
                 <h2 class="section-title">Layanan <span>Kami</span></h2>
@@ -261,7 +79,7 @@
                 <h2 class="section-title">Produk <span>Unggulan</span></h2>
                 <div class="grid-3">
                     <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=60" alt="Produk 1">
+                        <img src="https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=800&q=60" alt="Sepasang sepatu sneakers wanita berwarna-warni">
                         <div class="item-card-content">
                             <h3>Sepatu Sneakers Modern</h3>
                             <p class="meta"><span><i class="fas fa-tag"></i>Fashion</span></p>
@@ -270,7 +88,7 @@
                         </div>
                     </div>
                     <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ab?auto=format&fit=crop&w=800&q=60" alt="Produk 2">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ab?auto=format&fit=crop&w=800&q=60" alt="Biji kopi robusta segar di dalam karung goni">
                         <div class="item-card-content">
                             <h3>Kopi Robusta Situbondo</h3>
                              <p class="meta"><span><i class="fas fa-tag"></i>Kuliner</span></p>
@@ -279,7 +97,7 @@
                         </div>
                     </div>
                     <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=60" alt="Produk 3">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=800&q=60" alt="Tampilan layar smartphone yang menunjukkan analisis media sosial">
                         <div class="item-card-content">
                             <h3>Layanan Digital Marketing</h3>
                             <p class="meta"><span><i class="fas fa-tag"></i>Jasa</span></p>
@@ -296,7 +114,7 @@
                 <h2 class="section-title">Berita & <span>Informasi</span></h2>
                  <div class="grid-3">
                     <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&w=800&q=60" alt="Grand Opening">
+                        <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&w=800&q=60" alt="Bagian depan cafe dengan papan tulis bertuliskan 'Grand Opening'">
                         <div class="item-card-content">
                              <p class="meta"><span><i class="far fa-calendar-alt"></i> 25 Okt 2025</span></p>
                             <h3>Grand Opening Cafe "Senja"</h3>
@@ -304,7 +122,7 @@
                         </div>
                     </div>
                      <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=60" alt="Event">
+                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=800&q=60" alt="Surat kabar dengan berita utama tentang bisnis digital">
                         <div class="item-card-content">
                             <p class="meta"><span><i class="far fa-calendar-alt"></i> 15 Nov 2025</span></p>
                             <h3>Workshop UMKM Go Digital</h3>
@@ -312,7 +130,7 @@
                         </div>
                     </div>
                      <div class="item-card">
-                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60" alt="Partnership">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=60" alt="Tim kerja sedang berdiskusi di sekitar meja dengan laptop">
                         <div class="item-card-content">
                              <p class="meta"><span><i class="far fa-calendar-alt"></i> 01 Des 2025</span></p>
                             <h3>Kerjasama Baru dengan Logistik Lokal</h3>
@@ -358,7 +176,7 @@
                         <p><i class="fas fa-phone"></i> +62 813-3631-4392</p>
                         <p><i class="fas fa-envelope"></i> info@lenterakarya.com</p>
                     </div>
-                    <form action="#" class="contact-form">
+                    <form action="https://formspree.io/f/your-unique-id" method="POST" class="contact-form">
                         <input type="text" name="name" placeholder="Nama Anda" required>
                         <input type="email" name="email" placeholder="Email Anda" required>
                         <textarea name="message" rows="6" placeholder="Pesan Anda" required></textarea>
@@ -376,9 +194,9 @@
                     <h4>Lentera Karya Situbondo</h4>
                     <p>Menjadi penghubung dan akselerator pertumbuhan bisnis lokal di Situbondo melalui platform digital yang inklusif.</p>
                     <div class="social-icons" style="margin-top: 20px;">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" aria-label="Kunjungi Facebook kami"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Kunjungi Instagram kami"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Hubungi kami via WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -403,52 +221,6 @@
         </div>
     </footer>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const navbar = document.getElementById('navbar');
-            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const navLinks = document.getElementById('navLinks');
-            const links = navLinks.querySelectorAll('a');
-
-            // Mobile menu toggle
-            mobileMenuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
-            });
-
-            // Navbar scroll effect
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-
-                // Active link on scroll
-                let current = '';
-                document.querySelectorAll('section').forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 60) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                links.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href').substring(1) === current) {
-                        link.classList.add('active');
-                    }
-                });
-            });
-            
-             // Close mobile menu on link click
-             links.forEach(link => {
-                link.addEventListener('click', () => {
-                    if(navLinks.classList.contains('active')) {
-                        navLinks.classList.remove('active');
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
