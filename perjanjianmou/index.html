@@ -297,6 +297,21 @@
             transition: border-color 0.3s;
         }
         
+        .id-permohonan-group {
+            display: flex;
+            align-items: center;
+        }
+        .id-permohonan-group .prefix {
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ddd;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+        }
+        .id-permohonan-group input {
+            border-radius: 0 4px 4px 0;
+        }
+        
         input[type="text"]:focus,
         input[type="date"]:focus,
         input[type="tel"]:focus,
@@ -828,13 +843,10 @@
 </head>
 <body>
     <div class="form-container">
-        <!-- Security Pattern -->
         <div class="security-pattern"></div>
         
-        <!-- Watermark -->
         <div class="watermark">LENTERA KARYA SITUBONDO</div>
         
-        <!-- Form Input Section -->
         <div class="no-print">
             <h1 style="color: #1a3d7c; text-align: center; margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 22px;">Formulir Perjanjian Layanan LKS 2025</h1>
             <p style="text-align: center; margin-bottom: 20px; color: #000; font-size: 14px;">Silakan isi formulir berikut untuk mendaftar sebagai pengguna layanan:</p>
@@ -843,6 +855,15 @@
                 <label for="nama_pemohon">Nama Pemohon:</label>
                 <input type="text" id="nama_pemohon" name="nama_pemohon" class="uppercase" required>
                 <div id="nama_pemohon_error" class="error-message">Nama harus diisi</div>
+            </div>
+
+            <div class="form-group">
+                <label for="id_permohonan_input">ID Permohonan (6 Karakter setelah AM-):</label>
+                <div class="id-permohonan-group">
+                    <span class="prefix">AM-</span>
+                    <input type="text" id="id_permohonan_input" name="id_permohonan_input" class="uppercase" required maxlength="6" placeholder="Masukkan 6 Karakter">
+                </div>
+                <div id="id_permohonan_input_error" class="error-message">ID Permohonan harus 6 karakter</div>
             </div>
             
             <div class="form-group">
@@ -870,25 +891,33 @@
             </div>
             
             <div class="form-group">
-                <label for="id_pendaftaran">No. ID Pendaftaran:</label>
+                <label for="id_pendaftaran">No. ID Pendaftaran (Otomatis):</label>
                 <input type="text" id="id_pendaftaran" name="id_pendaftaran" readonly style="background-color: #f0f0f0; font-weight: bold;">
             </div>
             
             <div class="form-group">
-                <label for="nama_umkm">Nama UMKM:</label>
+                <label for="nama_umkm">Nama Usaha / Brand:</label>
                 <input type="text" id="nama_umkm" name="nama_umkm" class="uppercase" required>
-                <div id="nama_umkm_error" class="error-message">Nama UMKM harus diisi</div>
+                <div id="nama_umkm_error" class="error-message">Nama Usaha harus diisi</div>
             </div>
             
             <div class="form-group">
-                <label for="kategori_layanan">Kategori Layanan:</label>
+                <label for="kategori_layanan">Kategori Usaha:</label>
                 <select id="kategori_layanan" name="kategori_layanan" required>
                     <option value="">-- Pilih Kategori --</option>
-                    <option value="Layanan UMKM">Layanan UMKM</option>
-                    <option value="Layanan Ojek Online">Layanan Ojek Online</option>
-                    <option value="Layanan Jasa">Layanan Jasa</option>
-                    <option value="Layanan Sewa Hotel">Layanan Sewa Hotel</option>
-                    <option value="Layanan Wisata">Layanan Wisata</option>
+                    <option value="UMKM">UMKM</option>
+                    <option value="Jasa Service">Jasa Service</option>
+                    <option value="Kuliner">Kuliner</option>
+                    <option value="Warung atau Resto">Warung atau Resto</option>
+                    <option value="Cafe">Cafe</option>
+                    <option value="Retail">Retail</option>
+                    <option value="Pertanian">Pertanian</option>
+                    <option value="Perikanan">Perikanan</option>
+                    <option value="Kerajinan">Kerajinan</option>
+                    <option value="Jasa Transportasi">Jasa Transportasi</option>
+                    <option value="Wisata">Wisata</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Lainnya">Lainnya</option>
                 </select>
                 <div id="kategori_layanan_error" class="error-message">Kategori harus dipilih</div>
             </div>
@@ -905,7 +934,6 @@
             </div>
         </div>
         
-        <!-- Agreement Document -->
         <div id="agreement-document">
             <div class="header">
                 <div class="logo-container">
@@ -945,12 +973,13 @@
                 <div class="party">
                     <div class="party-title">PIHAK KEDUA (Pemohon / Pengguna Layanan):</div>
                     <p>Nama Pemohon : <span id="display_nama_pemohon" class="form-input"></span></p>
+                    <p>ID Permohonan : <span id="display_id_permohonan" class="form-input"></span></p>
                     <p>NIK : <span id="display_nik" class="form-input"></span></p>
                     <p>Alamat : <span id="display_alamat" class="form-input"></span></p>
                     <p>Nomor Telepon : <span id="display_nomor_telepon" class="form-input"></span></p>
                     <p>No. ID Pendaftaran : <span id="display_id_pendaftaran" class="form-input"></span></p>
-                    <p>Nama UMKM : <span id="display_nama_umkm" class="form-input"></span></p>
-                    <p>Kategori Layanan : <span id="display_kategori_layanan" class="form-input"></span></p>
+                    <p>Nama Usaha / Brand : <span id="display_nama_umkm" class="form-input"></span></p>
+                    <p>Kategori Usaha : <span id="display_kategori_layanan" class="form-input"></span></p>
                 </div>
             </div>
             
@@ -1045,7 +1074,6 @@
                 </div>
             </div>
             
-            <!-- Page number for print -->
             <div class="page-number"></div>
         </div>
     </div>
@@ -1114,6 +1142,11 @@
                 showError(field, errorElement, 'NIK harus 16 digit angka');
                 return false;
             }
+
+            if (field.id === 'id_permohonan_input' && field.value.length !== 6) {
+                 showError(field, errorElement, 'ID Permohonan harus 6 karakter');
+                 return false;
+            }
             
             if (field.id === 'nomor_telepon' && !/^08\d{10,11}$/.test(field.value)) {
                 showError(field, errorElement, 'Nomor harus diawali 08 dan 12-13 digit');
@@ -1142,7 +1175,7 @@
             
             // Validate all required fields
             const requiredFields = [
-                'nama_pemohon', 'nik', 'alamat', 'nomor_telepon', 
+                'nama_pemohon', 'id_permohonan_input', 'nik', 'alamat', 'nomor_telepon', 
                 'tanggal_pendaftaran', 'nama_umkm', 'kategori_layanan'
             ];
             
@@ -1164,6 +1197,7 @@
         function generateAgreement() {
             // Get form values
             const namaPemohon = document.getElementById('nama_pemohon').value;
+            const idPermohonanInput = document.getElementById('id_permohonan_input').value;
             const nik = document.getElementById('nik').value;
             const alamat = document.getElementById('alamat').value;
             const nomorTelepon = document.getElementById('nomor_telepon').value;
@@ -1171,6 +1205,8 @@
             const idPendaftaran = document.getElementById('id_pendaftaran').value;
             const namaUmkm = document.getElementById('nama_umkm').value;
             const kategoriLayanan = document.getElementById('kategori_layanan').value;
+            
+            const fullIdPermohonan = 'AM-' + idPermohonanInput.toUpperCase();
             
             // Format date
             const formattedDate = formatDate(tanggalPendaftaran);
@@ -1182,6 +1218,7 @@
             
             // Display values in the agreement
             document.getElementById('display_nama_pemohon').textContent = namaPemohon;
+            document.getElementById('display_id_permohonan').textContent = fullIdPermohonan;
             document.getElementById('display_nik').textContent = nik;
             document.getElementById('display_alamat').textContent = alamat;
             document.getElementById('display_nomor_telepon').textContent = nomorTelepon;
@@ -1195,7 +1232,7 @@
             
             // Generate QR Codes
             generateQRCode('qrcode_pihak_kedua', 
-                         `PEMOHON:${namaPemohon}|NIK:${nik}|ID:${idPendaftaran}|TGL:${formattedDate}`);
+                         `PEMOHON:${namaPemohon}|NIK:${nik}|ID:${fullIdPermohonan}|TGL:${formattedDate}`);
             
             generateQRCode('qrcode_pihak_pertama', 
                          `PERUSAHAAN:LENTERA KARYA|PENANDATANGAN:MUHAMMAD SALAM|JABATAN:FOUNDER|TGL:07/07/2025`);
@@ -1281,6 +1318,10 @@
             this.value = this.value.toUpperCase();
         });
 
+        document.getElementById('id_permohonan_input').addEventListener('input', function() {
+            this.value = this.value.toUpperCase();
+        });
+
         // Print function
         function printDocument() {
             // First generate the agreement if not already done
@@ -1335,9 +1376,9 @@
             }
             
             const namaPemohon = document.getElementById('nama_pemohon').value || 'Nama Pemohon';
-            const idPendaftaran = document.getElementById('id_pendaftaran').value || 'ID Pendaftaran';
+            const idPermohonan = 'AM-' + (document.getElementById('id_permohonan_input').value.toUpperCase() || 'ID Permohonan');
             
-            const message = `Berikut tanda bukti pendaftaran saya dan bukti perjanjiannya:\n\nNama: ${namaPemohon}\nID Pendaftaran: ${idPendaftaran}\n\nSilakan lihat dokumen terlampir.`;
+            const message = `Berikut tanda bukti pendaftaran saya dan bukti perjanjiannya:\n\nNama: ${namaPemohon}\nID Permohonan: ${idPermohonan}\n\nSilakan lihat dokumen terlampir.`;
             
             // WhatsApp API URL
             const whatsappUrl = `https://wa.me/6287865614222?text=${encodeURIComponent(message)}`;
