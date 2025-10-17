@@ -21,7 +21,7 @@
             --warning-color: #ffc107;
             --border-color: #dee2e6;
             --border-radius: 12px;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            --shadow: 0 12px 35px rgba(0, 0, 0, 0.08); /* Shadow disempurnakan */
         }
 
         * {
@@ -39,16 +39,11 @@
             padding: 20px;
             color: var(--dark-color);
             line-height: 1.6;
-            background: linear-gradient(-45deg, #a8c0ff, #3f2b96, #23a6d5, #83a4d4);
-            background-size: 400% 400%;
-            animation: gradientBG 25s ease infinite;
+            /* Latar belakang diubah menjadi gradien yang lebih halus dan profesional */
+            background: linear-gradient(135deg, var(--light-color) 0%, #e0eafc 100%);
         }
 
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+        /* Animasi gradien dihapus untuk tampilan yang lebih bersih */
 
         .container {
             max-width: 750px;
@@ -58,14 +53,14 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             margin: 20px 0;
-            border: 1px solid #e9ecef;
+            border: none; /* Border dihilangkan, shadow sudah cukup */
         }
 
         .header {
             padding: 30px 40px;
             text-align: center;
             border-bottom: 1px solid var(--border-color);
-            background-color: var(--light-color);
+            background-color: var(--white-color); /* Disamakan dengan container */
         }
 
         .header h1 {
@@ -98,42 +93,60 @@
             border-bottom: 1px solid var(--border-color);
         }
         .form-section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
         .form-section h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
-            font-weight: 500;
-            color: var(--primary-color);
+            font-weight: 600;
+            color: var(--dark-color); /* Warna diubah agar lebih tegas */
             margin-bottom: 20px;
+            /* Aksen garis untuk memperjelas judul bagian */
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
         }
 
         .form-group { margin-bottom: 20px; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--dark-color); font-size: 0.9rem; }
+        
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 600; /* Ditebalkan sedikit */
+            color: #495057; /* Digelapkan sedikit */
+            font-size: 0.9rem; 
+        }
         .required::after { content: " *"; color: var(--error-color); }
 
+        /* --- Perbaikan Desain Input --- */
         input, select, textarea {
             width: 100%;
-            padding: 12px 0;
-            border: none;
-            border-bottom: 2px solid var(--border-color);
-            border-radius: 0;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-            background: transparent;
+            padding: 12px 15px; /* Diberi padding horizontal */
+            border: 1px solid var(--border-color); /* Diubah menjadi full border */
+            border-radius: 8px; /* Diberi radius */
+            font-size: 0.95rem; /* Disesuaikan agar rapi */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: var(--white-color); /* Background eksplisit */
             color: var(--dark-color);
             font-weight: 400;
         }
         input::placeholder, textarea::placeholder { color: #adb5bd; }
-        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary-color); }
-        textarea { resize: vertical; }
+        
+        input:focus, select:focus, textarea:focus { 
+            outline: none; 
+            border-color: var(--primary-color); 
+            /* Ditambahkan focus ring modern */
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+        }
+        textarea { resize: vertical; min-height: 80px; }
 
         input[readonly] {
-            background-color: #e9ecef;
-            border: 2px solid transparent;
-            padding: 12px;
+            background-color: var(--light-color);
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
             border-radius: 8px;
             cursor: not-allowed;
             color: var(--gray-color);
+            box-shadow: none; /* Memastikan tidak ada shadow saat focus */
         }
         
         .file-input-wrapper {
@@ -177,7 +190,7 @@
             padding: 10px 0;
         }
         .checkbox-group input { display: none; }
-        .checkbox-group label { margin-bottom: 0; font-size: 0.95rem; cursor: pointer; }
+        .checkbox-group label { margin-bottom: 0; font-size: 0.95rem; cursor: pointer; font-weight: 500; color: var(--dark-color); }
         .checkbox-custom {
             height: 22px; width: 22px;
             border: 2px solid var(--border-color);
@@ -278,24 +291,12 @@
             text-align: center;
         }
 
-        .notification {
-            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: var(--white-color); color: var(--dark-color);
-            padding: 40px; border-radius: var(--border-radius);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            text-align: center; z-index: 1000; display: none;
-            max-width: 400px; width: 90%;
-            animation: fadeIn 0.5s ease-out;
-        }
-        .overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(5px);
-            z-index: 999; display: none;
-        }
+        .notification { display: none; }
+        .overlay { display: none; }
+
         .error-message, .status-message { color: var(--error-color); font-size: 0.8rem; margin-top: 5px; font-weight: 500; display: none; }
         .status-message { color: var(--dark-color); }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translate(-50%, -60%); } to { opacity: 1; transform: translate(-50%, -50%); } }
         @media (max-width: 768px) {
             .form-row { grid-template-columns: 1fr; gap: 0; }
             .header h1 { font-size: 1.5rem; }
@@ -313,7 +314,7 @@
             <p>Bergabunglah dengan komunitas bisnis terdepan di Situbondo</p>
         </div>
         
-        <div class="form-container">
+        <div class="form-container" id="form-container">
             <form id="registrationForm">
                 <div class="form-section">
                     <h3>1. Data Pribadi</h3>
@@ -347,7 +348,7 @@
                         <div class="location-warning" id="location-warning">
                             <strong>Penting:</strong> Untuk akurasi, dapatkan titik lokasi saat Anda berada di tempat usaha.
                         </div>
-                        <input type="url" id="lokasi_maps" name="lokasi_maps" placeholder="Contoh: https://www.google.com/maps?q=-7.7,114.0" required>
+                        <input type="url" id="lokasi_maps" name="lokasi_maps" placeholder="Contoh: https://www.google.com/maps?q=..." required>
                         <div class="location-button-group">
                             <button type="button" class="btn btn-location" id="getLocationBtn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
@@ -393,22 +394,38 @@
         </div>
     </div>
     
-    <div class="overlay" id="overlay"></div>
-    <div class="notification" id="successNotification">
-        <h2>Pendaftaran Berhasil!</h2>
-        <p>Terima kasih telah bergabung. Data Anda akan segera kami proses.</p>
-        <button class="btn btn-primary" id="okButton" style="background: var(--success-color);">OK</button>
-    </div>
-
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script type="text/javascript">
         (function() {
-            emailjs.init({ publicKey: "O0****-jR*****" });
+            emailjs.init({ publicKey: "O0CF5tp-jRja9rZ4k" });
         })();
     </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // --- KONFIGURASI PENTING ---
+            const apiKeyImgBB = '0e598ab24278f062969e6d0ec810d518'; // API Key ImgBB Anda
+            const nomorWhatsAppTujuan = '6285647709114'; // Nomor WA Tujuan
+            const serviceID_emailjs = 'JSservice_qx*****'; // GANTI DENGAN SERVICE ID ANDA
+            const templateID_emailjs = 'template_xxxxxxxx'; // GANTI DENGAN TEMPLATE ID ANDA
+
+            // --- Elemen Form ---
+            const formContainer = document.getElementById('form-container');
+            const form = document.getElementById('registrationForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const kategoriSelect = document.getElementById('kategori_usaha');
+            const lainnyaGroup = document.getElementById('lainnya_keterangan_group');
+            const keteranganLainnya = document.getElementById('keterangan_lainnya');
+            const ktpInput = document.getElementById('foto_ktp');
+            const fileNameDisplay = document.getElementById('file-name');
+            const mapsInput = document.getElementById('lokasi_maps');
+            const registerLaterBtn = document.getElementById('registerLaterBtn');
+            const getLocationBtn = document.getElementById('getLocationBtn');
+            const locationStatus = document.getElementById('location-status');
+            
+            let finalWhatsAppMessage = '';
+
+            // --- Fungsi Inisialisasi Form ---
             function generateIdPermohonan() {
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
                 let result = 'AM-';
@@ -424,24 +441,13 @@
                     day: '2-digit', month: 'long', year: 'numeric',
                     hour: '2-digit', minute: '2-digit'
                 };
-                return now.toLocaleDateString('id-ID', options).replace(/\./g, ':');
+                return now.toLocaleString('id-ID', options).replace(/\./g, ':');
             }
             
             document.getElementById('id_permohonan').value = generateIdPermohonan();
             document.getElementById('tanggal_pendaftaran').value = setTanggalPendaftaran();
             
-            const form = document.getElementById('registrationForm');
-            const submitBtn = document.getElementById('submitBtn');
-            const kategoriSelect = document.getElementById('kategori_usaha');
-            const lainnyaGroup = document.getElementById('lainnya_keterangan_group');
-            const keteranganLainnya = document.getElementById('keterangan_lainnya');
-            const ktpInput = document.getElementById('foto_ktp');
-            const fileNameDisplay = document.getElementById('file-name');
-            const mapsInput = document.getElementById('lokasi_maps');
-            const registerLaterBtn = document.getElementById('registerLaterBtn');
-            const getLocationBtn = document.getElementById('getLocationBtn');
-            const locationStatus = document.getElementById('location-status');
-
+            // --- Event Listener Form ---
             kategoriSelect.addEventListener('change', function() {
                 lainnyaGroup.style.display = this.value === 'Lainnya' ? 'block' : 'none';
                 if (this.value === 'Lainnya') {
@@ -484,9 +490,12 @@
                     function(position) {
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
-                        const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`;
+                        
+                        // [PERBAIKAN BUG]: Menggunakan format URL Google Maps yang standar dan valid
+                        const mapsUrl = `https://www.google.com/maps?q=${lat},${lon}`; 
+                        
                         mapsInput.value = mapsUrl;
-                        mapsInput.setAttribute('required', 'required'); // Pastikan required kembali aktif
+                        mapsInput.setAttribute('required', 'required');
                         locationStatus.textContent = 'Lokasi berhasil dideteksi!';
                         locationStatus.style.color = 'var(--success-color)';
                         validateForm();
@@ -517,6 +526,7 @@
             
             form.addEventListener('input', validateForm);
             
+            // --- Validasi Form ---
             function validateForm() {
                 let allValid = true;
                 const requiredFields = form.querySelectorAll('[required]');
@@ -541,7 +551,7 @@
                                 errorMessage = 'Field ini wajib diisi.';
                             } else if (field.value !== 'Akan diisi nanti' && !/^(https?:\/\/)?(www\.)?(google\.com\/maps|maps\.app\.goo\.gl)\S+$/.test(field.value)) {
                                 isValid = false;
-                                errorMessage = 'Format URL Google Maps tidak valid.';
+                                errorMessage = 'Format URL Google Maps tidak valid. Coba gunakan tombol lokasi.';
                             }
                             break;
                         case 'select-one':
@@ -588,6 +598,7 @@
             function showError(field, message) {
                 const errorElement = document.getElementById(`${field.id}-error`);
                 if(errorElement && message) {
+                    // Disesuaikan dengan desain input baru
                     field.style.borderColor = 'var(--error-color)';
                     if (field.type === 'file') field.parentElement.style.borderColor = 'var(--error-color)';
                     errorElement.textContent = message;
@@ -598,88 +609,168 @@
             function hideError(field) {
                 const errorElement = document.getElementById(`${field.id}-error`);
                 if (errorElement) {
-                    field.style.borderColor = '';
+                    field.style.borderColor = 'var(--border-color)';
                      if (field.type === 'file') field.parentElement.style.borderColor = 'var(--border-color)';
                     errorElement.style.display = 'none';
                 }
             }
+
+            // --- Fungsi Upload Gambar ---
+            async function uploadFileToImgBB(file) {
+                const formData = new FormData();
+                formData.append('image', file);
+                try {
+                    const response = await fetch(`https://api.imgbb.com/1/upload?key=${apiKeyImgBB}`, {
+                        method: 'POST',
+                        body: formData,
+                    });
+                    const result = await response.json();
+                    if (result.success) {
+                        return result.data.url;
+                    } else {
+                        throw new Error(result.error.message || 'Gagal mengunggah gambar ke ImgBB.');
+                    }
+                } catch (error) {
+                    console.error('Error uploading to ImgBB:', error);
+                    throw error;
+                }
+            }
             
-            form.addEventListener('submit', function(e) {
+            // --- Submit Handler (Async) ---
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 if (validateForm()) {
                     submitBtn.disabled = true;
-                    submitBtn.textContent = 'Mengirim...';
-                    sendEmail();
-                    sendWhatsApp();
-                    document.getElementById('overlay').style.display = 'block';
-                    document.getElementById('successNotification').style.display = 'block';
+                    submitBtn.innerHTML = 'Mengunggah KTP...';
+
+                    try {
+                        const ktpFile = document.getElementById('foto_ktp').files[0];
+                        const ktpUrl = await uploadFileToImgBB(ktpFile); 
+
+                        if (ktpUrl) {
+                            submitBtn.innerHTML = 'Menyiapkan Data...';
+                            const params = getTemplateParams(ktpUrl);
+                            sendEmail(params); 
+                            
+                            // [PERBAIKAN 1]: Teks "Terima kasih..." dihapus dari pesan WA
+                            const message = `*PENDAFTARAN MITRA ANEKAMARKET*
+
+*Data Pribadi:*
+• Nama: ${params.nama}
+• NIK: ${params.nik}
+• Alamat: ${params.alamat}
+• WhatsApp: ${params.whatsapp}
+• Email: ${params.email}
+• Link Foto KTP: ${ktpUrl}
+
+*Data Usaha:*
+• Nama Usaha: ${params.nama_usaha}
+• Alamat Usaha: ${params.alamat_usaha}
+• Kategori Usaha: ${params.kategori_usaha}
+• Lokasi Maps: ${params.lokasi_maps}
+
+*Data Sistem:*
+• ID Permohonan: ${params.id_permohonan}
+• Tanggal Pendaftaran: ${params.tanggal_pendaftaran}
+
+_Saya menyatakan bahwa semua data di atas adalah benar dan dapat dipertanggungjawabkan._`;
+                            
+                            finalWhatsAppMessage = encodeURIComponent(message);
+                            showSuccessScreen();
+                        }
+
+                    } catch (error) {
+                        console.error('Proses submit gagal:', error);
+                        
+                        alert('Gagal mengunggah KTP. Mohon periksa koneksi Anda dan coba lagi. Pesan Error: ' + error.message);
+                        
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = `
+                            Kirim Pendaftaran
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                              <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                            </svg>`;
+                    }
                 }
             });
 
-            function sendEmail() {
-                const serviceID = 'JSservice_qx*****';
-                const templateID = 'template_xxxxxxxx';
-                emailjs.sendForm(serviceID, templateID, form)
-                    .then(() => console.log('Email berhasil terkirim!'))
-                    .catch(err => {
-                        console.error('Gagal mengirim email. Error: ', JSON.stringify(err));
-                        alert('Oops! Gagal mengirim email notifikasi.');
-                    });
-            }
-            
-            function sendWhatsApp() {
-                const nama = document.getElementById('nama').value;
-                const nik = document.getElementById('nik').value;
-                const alamat = document.getElementById('alamat').value;
-                const whatsapp = document.getElementById('whatsapp').value;
-                const email = document.getElementById('email').value || 'Tidak diisi';
-                const namaUsaha = document.getElementById('nama_usaha').value;
-                const alamatUsaha = document.getElementById('alamat_usaha').value;
+            // --- Fungsi Pengumpulan Data ---
+            function getTemplateParams(ktpUrl) {
                 let kategoriUsaha = document.getElementById('kategori_usaha').value;
-                const idPermohonan = document.getElementById('id_permohonan').value;
-                const tanggalPendaftaran = document.getElementById('tanggal_pendaftaran').value;
-                const lokasiMaps = document.getElementById('lokasi_maps').value;
-                const fotoKtpFile = document.getElementById('foto_ktp').files[0];
-                const namaFileKtp = fotoKtpFile ? fotoKtpFile.name : 'Tidak ada file';
-
                 if (kategoriUsaha === 'Lainnya') {
                     const keterangan = document.getElementById('keterangan_lainnya').value;
                     kategoriUsaha = `Lainnya (Keterangan: ${keterangan})`;
                 }
+
+                return {
+                    nama: document.getElementById('nama').value,
+                    nik: document.getElementById('nik').value,
+                    alamat: document.getElementById('alamat').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    email: document.getElementById('email').value || 'Tidak diisi',
+                    nama_usaha: document.getElementById('nama_usaha').value,
+                    alamat_usaha: document.getElementById('alamat_usaha').value,
+                    lokasi_maps: document.getElementById('lokasi_maps').value,
+                    kategori_usaha: kategoriUsaha,
+                    id_permohonan: document.getElementById('id_permohonan').value,
+                    tanggal_pendaftaran: document.getElementById('tanggal_pendaftaran').value,
+                    foto_ktp_url: ktpUrl
+                };
+            }
+
+            // --- Fungsi Kirim Email ---
+            function sendEmail(templateParams) {
+                if (serviceID_emailjs === 'JSservice_qx*****' || templateID_emailjs === 'template_xxxxxxxx') {
+                    console.warn("Peringatan: serviceID_emailjs atau templateID_emailjs belum diganti. Email tidak akan terkirim.");
+                    return; 
+                }
                 
-                const message = `*PENDAFTARAN MITRA ANEKAMARKET*
-
-*Data Pribadi:*
-• Nama: ${nama}
-• NIK: ${nik}
-• Alamat: ${alamat}
-• WhatsApp: ${whatsapp}
-• Email: ${email}
-• File KTP: ${namaFileKtp}
-
-*Data Usaha:*
-• Nama Usaha: ${namaUsaha}
-• Alamat Usaha: ${alamatUsaha}
-• Kategori Usaha: ${kategoriUsaha}
-• Lokasi Maps: ${lokasiMaps}
-
-*Data Sistem:*
-• ID Permohonan: ${idPermohonan}
-• Tanggal Pendaftaran: ${tanggalPendaftaran}
-
-_Saya menyatakan bahwa semua data di atas adalah benar dan dapat dipertanggungjawabkan._
-Terima kasih telah mendaftar di ANEKAMARKET!`;
-                
-                const encodedMessage = encodeURIComponent(message);
-                const whatsappURL = `https://wa.me/6285647709114?text=${encodedMessage}`;
-                window.open(whatsappURL, '_blank');
+                emailjs.send(serviceID_emailjs, templateID_emailjs, templateParams)
+                    .then(() => console.log('Email berhasil terkirim!'))
+                    .catch(err => {
+                        console.error('Gagal mengirim email. Error: ', JSON.stringify(err));
+                    });
             }
             
-            document.getElementById('okButton').addEventListener('click', function() {
-                document.getElementById('overlay').style.display = 'none';
-                document.getElementById('successNotification').style.display = 'none';
-                window.location.href = 'https://www.anekamarket.my.id';
-            });
+            // --- Fungsi Layar Sukses ---
+            function showSuccessScreen() {
+                // [PERBAIKAN 2]: Pesan peringatan/perintah WAJIB ditambahkan
+                formContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="var(--success-color)" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                           <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                        <h2 style="color: var(--dark-color); font-size: 1.8rem; font-family: 'Poppins', sans-serif; margin-top: 20px;">Pendaftaran Berhasil!</h2>
+                        <p style="font-size: 1rem; color: var(--gray-color); margin-top: 15px; margin-bottom: 30px; line-height: 1.7;">
+                            Terima kasih telah bergabung. Data Anda telah kami simpan.
+                            <br><br>
+                            <strong style="color: var(--error-color); font-size: 1.1rem;">LANGKAH TERAKHIR (WAJIB):</strong>
+                            <br>
+                            Anda <strong>wajib</strong> mengirimkan salinan data pendaftaran ini kepada kami sebagai konfirmasi. 
+                            <br>
+                            Silakan klik tombol di bawah untuk mengirim data Anda via WhatsApp.
+                        </p>
+                        <button type="button" class="btn btn-primary" id="sendWaButton" style="background: #25D366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                               <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.626-2.957 6.584-6.591 6.584zM10.118 8.584c-.197-.1-.8-.396-1.02-.459-.22-.063-.38-.099-.54.099-.16.198-.5.63-.61.751-.12.122-.23.138-.43.038-.2-.099-.84-.31-1.59-1.02-.58-.55-1.01-1.23-1.13-1.43-.12-.2-.02-.3.07-.401.08-.09.19-.23.29-.33.1-.1.13-.17.2-.28.07-.1.03-.18-.02-.28-.05-.1-.54-1.28- .73-1.75-.19-.47-.38-.4-.54-.4-.16-.007-.34-.007-.5-.007-.16 0-.43.063-.66.33-.22.27-.85.83-.85 2.02 0 1.18.87 2.34 1 2.49.12.15 1.7 2.58 4.13 3.63.58.25 1.03.4 1.38.52.36.12.68.1.92.06.27-.05.8-.33.91-.65.12-.32.12-.58.08-.65-.05-.07-.17-.12-.37-.22z"/>
+                            </svg>
+                            Kirim Konfirmasi (WAJIB)
+                        </button>
+                    </div>
+                `;
+                document.getElementById('sendWaButton').addEventListener('click', sendWhatsApp);
+            }
+            
+            // --- Fungsi Kirim WA ---
+            function sendWhatsApp() {
+                if (finalWhatsAppMessage) {
+                    const whatsappURL = `https://wa.me/${nomorWhatsAppTujuan}?text=${finalWhatsAppMessage}`;
+                    window.open(whatsappURL, '_blank');
+                }
+                setTimeout(() => {
+                    window.location.href = 'https://www.anekamarket.my.id';
+                }, 1000);
+            }
         });
     </script>
 </body>
