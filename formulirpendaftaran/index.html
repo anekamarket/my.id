@@ -21,9 +21,25 @@
             --warning-color: #ffc107;
             --border-color: #dee2e6;
             --border-radius: 12px;
-            --shadow: 0 12px 35px rgba(0, 0, 0, 0.08); /* Shadow disempurnakan */
+            /* Shadow yang lebih halus dan berlapis untuk tampilan modern */
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.07), 0 1px 1px rgba(0, 0, 0, 0.05);
         }
 
+        /* --- Animasi --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -39,11 +55,11 @@
             padding: 20px;
             color: var(--dark-color);
             line-height: 1.6;
-            /* Latar belakang diubah menjadi gradien yang lebih halus dan profesional */
-            background: linear-gradient(135deg, var(--light-color) 0%, #e0eafc 100%);
+            /* Latar belakang yang lebih profesional dengan pola SVG subtil */
+            background-color: #f0f4f8;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cg fill='%23e0eafc' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 0h20v1H0zM0 3h20v1H0zM0 6h20v1H0zM0 9h20v1H0zM0 12h20v1H0zM0 15h20v1H0zM0 18h20v1H0z'/%3E%3C/g%3E%3C/svg%3E");
+            animation: fadeIn 0.5s ease-out;
         }
-
-        /* Animasi gradien dihapus untuk tampilan yang lebih bersih */
 
         .container {
             max-width: 750px;
@@ -53,14 +69,18 @@
             box-shadow: var(--shadow);
             overflow: hidden;
             margin: 20px 0;
-            border: none; /* Border dihilangkan, shadow sudah cukup */
+            /* Border subtil untuk efek "lifted" */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            animation: fadeInUp 0.5s ease-out 0.1s;
+            animation-fill-mode: backwards;
         }
 
         .header {
             padding: 30px 40px;
             text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            background-color: var(--white-color); /* Disamakan dengan container */
+            /* Border header yang lebih halus */
+            border-bottom: 1px solid #f0f0f0; 
+            background-color: var(--white-color);
         }
 
         .header h1 {
@@ -90,17 +110,23 @@
         .form-section {
             margin-bottom: 25px;
             padding-bottom: 25px;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid #f0f0f0;
+            animation: fadeInUp 0.5s ease-out;
+            animation-fill-mode: backwards;
         }
         .form-section:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         
+        /* Delay animasi stagger yang lebih cepat */
+        .form-section:nth-of-type(1) { animation-delay: 0.3s; }
+        .form-section:nth-of-type(2) { animation-delay: 0.4s; }
+        .form-section:nth-of-type(3) { animation-delay: 0.5s; }
+
         .form-section h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.1rem;
             font-weight: 600;
-            color: var(--dark-color); /* Warna diubah agar lebih tegas */
+            color: var(--dark-color);
             margin-bottom: 20px;
-            /* Aksen garis untuk memperjelas judul bagian */
             border-left: 4px solid var(--primary-color);
             padding-left: 10px;
         }
@@ -111,30 +137,59 @@
         label { 
             display: block; 
             margin-bottom: 8px; 
-            font-weight: 600; /* Ditebalkan sedikit */
-            color: #495057; /* Digelapkan sedikit */
+            font-weight: 500; /* Sedikit lebih tipis dari 600 agar lebih elegan */
+            color: #344054; /* Warna abu-abu gelap yang lebih modern */
             font-size: 0.9rem; 
         }
         .required::after { content: " *"; color: var(--error-color); }
 
-        /* --- Perbaikan Desain Input --- */
+        /* --- (BARU) Grup Input dengan Ikon --- */
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-color);
+            transition: color 0.3s ease;
+        }
+        
+        .input-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* --- Desain Input yang Disempurnakan --- */
         input, select, textarea {
             width: 100%;
-            padding: 12px 15px; /* Diberi padding horizontal */
-            border: 1px solid var(--border-color); /* Diubah menjadi full border */
-            border-radius: 8px; /* Diberi radius */
-            font-size: 0.95rem; /* Disesuaikan agar rapi */
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            background: var(--white-color); /* Background eksplisit */
+            background: var(--white-color);
             color: var(--dark-color);
             font-weight: 400;
         }
+        
+        /* (BARU) Tambahkan padding untuk input yang memiliki ikon */
+        .input-group input {
+            padding-left: 45px;
+        }
+
         input::placeholder, textarea::placeholder { color: #adb5bd; }
         
+        /* (BARU) Efek :focus-within pada Grup Input */
+        .input-group:focus-within .input-icon {
+            color: var(--primary-color);
+        }
+
         input:focus, select:focus, textarea:focus { 
             outline: none; 
             border-color: var(--primary-color); 
-            /* Ditambahkan focus ring modern */
             box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
         }
         textarea { resize: vertical; min-height: 80px; }
@@ -146,22 +201,29 @@
             border-radius: 8px;
             cursor: not-allowed;
             color: var(--gray-color);
-            box-shadow: none; /* Memastikan tidak ada shadow saat focus */
+            box-shadow: none;
         }
         
+        /* (BARU) Desain Ulang File Input */
         .file-input-wrapper {
             position: relative;
             overflow: hidden;
-            display: inline-block;
+            display: flex; /* Menggunakan flex */
+            flex-direction: column; /* Konten ditumpuk vertikal */
+            align-items: center; /* Tengahkan horizontal */
+            justify-content: center; /* Tengahkan vertikal */
             width: 100%;
             border: 2px dashed var(--border-color);
             border-radius: 8px;
-            padding: 15px;
+            padding: 25px 15px; /* Padding lebih besar */
             text-align: center;
             cursor: pointer;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, background-color 0.3s;
         }
-        .file-input-wrapper:hover { border-color: var(--primary-color); }
+        .file-input-wrapper:hover { 
+            border-color: var(--primary-color); 
+            background-color: #f8faff;
+        }
         .file-input-wrapper input[type="file"] {
             font-size: 100px;
             position: absolute;
@@ -170,9 +232,25 @@
             opacity: 0;
             cursor: pointer;
         }
+        /* (BARU) Ikon untuk file input */
+        .file-input-icon {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .file-input-icon svg {
+            width: 40px;
+            height: 40px;
+        }
         .file-input-label {
-            color: var(--gray-color);
-            font-weight: 500;
+            color: var(--dark-color); /* Warna lebih gelap */
+            font-weight: 600; /* Lebih tebal */
+            font-size: 1rem;
+        }
+        #file-name-label {
+             color: var(--gray-color);
+             font-weight: 400;
+             font-size: 0.9rem;
+             margin-top: 4px;
         }
         #file-name {
             display: block;
@@ -181,6 +259,8 @@
             color: var(--primary-color);
             font-size: 0.9rem;
         }
+        /* --- Akhir Desain Ulang File Input --- */
+
 
         .checkbox-group {
             display: flex;
@@ -239,6 +319,11 @@
             text-align: center;
             margin-top: 20px;
         }
+        #registrationForm button[type="submit"] {
+            animation: fadeInUp 0.5s ease-out 0.6s;
+            animation-fill-mode: backwards;
+        }
+
         .btn-primary {
             background: var(--primary-gradient);
             color: var(--white-color);
@@ -294,8 +379,55 @@
         .notification { display: none; }
         .overlay { display: none; }
 
-        .error-message, .status-message { color: var(--error-color); font-size: 0.8rem; margin-top: 5px; font-weight: 500; display: none; }
+        .error-message, .status-message { color: var(--error-color); font-size: 0.8rem; margin-top: 8px; font-weight: 500; display: none; }
         .status-message { color: var(--dark-color); }
+        
+        /* (BARU) Sesuaikan error message untuk input group */
+        .input-group ~ .error-message {
+            margin-top: 8px;
+        }
+
+        /* --- CSS Loading Overlay --- */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(5px);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+        #loading-overlay.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        #loading-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--dark-color);
+            text-align: center;
+            padding: 0 20px;
+        }
+
 
         @media (max-width: 768px) {
             .form-row { grid-template-columns: 1fr; gap: 0; }
@@ -319,19 +451,55 @@
                 <div class="form-section">
                     <h3>1. Data Pribadi</h3>
                     <div class="form-row">
-                        <div class="form-group"><label for="nama" class="required">Nama (sesuai KTP)</label><input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required><div class="error-message" id="nama-error"></div></div>
-                        <div class="form-group"><label for="nik" class="required">NIK (Nomor KTP)</label><input type="text" id="nik" name="nik" placeholder="Masukkan 16 digit NIK" required maxlength="16"><div class="error-message" id="nik-error"></div></div>
+                        <div class="form-group">
+                            <label for="nama" class="required">Nama (sesuai KTP)</label>
+                            <div class="input-group">
+                                <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/></svg></span>
+                                <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+                            </div>
+                            <div class="error-message" id="nama-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nik" class="required">NIK (Nomor KTP)</label>
+                             <div class="input-group">
+                                <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16"><path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5ZM9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8Zm1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5Z"/><path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2ZM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4Z"/></svg></span>
+                                <input type="text" id="nik" name="nik" placeholder="Masukkan 16 digit NIK" required maxlength="16">
+                            </div>
+                            <div class="error-message" id="nik-error"></div>
+                        </div>
                     </div>
-                    <div class="form-group"><label for="alamat" class="required">Alamat (sesuai KTP)</label><textarea id="alamat" name="alamat" rows="2" placeholder="Masukkan alamat lengkap" required></textarea><div class="error-message" id="alamat-error"></div></div>
+                    <div class="form-group">
+                        <label for="alamat" class="required">Alamat (sesuai KTP)</label>
+                        <textarea id="alamat" name="alamat" rows="2" placeholder="Masukkan alamat lengkap" required></textarea>
+                        <div class="error-message" id="alamat-error"></div>
+                    </div>
                     <div class="form-row">
-                        <div class="form-group"><label for="whatsapp" class="required">Nomor WhatsApp</label><input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 081234567890" required><div class="error-message" id="whatsapp-error"></div></div>
-                        <div class="form-group"><label for="email">Email (Opsional)</label><input type="email" id="email" name="email" placeholder="contoh@gmail.com"><div class="error-message" id="email-error"></div></div>
+                        <div class="form-group">
+                            <label for="whatsapp" class="required">Nomor WhatsApp</label>
+                            <div class="input-group">
+                                <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16"><path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.626-2.957 6.584-6.591 6.584zM10.118 8.584c-.197-.1-.8-.396-1.02-.459-.22-.063-.38-.099-.54.099-.16.198-.5.63-.61.751-.12.122-.23.138-.43.038-.2-.099-.84-.31-1.59-1.02-.58-.55-1.01-1.23-1.13-1.43-.12-.2-.02-.3.07-.401.08-.09.19-.23.29-.33.1-.1.13-.17.2-.28.07-.1.03-.18-.02-.28-.05-.1-.54-1.28- .73-1.75-.19-.47-.38-.4-.54-.4-.16-.007-.34-.007-.5-.007-.16 0-.43.063-.66.33-.22.27-.85.83-.85 2.02 0 1.18.87 2.34 1 2.49.12.15 1.7 2.58 4.13 3.63.58.25 1.03.4 1.38.52.36.12.68.1.92.06.27-.05.8-.33.91-.65.12-.32.12-.58.08-.65-.05-.07-.17-.12-.37-.22z"/></svg></span>
+                                <input type="tel" id="whatsapp" name="whatsapp" placeholder="Contoh: 081234567890" required>
+                            </div>
+                            <div class="error-message" id="whatsapp-error"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email (Opsional)</label>
+                            <div class="input-group">
+                                <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z"/></svg></span>
+                                <input type="email" id="email" name="email" placeholder="contoh@gmail.com">
+                            </div>
+                            <div class="error-message" id="email-error"></div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="foto_ktp" class="required">Foto/Scan KTP</label>
                         <div class="file-input-wrapper">
+                            <span class="file-input-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-arrow-up" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M7.646 5.146a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2z"/><path d="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383zm.653.757c-.757.653-1.153 1.44-1.153 2.056v.448l-.445.049C2.064 6.805 1 7.952 1 9.318 1 10.785 2.23 12 3.781 12h8.906C13.98 12 15 10.988 15 9.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 4.225 10.328 2.5 8 2.5c-2.414 0-4.382 1.848-4.406 4.101z"/></svg>
+                            </span>
+                            <span class="file-input-label">Klik untuk memilih gambar KTP</span>
+                            <span id="file-name-label">Belum ada file dipilih</span>
                             <input type="file" id="foto_ktp" name="foto_ktp" accept="image/*" required>
-                            <span class="file-input-label">Klik untuk memilih gambar...</span>
                             <span id="file-name"></span>
                         </div>
                         <div class="error-message" id="foto_ktp-error"></div>
@@ -340,15 +508,29 @@
 
                 <div class="form-section">
                     <h3>2. Data Usaha</h3>
-                    <div class="form-group"><label for="nama_usaha" class="required">Nama Usaha / Brand</label><input type="text" id="nama_usaha" name="nama_usaha" placeholder="Contoh: Cafe Bintang" required><div class="error-message" id="nama_usaha-error"></div></div>
-                    <div class="form-group"><label for="alamat_usaha" class="required">Alamat Usaha</label><textarea id="alamat_usaha" name="alamat_usaha" rows="2" placeholder="Masukkan alamat lengkap usaha" required></textarea><div class="error-message" id="alamat_usaha-error"></div></div>
+                    <div class="form-group">
+                        <label for="nama_usaha" class="required">Nama Usaha / Brand</label>
+                        <div class="input-group">
+                             <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shop-window" viewBox="0 0 16 16"><path d="M2.97 1.35A1 1 0 0 1 3.73 1h8.54a1 1 0 0 1 .76.35l2.609 3.044A1.5 1.5 0 0 1 16 5.37v.255a2.375 2.375 0 0 1-4.25 1.458A2.371 2.371 0 0 1 9.875 8 2.37 2.37 0 0 1 8 7.083 2.37 2.37 0 0 1 6.125 8a2.37 2.37 0 0 1-1.875-.917A2.375 2.375 0 0 1 0 5.625V5.37a1.5 1.5 0 0 1 .361-.976l2.61-3.045zm1.78 4.275a1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 0 0 2.75 0 .5.5 0 0 1 1 0 1.375 1.375 0 1 0 2.75 0H15.5v2h.5a.5.5 0 0 1 0 1h-.5v.5a.5.5 0 0 1-1 0V11h-1.5v.5a.5.5 0 0 1-1 0V11H11v.5a.5.5 0 0 1-1 0V11H8.5v.5a.5.5 0 0 1-1 0V11H6v.5a.5.5 0 0 1-1 0V11H3.5v.5a.5.5 0 0 1-1 0V11H1v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0-1H2v-2h.5a.5.5 0 0 1 0 1H.5v-2H1a.5.5 0 0 1 0-1h.5V7h1V6.645zM8.5 5.03l-1-1.11L6.36 5.03h2.14zM5 5.03l-1-1.11L2.86 5.03H5zm6 0l-1-1.11L9.86 5.03h2.14z"/></svg></span>
+                            <input type="text" id="nama_usaha" name="nama_usaha" placeholder="Contoh: Cafe Bintang" required>
+                        </div>
+                        <div class="error-message" id="nama_usaha-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="alamat_usaha" class="required">Alamat Usaha</label>
+                        <textarea id="alamat_usaha" name="alamat_usaha" rows="2" placeholder="Masukkan alamat lengkap usaha" required></textarea>
+                        <div class="error-message" id="alamat_usaha-error"></div>
+                    </div>
                     
                     <div class="form-group">
                         <label for="lokasi_maps" class="required">URL Titik Lokasi Google Maps</label>
                         <div class="location-warning" id="location-warning">
                             <strong>Penting:</strong> Untuk akurasi, dapatkan titik lokasi saat Anda berada di tempat usaha.
                         </div>
-                        <input type="url" id="lokasi_maps" name="lokasi_maps" placeholder="Contoh: https://www.google.com/maps?q=..." required>
+                        <div class="input-group">
+                            <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg></span>
+                            <input type="url" id="lokasi_maps" name="lokasi_maps" placeholder="Contoh: https://www.google.com/maps?q=..." required>
+                        </div>
                         <div class="location-button-group">
                             <button type="button" class="btn btn-location" id="getLocationBtn">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16"><path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
@@ -364,7 +546,7 @@
                         <label for="kategori_usaha" class="required">Kategori Usaha</label>
                         <select id="kategori_usaha" name="kategori_usaha" required>
                             <option value="">Pilih Kategori Usaha</option>
-                            <option value="UMKM">UMKM</option><option value="Jasa Service">Jasa Service</option><option value="Kuliner">Kuliner</option><option value="Warung atau Resto">Warung atau Resto</option><option value="Cafe">Cafe</option><option value="Retail">Retail</option><option value="Pertanian">Pertanian</option><option value="Perikanan">Perikanan</option><option value="Kerajinan">Kerajinan</option><option value="Jasa Transportasi">Jasa Transportasi</option><option value="Wisata">Wisata</option><option value="Hotel">Hotel</option><option value="Lainnya">Lainnya</option>
+                            <option value="UMKM">UMKM</option><option value="Jasa Service">Jasa Service</option><option value="Kuliner">Kuliner</option><option value="Warung atau Resto">Warung atau Resto</option><option value="Cafe">Cafe</option><option value="Retail">Retail</option><option value="Pertanian">Pertanian</option><option value="Perikanan">Perikanan</option><option value="Kerajinan">Kerajinan</option><option value="Jasa Transportasi">Jasa Transportasi</option><option value="Wisata">Wisata</option><option value="Hotel">Hotel</option><option value="Lainnya">Lainnya</m>
                         </select>
                         <div class="error-message" id="kategori_usaha-error"></div>
                     </div>
@@ -394,21 +576,19 @@
         </div>
     </div>
     
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script type="text/javascript">
-        (function() {
-            emailjs.init({ publicKey: "O0CF5tp-jRja9rZ4k" });
-        })();
-    </script>
-
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p id="loading-text">Mohon tunggu...</p>
+    </div>
+    
+    <audio id="success-sound" src="https://github.com/anekamarket/my.id/blob/main/notifikasi.mp3" preload="auto"></audio>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // --- KONFIGURASI PENTING ---
             const apiKeyImgBB = '0e598ab24278f062969e6d0ec810d518'; // API Key ImgBB Anda
             const nomorWhatsAppTujuan = '6285647709114'; // Nomor WA Tujuan
-            const serviceID_emailjs = 'JSservice_qx*****'; // GANTI DENGAN SERVICE ID ANDA
-            const templateID_emailjs = 'template_xxxxxxxx'; // GANTI DENGAN TEMPLATE ID ANDA
-
+            
             // --- Elemen Form ---
             const formContainer = document.getElementById('form-container');
             const form = document.getElementById('registrationForm');
@@ -418,11 +598,17 @@
             const keteranganLainnya = document.getElementById('keterangan_lainnya');
             const ktpInput = document.getElementById('foto_ktp');
             const fileNameDisplay = document.getElementById('file-name');
+            const fileNameLabel = document.getElementById('file-name-label'); // (BARU) Label file
             const mapsInput = document.getElementById('lokasi_maps');
             const registerLaterBtn = document.getElementById('registerLaterBtn');
             const getLocationBtn = document.getElementById('getLocationBtn');
             const locationStatus = document.getElementById('location-status');
             
+            // --- Elemen Baru untuk Loading & Suara ---
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const loadingText = document.getElementById('loading-text');
+            const successSound = document.getElementById('success-sound');
+
             let finalWhatsAppMessage = '';
 
             // --- Fungsi Inisialisasi Form ---
@@ -461,7 +647,14 @@
             });
             
             ktpInput.addEventListener('change', function() {
-                fileNameDisplay.textContent = this.files.length > 0 ? this.files[0].name : '';
+                // (BARU) Update label file
+                if (this.files.length > 0) {
+                    fileNameLabel.textContent = this.files[0].name;
+                    fileNameDisplay.textContent = ''; // Kosongkan span lama jika masih ada
+                } else {
+                    fileNameLabel.textContent = 'Belum ada file dipilih';
+                    fileNameDisplay.textContent = '';
+                }
                 validateForm();
             });
 
@@ -549,7 +742,8 @@
                             if (field.value.trim() === '') {
                                 isValid = false;
                                 errorMessage = 'Field ini wajib diisi.';
-                            } else if (field.value !== 'Akan diisi nanti' && !/^(https?:\/\/)?(www\.)?(google\.com\/maps|maps\.app\.goo\.gl)\S+$/.test(field.value)) {
+                            // [PERBAIKAN VALIDASI]: Regex disempurnakan untuk mencocokkan format URL Maps yang valid
+                            } else if (field.value !== 'Akan diisi nanti' && !/^(https?:\/\/)?(www\.)?((google\.com\/maps)|(maps\.app\.goo\.gl))\S+$/.test(field.value)) {
                                 isValid = false;
                                 errorMessage = 'Format URL Google Maps tidak valid. Coba gunakan tombol lokasi.';
                             }
@@ -597,9 +791,11 @@
             
             function showError(field, message) {
                 const errorElement = document.getElementById(`${field.id}-error`);
+                // (BARU) Targetkan border input group jika ada
+                const inputWrapper = field.closest('.input-group') || field;
+                
                 if(errorElement && message) {
-                    // Disesuaikan dengan desain input baru
-                    field.style.borderColor = 'var(--error-color)';
+                    inputWrapper.style.borderColor = 'var(--error-color)';
                     if (field.type === 'file') field.parentElement.style.borderColor = 'var(--error-color)';
                     errorElement.textContent = message;
                     errorElement.style.display = 'block';
@@ -608,8 +804,10 @@
             
             function hideError(field) {
                 const errorElement = document.getElementById(`${field.id}-error`);
+                const inputWrapper = field.closest('.input-group') || field;
+                
                 if (errorElement) {
-                    field.style.borderColor = 'var(--border-color)';
+                    inputWrapper.style.borderColor = 'var(--border-color)';
                      if (field.type === 'file') field.parentElement.style.borderColor = 'var(--border-color)';
                     errorElement.style.display = 'none';
                 }
@@ -641,18 +839,18 @@
                 e.preventDefault();
                 if (validateForm()) {
                     submitBtn.disabled = true;
-                    submitBtn.innerHTML = 'Mengunggah KTP...';
+                    loadingText.textContent = 'Mengunggah KTP... Mohon tunggu...';
+                    loadingOverlay.classList.add('visible');
 
                     try {
                         const ktpFile = document.getElementById('foto_ktp').files[0];
                         const ktpUrl = await uploadFileToImgBB(ktpFile); 
 
                         if (ktpUrl) {
-                            submitBtn.innerHTML = 'Menyiapkan Data...';
-                            const params = getTemplateParams(ktpUrl);
-                            sendEmail(params); 
+                            loadingText.textContent = 'Menyiapkan Data...';
                             
-                            // [PERBAIKAN 1]: Teks "Terima kasih..." dihapus dari pesan WA
+                            const params = getTemplateParams(ktpUrl);
+                            
                             const message = `*PENDAFTARAN MITRA ANEKAMARKET*
 
 *Data Pribadi:*
@@ -681,15 +879,9 @@ _Saya menyatakan bahwa semua data di atas adalah benar dan dapat dipertanggungja
 
                     } catch (error) {
                         console.error('Proses submit gagal:', error);
-                        
+                        loadingOverlay.classList.remove('visible');
                         alert('Gagal mengunggah KTP. Mohon periksa koneksi Anda dan coba lagi. Pesan Error: ' + error.message);
-                        
                         submitBtn.disabled = false;
-                        submitBtn.innerHTML = `
-                            Kirim Pendaftaran
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
-                              <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
-                            </svg>`;
                     }
                 }
             });
@@ -717,26 +909,14 @@ _Saya menyatakan bahwa semua data di atas adalah benar dan dapat dipertanggungja
                     foto_ktp_url: ktpUrl
                 };
             }
-
-            // --- Fungsi Kirim Email ---
-            function sendEmail(templateParams) {
-                if (serviceID_emailjs === 'JSservice_qx*****' || templateID_emailjs === 'template_xxxxxxxx') {
-                    console.warn("Peringatan: serviceID_emailjs atau templateID_emailjs belum diganti. Email tidak akan terkirim.");
-                    return; 
-                }
-                
-                emailjs.send(serviceID_emailjs, templateID_emailjs, templateParams)
-                    .then(() => console.log('Email berhasil terkirim!'))
-                    .catch(err => {
-                        console.error('Gagal mengirim email. Error: ', JSON.stringify(err));
-                    });
-            }
             
             // --- Fungsi Layar Sukses ---
             function showSuccessScreen() {
-                // [PERBAIKAN 2]: Pesan peringatan/perintah WAJIB ditambahkan
+                loadingOverlay.classList.remove('visible');
+                successSound.play().catch(e => console.warn("Autoplay audio gagal:", e));
+
                 formContainer.innerHTML = `
-                    <div style="text-align: center; padding: 40px 20px;">
+                    <div style="text-align: center; padding: 40px 20px; animation: fadeInUp 0.5s ease-out;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" fill="var(--success-color)" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
                         </svg>
