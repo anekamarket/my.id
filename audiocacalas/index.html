@@ -263,7 +263,9 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            /* --- [PERBAIKAN RESPONSIF] --- */
+            /* Mengubah minmax dari 360px ke 280px agar pas di layar smartphone terkecil (misal 320px - 40px padding) */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
         }
         
@@ -393,7 +395,14 @@
              padding: 30px; /* REFINEMENT: Add padding back when visible */
         }
         
-        .gallery-description { font-size: 1rem; margin-bottom: 20px; }
+        .gallery-description {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            /* --- [PERBAIKAN RESPONSIF] --- */
+            /* Memastikan teks/kata yang panjang tidak merusak layout (overflow) */
+            overflow-wrap: break-word;
+            word-break: break-word;
+        }
         
         /* --- [PERBAIKAN CSS] Menambahkan style untuk list & paragraf di deskripsi --- */
         .gallery-description p {
@@ -729,6 +738,17 @@
             .offer-notification { width: calc(100% - 20px); bottom: 10px; right: 10px; }
              .contact-bar { left: 10px; bottom: 10px; }
              .contact-btn { width: 50px; height: 50px; font-size: 1.5rem; }
+             
+             /* --- [PERBAIKAN RESPONSIF] --- */
+             /* Menyesuaikan padding di dalam kartu agar konten tidak terlalu sempit di layar kecil */
+             .gallery-details { padding: 20px; }
+             .gallery-detail-expanded {
+                 margin: 20px -20px -20px -20px; 
+             }
+             .gallery-detail-expanded.visible {
+                 padding: 20px; 
+             }
+             
              /* [PERBAIKAN] Penyesuaian posisi tombol mengambang */
              .floating-register-btn {
                 width: 55px;
@@ -962,8 +982,8 @@
                     "units": ["proyek", "harian", "borongan"],
                     "defaultUnit": "proyek",
                     "details": {
-                        // --- [PERBAIKAN] Teks deskripsi diformat ulang dengan HTML yang benar (paragraf dan list) ---
-                        "description": "<b>🔧 Jasa Las & Konstruksi Artistik</b>\n<p>Kami menghadirkan keahlian dalam pembuatan dan pemasangan pagar, kanopi, railing, dan berbagai kebutuhan konstruksi logam lainnya. Gambar di atas menampilkan hasil karya kami berupa pagar dengan desain ukiran laser yang rumit dan elegan—menggabungkan kekuatan dan estetika dalam satu bentuk. Cocok untuk memperindah rumah, toko, atau bangunan komersial Anda.</p>\n\n<b>🔊 Sewa Sound System untuk Berbagai Acara</b>\n<p>Selain jasa las, kami juga menyediakan layanan sewa sound system profesional untuk berbagai acara seperti pernikahan, ulang tahun, seminar, konser kecil, hingga acara komunitas. Peralatan kami berkualitas tinggi, dengan teknisi berpengalaman yang siap memastikan suara jernih dan merata di seluruh area acara.</p>\n\n<b>🎯 Mengapa Memilih Kami?</b>\n<ul>\n<li>Hasil las rapi dan tahan lama</li>\n<li>Desain custom sesuai permintaan</li>\n<li>Sound system berkualitas dengan harga bersahabat</li>\n<li>Layanan cepat dan profesional</li>\n</ul>\n\n<p>📞 <i>Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!</i></p>",
+                        // --- [PERBAIKAN RESPONSIF] Teks deskripsi diformat ulang (menghapus \n) agar rendering HTML lebih konsisten ---
+                        "description": "<b>🔧 Jasa Las & Konstruksi Artistik</b><p>Kami menghadirkan keahlian dalam pembuatan dan pemasangan pagar, kanopi, railing, dan berbagai kebutuhan konstruksi logam lainnya. Gambar di atas menampilkan hasil karya kami berupa pagar dengan desain ukiran laser yang rumit dan elegan—menggabungkan kekuatan dan estetika dalam satu bentuk. Cocok untuk memperindah rumah, toko, atau bangunan komersial Anda.</p><b>🔊 Sewa Sound System untuk Berbagai Acara</b><p>Selain jasa las, kami juga menyediakan layanan sewa sound system profesional untuk berbagai acara seperti pernikahan, ulang tahun, seminar, konser kecil, hingga acara komunitas. Peralatan kami berkualitas tinggi, dengan teknisi berpengalaman yang siap memastikan suara jernih dan merata di seluruh area acara.</p><b>🎯 Mengapa Memilih Kami?</b><ul><li>Hasil las rapi dan tahan lama</li><li>Desain custom sesuai permintaan</li><li>Sound system berkualitas dengan harga bersahabat</li><li>Layanan cepat dan profesional</li></ul><p>📞 <i>Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!</i></p>",
                         "images": ["https://i.imgur.com/d3YbYNV.jpeg", "https://i.imgur.com/gPVdWNB.jpeg", "https://i.imgur.com/C6mFdLw.jpeg", "https://i.imgur.com/A5Fsyf2.jpeg", "https://i.imgur.com/1YpSuKH.jpeg", "https://i.imgur.com/DzP9iZl.jpeg", "https://i.imgur.com/vDyzdcb.jpeg", "https://i.imgur.com/3scBCqU.jpeg", "https://i.imgur.com/Joc4BDJ.jpeg", "https://i.imgur.com/BgpS4LI.mp4"],
                         "specs": [{
                             "label": "Kode Jasa",
