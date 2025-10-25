@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             orderDetails.items.forEach((item, index) => {
                 const itemY = y;
-                if(index % 2 !== 0){ doc.setFillColor(lightColor); doc.rect(margin, itemY, pageW - (margin*2), 10, 'F'); }
+                if (index % 2 !== 0){ doc.setFillColor(lightColor); doc.rect(margin, itemY, pageW - (margin*2), 10, 'F'); }
                 
                 const itemDescription = doc.splitTextToSize(`${item.name} (${productData.code})`, 80);
                 doc.text(itemDescription, margin + 3, itemY + 7);
@@ -622,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const generateWhatsAppMessage = (product, details) => {
                 let itemsText = details.items.map(item => `   - ${item.name} (x${item.quantity})`).join('\n');
                 let totalText = `Total Harga: *${formatPrice(details.grandTotal)}*`;
-                if(details.type === 'PRE-ORDER') totalText += `\nUang Muka: *${details.dpAmount}*`;
+                if (details.type === 'PRE-ORDER') totalText += `\nUang Muka: *${details.dpAmount}*`;
                 const orderType = details.type === 'PRE-ORDER' ? 'PRE-ORDER' : 'PEMESANAN';
                 return `Halo, saya ingin melakukan *${orderType}* untuk produk dari *${product.seller?.name || 'N/A'}*:\n\n*${product.title}*\n${itemsText}\n\nSatuan: ${details.unit}\n${totalText}\n\nBukti pemesanan sudah saya unduh. Mohon info lebih lanjut untuk proses selanjutnya. Terima kasih.`;
             }
@@ -658,18 +658,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (e.target.classList.contains('quantity-input')) {
                 if (e.target.value < 0) e.target.value = 0;
                 const productCard = e.target.closest('.gallery-item');
-                if(productCard) updateGrandTotal(productCard);
+                if (productCard) updateGrandTotal(productCard);
             }
         });
     }
 
-    if(galleryGrid) initCardEventListeners(galleryGrid);
+    if (galleryGrid) initCardEventListeners(galleryGrid);
 
     const searchModal = document.getElementById('searchModal'); const searchModalInput = document.getElementById('searchModalInput'); const searchResults = document.getElementById('searchResults'); const headerSearchInput = document.getElementById('headerSearchInput'); const headerSearchBtn = document.getElementById('headerSearchBtn'); const navSearchInput = document.getElementById('navSearchInput'); const navSearchBtn = document.getElementById('navSearchBtn'); const searchFilters = document.getElementById('searchFilters');
     const btnCloseSearchModal = document.querySelector('.btn-close-modal');
 
-    function openSearchModal(query = '') { if(searchModal) { searchModal.classList.add('show'); body.style.overflow = 'hidden'; searchModalInput.value = query; searchModalInput.focus(); performSearch(query); } }
-    function closeSearchModal() { if(searchModal) { searchModal.classList.remove('show'); body.style.overflow = ''; } }
+    function openSearchModal(query = '') { if (searchModal) { searchModal.classList.add('show'); body.style.overflow = 'hidden'; searchModalInput.value = query; searchModalInput.focus(); performSearch(query); } }
+    function closeSearchModal() { if (searchModal) { searchModal.classList.remove('show'); body.style.overflow = ''; } }
     
     function performSearch(query) { 
         const lowerCaseQuery = query.trim().toLowerCase(); 
@@ -691,7 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return searchableText.includes(lowerCaseQuery);
             });
         } else if (!isAnyFilterActive) {
-            if(searchResults) searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf atau pilih filter untuk mencari produk...</p>'; 
+            if (searchResults) searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf atau pilih filter untuk mencari produk...</p>'; 
             return;
         }
         
@@ -713,18 +713,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     function displaySearchResults(results) { if (!searchResults) return; if (results.length === 0) { searchResults.innerHTML = '<p class="search-results-placeholder">Produk tidak ditemukan.</p>'; return; } searchResults.innerHTML = results.map(p => `<a href="#product-${p.id}" class="search-result-item" data-product-id="${p.id}"><img src="${p.mainImage}" alt="${p.title}" class="search-result-image"><div class="search-result-info"><h4>${p.title}</h4><p>oleh ${p.seller?.name || ''} (Kode: ${p.code || ''})</p></div></a>`).join(''); }
-    [headerSearchInput, navSearchInput].forEach(input => { if(input) input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); openSearchModal(input.value); } }); });
-    [headerSearchBtn, navSearchBtn].forEach(button => { if(button) button.addEventListener('click', (e) => { e.preventDefault(); const input = button.previousElementSibling; if(input) openSearchModal(input.value); }); });
-    if(searchModalInput) searchModalInput.addEventListener('input', () => performSearch(searchModalInput.value));
-    if(searchFilters) searchFilters.addEventListener('change', () => performSearch(searchModalInput.value));
-    if(btnCloseSearchModal) btnCloseSearchModal.addEventListener('click', closeSearchModal);
-    if(searchResults) searchResults.addEventListener('click', (e) => { const link = e.target.closest('.search-result-item'); if (link) { e.preventDefault(); const targetId = link.getAttribute('href'); const targetElement = document.querySelector(targetId); if (targetElement) { closeSearchModal(); setTimeout(() => { window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' }); }, 100); } } });
+    [headerSearchInput, navSearchInput].forEach(input => { if (input) input.addEventListener('keypress', (e) => { if (e.key === 'Enter') { e.preventDefault(); openSearchModal(input.value); } }); });
+    [headerSearchBtn, navSearchBtn].forEach(button => { if (button) button.addEventListener('click', (e) => { e.preventDefault(); const input = button.previousElementSibling; if (input) openSearchModal(input.value); }); });
+    if (searchModalInput) searchModalInput.addEventListener('input', () => performSearch(searchModalInput.value));
+    if (searchFilters) searchFilters.addEventListener('change', () => performSearch(searchModalInput.value));
+    if (btnCloseSearchModal) btnCloseSearchModal.addEventListener('click', closeSearchModal);
+    if (searchResults) searchResults.addEventListener('click', (e) => { const link = e.target.closest('.search-result-item'); if (link) { e.preventDefault(); const targetId = link.getAttribute('href'); const targetElement = document.querySelector(targetId); if (targetElement) { closeSearchModal(); setTimeout(() => { window.scrollTo({ top: targetElement.offsetTop - 100, behavior: 'smooth' }); }, 100); } } });
     
     const bgMusic = document.getElementById('bgMusic'); if (bgMusic) { bgMusic.volume = 0.3; let p = false; const pm = () => { if (!p) { bgMusic.play().then(() => { p = true; }).catch(() => {}); } }; pm(); document.body.addEventListener('click', pm, { once: true }); document.body.addEventListener('touchstart', pm, { once: true }); }
     const particlesContainer = document.getElementById('particles'); if (particlesContainer) { for (let i = 0; i < 40; i++) { const pr = document.createElement('div'); pr.classList.add('particle'); const s = Math.random() * 6 + 2; pr.style.width = `${s}px`; pr.style.height = `${s}px`; pr.style.left = `${Math.random() * 100}%`; pr.style.animationDuration = `${Math.random() * 15 + 15}s`; pr.style.animationDelay = `${Math.random() * 10}s`; particlesContainer.appendChild(pr); } }
     const navbar = document.getElementById('navbar'); if (navbar) { window.addEventListener('scroll', () => { const isScrolled = window.scrollY > 50; navbar.classList.toggle('scrolled', isScrolled); }); }
     const mobileMenuToggle = document.getElementById('mobileMenuToggle'); const navLinks = document.getElementById('navLinks'); if (mobileMenuToggle && navLinks) { mobileMenuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; playButtonSound(); }); navLinks.addEventListener('click', (e) => { if (e.target.tagName === 'A') { navLinks.classList.remove('active'); mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>'; } }); }
-    const searchToggle = document.getElementById('searchToggle'); const navSearch = document.getElementById('navSearch'); if(searchToggle && navSearch) { searchToggle.addEventListener('click', () => { navSearch.classList.toggle('active'); playButtonSound(); }); }
+    const searchToggle = document.getElementById('searchToggle'); const navSearch = document.getElementById('navSearch'); if (searchToggle && navSearch) { searchToggle.addEventListener('click', () => { navSearch.classList.toggle('active'); playButtonSound(); }); }
     const productCategories = document.querySelector('.product-categories'); const categoryTabs = document.querySelector('.category-tabs'); let activeCategory = 'all'; let activeType = 'all';
     function applyFilters() { document.querySelectorAll('.gallery-item').forEach(item => { const iC = item.dataset.category; const iT = item.dataset.type; const cM = activeCategory === 'all' || iC === activeCategory; const tM = activeType === 'all' || iT === activeType || (iT === 'all' && activeType !== 'sewa' && activeType !== 'promo' && activeType !== 'jasa' && activeType !== 'wisata' && activeType !== 'resto' && activeType !== 'cafe') ; item.style.display = (cM && tM) ? 'flex' : 'none'; }); }
     if (productCategories) { productCategories.addEventListener('click', e => { if (e.target.classList.contains('product-category-btn')) { productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeCategory = e.target.dataset.category; applyFilters(); playButtonSound(); } }); }
@@ -748,8 +748,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const notificationSound = document.getElementById('notificationSound');
     const buttonSound = document.getElementById('buttonSound'); 
     
-    function playNotificationSound() { if(notificationSound) { notificationSound.currentTime = 0; notificationSound.play().catch(() => {}); } }
-    function playButtonSound() { if(buttonSound) { buttonSound.currentTime = 0; buttonSound.play().catch(() => {}); } }
+    function playNotificationSound() { if (notificationSound) { notificationSound.currentTime = 0; notificationSound.play().catch(() => {}); } }
+    function playButtonSound() { if (buttonSound) { buttonSound.currentTime = 0; buttonSound.play().catch(() => {}); } }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { if (this.getAttribute('href') !== '#' && !this.closest('.search-result-item')) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); } } }); });
     
@@ -758,9 +758,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const step2 = document.getElementById('notificationStep2');
     let notificationTimer; 
     const showNotification = () => { if (offerNotification && !localStorage.getItem('offerDismissed')) { offerNotification.classList.add('show'); playNotificationSound(); notificationTimer = setTimeout(hideNotification, 5000); } };
-    const hideNotification = () => { if(offerNotification) { offerNotification.classList.remove('show'); localStorage.setItem('offerDismissed', 'true'); clearTimeout(notificationTimer); } };
+    const hideNotification = () => { if (offerNotification) { offerNotification.classList.remove('show'); localStorage.setItem('offerDismissed', 'true'); clearTimeout(notificationTimer); } };
     setTimeout(showNotification, 5000); 
-    if(offerNotification) {
+    if (offerNotification) {
         offerNotification.addEventListener('mouseenter', () => { clearTimeout(notificationTimer); });
         offerNotification.addEventListener('mouseleave', () => { clearTimeout(notificationTimer); notificationTimer = setTimeout(hideNotification, 5000); });
         offerNotification.addEventListener('click', (e) => {
@@ -785,19 +785,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }, false);
 
     const generatorModal = document.getElementById('generatorModal'); const openGeneratorBtn = document.getElementById('openGeneratorBtn'); const closeGeneratorModalBtn = document.getElementById('closeGeneratorModal'); const generatorForm = document.getElementById('productGeneratorForm'); const priceVariationsContainer = document.getElementById('priceVariationsContainer'); const specsContainer = document.getElementById('specsContainer'); const addPriceVariationBtn = document.getElementById('addPriceVariationBtn'); const addSpecBtn = document.getElementById('addSpecBtn'); const outputContainer = document.getElementById('generatorOutputContainer'); const outputElement = document.getElementById('generatedScriptOutput'); const outputWrapper = document.getElementById('generatedScriptWrapper'); const copyScriptBtn = document.getElementById('copyScriptBtn'); const downloadScriptBtn = document.getElementById('downloadScriptBtn'); const toggleVisibilityBtn = document.getElementById('toggleScriptVisibilityBtn'); const importScriptBtn = document.getElementById('importScriptBtn'); const genImporter = document.getElementById('gen-importer'); const previewProductBtn = document.getElementById('previewProductBtn'); const generatorPreviewContainer = document.getElementById('generatorPreviewContainer'); const previewTarget = document.getElementById('previewTarget');
-    const openGeneratorModal = () => { if(generatorModal) { generatorModal.classList.add('show'); body.style.overflow = 'hidden'; }};
-    const closeGeneratorModal = () => { if(generatorModal) { generatorModal.classList.remove('show'); body.style.overflow = ''; }};
+    const openGeneratorModal = () => { if (generatorModal) { generatorModal.classList.add('show'); body.style.overflow = 'hidden'; }};
+    const closeGeneratorModal = () => { if (generatorModal) { generatorModal.classList.remove('show'); body.style.overflow = ''; }};
     if (openGeneratorBtn) { openGeneratorBtn.addEventListener('click', () => { playButtonSound(); const password = prompt("Masukkan password untuk mengakses generator:"); if (password === "LKS.1945") { openGeneratorModal(); } else if (password !== null) { alert("Password salah. Akses ditolak."); } }); }
-    if(closeGeneratorModalBtn) closeGeneratorModalBtn.addEventListener('click', closeGeneratorModal);
-    if(generatorModal) generatorModal.addEventListener('click', (e) => { if (e.target === generatorModal) closeGeneratorModal(); });
+    if (closeGeneratorModalBtn) closeGeneratorModalBtn.addEventListener('click', closeGeneratorModal);
+    if (generatorModal) generatorModal.addEventListener('click', (e) => { if (e.target === generatorModal) closeGeneratorModal(); });
     const addDynamicItem = (container, name = '', value = '', placeholder1, placeholder2) => {
         const item = document.createElement('div'); item.className = 'dynamic-list-item';
         item.innerHTML = `<input type="text" class="dynamic-name" placeholder="${placeholder1}" value="${name}" required> <input type="text" class="dynamic-value" placeholder="${placeholder2}" value="${value}" required> <button type="button" class="btn-remove-item"><i class="fas fa-trash"></i></button>`;
         if (container === priceVariationsContainer) { item.querySelector('.dynamic-value').type = 'number'; }
         container.appendChild(item); item.querySelector('.btn-remove-item').addEventListener('click', () => item.remove());
     };
-    if(addPriceVariationBtn) addPriceVariationBtn.addEventListener('click', () => addDynamicItem(priceVariationsContainer, '', '', 'Nama Variasi (e.g., Ecer)', 'Harga (e.g., 8000)'));
-    if(addSpecBtn) addSpecBtn.addEventListener('click', () => addDynamicItem(specsContainer, '', '', 'Label (e.g., Kode Produk)', 'Value (e.g., ACA-2025-8899)'));
+    if (addPriceVariationBtn) addPriceVariationBtn.addEventListener('click', () => addDynamicItem(priceVariationsContainer, '', '', 'Nama Variasi (e.g., Ecer)', 'Harga (e.g., 8000)'));
+    if (addSpecBtn) addSpecBtn.addEventListener('click', () => addDynamicItem(specsContainer, '', '', 'Label (e.g., Kode Produk)', 'Value (e.g., ACA-2025-8899)'));
     function getProductDataFromForm() {
         const product = {}; product.id = document.getElementById('gen-id').value; product.category = document.getElementById('gen-category').value; product.type = document.getElementById('gen-type').value;
         product.seller = { name: document.getElementById('gen-seller-name').value, link: document.getElementById('gen-seller-link').value, locationLink: document.getElementById('gen-seller-location').value || null };
@@ -810,7 +810,7 @@ document.addEventListener('DOMContentLoaded', () => {
         product.contact = { whatsapp: document.getElementById('gen-contact-whatsapp').value, phone: document.getElementById('gen-contact-phone').value };
         return product;
     }
-    if(generatorForm) { generatorForm.addEventListener('submit', (e) => { e.preventDefault(); const product = getProductDataFromForm(); const jsonString = JSON.stringify(product); outputElement.textContent = jsonString; outputContainer.style.display = 'block'; generatorPreviewContainer.style.display = 'none'; outputContainer.scrollIntoView({ behavior: 'smooth' }); playButtonSound(); }); }
+    if (generatorForm) { generatorForm.addEventListener('submit', (e) => { e.preventDefault(); const product = getProductDataFromForm(); const jsonString = JSON.stringify(product); outputElement.textContent = jsonString; outputContainer.style.display = 'block'; generatorPreviewContainer.style.display = 'none'; outputContainer.scrollIntoView({ behavior: 'smooth' }); playButtonSound(); }); }
     if (importScriptBtn) {
         importScriptBtn.addEventListener('click', () => {
             let scriptText = genImporter.value.trim(); if (!scriptText) { alert("Area teks kosong. Silakan tempel script produk."); return; }
@@ -827,14 +827,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     if (previewProductBtn) { previewProductBtn.addEventListener('click', () => { try { const productData = getProductDataFromForm(); previewTarget.innerHTML = createProductCardHTML(productData); generatorPreviewContainer.style.display = 'block'; outputContainer.style.display = 'none'; initCardEventListeners(previewTarget); initializeProductSliders(); generatorPreviewContainer.scrollIntoView({ behavior: 'smooth' }); playButtonSound(); } catch(e){ alert("Gagal membuat preview. Pastikan semua field wajib diisi dengan benar."); } }); }
-    if(copyScriptBtn) copyScriptBtn.addEventListener('click', () => { navigator.clipboard.writeText(outputElement.textContent).then(() => alert('Script berhasil disalin!')).catch(err => alert('Gagal menyalin.')); playButtonSound(); });
-    if(downloadScriptBtn) downloadScriptBtn.addEventListener('click', () => { const blob = new Blob([outputElement.textContent], { type: 'application/javascript' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); const fileName = document.getElementById('gen-id').value || 'product-data'; a.href = url; a.download = `${fileName}.js`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); playButtonSound(); });
-    if(toggleVisibilityBtn) toggleVisibilityBtn.addEventListener('click', () => { outputWrapper.classList.toggle('visible'); const icon = toggleVisibilityBtn.querySelector('i'); if(icon) icon.className = outputWrapper.classList.contains('visible') ? 'fas fa-eye' : 'fas fa-eye-slash'; playButtonSound(); });
+    if (copyScriptBtn) copyScriptBtn.addEventListener('click', () => { navigator.clipboard.writeText(outputElement.textContent).then(() => alert('Script berhasil disalin!')).catch(err => alert('Gagal menyalin.')); playButtonSound(); });
+    if (downloadScriptBtn) downloadScriptBtn.addEventListener('click', () => { const blob = new Blob([outputElement.textContent], { type: 'application/javascript' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); const fileName = document.getElementById('gen-id').value || 'product-data'; a.href = url; a.download = `${fileName}.js`; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); playButtonSound(); });
+    if (toggleVisibilityBtn) toggleVisibilityBtn.addEventListener('click', () => { outputWrapper.classList.toggle('visible'); const icon = toggleVisibilityBtn.querySelector('i'); if (icon) icon.className = outputWrapper.classList.contains('visible') ? 'fas fa-eye' : 'fas fa-eye-slash'; playButtonSound(); });
     const whatsappInput = document.getElementById('gen-contact-whatsapp'); const phoneInput = document.getElementById('gen-contact-phone');
-    if(whatsappInput) { whatsappInput.addEventListener('input', (e) => { let value = e.target.value.replace(/\D/g, ''); if (value.startsWith('0')) { value = '62' + value.substring(1); } else if (value.startsWith('+62')) { value = '62' + value.substring(3); } e.target.value = value; }); }
-    if(phoneInput) { phoneInput.addEventListener('input', (e) => { let value = e.target.value.replace(/[^0-9+]/g, ''); if (value.startsWith('0')) { value = '+62' + value.substring(1); } else if (!value.startsWith('+')) { value = '+' + value; } e.target.value = value; }); }
+    if (whatsappInput) { whatsappInput.addEventListener('input', (e) => { let value = e.target.value.replace(/\D/g, ''); if (value.startsWith('0')) { value = '62' + value.substring(1); } else if (value.startsWith('+62')) { value = '62' + value.substring(3); } e.target.value = value; }); }
+    if (phoneInput) { phoneInput.addEventListener('input', (e) => { let value = e.target.value.replace(/[^0-9+]/g, ''); if (value.startsWith('0')) { value = '+62' + value.substring(1); } else if (!value.startsWith('+')) { value = '+' + value; } e.target.value = value; }); }
     const descriptionTextarea = document.getElementById('gen-description'); const toolbar = document.querySelector('.description-toolbar');
-    if(toolbar && descriptionTextarea) {
+    if (toolbar && descriptionTextarea) {
         toolbar.addEventListener('click', (e) => {
             const button = e.target.closest('.toolbar-btn'); if (!button) return;
             const tag = button.dataset.tag; const start = descriptionTextarea.selectionStart; const end = descriptionTextarea.selectionEnd; const selectedText = descriptionTextarea.value.substring(start, end); const beforeText = descriptionTextarea.value.substring(0, start); const afterText = descriptionTextarea.value.substring(end);
