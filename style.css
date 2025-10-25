@@ -14,6 +14,14 @@
     --danger: #dc3545;
     --white: #FFFFFF;
     --red-bright: #FF3B3B; /* Warna baru untuk tombol lokasi */
+
+    /* --- [REVISI] Tambahan Variabel untuk Tombol Favorit --- */
+    --favorite-red: #E53935; /* Merah yang lebih kaya */
+    --favorite-red-dark: #C62828; /* Untuk hover/active */
+    --favorite-red-light: #FFEBEE; /* Latar belakang non-aktif */
+    --favorite-shadow: 0 4px 12px rgba(229, 57, 53, 0.3);
+    /* --- [AKHIR REVISI] --- */
+
     --transition: all 0.3s ease;
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.1);
     --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.06);
@@ -396,31 +404,44 @@ section { padding: 3rem 0; } /* DIUBAH: Padding atas/bawah dikurangi */
     transform: translateY(-2px); box-shadow: 0 3px 10px rgba(52, 97, 253, 0.2);
 }
 
-/* [PENYEMPURNAAN] Tombol Favorit di Galeri */
+/* --- [REVISI] Desain Tombol Favorit Galeri --- */
 .btn-filter-favorites {
-    background-color: var(--white);
-    color: var(--danger);
-    border-color: var(--danger);
-}
-
-.btn-filter-favorites .fa-heart {
-    color: var(--danger);
+    background-color: var(--favorite-red-light);
+    color: var(--favorite-red);
+    border: 1px solid var(--favorite-red);
+    font-weight: 600; /* Sedikit lebih tebal */
     transition: var(--transition);
 }
 
-.btn-filter-favorites:hover,
-.btn-filter-favorites.active {
-    background-color: var(--danger);
-    color: var(--white);
-    border-color: var(--danger);
-    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+.btn-filter-favorites .fa-heart {
+    color: var(--favorite-red);
+    transition: transform 0.3s ease;
 }
 
+.btn-filter-favorites:hover {
+    background-color: var(--favorite-red);
+    color: var(--white);
+    border-color: var(--favorite-red);
+    box-shadow: var(--favorite-shadow);
+    transform: translateY(-3px); /* Efek 'lift' lebih jelas */
+}
+
+.btn-filter-favorites.active {
+    /* Gradient untuk tampilan 'profesional' */
+    background: linear-gradient(45deg, var(--favorite-red-dark), var(--favorite-red));
+    color: var(--white);
+    border-color: var(--favorite-red-dark);
+    box-shadow: var(--favorite-shadow);
+    transform: translateY(-3px);
+}
+
+/* Animasi ikon 'pop' saat hover atau aktif */
 .btn-filter-favorites:hover .fa-heart,
 .btn-filter-favorites.active .fa-heart {
     color: var(--white);
+    transform: scale(1.15); 
 }
-/* [AKHIR PENYEMPURNAAN] */
+/* --- [AKHIR REVISI] --- */
 
 .gallery-grid {
     display: grid;
@@ -848,32 +869,39 @@ footer {
 .search-filters input[type="checkbox"] { display: none; }
 .search-filters input[type="checkbox"]:checked + label { background-color: var(--primary); color: var(--white); }
 
-/* [PENYEMPURNAAN] Tombol Favorit di Modal Pencarian */
+/* --- [REVISI] Desain Tombol Favorit Modal Pencarian --- */
 .search-filters label[for="filter-favorites-modal"] {
-    background-color: #fdf2f3; /* Latar belakang merah muda */
-    color: var(--danger);
-    border: 1px solid #f5c6cb; /* Border merah muda */
+    background-color: var(--favorite-red-light);
+    color: var(--favorite-red);
+    border: 1px solid var(--favorite-red-light); /* Border senada */
+    font-weight: 500;
+    transition: var(--transition);
 }
 
 .search-filters label[for="filter-favorites-modal"] .fa-heart {
-    color: var(--danger);
+    color: var(--favorite-red);
+    transition: transform 0.3s ease;
 }
 
 .search-filters label[for="filter-favorites-modal"]:hover {
-    background-color: #f8d7da; /* Latar belakang lebih gelap saat hover */
-    border-color: #f5c6cb;
+    background-color: var(--favorite-red-light);
+    border-color: var(--favorite-red); /* Hanya border yg menguat */
+    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2);
 }
 
+/* State Aktif (Checked) */
 .search-filters input[type="checkbox"]:checked + label[for="filter-favorites-modal"] {
-    background-color: var(--danger);
+    background: linear-gradient(45deg, var(--favorite-red-dark), var(--favorite-red));
     color: var(--white);
-    border-color: var(--danger);
+    border-color: var(--favorite-red-dark);
+    box-shadow: var(--favorite-shadow);
 }
 
 .search-filters input[type="checkbox"]:checked + label[for="filter-favorites-modal"] .fa-heart {
     color: var(--white);
+    transform: scale(1.1); /* 'Pop' effect */
 }
-/* [AKHIR PENYEMPURNAAN] */
+/* --- [AKHIR REVISI] --- */
 
 .search-modal-footer { padding: 15px 25px; border-top: 1px solid #e9ecef; text-align: right; background-color: #f8f9fa; }
 .btn-close-modal { padding: 10px 20px; background-color: #6c757d; color: var(--white); border: none; border-radius: 5px; cursor: pointer; }
