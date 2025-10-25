@@ -396,6 +396,32 @@ section { padding: 3rem 0; } /* DIUBAH: Padding atas/bawah dikurangi */
     transform: translateY(-2px); box-shadow: 0 3px 10px rgba(52, 97, 253, 0.2);
 }
 
+/* [PENYEMPURNAAN] Tombol Favorit di Galeri */
+.btn-filter-favorites {
+    background-color: var(--white);
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.btn-filter-favorites .fa-heart {
+    color: var(--danger);
+    transition: var(--transition);
+}
+
+.btn-filter-favorites:hover,
+.btn-filter-favorites.active {
+    background-color: var(--danger);
+    color: var(--white);
+    border-color: var(--danger);
+    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
+}
+
+.btn-filter-favorites:hover .fa-heart,
+.btn-filter-favorites.active .fa-heart {
+    color: var(--white);
+}
+/* [AKHIR PENYEMPURNAAN] */
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -821,6 +847,34 @@ footer {
 .search-filters label { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; background-color: #e9ecef; padding: 8px 16px; border-radius: 50px; cursor: pointer; transition: all 0.3s; }
 .search-filters input[type="checkbox"] { display: none; }
 .search-filters input[type="checkbox"]:checked + label { background-color: var(--primary); color: var(--white); }
+
+/* [PENYEMPURNAAN] Tombol Favorit di Modal Pencarian */
+.search-filters label[for="filter-favorites-modal"] {
+    background-color: #fdf2f3; /* Latar belakang merah muda */
+    color: var(--danger);
+    border: 1px solid #f5c6cb; /* Border merah muda */
+}
+
+.search-filters label[for="filter-favorites-modal"] .fa-heart {
+    color: var(--danger);
+}
+
+.search-filters label[for="filter-favorites-modal"]:hover {
+    background-color: #f8d7da; /* Latar belakang lebih gelap saat hover */
+    border-color: #f5c6cb;
+}
+
+.search-filters input[type="checkbox"]:checked + label[for="filter-favorites-modal"] {
+    background-color: var(--danger);
+    color: var(--white);
+    border-color: var(--danger);
+}
+
+.search-filters input[type="checkbox"]:checked + label[for="filter-favorites-modal"] .fa-heart {
+    color: var(--white);
+}
+/* [AKHIR PENYEMPURNAAN] */
+
 .search-modal-footer { padding: 15px 25px; border-top: 1px solid #e9ecef; text-align: right; background-color: #f8f9fa; }
 .btn-close-modal { padding: 10px 20px; background-color: #6c757d; color: var(--white); border: none; border-radius: 5px; cursor: pointer; }
 
