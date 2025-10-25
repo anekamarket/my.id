@@ -215,9 +215,78 @@
             font-size: 0.95rem;
             color: var(--text-secondary);
             line-height: 1.6;
-            flex-grow: 1; /* Membuat deskripsi punya tinggi sama */
+            flex-grow: 1; /* Membuat deskripsi punya tinggi sama & mendorong tombol ke bawah */
         }
         
+        /* --- [BARU] GAYA TOMBOL AKSI --- */
+        .app-card-header-link {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .app-card-header-link h3 {
+             color: var(--text-primary);
+             transition: color 0.3s ease;
+        }
+        
+        .app-card:hover .app-card-header-link h3 {
+            color: var(--secondary-glow);
+        }
+
+        .app-card-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            width: 100%;
+            margin-top: 25px; /* Jarak dari deskripsi */
+            z-index: 2; /* Memastikan tombol di atas efek hover */
+            position: relative; /* Diperlukan untuk z-index */
+        }
+
+        .btn {
+            flex-basis: 48%; /* Bagi ruang */
+            text-decoration: none;
+            padding: 12px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .btn-trial {
+            background-color: transparent;
+            border-color: var(--secondary-glow);
+            color: var(--secondary-glow);
+        }
+
+        .btn-trial:hover {
+            background-color: var(--secondary-glow);
+            color: var(--bg-color-1);
+            box-shadow: 0 0 15px var(--secondary-glow);
+            transform: translateY(-2px);
+        }
+
+        .btn-premium {
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            background-size: 200% auto;
+            color: var(--text-primary);
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-premium:hover {
+            background-position: right center;
+            box-shadow: 0 0 20px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+        /* --- AKHIR GAYA TOMBOL --- */
+
+
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -237,6 +306,8 @@
             .app-grid { grid-template-columns: 1fr; }
             .gallery-title h1 { font-size: 2rem; }
             .gallery-title p { font-size: 1rem; }
+            .app-card-buttons { flex-direction: column; gap: 10px; } /* Susun tombol ke bawah di HP */
+            .btn { flex-basis: auto; } /* Reset basis tombol */
         }
     </style>
 </head>
@@ -250,87 +321,198 @@
         </div>
         
         <div class="app-grid">
-            <a href="https://aplikasiusaha.com/bantuansosial/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-hands-helping"></i></div>
-                <h3>Bantuan BARJAS</h3>
+        
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/bantuansosial/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h3>Bantuan BARJAS</h3>
+                </a>
                 <p>Manajemen penyaluran bantuan sosial agar tepat sasaran.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/arsipsurat/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-archive"></i></div>
-                <h3>Arsip Surat</h3>
-                <p>Sistem pengarsipan surat masuk dan keluar secara digital.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/absensitrial/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-user-check"></i></div>
-                <h3>Absen Karyawan</h3>
-                <p>Catat kehadiran dan kelola data jam kerja karyawan.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/notagratis/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-receipt"></i></div>
-                <h3>Nota Digital</h3>
-                <p>Buat dan kirim nota atau invoice profesional dengan mudah.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/supermarket/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-shopping-cart"></i></div>
-                <h3>Aplikasi Toko</h3>
-                <p>Solusi kasir (POS) dan manajemen stok untuk bisnis ritel.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/caferesto/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-utensils"></i></div>
-                <h3>Cafe & Resto</h3>
-                <p>Kelola pesanan, meja, dan pembayaran untuk F&B.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/hoteltrial/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-concierge-bell"></i></div>
-                <h3>Aplikasi Hotel</h3>
-                <p>Sistem manajemen booking dan reservasi kamar penginapan.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/wisatatrial/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-map-marked-alt"></i></div>
-                <h3>Tiket Wisata</h3>
-                <p>Manajemen penjualan tiket untuk destinasi wisata.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/ujianonline/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-file-alt"></i></div>
-                <h3>Ujian Online</h3>
-                <p>Platform untuk menyelenggarakan ujian berbasis web.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/laundrytrial/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-tshirt"></i></div>
-                <h3>Aplikasi Laundry</h3>
-                <p>Catat transaksi dan status pengerjaan laundry kiloan.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/traveltrial/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-plane"></i></div>
-                <h3>Agen Travel</h3>
-                <p>Kelola pemesanan tiket dan paket perjalanan wisata.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/keuangantrial/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-book-open"></i></div>
-                <h3>Catatan Keuangan</h3>
-                <p>Pencatatan pemasukan dan pengeluaran usaha simpel.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/undian/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-ticket-alt"></i></div>
-                <h3>Lotre Digital</h3>
-                <p>Sistem pengundian hadiah secara adil dan transparan.</p>
-            </a>
-            <a href="https://www.anekamarket.my.id/qrmakerpro.html" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-qrcode"></i></div>
-                <h3>QR Maker Ultimate</h3>
-                <p>Buat dan kustomisasi kode QR untuk berbagai keperluan.</p>
-            </a>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/bantuansosial/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Bantuan%20BARJAS." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
             
-            <a href="https://www.aplikasiusaha.com/sistemtiket" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-ticket-alt"></i></div>
-                <h3>Sistem Tiket</h3>
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/arsipsurat/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-archive"></i></div>
+                    <h3>Arsip Surat</h3>
+                </a>
+                <p>Sistem pengarsipan surat masuk dan keluar secara digital.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/arsipsurat/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Arsip%20Surat." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/absensitrial/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-user-check"></i></div>
+                    <h3>Absen Karyawan</h3>
+                </a>
+                <p>Catat kehadiran dan kelola data jam kerja karyawan.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/absensitrial/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Absen%20Karyawan." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/notagratis/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-receipt"></i></div>
+                    <h3>Nota Digital</h3>
+                </a>
+                <p>Buat dan kirim nota atau invoice profesional dengan mudah.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/notagratis/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Nota%20Digital." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/supermarket/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <h3>Aplikasi Toko</h3>
+                </a>
+                <p>Solusi kasir (POS) dan manajemen stok untuk bisnis ritel.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/supermarket/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Toko." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/caferesto/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Cafe & Resto</h3>
+                </a>
+                <p>Kelola pesanan, meja, dan pembayaran untuk F&B.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/caferesto/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Cafe%20%26%20Resto." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/hoteltrial/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-concierge-bell"></i></div>
+                    <h3>Aplikasi Hotel</h3>
+                </a>
+                <p>Sistem manajemen booking dan reservasi kamar penginapan.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/hoteltrial/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Hotel." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/wisatatrial/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3>Tiket Wisata</h3>
+                </a>
+                <p>Manajemen penjualan tiket untuk destinasi wisata.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/wisatatrial/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Tiket%20Wisata." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/ujianonline/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-file-alt"></i></div>
+                    <h3>Ujian Online</h3>
+                </a>
+                <p>Platform untuk menyelenggarakan ujian berbasis web.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/ujianonline/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Ujian%20Online." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/laundrytrial/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-tshirt"></i></div>
+                    <h3>Aplikasi Laundry</h3>
+                </a>
+                <p>Catat transaksi dan status pengerjaan laundry kiloan.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/laundrytrial/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Laundry." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/traveltrial/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-plane"></i></div>
+                    <h3>Agen Travel</h3>
+                </a>
+                <p>Kelola pemesanan tiket dan paket perjalanan wisata.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/traveltrial/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Agen%20Travel." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/keuangantrial/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-book-open"></i></div>
+                    <h3>Catatan Keuangan</h3>
+                </a>
+                <p>Pencatatan pemasukan dan pengeluaran usaha simpel.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/keuangantrial/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Catatan%20Keuangan." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/undian/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-ticket-alt"></i></div>
+                    <h3>Lotre Digital</h3>
+                </a>
+                <p>Sistem pengundian hadiah secara adil dan transparan.</p>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/undian/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Lotre%20Digital." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://www.anekamarket.my.id/qrmakerpro.html" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-qrcode"></i></div>
+                    <h3>QR Maker Ultimate</h3>
+                </a>
+                <p>Buat dan kustomisasi kode QR untuk berbagai keperluan.</p>
+                <div class="app-card-buttons">
+                    <a href="https://www.anekamarket.my.id/qrmakerpro.html" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20QR%20Maker%20Ultimate." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://www.aplikasiusaha.com/sistemtiket" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-ticket-alt"></i></div>
+                    <h3>Sistem Tiket</h3>
+                </a>
                 <p>Buat tiket untuk berbagai kebutuhan, lengkap dengan manajemen stok dan pembayaran.</p>
-            </a>
-            <a href="https://aplikasiusaha.com/segerahadir/" target="_blank" class="app-card">
-                <div class="app-icon"><i class="fas fa-plus-circle"></i></div>
-                <h3>Aplikasi Lainnya</h3>
+                <div class="app-card-buttons">
+                    <a href="https://www.aplikasiusaha.com/sistemtiket" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Sistem%20Tiket." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
+            
+            <div class="app-card">
+                <a href="https://aplikasiusaha.com/segerahadir/" target="_blank" class="app-card-header-link">
+                    <div class="app-icon"><i class="fas fa-plus-circle"></i></div>
+                    <h3>Aplikasi Lainnya</h3>
+                </a>
                 <p>Jelajahi lebih banyak solusi yang akan segera kami rilis.</p>
-            </a>
+                <div class="app-card-buttons">
+                    <a href="https://aplikasiusaha.com/segerahadir/" target="_blank" class="btn btn-trial">Coba Gratis</a>
+                    <a href="https://wa.me/6285647709114?text=Halo%2C%20saya%20tertarik%20untuk%20Beli%20Versi%20Premium%20Aplikasi%20Lainnya." target="_blank" class="btn btn-premium">Beli Premium</a>
+                </div>
+            </div>
         </div>
     </main>
     
