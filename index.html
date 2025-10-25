@@ -180,18 +180,25 @@
                 
                 <div class="product-categories">
                     <button class="product-category-btn active" data-category="all">Semua Kategori</button>
+                    <button class="product-category-btn btn-filter-favorites" data-category="favorites"><i class="fas fa-heart"></i> Favorit Saya</button>
                     <button class="product-category-btn" data-category="food">Makanan & Minuman</button>
                     <button class="product-category-btn" data-category="snack">Kue & Cemilan</button>
+                    <button class="product-category-btn" data-category="catering">Catering</button>
+                    <button class="product-category-btn" data-category="craft">Kerajinan</button>
+                    <button class="product-category-btn" data-category="printing">Percetakan</button>
+                    <button class="product-category-btn" data-category="service">Servis</button>
+                    <button class="product-category-btn" data-category="makeup">Tata Rias</button>
+                    <button class="product-category-btn" data-category="wedding">Wedding</button>
+                    <button class="product-category-btn" data-category="cultivation">Budidaya</button>
+                    <button class="product-category-btn" data-category="agriculture">Pertanian</button>
+                    <button class="product-category-btn" data-category="livestock">Peternakan</button>
+                    <button class="product-category-btn" data-category="fishery">Perikanan</button>
                     <button class="product-category-btn" data-category="construction">Alat Konstruksi</button>
                     <button class="product-category-btn" data-category="office">Alat Kantor</button>
                     <button class="product-category-btn" data-category="household">Alat Rumah Tangga</button>
                     <button class="product-category-btn" data-category="software">Software Aplikasi</button>
                     <button class="product-category-btn" data-category="electronics">Elektronik</button>
-                    <button class="product-category-btn" data-category="fishery">Perikanan</button>
-                    <button class="product-category-btn" data-category="livestock">Peternakan</button>
-                    <button class="product-category-btn" data-category="agriculture">Pertanian</button>
                 </div>
-                
                 <div class="category-tabs">
                     <button class="category-btn active" data-type="all">Semua</button>
                     <button class="category-btn" data-type="promo">Promosi</button>
@@ -438,6 +445,9 @@
                     
                     <input type="checkbox" name="search-filter" value="sort-cheap" id="filter-sort-cheap">
                     <label for="filter-sort-cheap"><i class="fas fa-sort-amount-down"></i> Urutkan Termurah</label>
+
+                    <input type="checkbox" name="search-filter" value="favorites" id="filter-favorites-modal">
+                    <label for="filter-favorites-modal"><i class="fas fa-heart"></i> Favorit Saya</label>
                 </div>
                 
                 <div class="search-results" id="searchResults">
@@ -514,16 +524,23 @@
                                 <select id="gen-category">
                                     <option value="food">Makanan & Minuman</option>
                                     <option value="snack">Kue & Cemilan</option>
+                                    <option value="catering">Catering</option>
+                                    <option value="craft">Kerajinan</option>
+                                    <option value="printing">Percetakan</option>
+                                    <option value="service">Servis</option>
+                                    <option value="makeup">Tata Rias</option>
+                                    <option value="wedding">Wedding</option>
+                                    <option value="cultivation">Budidaya</option>
+                                    <option value="agriculture">Pertanian</option>
+                                    <option value="livestock">Peternakan</option>
+                                    <option value="fishery">Perikanan</option>
                                     <option value="construction">Alat Konstruksi</option>
                                     <option value="office">Alat Kantor</option>
                                     <option value="household">Alat Rumah Tangga</option>
                                     <option value="software">Software Aplikasi</option>
                                     <option value="electronics">Elektronik</option>
-                                    <option value="fishery">Perikanan</option>
-                                    <option value="livestock">Peternakan</option>
-                                    <option value="agriculture">Pertanian</option>
                                 </select>
-                            </div>
+                                </div>
                             <div class="form-group">
                                 <label for="gen-type">Tipe Tampilan</label>
                                 <select id="gen-type">
