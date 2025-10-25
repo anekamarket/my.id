@@ -1241,14 +1241,16 @@
                     // *** PERBAIKAN 2: Logika untuk menampilkan video di galeri ***
                     const mainSliderHTML = sliderImages.map((mediaUrl, index) => {
                         if (mediaUrl.endsWith('.mp4')) {
+                            // --- [PERBAIKAN VIDEO DITERAPKAN DI SINI] ---
                             return `
                                 <div class="swiper-slide" data-index="${index}">
-                                    <video controls style="width: 100%; height: 100%; object-fit: cover;">
+                                    <video autoplay muted loop controls style="width: 100%; height: 100%; object-fit: cover; background-color: #000;">
                                         <source src="${mediaUrl}" type="video/mp4">
                                         Browser Anda tidak mendukung tag video.
                                     </video>
                                 </div>
                             `;
+                            // --- [AKHIR PERBAIKAN VIDEO] ---
                         } else {
                             return `
                                 <div class="swiper-slide" data-index="${index}">
@@ -1303,12 +1305,59 @@
                         spaceBetween: 10, slidesPerView: 4, freeMode: true, watchSlidesProgress: true,
                     });
 
+                    // --- [PERBAIKAN SLIDER VIDEO DITERAPKAN DI SINI] ---
+                    
+                    // Fungsi helper untuk mengelola play/pause video
+                    function handleSlideChange(swiper) {
+                        // 1. Matikan dan reset semua video di semua slide
+                        swiper.slides.forEach(slide => {
+                            const video = slide.querySelector('video');
+                            if (video) {
+                                video.pause();
+                                video.currentTime = 0; // Reset video ke awal
+                            }
+                        });
+
+                        // 2. Dapatkan slide yang aktif
+                        const activeSlide = swiper.slides[swiper.activeIndex];
+                        const activeVideo = activeSlide.querySelector('video');
+
+                        if (activeVideo) {
+                            // 3. Jika slide aktif punya video:
+                            swiper.autoplay.stop(); // Hentikan autoplay slider
+                            activeVideo.play().catch(e => console.log("Video play failed:", e)); // Putar video (sudah muted by default)
+                            
+                            // 4. Dengarkan event 'ended' pada video
+                            activeVideo.onended = null; // Hapus listener lama (jika ada)
+                            activeVideo.onended = () => {
+                                swiper.autoplay.start(); // Mulai lagi autoplay slider setelah video selesai
+                            };
+                        } else {
+                            // 5. Jika slide aktif adalah gambar:
+                            swiper.autoplay.start(); // Pastikan autoplay slider berjalan
+                        }
+                    }
+
+                    // Inisialisasi Swiper Utama
                     new Swiper(card.querySelector('.product-slider-main'), {
                         spaceBetween: 10,
                         navigation: { nextEl: card.querySelector('.swiper-button-next'), prevEl: card.querySelector('.swiper-button-prev'), },
                         thumbs: { swiper: thumbsSwiper, },
                         autoplay: { delay: 3500, disableOnInteraction: false, },
+                        
+                        // Tambahkan event listener untuk mengelola video
+                        on: {
+                            init: (swiper) => {
+                                // Saat inisialisasi, cek slide pertama
+                                handleSlideChange(swiper);
+                            },
+                            slideChange: (swiper) => {
+                                // Saat slide berganti
+                                handleSlideChange(swiper);
+                            }
+                        }
                     });
+                    // --- [AKHIR PERBAIKAN SLIDER VIDEO] ---
                 });
             }
 
@@ -1425,6 +1474,9 @@
                 }
                 
                 if (e.target.closest('.product-slider-main .swiper-slide')) {
+                    // Jangan buka lightbox jika targetnya adalah video (agar controls berfungsi)
+                    if (e.target.closest('video')) return;
+
                     const clickedSlide = e.target.closest('.swiper-slide');
                     const product = products.find(p => p.id === card.dataset.id);
                     const initialIndex = parseInt(clickedSlide.dataset.index, 10);
