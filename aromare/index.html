@@ -1021,6 +1021,8 @@
                         "description": "<strong>🐟 Pempek Aromare – Cita Rasa Palembang dalam Satu Kemasan</strong>\n<br>\nNikmati kelezatan autentik khas Palembang dengan Pempek Aromare, sajian pempek ikan tenggiri berkualitas dalam bentuk frozen food praktis. Satu kemasan berisi 4 varian favorit:\n\n<b>- Adaan – gurih dan beraroma rempah\n- Lenjer – tekstur kenyal yang klasik\n- Kulit – rasa khas dengan sentuhan renyah\n- Kapal Selam Mini – Gurih Nikmat\n</b>\n💧Dilengkapi dengan pilihan kuah cuko khas Palembang:\n<b>- Pedas 🔥 – untuk pencinta sensasi ekstra\n- Sedang – pas di lidah semua kalangan\n- Tidak Pedas – tetap nikmat tanpa rasa menyengat</b>\n\n<i>📦 Berat bersih: 190 gram</i>\n<b>❄️ Cocok untuk stok di freezer, tinggal goreng dan sajikan!</b>\n",
                         "media": [
                             { "type": "image", "src": "https://i.imgur.com/qw8X3pD.jpeg", "thumb": "https://i.imgur.com/qw8X3pD.jpeg" },
+                            
+                            { "type": "video", "src": "https://i.imgur.com/Yx2jg8Y.mp4", "thumb": "https://i.imgur.com/qw8X3pD.jpeg" },
                             { "type": "image", "src": "https://i.imgur.com/2pw5SOS.jpeg", "thumb": "https://i.imgur.com/2pw5SOS.jpeg" },
                             { "type": "image", "src": "https://i.imgur.com/yornurz.jpeg", "thumb": "https://i.imgur.com/yornurz.jpeg" },
                             { "type": "image", "src": "https://i.imgur.com/QDgKZXC.jpeg", "thumb": "https://i.imgur.com/QDgKZXC.jpeg" }
@@ -1254,7 +1256,7 @@
                         if (media.type === 'video') {
                             return `
                                 <div class="swiper-slide" data-index="${index}">
-                                    <video playsinline muted>
+                                    <video controls playsinline muted>
                                         <source src="${media.src}" type="video/mp4">
                                         Browser Anda tidak mendukung tag video.
                                     </video>
@@ -1336,19 +1338,31 @@
                             video.currentTime = 0;
                             video.play().catch(e => console.error("Video autoplay was prevented by the browser:", e));
                             video.onended = () => {
-                                swiper.slideNext();
+                                swiper.slideNext(); // Lanjut otomatis saat video selesai
                             };
                         } else {
+                            // [PERBAIKAN] Logika autoplay untuk slide gambar
+                            const slideIndex = swiper.activeIndex; // Ambil indeks slide saat ini
                             activeSliders[cardId] = setTimeout(() => {
-                                swiper.slideNext();
+                                // [PERBAIKAN] Hanya geser jika kita MASIH di slide yang sama.
+                                // Ini mencegah timeout dari slide gambar mengganggu saat pengguna menonton video.
+                                if (swiper.activeIndex === slideIndex) { 
+                                    swiper.slideNext();
+                                }
                             }, 4000);
                         }
                     }
 
                     mainSwiper.on('slideChangeTransitionStart', function (swiper) {
+                        // [PERBAIKAN] Jeda semua video dan reset waktunya saat slide mulai berganti.
+                        // Ini penting agar video tidak berbunyi di slide yang tidak aktif.
                         const allVideos = card.querySelectorAll('video');
-                        allVideos.forEach(v => v.pause());
+                        allVideos.forEach(v => {
+                            v.pause();
+                            v.currentTime = 0; // Reset video ke awal
+                        });
                         
+                        // Hapus timeout yang tertunda dari slide gambar sebelumnya
                         if (activeSliders[cardId]) {
                             clearTimeout(activeSliders[cardId]);
                         }
@@ -1458,6 +1472,9 @@
                 }
                 
                 if (e.target.closest('.product-slider-main .swiper-slide')) {
+                    // Jangan buka lightbox jika pengguna mengklik kontrol video
+                    if (e.target.tagName === 'VIDEO') return;
+
                     const clickedSlide = e.target.closest('.swiper-slide');
                     const product = products.find(p => p.id === card.dataset.id);
                     const initialIndex = parseInt(clickedSlide.dataset.index, 10);
