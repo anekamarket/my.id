@@ -948,7 +948,8 @@
                     "units": ["proyek", "harian", "borongan"],
                     "defaultUnit": "proyek",
                     "details": {
-                        "description": "<b>🔧 Jasa Las & Konstruksi Artistik  </b><strong></strong<br>\n Kami menghadirkan keahlian dalam pembuatan dan pemasangan pagar, kanopi, railing, dan berbagai kebutuhan konstruksi logam lainnya. Gambar di atas menampilkan hasil karya kami berupa pagar dengan desain ukiran laser yang rumit dan elegan—menggabungkan kekuatan dan estetika dalam satu bentuk. Cocok untuk memperindah rumah, toko, atau bangunan komersial Anda.<br>\n\n<b>🔊 Sewa Sound System untuk Berbagai Acara</b><strong></strong><br>                                         \n Selain jasa las, kami juga menyediakan layanan sewa sound system profesional untuk berbagai acara seperti pernikahan, ulang tahun, seminar, konser kecil, hingga acara komunitas. Peralatan kami berkualitas tinggi, dengan teknisi berpengalaman yang siap memastikan suara jernih dan merata di seluruh area acara.\n<br>\n <b> 🎯 Mengapa Memilih Kami?</b>\n- Hasil las rapi dan tahan lama\n- Desain custom sesuai permintaan\n- Sound system berkualitas dengan harga bersahabat\n- Layanan cepat dan profesional\n\n📞 <i>Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!          </i>                                                                            ",
+                        // --- [PERBAIKAN] Typo HTML (</strong<br>) telah diperbaiki menjadi (<br>) ---
+                        "description": "<b>🔧 Jasa Las & Konstruksi Artistik  </b><br>\n Kami menghadirkan keahlian dalam pembuatan dan pemasangan pagar, kanopi, railing, dan berbagai kebutuhan konstruksi logam lainnya. Gambar di atas menampilkan hasil karya kami berupa pagar dengan desain ukiran laser yang rumit dan elegan—menggabungkan kekuatan dan estetika dalam satu bentuk. Cocok untuk memperindah rumah, toko, atau bangunan komersial Anda.<br>\n\n<b>🔊 Sewa Sound System untuk Berbagai Acara</b><strong></strong><br>                                         \n Selain jasa las, kami juga menyediakan layanan sewa sound system profesional untuk berbagai acara seperti pernikahan, ulang tahun, seminar, konser kecil, hingga acara komunitas. Peralatan kami berkualitas tinggi, dengan teknisi berpengalaman yang siap memastikan suara jernih dan merata di seluruh area acara.\n<br>\n <b> 🎯 Mengapa Memilih Kami?</b>\n- Hasil las rapi dan tahan lama\n- Desain custom sesuai permintaan\n- Sound system berkualitas dengan harga bersahabat\n- Layanan cepat dan profesional\n\n📞 <i>Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!          </i>                                                                            ",
                         "images": ["https://i.imgur.com/d3YbYNV.jpeg", "https://i.imgur.com/gPVdWNB.jpeg", "https://i.imgur.com/C6mFdLw.jpeg", "https://i.imgur.com/A5Fsyf2.jpeg", "https://i.imgur.com/1YpSuKH.jpeg", "https://i.imgur.com/DzP9iZl.jpeg", "https://i.imgur.com/vDyzdcb.jpeg", "https://i.imgur.com/3scBCqU.jpeg", "https://i.imgur.com/Joc4BDJ.jpeg", "https://i.imgur.com/BgpS4LI.mp4"],
                         "specs": [{
                             "label": "Kode Jasa",
@@ -1281,7 +1282,7 @@
                             <div class="gallery-actions">
                                 ${actionsHTML}
                                 ${locationButtonHTML}
-                                <button class="btn-detail"><i class="fas fa-info-circle"></i> Detail</button>
+                                <button class="btn-detail"><i class="fas fa-info-circle"></i> Deskripsi</button>
                             </div>
                             <div class="gallery-detail-expanded">
                                 <div thumbsSlider="" class="swiper product-slider-thumbs">
@@ -1470,7 +1471,8 @@
                     const btn = e.target.closest('.btn-detail');
                     const expandedContent = card.querySelector('.gallery-detail-expanded');
                     const isVisible = expandedContent.classList.toggle('visible');
-                    btn.innerHTML = isVisible ? '<i class="fas fa-chevron-up"></i> Sembunyikan' : '<i class="fas fa-info-circle"></i> Detail';
+                    // --- [PERBAIKAN] Teks tombol diubah dari "Detail" menjadi "Deskripsi" ---
+                    btn.innerHTML = isVisible ? '<i class="fas fa-chevron-up"></i> Sembunyikan' : '<i class="fas fa-info-circle"></i> Deskripsi';
                 }
                 
                 if (e.target.closest('.product-slider-main .swiper-slide')) {
