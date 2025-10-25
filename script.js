@@ -21,8 +21,8 @@ const products = [
 {"id":"AJN-2025-JASA","category":"construction","type":"jasa","seller":{"name":"Abang Joni","link":"https://anekamarket.my.id/abangjoni","locationLink":"https://www.google.com/maps?q=-7.731845,113.9390115"},"badge":{"text":"Jasa Profesional","type":"service"},"mainImage":"https://i.imgur.com/8SQGdWj.jpeg","title":"Jasa Tukang Profesional Berpengalaman","code":"AJN-2025-JASA","price":0,"originalPrice":null,"discount":"Nego","priceVariations":[],"units":["proyek","harian","borongan"],"defaultUnit":"proyek","details":{"description":"<br><strong>Butuh tukang handal dan berpengalaman untuk proyek bangunan Anda? Abang Joni solusinya!</strong><br><br>Dengan pengalaman sejak tahun 2000, Abang Joni telah terbukti profesional dalam mengerjakan berbagai proyek, mulai dari rumah minimalis, perumahan, kost-kostan, hingga perkantoran. Dikenal dengan karakter yang humoris dan sosial tinggi, Abang Joni tidak hanya memberikan hasil kerja yang rapi dan berkualitas, tetapi juga suasana kerja yang menyenangkan.<br><br>Siap bekerja dengan sistem harian, mingguan, bulanan, maupun borongan sesuai kebutuhan Anda. Hubungi langsung untuk konsultasi gratis dan dapatkan penawaran terbaik untuk proyek impian Anda! Harga bisa nego.","images":["https://i.imgur.com/RzRr0Ei.mp4","https://i.imgur.com/fauf9v5.jpeg","https://i.imgur.com/Vy5WFCg.jpeg","https://i.imgur.com/gVuL79s.jpeg","https://i.imgur.com/lrAPJFa.jpeg","https://i.imgur.com/hIl9fQz.jpeg","https://i.imgur.com/RcQWBKO.jpeg"],"specs":[{"label":"Kode Jasa","value":"AJN-2025-JASA"},{"label":"Nama Tukang","value":"Abang Joni"},{"label":"Pengalaman","value":"Sejak tahun 2000"},{"label":"Portofolio","value":"Rumah minimalis, kolam, gudang, perumahan, kost, perkantoran"},{"label":"Jabatan Proyek","value":"Pernah menjadi Mandor, Kepala Proyek, Kepala Tukang"},{"label":"Sistem Kerja","value":"Harian, Mingguan, Bulanan, Borongan"},{"label":"Karakter","value":"Humoris, Sosial Tinggi, Profesional"},{"label":"Area Layanan","value":"Situbondo & sekitarnya (Nego)"},{"label":"Catatan","value":"Hubungi langsung untuk diskusi harga dan jadwal."}]},"contact":{"whatsapp":"6285257633212","phone":"+6285257633212"}},
 
 {"id":"RIC-2025-0810","category":"snack","type":"promo","seller":{"name":"Regginang Situbondo Ibu Ican","link":"https://anekamarket.my.id/rengginang-situbondo-ibu-ican","locationLink":"https://www.google.com/maps?q=-7.6393021,113.9997534"},"badge":{"text":"Harga Hemat","type":"promo"},"mainImage":"https://i.imgur.com/H3Lc1Qt.jpeg","title":"RENGGINANG ANEKA RASA","code":"RIC-2025-0810","price":18000,"originalPrice":20000,"discount":"10%","priceVariations":[{"name":"Renggginang Rasa Terasi","price":8000},{"name":"Renggginang Rasa Bawang","price":8000},{"name":"Renggginang Rasa Udang","price":8000},{"name":"Renggginang Rasa Cumi","price":8000},{"name":"Renggginang Rasa Mix","price":19000}],"units":["pack 450gram"],"defaultUnit":"pack","details":{"description":"<br><b>Rengginang Gurih Renyah</b> – <strong>Cita Rasa Tradisional yang Tak Pernah Lekang oleh Waktu</strong>\n\nNikmati kelezatan rengginang khas Nusantara yang dibuat dari beras ketan pilihan, diproses secara higienis, dan digoreng hingga renyah sempurna. \n\nCocok sebagai camilan keluarga, teman minum teh, atau oleh-oleh khas yang menggugah selera. Tersedia dalam berbagai varian rasa: Terasi,bawang,Udang dan Cumi pasti ketagihan!","images":["https://i.imgur.com/mtQc5pc.jpeg","https://i.imgur.com/EuC9Np2.jpeg","https://i.imgur.com/yGCEh0n.jpeg","https://i.imgur.com/ACGxe8H.jpeg"],"specs":[]},"contact":{"whatsapp":"6282338341476","phone":"+6282338341476"}},                                                                                            
-
-{"id":"GPA-2025-4392","category":"food","type":"all","seller":{"name":"PEMPEK AROMARE","link":"https://anekamarket.my.id/aromare","locationLink":"https://www.google.com/maps?q=-7.71544,114.0152576"},"badge":{"text":"Harga Hemat","type":"new"},"mainImage":"https://i.imgur.com/qw8X3pD.jpeg","title":"Pempek Ikan Tenggiri Khas Palembang","code":"GPA-2025-4392","price":17000,"originalPrice":null,"discount":null,"priceVariations":[{"name":"Adaan","price":17000},{"name":"Lenjer","price":17000},{"name":"Kulit","price":17000},{"name":"Kapal Selam Kecil","price":17000}],"units":["Bungkus"],"defaultUnit":"Gram","details":{"description":"<strong>🐟 Pempek Aromare – Cita Rasa Palembang dalam Satu Kemasan</strong>\n<br>\nNikmati kelezatan autentik khas Palembang dengan Pempek Aromare, sajian pempek ikan tenggiri berkualitas dalam bentuk frozen food praktis. Satu kemasan berisi 4 varian favorit:\n\n<b>- Adaan – gurih dan beraroma rempah\n- Lenjer – tekstur kenyal yang klasik\n- Kulit – rasa khas dengan sentuhan renyah\n- Kapal Selam Mini – Gurih Nikmat\n</b>\n💧Dilengkapi dengan pilihan kuah cuko khas Palembang:\n<b>- Pedas 🔥 – untuk pencinta sensasi ekstra\n- Sedang – pas di lidah semua kalangan\n- Tidak Pedas – tetap nikmat tanpa rasa menyengat</b>\n\n<i>📦 Berat bersih: 190 gram</i>\n<b>❄️ Cocok untuk stok di freezer, tinggal goreng dan sajikan!</b>\n","images":["https://i.imgur.com/Yx2jg8Y.mp4","https://i.imgur.com/2pw5SOS.jpeg","https://i.imgur.com/yornurz.jpeg","https://i.imgur.com/QDgKZXC.jpeg"],"specs":[{"label":"Pemilik","value":"Sudarwati"},{"label":"Alamat","value":"Jl. Bukit Putih RT.001/RW.003 Kelurahan Ardirejo, Kecamatan panji Kabupaten Situbondo"}]},"contact":{"whatsapp":"6281336314392","phone":"+6281336314392"}},
+    
+{"id":"GPA-2025-4392","category":"food","type":"all","seller":{"name":"PEMPEK AROMARE","link":"https://anekamarket.my.id/aromare","locationLink":"https://www.google.com/maps?q=-7.71544,114.0152576"},"badge":{"text":"Harga Hemat","type":"new"},"mainImage":"https://i.imgur.com/qw8X3pD.jpeg","title":"Pempek Ikan Tenggiri Khas Palembang","code":"GPA-2025-4392","price":17000,"originalPrice":null,"discount":null,"priceVariations":[{"name":"Adaan","price":17000},{"name":"Lenjer","price":17000},{"name":"Kulit","price":17000},{"name":"Kapal Selam Kecil","price":17000}],"units":["Bungkus"],"defaultUnit":"Gram","details":{"description":"<strong>🐟 Pempek Aromare – Cita Rasa Palembang dalam Satu Kemasan</strong>\n<br>\nNikmati kelezatan autentik khas Palembang dengan Pempek Aromare, sajian pempek ikan tenggiri berkualitas dalam bentuk frozen food praktis. Satu kemasan berisi 4 varian favorit:\n\n<b>- Adaan – gurih dan beraroma rempah\n- Lenjer – tekstur kenyal yang klasik\n- Kulit – rasa khas dengan sentuhan renyah\n- Kapal Selam Mini – Gurih Nikmat\n</b>\n💧Dilengkapi dengan pilihan kuah cuko khas Palembang:\n<b>- Pedas 🔥 – untuk pencinta sensasi ekstra\n- Sedang – pas di lidah semua kalangan\n- Tidak Pedas – tetap tetep nikmat tanpa rasa menyengat</b>\n\n<i>📦 Berat bersih: 190 gram</i>\n<b>❄️ Cocok untuk stok di freezer, tinggal goreng dan sajikan!</b>\n","images":["https://i.imgur.com/Yx2jg8Y.mp4","https://i.imgur.com/2pw5SOS.jpeg","https://i.imgur.com/yornurz.jpeg","https://i.imgur.com/QDgKZXC.jpeg"],"specs":[{"label":"Pemilik","value":"Sudarwati"},{"label":"Alamat","value":"Jl. Bukit Putih RT.001/RW.003 Kelurahan Ardirejo, Kecamatan panji Kabupaten Situbondo"}]},"contact":{"whatsapp":"6281336314392","phone":"+6281336314392"}},
 
 {"id":"ACL-2025-2410","category":"construction","type":"jasa","seller":{"name":"AUDIO CACA LAS","link":"https://anekamarket.my.id/audiocacalas","locationLink":"https://www.google.com/maps?q=-7.7078922,114.0166565"},"badge":{"text":"Jasa Profesional","type":"service"},"mainImage":"https://i.imgur.com/MRGoHHu.jpeg","title":"JASA LAS DAN SOUND SYSTEM","code":"ACL-2025-2410","price":0,"originalPrice":null,"discount":"Nego","priceVariations":[],"units":["proyek","harian","borongan"],"defaultUnit":"proyek","details":{"description":"<b>🔧 Jasa Las & Konstruksi Artistik  </b><strong></strong<br>\n Kami menghadirkan keahlian dalam pembuatan dan pemasangan pagar, kanopi, railing, dan berbagai kebutuhan konstruksi logam lainnya. Gambar di atas menampilkan hasil karya kami berupa pagar dengan desain ukiran laser yang rumit dan elegan—menggabungkan kekuatan dan estetika dalam satu bentuk. Cocok untuk memperindah rumah, toko, atau bangunan komersial Anda.<br>\n\n<b>🔊 Sewa Sound System untuk Berbagai Acara</b><strong></strong><br>                                         \n Selain jasa las, kami juga menyediakan layanan sewa sound system profesional untuk berbagai acara seperti pernikahan, ulang tahun, seminar, konser kecil, hingga acara komunitas. Peralatan kami berkualitas tinggi, dengan teknisi berpengalaman yang siap memastikan suara jernih dan merata di seluruh area acara.\n<br>\n <b> 🎯 Mengapa Memilih Kami?</b>\n- Hasil las rapi dan tahan lama\n- Desain custom sesuai permintaan\n- Sound system berkualitas dengan harga bersahabat\n- Layanan cepat dan profesional\n\n📞 <i>Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!          </i>                                                                            ","images":["https://i.imgur.com/d3YbYNV.jpeg","https://i.imgur.com/gPVdWNB.jpeg","https://i.imgur.com/C6mFdLw.jpeg","https://i.imgur.com/A5Fsyf2.jpeg","https://i.imgur.com/1YpSuKH.jpeg","https://i.imgur.com/DzP9iZl.jpeg","https://i.imgur.com/vDyzdcb.jpeg","https://i.imgur.com/3scBCqU.jpeg","https://i.imgur.com/Joc4BDJ.jpeg","https://i.imgur.com/BgpS4LI.mp4"],"specs":[{"label":"Kode Jasa","value":"ACL-2025-2410"},{"label":"Nama","value":"Moh Hasbullah"},{"label":"Alamat","value":"Jl. Semeru RT.001 RW.011 Kel. Mimbaan Kec. Panji"},{"label":"Sistem Kerja","value":"Harian, Mingguan, Bulanan, Borongan"},{"label":"Area Layanan","value":"Situbondo & sekitarnya (Nego)"},{"label":"Catatan","value":"Hubungi langsung untuk diskusi harga dan jadwal."}]},"contact":{"whatsapp":"6282141424679","phone":"+6282141424679"}}
                                               
@@ -31,6 +31,67 @@ const products = [
 document.addEventListener('DOMContentLoaded', () => {
     const { jsPDF } = window.jspdf;
     
+    // ==============================================
+    // --- AWAL PENAMBAHAN FITUR FAVORIT ---
+    // ==============================================
+    let favorites = JSON.parse(localStorage.getItem('anekamarket-favorites')) || [];
+    const galleryGrid = document.getElementById('gallery-grid');
+    const body = document.body;
+
+    /**
+     * Menyimpan daftar favorit ke localStorage
+     */
+    function saveFavorites() {
+        localStorage.setItem('anekamarket-favorites', JSON.stringify(favorites));
+    }
+
+    /**
+     * Memeriksa apakah sebuah produk ada di daftar favorit
+     * @param {string} productId - ID produk
+     * @returns {boolean} - True jika favorit, false jika tidak
+     */
+    function isFavorite(productId) {
+        return favorites.includes(productId.toString());
+    }
+
+    /**
+     * Menambah/menghapus produk dari favorit dan memperbarui UI
+     * @param {string} productId - ID produk
+     * @param {HTMLElement} buttonElement - Tombol favorit yang diklik
+     */
+    function toggleFavorite(productId, buttonElement) {
+        playButtonSound();
+        const icon = buttonElement.querySelector('i');
+        const productCard = buttonElement.closest('.gallery-item');
+        const productIdStr = productId.toString(); // Pastikan string
+        const index = favorites.indexOf(productIdStr);
+
+        if (index > -1) {
+            // Sudah favorit, hapus
+            favorites.splice(index, 1);
+            buttonElement.classList.remove('active');
+            if (icon) icon.className = 'far fa-heart'; // Hati kosong
+            if (productCard) productCard.dataset.isFavorite = 'false';
+        } else {
+            // Belum favorit, tambahkan
+            favorites.push(productIdStr);
+            buttonElement.classList.add('active');
+            if (icon) icon.className = 'fas fa-heart'; // Hati penuh
+            if (productCard) productCard.dataset.isFavorite = 'true';
+        }
+        
+        saveFavorites(); // Simpan perubahan
+
+        // Terapkan ulang filter jika filter favorit sedang aktif
+        const favoritesFilterBtn = document.querySelector('.product-category-btn[data-category="favorites"]');
+        if (favoritesFilterBtn && favoritesFilterBtn.classList.contains('active')) {
+            applyFilters();
+        }
+    }
+    // ==============================================
+    // --- AKHIR PENAMBAHAN FITUR FAVORIT ---
+    // ==============================================
+
     function injectProductSchema(products) {
         const productSchemaElement = document.getElementById('product-schema');
         if (!productSchemaElement) return;
@@ -273,6 +334,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createProductCardHTML(product) {
+         // ==============================================
+         // --- PENYESUAIAN FITUR FAVORIT ---
+         // ==============================================
+         const isFav = isFavorite(product.id); // Cek status favorit
+         // ==============================================
+         
          const hasPriceVariations = product.priceVariations && product.priceVariations.length > 0;
          
          const priceVariationsHTML = hasPriceVariations 
@@ -301,6 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const whatsappButtonHTML = `<a href="https://wa.me/${product.contact?.whatsapp || ''}?text=Halo%20${encodeURIComponent(product.seller?.name || '')},%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(product.title || '')}%20(${product.code || ''})" class="btn btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> Chat</a>`;
         const phoneButtonHTML = `<a href="tel:${product.contact?.phone || ''}" class="btn btn-call"><i class="fas fa-phone-alt"></i> Telepon</a>`;
+        
+        // ==============================================
+        // --- PENAMBAHAN TOMBOL FAVORIT ---
+        // ==============================================
+        const favBtnHTML = `<button class="btn btn-favorite ${isFav ? 'active' : ''}" title="Tandai sebagai Favorit"><i class="${isFav ? 'fas' : 'far'} fa-heart"></i></button>`;
+        // ==============================================
 
         // ==============================================
         // --- AWAL PERBAIKAN VIDEO (KODE ASLI ANDA, SUDAH BENAR) ---
@@ -337,8 +410,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- AKHIR PERBAIKAN VIDEO (KODE ASLI ANDA, SUDAH BENAR) ---
         // ==============================================
         
+        // ==============================================
+        // --- PENAMBAHAN data-is-favorite ---
+        // ==============================================
         return `
-            <div class="gallery-item" data-category="${product.category || 'all'}" data-type="${product.type || 'all'}" data-id="${product.id}" id="product-${product.id}">
+            <div class="gallery-item" data-category="${product.category || 'all'}" data-type="${product.type || 'all'}" data-id="${product.id}" id="product-${product.id}" data-is-favorite="${isFav}">
                 <a href="${product.seller?.link || '#'}" target="_blank" class="gallery-badge seller">Gerai: ${product.seller?.name || 'N/A'}</a>
                 <span class="gallery-badge ${product.badge?.type || 'promo'}">${product.badge?.text || 'Promo'}</span>
                 
@@ -388,18 +464,28 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="${product.seller?.link || '#'}" target="_blank" class="btn btn-visit"><i class="fas fa-store-alt"></i> Kunjungi Gerai</a>
                         ${locationButtonHTML}
                         ${hasPriceVariations ? '<button class="btn btn-toggle-prices"><i class="fas fa-tags"></i> Cek Harga</button>' : ''}
+                        ${favBtnHTML} 
                         <button class="btn btn-detail"><i class="fas fa-chevron-down"></i> Detail</button>
                     </div>
                 </div>
             </div>`;
     }
 
-    const galleryGrid = document.getElementById('gallery-grid');
-    const body = document.body;
-
     function renderProducts(productsData) {
         if (!galleryGrid) return;
         galleryGrid.innerHTML = productsData.map(product => createProductCardHTML(product)).join('');
+        // Memastikan status favorit UI sudah benar setelah render
+        document.querySelectorAll('.gallery-item').forEach(card => {
+            const id = card.dataset.id;
+            const isFav = isFavorite(id);
+            card.dataset.isFavorite = isFav.toString();
+            const btn = card.querySelector('.btn-favorite');
+            if (btn) {
+                btn.classList.toggle('active', isFav);
+                const icon = btn.querySelector('i');
+                if (icon) icon.className = isFav ? 'fas fa-heart' : 'far fa-heart';
+            }
+        });
     }
     renderProducts(products); 
 
@@ -434,8 +520,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             // =================================================================
-            // --- INILAH PERBAIKAN YANG DIMINTA ---
-            // Fungsi nextSlide dimodifikasi untuk memeriksa status video
+            // --- INILAH PERBAIKAN YANG DIMINTA (KODE ASLI) ---
             // =================================================================
             const nextSlide = () => {
                 // Ambil media yang sedang aktif
@@ -454,7 +539,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 showSlide(currentIndex);
             };
             // =================================================================
-            // --- AKHIR DARI PERBAIKAN ---
+            // --- AKHIR DARI PERBAIKAN (KODE ASLI) ---
             // =================================================================
 
             const startSlider = () => {
@@ -516,6 +601,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = e.target;
             const productCard = target.closest('.gallery-item');
             if (!productCard) return;
+
+            // ==============================================
+            // --- PENAMBAHAN EVENT LISTENER TOMBOL FAVORIT ---
+            // ==============================================
+            if (target.closest('.btn-favorite')) {
+                const productId = productCard.dataset.id;
+                toggleFavorite(productId, target.closest('.btn-favorite'));
+            }
+            // ==============================================
 
             if (target.closest('.btn-toggle-prices')) {
                 playButtonSound();
@@ -673,12 +767,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function performSearch(query) { 
         const lowerCaseQuery = query.trim().toLowerCase(); 
+        
+        // ==============================================
+        // --- PENYESUAIAN FITUR FAVORIT ---
+        // ==============================================
         const filters = {
             discount: document.getElementById('filter-discount')?.checked,
             bonus: document.getElementById('filter-bonus')?.checked,
             negotiable: document.getElementById('filter-negotiable')?.checked,
-            sortCheap: document.getElementById('filter-sort-cheap')?.checked
+            sortCheap: document.getElementById('filter-sort-cheap')?.checked,
+            favorites: document.getElementById('filter-favorites-modal')?.checked // Ditambahkan
         };
+        // ==============================================
 
         let results = products;
         const isAnyFilterActive = Object.values(filters).some(v => v);
@@ -694,6 +794,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (searchResults) searchResults.innerHTML = '<p class="search-results-placeholder">Ketik minimal 2 huruf atau pilih filter untuk mencari produk...</p>'; 
             return;
         }
+        
+        // ==============================================
+        // --- PENYESUAIAN FITUR FAVORIT ---
+        // ==============================================
+        if (filters.favorites) {
+            results = results.filter(p => isFavorite(p.id));
+        }
+        // ==============================================
         
         if (filters.discount) {
             results = results.filter(p => p.originalPrice || p.discount);
@@ -725,10 +833,114 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = document.getElementById('navbar'); if (navbar) { window.addEventListener('scroll', () => { const isScrolled = window.scrollY > 50; navbar.classList.toggle('scrolled', isScrolled); }); }
     const mobileMenuToggle = document.getElementById('mobileMenuToggle'); const navLinks = document.getElementById('navLinks'); if (mobileMenuToggle && navLinks) { mobileMenuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>'; playButtonSound(); }); navLinks.addEventListener('click', (e) => { if (e.target.tagName === 'A') { navLinks.classList.remove('active'); mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>'; } }); }
     const searchToggle = document.getElementById('searchToggle'); const navSearch = document.getElementById('navSearch'); if (searchToggle && navSearch) { searchToggle.addEventListener('click', () => { navSearch.classList.toggle('active'); playButtonSound(); }); }
-    const productCategories = document.querySelector('.product-categories'); const categoryTabs = document.querySelector('.category-tabs'); let activeCategory = 'all'; let activeType = 'all';
-    function applyFilters() { document.querySelectorAll('.gallery-item').forEach(item => { const iC = item.dataset.category; const iT = item.dataset.type; const cM = activeCategory === 'all' || iC === activeCategory; const tM = activeType === 'all' || iT === activeType || (iT === 'all' && activeType !== 'sewa' && activeType !== 'promo' && activeType !== 'jasa' && activeType !== 'wisata' && activeType !== 'resto' && activeType !== 'cafe') ; item.style.display = (cM && tM) ? 'flex' : 'none'; }); }
-    if (productCategories) { productCategories.addEventListener('click', e => { if (e.target.classList.contains('product-category-btn')) { productCategories.querySelectorAll('.product-category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeCategory = e.target.dataset.category; applyFilters(); playButtonSound(); } }); }
-    if (categoryTabs) { categoryTabs.addEventListener('click', e => { if (e.target.classList.contains('category-btn')) { categoryTabs.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active')); e.target.classList.add('active'); activeType = e.target.dataset.type; applyFilters(); playButtonSound(); } }); }
+    
+    // ==============================================
+    // --- AWAL PERBAIKAN LOGIKA MULTI-FILTER ---
+    // ==============================================
+    const productCategories = document.querySelector('.product-categories');
+    const categoryTabs = document.querySelector('.category-tabs');
+    let activeCategories = ['all'];
+    let activeTypes = ['all'];
+
+    function applyFilters() {
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            const iC = item.dataset.category;
+            const iT = item.dataset.type;
+            const isItemFavorite = item.dataset.isFavorite === 'true';
+
+            // Logika Pencocokan Kategori (cM)
+            const cM_all = activeCategories.includes('all');
+            const cM_fav = activeCategories.includes('favorites') && isItemFavorite;
+            const cM_cat = activeCategories.includes(iC);
+            // Tampil jika 'all' aktif, ATAU (filter favorit aktif DAN item adalah favorit), ATAU item cocok dengan kategori lain yang aktif
+            const cM = cM_all || cM_fav || cM_cat;
+
+            // Logika Pencocokan Tipe (tM)
+            const tM_all = activeTypes.includes('all');
+            const tM_type = activeTypes.includes(iT);
+            // Logika asli untuk item 'all' agar bisa tampil di filter non-spesifik
+            const tM_special = (iT === 'all' && !activeTypes.includes('sewa') && !activeTypes.includes('promo') && !activeTypes.includes('jasa') && !activeTypes.includes('wisata') && !activeTypes.includes('resto') && !activeTypes.includes('cafe') );
+            const tM = tM_all || tM_type || tM_special;
+
+            item.style.display = (cM && tM) ? 'flex' : 'none';
+        });
+    }
+
+    if (productCategories) {
+        productCategories.addEventListener('click', e => {
+            const btn = e.target.closest('.product-category-btn');
+            if (!btn) return;
+
+            playButtonSound();
+            const category = btn.dataset.category;
+            const allBtn = productCategories.querySelector('.product-category-btn[data-category="all"]');
+
+            if (category === 'all') {
+                // Jika 'all' diklik, aktifkan 'all' dan nonaktifkan yang lain
+                activeCategories = ['all'];
+                productCategories.querySelectorAll('.product-category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            } else {
+                // Jika tombol lain diklik, toggle statusnya
+                btn.classList.toggle('active');
+                // Nonaktifkan 'all'
+                if (allBtn) allBtn.classList.remove('active');
+
+                // Bangun ulang array kategori aktif
+                activeCategories = [];
+                productCategories.querySelectorAll('.product-category-btn.active').forEach(b => {
+                    activeCategories.push(b.dataset.category);
+                });
+
+                // Jika tidak ada yang aktif, aktifkan 'all'
+                if (activeCategories.length === 0) {
+                    activeCategories = ['all'];
+                    if (allBtn) allBtn.classList.add('active');
+                }
+            }
+            applyFilters();
+        });
+    }
+
+    if (categoryTabs) {
+        categoryTabs.addEventListener('click', e => {
+            const btn = e.target.closest('.category-btn');
+            if (!btn) return;
+
+            playButtonSound();
+            const type = btn.dataset.type;
+            const allBtn = categoryTabs.querySelector('.category-btn[data-type="all"]');
+
+            if (type === 'all') {
+                // Jika 'all' diklik, aktifkan 'all' dan nonaktifkan yang lain
+                activeTypes = ['all'];
+                categoryTabs.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            } else {
+                // Jika tombol lain diklik, toggle statusnya
+                btn.classList.toggle('active');
+                // Nonaktifkan 'all'
+                if (allBtn) allBtn.classList.remove('active');
+
+                // Bangun ulang array tipe aktif
+                activeTypes = [];
+                categoryTabs.querySelectorAll('.category-btn.active').forEach(b => {
+                    activeTypes.push(b.dataset.type);
+                });
+
+                // Jika tidak ada yang aktif, aktifkan 'all'
+                if (activeTypes.length === 0) {
+                    activeTypes = ['all'];
+                    if (allBtn) allBtn.classList.add('active');
+                }
+            }
+            applyFilters();
+        });
+    }
+    // ==============================================
+    // --- AKHIR PERBAIKAN LOGIKA MULTI-FILTER ---
+    // ==============================================
+    
     const contactForm = document.getElementById('contactForm'); if (contactForm) { contactForm.addEventListener('submit', function(e) { /* Biarkan default action dari formsubmit.co berjalan */ }); }
     const orderModal = document.getElementById('orderModal'); const quickOrderBtn = document.getElementById('quick-order'); if (orderModal && quickOrderBtn) { quickOrderBtn.addEventListener('click', () => { orderModal.classList.add('show'); body.style.overflow = 'hidden'; playButtonSound(); }); }
     
