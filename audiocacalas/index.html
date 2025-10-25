@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">jA
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="ANEKAMARKET - Platform jual beli online terpercaya untuk semua kebutuhan Anda. Dekorasi, handmade, dan souvenir berkualitas.">
     <meta name="keywords" content="jual beli online, situbondo, dekorasi, handmade, souvenir, perikanan, ikan segar, kuliner, warung makan">
     <meta name="author" content="ANEKAMARKET">
@@ -394,6 +394,20 @@
         }
         
         .gallery-description { font-size: 1rem; margin-bottom: 20px; }
+        
+        /* --- [PERBAIKAN CSS] Menambahkan style untuk list & paragraf di deskripsi --- */
+        .gallery-description p {
+            margin-bottom: 15px;
+        }
+        .gallery-description ul {
+            list-style-position: inside;
+            padding-left: 5px;
+            margin-bottom: 15px;
+        }
+        .gallery-description li {
+            margin-bottom: 8px;
+        }
+        
         .spec-item {
             display: flex; align-items: flex-start;
             margin-bottom: 12px; padding-bottom: 12px;
@@ -948,8 +962,8 @@
                     "units": ["proyek", "harian", "borongan"],
                     "defaultUnit": "proyek",
                     "details": {
-                        // --- [PERBAIKAN] Typo HTML (</strong<br>) telah diperbaiki menjadi (<br>) ---
-                        "description": "<b>🔧 Jasa Las & Konstruksi Artistik  </b><br>\n Kami menghadirkan keahlian dalam pembuatan dan pemasangan pagar, kanopi, railing, dan berbagai kebutuhan konstruksi logam lainnya. Gambar di atas menampilkan hasil karya kami berupa pagar dengan desain ukiran laser yang rumit dan elegan—menggabungkan kekuatan dan estetika dalam satu bentuk. Cocok untuk memperindah rumah, toko, atau bangunan komersial Anda.<br>\n\n<b>🔊 Sewa Sound System untuk Berbagai Acara</b><strong></strong><br> \n Selain jasa las, kami juga menyediakan layanan sewa sound system profesional untuk berbagai acara seperti pernikahan, ulang tahun, seminar, konser kecil, hingga acara komunitas. Peralatan kami berkualitas tinggi, dengan teknisi berpengalaman yang siap memastikan suara jernih dan merata di seluruh area acara.\n<br>\n <b> 🎯 Mengapa Memilih Kami?</b>\n- Hasil las rapi dan tahan lama\n- Desain custom sesuai permintaan\n- Sound system berkualitas dengan harga bersahabat\n- Layanan cepat dan profesional\n\n📞 <i>Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!          </i>                                                                            ",
+                        // --- [PERBAIKAN] Teks deskripsi diformat ulang dengan HTML yang benar (paragraf dan list) ---
+                        "description": "<b>🔧 Jasa Las & Konstruksi Artistik</b>\n<p>Kami menghadirkan keahlian dalam pembuatan dan pemasangan pagar, kanopi, railing, dan berbagai kebutuhan konstruksi logam lainnya. Gambar di atas menampilkan hasil karya kami berupa pagar dengan desain ukiran laser yang rumit dan elegan—menggabungkan kekuatan dan estetika dalam satu bentuk. Cocok untuk memperindah rumah, toko, atau bangunan komersial Anda.</p>\n\n<b>🔊 Sewa Sound System untuk Berbagai Acara</b>\n<p>Selain jasa las, kami juga menyediakan layanan sewa sound system profesional untuk berbagai acara seperti pernikahan, ulang tahun, seminar, konser kecil, hingga acara komunitas. Peralatan kami berkualitas tinggi, dengan teknisi berpengalaman yang siap memastikan suara jernih dan merata di seluruh area acara.</p>\n\n<b>🎯 Mengapa Memilih Kami?</b>\n<ul>\n<li>Hasil las rapi dan tahan lama</li>\n<li>Desain custom sesuai permintaan</li>\n<li>Sound system berkualitas dengan harga bersahabat</li>\n<li>Layanan cepat dan profesional</li>\n</ul>\n\n<p>📞 <i>Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik!</i></p>",
                         "images": ["https://i.imgur.com/d3YbYNV.jpeg", "https://i.imgur.com/gPVdWNB.jpeg", "https://i.imgur.com/C6mFdLw.jpeg", "https://i.imgur.com/A5Fsyf2.jpeg", "https://i.imgur.com/1YpSuKH.jpeg", "https://i.imgur.com/DzP9iZl.jpeg", "https://i.imgur.com/vDyzdcb.jpeg", "https://i.imgur.com/3scBCqU.jpeg", "https://i.imgur.com/Joc4BDJ.jpeg", "https://i.imgur.com/BgpS4LI.mp4"],
                         "specs": [{
                             "label": "Kode Jasa",
