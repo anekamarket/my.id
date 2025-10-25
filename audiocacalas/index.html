@@ -350,15 +350,18 @@
             color: var(--dark);
         }
         
+        /* --- [PERBAIKAN TOMBOL AKSI] --- */
         .gallery-actions { margin-top: auto; padding-top: 30px; display: flex; gap: 15px; }
         .gallery-actions button, .gallery-actions a {
-            flex: 1; padding: 15px; border: none;
+            /* flex: 1; <-- [DIHAPUS] Flex diatur di bawah */
+            padding: 15px; border: none;
             border-radius: var(--border-radius-md); cursor: pointer;
             font-weight: 600; font-size: 1rem;
             transition: all var(--transition-smooth);
             display: flex; align-items: center; justify-content: center; gap: 8px;
             text-decoration: none;
         }
+        
         /* REFINEMENT: Shake animation for empty order attempt */
         .shake-animation {
             animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
@@ -373,13 +376,19 @@
         .gallery-actions .btn-order {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: white; box-shadow: 0 4px 20px rgba(74, 144, 226, 0.4);
+            flex: 2; /* [DIUBAH] Tombol utama mengambil 2 bagian ruang */
         }
         .gallery-actions .btn-order:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(74, 144, 226, 0.5); }
-        .gallery-actions .btn-detail {
+        
+        /* [DIUBAH] Mengganti .btn-detail menjadi .btn-secondary untuk tombol Lokasi & Deskripsi */
+        .gallery-actions .btn-secondary {
             background-color: var(--light); color: var(--text-dark);
             border: 1px solid var(--border-color);
+            flex: 1; /* [DIUBAH] Tombol sekunder mengambil 1 bagian ruang */
         }
-        .gallery-actions .btn-detail:hover { background-color: #eaf0f6; transform: translateY(-3px); }
+        .gallery-actions .btn-secondary:hover { background-color: #eaf0f6; transform: translateY(-3px); }
+        /* --- [AKHIR PERBAIKAN TOMBOL AKSI] --- */
+
 
         /* --- IMPROVED Detail View with smooth transition --- */
         .gallery-detail-expanded {
@@ -748,6 +757,23 @@
              .gallery-detail-expanded.visible {
                  padding: 20px; 
              }
+             
+             /* --- [PERBAIKAN RESPONSIF TOMBOL AKSI] --- */
+             /* Ini adalah perbaikan untuk tata letak tombol yang "hancur" di seluler */
+             .gallery-actions {
+                flex-wrap: wrap; /* Izinkan tombol untuk wrap ke baris baru */
+             }
+             .gallery-actions .btn-order {
+                width: 100%; /* Tombol order/hubungi utama menjadi full-width */
+                order: 1; /* Pindahkan ke urutan pertama (paling atas) */
+                flex-basis: 100%; /* Pastikan mengambil 100% lebar */
+             }
+             .gallery-actions .btn-secondary {
+                flex-grow: 1; /* Tombol sekunder (lokasi, deskripsi) akan berbagi ruang di baris kedua */
+                order: 2; /* Pindahkan ke urutan kedua (di bawah tombol utama) */
+             }
+             /* --- [AKHIR PERBAIKAN RESPONSIF TOMBOL AKSI] --- */
+
              
              /* [PERBAIKAN] Penyesuaian posisi tombol mengambang */
              .floating-register-btn {
@@ -1218,11 +1244,13 @@
                     let actionsHTML = '';
                     let locationButtonHTML = ''; // Variabel untuk tombol lokasi
 
-                    // *** PERBAIKAN 1: Logika untuk menampilkan tombol lokasi ***
-                    // Tambahkan tombol lokasi jika link tersedia (kondisi pengecekan URL spesifik dihapus)
+                    // --- [PERBAIKAN TOMBOL AKSI] ---
+                    // Logika untuk menampilkan tombol lokasi (sekarang menggunakan class .btn-secondary)
                     if (product.seller && product.seller.locationLink) {
-                        locationButtonHTML = `<a href="${product.seller.locationLink}" target="_blank" class="btn-detail"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`;
+                        locationButtonHTML = `<a href="${product.seller.locationLink}" target="_blank" class="btn-location btn-secondary"><i class="fas fa-map-marker-alt"></i> Lokasi</a>`;
                     }
+                    // --- [AKHIR PERBAIKAN TOMBOL AKSI] ---
+
 
                     // LOGIKA BARU: Cek apakah produk ini barang atau jasa
                     if (product.priceVariations && product.priceVariations.length > 0) {
@@ -1303,6 +1331,8 @@
 
                     const detailSpecsHTML = product.details.specs.map(spec => `<div class="spec-item"><span class="spec-label">${spec.label}</span><span class="spec-value">${spec.value}</span></div>`).join('');
                     
+                    // --- [PERBAIKAN TOMBOL AKSI] ---
+                    // Tombol "Deskripsi" sekarang menggunakan class .btn-secondary
                     productCard.innerHTML = `
                         ${badgeHTML}
                         <div class="swiper product-slider-main">
@@ -1316,7 +1346,7 @@
                             <div class="gallery-actions">
                                 ${actionsHTML}
                                 ${locationButtonHTML}
-                                <button class="btn-detail"><i class="fas fa-info-circle"></i> Deskripsi</button>
+                                <button class="btn-description btn-secondary"><i class="fas fa-info-circle"></i> Deskripsi</button>
                             </div>
                             <div class="gallery-detail-expanded">
                                 <div thumbsSlider="" class="swiper product-slider-thumbs">
@@ -1326,6 +1356,7 @@
                                 <div class="gallery-specs">${detailSpecsHTML}</div>
                             </div>
                         </div>`;
+                    // --- [AKHIR PERBAIKAN TOMBOL AKSI] ---
                     galleryGrid.appendChild(productCard);
                 });
                 initializeSliders();
@@ -1497,17 +1528,20 @@
                     updateCardTotal(card);
                 }
 
-                if (e.target.closest('.btn-detail')) {
-                    // Cek agar tidak konflik dengan link lokasi
+                // --- [PERBAIKAN TOMBOL AKSI] ---
+                // Mengubah selector dari .btn-detail menjadi .btn-description
+                if (e.target.closest('.btn-description')) {
+                    // Cek agar tidak konflik dengan link lokasi (yang .btn-location)
                     if (e.target.closest('a')) return;
                     
                     playSound();
-                    const btn = e.target.closest('.btn-detail');
+                    const btn = e.target.closest('.btn-description'); // Selector diubah
                     const expandedContent = card.querySelector('.gallery-detail-expanded');
                     const isVisible = expandedContent.classList.toggle('visible');
-                    // --- [PERBAIKAN] Teks tombol diubah dari "Detail" menjadi "Deskripsi" ---
+                    // Teks tombol sudah benar ("Deskripsi")
                     btn.innerHTML = isVisible ? '<i class="fas fa-chevron-up"></i> Sembunyikan' : '<i class="fas fa-info-circle"></i> Deskripsi';
                 }
+                // --- [AKHIR PERBAIKAN TOMBOL AKSI] ---
                 
                 if (e.target.closest('.product-slider-main .swiper-slide')) {
                     // Jangan buka lightbox jika targetnya adalah video (agar controls berfungsi)
