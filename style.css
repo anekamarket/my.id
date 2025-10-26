@@ -404,44 +404,54 @@ section { padding: 3rem 0; } /* DIUBAH: Padding atas/bawah dikurangi */
     transform: translateY(-2px); box-shadow: 0 3px 10px rgba(52, 97, 253, 0.2);
 }
 
-/* --- [REVISI] Desain Tombol Favorit Galeri --- */
+/* --- [PENYEMPURNAAN] Desain Tombol Favorit Galeri --- */
 .btn-filter-favorites {
-    background-color: var(--favorite-red-light);
+    /* Default State: Outline */
+    background-color: var(--white);
     color: var(--favorite-red);
-    border: 1px solid var(--favorite-red);
-    font-weight: 600; /* Sedikit lebih tebal */
+    border: 1px solid var(--favorite-red); /* Border merah solid */
+    font-weight: 600;
     transition: var(--transition);
 }
 
 .btn-filter-favorites .fa-heart {
+    /* Ikon merah, selaras dengan teks */
     color: var(--favorite-red);
     transition: transform 0.3s ease;
 }
 
 .btn-filter-favorites:hover {
-    background-color: var(--favorite-red);
-    color: var(--white);
+    /* Hover State: Latar belakang merah muda lembut, teks tetap merah */
+    background-color: var(--favorite-red-light); 
+    color: var(--favorite-red);
     border-color: var(--favorite-red);
-    box-shadow: var(--favorite-shadow);
-    transform: translateY(-3px); /* Efek 'lift' lebih jelas */
+    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2); /* Shadow lebih lembut */
+    transform: translateY(-2px); /* Efek lift standar */
 }
 
 .btn-filter-favorites.active {
-    /* Gradient untuk tampilan 'profesional' */
-    background: linear-gradient(45deg, var(--favorite-red-dark), var(--favorite-red));
+    /* Active State: Penuh (Filled) */
+    background: linear-gradient(45deg, var(--favorite-red), var(--favorite-red-dark)); /* Gradient dibalik agar lebih cerah */
     color: var(--white);
     border-color: var(--favorite-red-dark);
     box-shadow: var(--favorite-shadow);
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 }
 
-/* Animasi ikon 'pop' saat hover atau aktif */
-.btn-filter-favorites:hover .fa-heart,
+/* Ikon menjadi putih saat hover (di state active) atau saat active */
+.btn-filter-favorites.active:hover .fa-heart,
 .btn-filter-favorites.active .fa-heart {
     color: var(--white);
-    transform: scale(1.15); 
+    transform: scale(1.1); /* Animasi pop */
 }
-/* --- [AKHIR REVISI] --- */
+
+/* Saat di-hover dalam state active */
+.btn-filter-favorites.active:hover {
+    background: linear-gradient(45deg, var(--favorite-red-dark), var(--favorite-red-dark));
+    box-shadow: 0 6px 14px rgba(200, 40, 40, 0.35); /* Shadow lebih kuat */
+    transform: translateY(-3px);
+}
+/* --- [AKHIR PENYEMPURNAAN] --- */
 
 .gallery-grid {
     display: grid;
@@ -869,11 +879,12 @@ footer {
 .search-filters input[type="checkbox"] { display: none; }
 .search-filters input[type="checkbox"]:checked + label { background-color: var(--primary); color: var(--white); }
 
-/* --- [REVISI] Desain Tombol Favorit Modal Pencarian --- */
+/* --- [PENYEMPURNAAN] Desain Tombol Favorit Modal Pencarian --- */
 .search-filters label[for="filter-favorites-modal"] {
-    background-color: var(--favorite-red-light);
+    /* Default State: Outline, mirip outline button */
+    background-color: var(--white);
     color: var(--favorite-red);
-    border: 1px solid var(--favorite-red-light); /* Border senada */
+    border: 1px solid var(--favorite-red); /* Border merah */
     font-weight: 500;
     transition: var(--transition);
 }
@@ -884,14 +895,16 @@ footer {
 }
 
 .search-filters label[for="filter-favorites-modal"]:hover {
+    /* Hover State: Latar belakang pink lembut */
     background-color: var(--favorite-red-light);
-    border-color: var(--favorite-red); /* Hanya border yg menguat */
+    border-color: var(--favorite-red);
     box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2);
 }
 
 /* State Aktif (Checked) */
 .search-filters input[type="checkbox"]:checked + label[for="filter-favorites-modal"] {
-    background: linear-gradient(45deg, var(--favorite-red-dark), var(--favorite-red));
+    /* Active State: Penuh (Filled) */
+    background: linear-gradient(45deg, var(--favorite-red), var(--favorite-red-dark));
     color: var(--white);
     border-color: var(--favorite-red-dark);
     box-shadow: var(--favorite-shadow);
@@ -901,7 +914,7 @@ footer {
     color: var(--white);
     transform: scale(1.1); /* 'Pop' effect */
 }
-/* --- [AKHIR REVISI] --- */
+/* --- [AKHIR PENYEMPURNAAN] --- */
 
 .search-modal-footer { padding: 15px 25px; border-top: 1px solid #e9ecef; text-align: right; background-color: #f8f9fa; }
 .btn-close-modal { padding: 10px 20px; background-color: #6c757d; color: var(--white); border: none; border-radius: 5px; cursor: pointer; }
