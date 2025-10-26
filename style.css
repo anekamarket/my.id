@@ -18,8 +18,11 @@
     /* --- [REVISI] Tambahan Variabel untuk Tombol Favorit --- */
     --favorite-red: #E53935; /* Merah yang lebih kaya */
     --favorite-red-dark: #C62828; /* Untuk hover/active */
-    --favorite-red-light: #FFEBEE; /* Latar belakang non-aktif */
-    --favorite-shadow: 0 4px 12px rgba(229, 57, 53, 0.3);
+    --favorite-red-light: #FFEBEE; /* Latar belakang non-aktif (TIDAK DIPAKAI UNTUK HOVER) */
+    /* DIUBAH: Latar belakang hover yang lebih profesional */
+    --favorite-red-hover-bg: rgba(229, 57, 53, 0.08); 
+    /* DIUBAH: Shadow yang disesuaikan */
+    --favorite-shadow: 0 5px 15px rgba(229, 57, 53, 0.35);
     /* --- [AKHIR REVISI] --- */
 
     --transition: all 0.3s ease;
@@ -409,24 +412,29 @@ section { padding: 3rem 0; } /* DIUBAH: Padding atas/bawah dikurangi */
     /* Default State: Outline */
     background-color: var(--white);
     color: var(--favorite-red);
-    border: 1px solid var(--favorite-red); /* Border merah solid */
+    border: 2px solid var(--favorite-red); /* DIUBAH: Border lebih tebal */
     font-weight: 600;
     transition: var(--transition);
+    box-shadow: none;
 }
 
 .btn-filter-favorites .fa-heart {
     /* Ikon merah, selaras dengan teks */
     color: var(--favorite-red);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .btn-filter-favorites:hover {
-    /* Hover State: Latar belakang merah muda lembut, teks tetap merah */
-    background-color: var(--favorite-red-light); 
-    color: var(--favorite-red);
-    border-color: var(--favorite-red);
-    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2); /* Shadow lebih lembut */
+    /* Hover State: Latar belakang merah transparan, bukan pink pucat */
+    background-color: var(--favorite-red-hover-bg); /* DIUBAH: Menggunakan variabel baru */
+    color: var(--favorite-red-dark);
+    border-color: var(--favorite-red-dark);
+    box-shadow: 0 3px 10px rgba(229, 57, 53, 0.15);
     transform: translateY(-2px); /* Efek lift standar */
+}
+
+.btn-filter-favorites:hover .fa-heart {
+    color: var(--favorite-red-dark);
 }
 
 .btn-filter-favorites.active {
@@ -434,6 +442,7 @@ section { padding: 3rem 0; } /* DIUBAH: Padding atas/bawah dikurangi */
     background: linear-gradient(45deg, var(--favorite-red), var(--favorite-red-dark)); /* Gradient dibalik agar lebih cerah */
     color: var(--white);
     border-color: var(--favorite-red-dark);
+    border-width: 2px; /* DIUBAH: Konsistensi border 2px */
     box-shadow: var(--favorite-shadow);
     transform: translateY(-2px);
 }
@@ -884,21 +893,27 @@ footer {
     /* Default State: Outline, mirip outline button */
     background-color: var(--white);
     color: var(--favorite-red);
-    border: 1px solid var(--favorite-red); /* Border merah */
+    border: 2px solid var(--favorite-red); /* DIUBAH: Border 2px */
     font-weight: 500;
     transition: var(--transition);
+    box-shadow: none;
 }
 
 .search-filters label[for="filter-favorites-modal"] .fa-heart {
     color: var(--favorite-red);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .search-filters label[for="filter-favorites-modal"]:hover {
-    /* Hover State: Latar belakang pink lembut */
-    background-color: var(--favorite-red-light);
-    border-color: var(--favorite-red);
-    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.2);
+    /* Hover State: Latar belakang transparan */
+    background-color: var(--favorite-red-hover-bg); /* DIUBAH: Menggunakan variabel baru */
+    color: var(--favorite-red-dark);
+    border-color: var(--favorite-red-dark);
+    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.15);
+}
+
+.search-filters label[for="filter-favorites-modal"]:hover .fa-heart {
+    color: var(--favorite-red-dark);
 }
 
 /* State Aktif (Checked) */
@@ -907,7 +922,15 @@ footer {
     background: linear-gradient(45deg, var(--favorite-red), var(--favorite-red-dark));
     color: var(--white);
     border-color: var(--favorite-red-dark);
+    border-width: 2px; /* DIUBAH: Konsistensi border 2px */
     box-shadow: var(--favorite-shadow);
+}
+
+/* DITAMBAHKAN: Hover state untuk tombol yang sedang aktif */
+.search-filters input[type="checkbox"]:checked + label[for="filter-favorites-modal"]:hover {
+    background: linear-gradient(45deg, var(--favorite-red-dark), var(--favorite-red-dark));
+    box-shadow: 0 6px 14px rgba(200, 40, 40, 0.35); /* Shadow lebih kuat */
+    border-color: var(--favorite-red-dark);
 }
 
 .search-filters input[type="checkbox"]:checked + label[for="filter-favorites-modal"] .fa-heart {
