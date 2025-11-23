@@ -597,8 +597,90 @@
                 align-self: center;
             }
 
-            .footer-content { text-align: center; justify-items: center; }
-            .footer-links a:hover { padding-left: 0; color: var(--accent); }
+            /* PERBAIKAN: Form dan Ringkasan Pesanan di HP */
+            .form-panel, .summary-panel {
+                padding: 1.5rem;
+                margin: 0 auto;
+                width: 100%;
+            }
+            
+            .order-layout {
+                gap: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            /* PERBAIKAN: Footer di HP */
+            .footer-content {
+                text-align: center;
+                justify-items: center;
+                gap: 2rem;
+            }
+            
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-contact {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-links a:hover {
+                padding-left: 0;
+                color: var(--accent);
+            }
+            
+            /* PERBAIKAN: Tombol Proses Pesanan di HP */
+            .btn-checkout {
+                padding: 14px;
+                font-size: 1rem;
+            }
+            
+            /* PERBAIKAN: Section Pesanan di HP */
+            #pesan {
+                padding: 3rem 0 4rem;
+            }
+            
+            /* PERBAIKAN: Ringkasan Pesanan di HP */
+            .summary-panel {
+                margin-bottom: 2rem;
+                width: 100%;
+            }
+            
+            /* PERBAIKAN: Form Control di HP */
+            .form-control {
+                font-size: 16px; /* Mencegah zoom di iOS */
+            }
+            
+            /* PERBAIKAN: Ringkasan Pesanan Teks di HP */
+            .summary-row, .summary-total {
+                font-size: 0.9rem;
+            }
+            
+            /* PERBAIKAN: Footer Teks di HP */
+            footer {
+                font-size: 0.9rem;
+            }
+            
+            /* PERBAIKAN: Product Grid di HP */
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* PERBAIKAN: Web Wrapper di HP */
+            .web-wrapper {
+                padding: 1rem;
+            }
+            
+            /* PERBAIKAN: Event Fields di HP */
+            .event-fields .grid-responsive {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* --- 9. PRINT STYLE --- */
