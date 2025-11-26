@@ -7,8 +7,6 @@
     
     <title>Aneka Digital - Jasa Pembuatan Website, Percetakan Online & Marketplace Terlengkap</title>
     
-    <meta name="description" content="Pusat layanan digital One-Stop Solution. Melayani Jasa Pembuatan Website Profesional (Toko Online, Company Profile), Percetakan Digital Murah (Undangan, ID Card, Foto), dan Marketplace Produk Digital. Pesan Online, Kirim ke Seluruh Indonesia.">
-    
     <meta name="keywords" content="
     jasa pembuatan website murah, jasa website situbondo, web developer profesional, edit gambar online, edit foto, umkm online, umkm indonesia, umkm naik kelas, aplikasiusaha, aplikasi bisnis, aplikasi usaha, anekamarket situbondo, aneka market, aplikasi umkm, buat website toko online, jasa landing page, website company profile, bikin website sekolah, website desa pemerintah, jasa seo website, digital printing online, 
     cetak undangan pernikahan unik, undangan murah situbondo, percetakan panarukan, percetakan besuki, percetakan bondowoso, percetakan jember, percetakan banyuwangi, percetakan probolinggo, cetak id card pvc, cetak member card, kartu pelajar, 
@@ -22,6 +20,7 @@
     pembuatan website sekolah, web desa terintegrasi, jasa maintenance website, domain murah indonesia, hosting terbaik, qris payment gateway, integrasi pembayaran digital
     ">
 
+    <meta name="description" content="Pusat layanan digital One-Stop Solution. Melayani Jasa Pembuatan Website Profesional (Toko Online, Company Profile), Percetakan Digital Murah (Undangan, ID Card, Foto), dan Marketplace Produk Digital. Pesan Online, Kirim ke Seluruh Indonesia.">
     <meta name="author" content="Aneka Digital Team">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="revisit-after" content="2 days">
@@ -55,15 +54,7 @@
       "telephone": "+6285647709114",
       "openingHoursSpecification": {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
         "opens": "08:00",
         "closes": "21:00"
       }
@@ -100,11 +91,8 @@
         
         h1, h2, h3, h4, .logo, .font-head { font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        /* PERBAIKAN: Mencegah website geser kanan-kiri di HP */
         body { background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; width: 100%; }
         html { scroll-behavior: smooth; }
-        
-        /* PERBAIKAN: Gambar otomatis menyesuaikan lebar layar */
         img { max-width: 100%; height: auto; display: block; }
 
         .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
@@ -120,8 +108,19 @@
         header.scrolled { padding: 0.6rem 0; box-shadow: var(--shadow-sm); }
         
         header .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 6px; letter-spacing: -0.5px; white-space: nowrap; }
+        
+        /* LOGO STYLING */
+        .logo { 
+            font-size: 1.5rem; font-weight: 800; color: var(--primary); 
+            text-decoration: none; display: flex; align-items: center; 
+            gap: 10px; letter-spacing: -0.5px; white-space: nowrap; 
+        }
         .logo span { color: var(--accent); }
+        .logo-icon {
+            filter: drop-shadow(0px 2px 4px rgba(10, 77, 152, 0.2));
+            transition: transform 0.3s ease;
+        }
+        .logo:hover .logo-icon { transform: rotate(10deg) scale(1.05); }
         
         nav ul { display: flex; gap: 2rem; list-style: none; align-items: center; }
         nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: 0.3s; font-size: 0.95rem; }
@@ -144,7 +143,7 @@
         
         .hamburger { display: none; cursor: pointer; font-size: 1.8rem; color: var(--text-dark); }
 
-        /* --- 3. HERO SECTION & BUTTON ANIMATION --- */
+        /* --- 3. HERO SECTION --- */
         .hero {
             padding-top: 140px; padding-bottom: 60px;
             background: linear-gradient(180deg, #E0F2FE 0%, #FFFFFF 100%);
@@ -158,7 +157,7 @@
             padding: 8px 20px; border-radius: 50px;
             font-size: 0.85rem; font-weight: 700; 
             box-shadow: var(--shadow-sm); margin-bottom: 1.5rem;
-            max-width: 100%; /* Agar tidak jebol di layar kecil */
+            max-width: 100%;
         }
         
         .hero-wrapper { display: flex; align-items: center; gap: 4rem; }
@@ -174,7 +173,6 @@
         }
 
         .hero-desc { font-size: 1.1rem; color: var(--text-gray); margin-bottom: 2.5rem; max-width: 95%; }
-
         .hero-btn-group { display: flex; gap: 15px; flex-wrap: wrap; }
 
         @keyframes radiate-pulse {
@@ -187,10 +185,8 @@
             background: linear-gradient(135deg, var(--accent), #ff5722);
             color: white; padding: 14px 32px; border-radius: 10px;
             text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 10px;
-            transition: all 0.3s ease; 
-            border: none; cursor: pointer;
-            animation: radiate-pulse 2s infinite;
-            position: relative; z-index: 5;
+            transition: all 0.3s ease; border: none; cursor: pointer;
+            animation: radiate-pulse 2s infinite; position: relative; z-index: 5;
             text-align: center; justify-content: center;
         }
         .btn-market:hover { 
@@ -210,45 +206,30 @@
         .hero-img img { width: 100%; border-radius: 24px; box-shadow: var(--shadow-card); animation: float 6s ease-in-out infinite; }
         @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
 
-        /* --- NEW SECTION: WEBSITE SERVICE --- */
-        .web-section {
-            padding: 4rem 0;
-            background: #fff;
-            position: relative;
-        }
+        /* --- WEB SERVICE SECTION --- */
+        .web-section { padding: 4rem 0; background: #fff; position: relative; }
         .web-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 24px;
-            padding: 3rem;
+            display: flex; align-items: center; gap: 3rem; background: #f8fafc;
+            border: 1px solid #e2e8f0; border-radius: 24px; padding: 3rem;
             box-shadow: var(--shadow-sm);
         }
         .web-content { flex: 1.2; }
         .web-image { flex: 0.8; }
         .web-image img { width: 100%; border-radius: 16px; box-shadow: var(--shadow-card); border: 4px solid white; }
         
-        /* Fix List agar tidak berantakan di Mobile */
         .feature-list { list-style: none; margin: 1.5rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
         .feature-list li { display: flex; align-items: center; gap: 8px; font-weight: 500; color: var(--text-dark); font-size: 0.95rem; }
         .feature-list li svg { color: var(--success); flex-shrink: 0; }
 
-        .price-tag-web {
-            font-size: 1.8rem; font-weight: 800; color: var(--primary);
-            margin: 1.5rem 0; display: block;
-        }
+        .price-tag-web { font-size: 1.8rem; font-weight: 800; color: var(--primary); margin: 1.5rem 0; display: block; }
         .price-tag-web small { font-size: 0.9rem; font-weight: 500; color: var(--text-gray); }
 
-        /* --- 4. KATALOG PRODUK --- */
+        /* --- KATALOG PRODUK --- */
         .section-title { text-align: center; margin-bottom: 3rem; padding: 0 10px; }
         .section-title h2 { font-size: 2.2rem; margin-bottom: 0.8rem; color: var(--text-dark); font-weight: 800; }
         .section-title p { color: var(--text-gray); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
 
-        /* PERBAIKAN: Grid responsif untuk produk agar tidak gepeng */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-        
         .product-card {
             background: var(--white); border-radius: var(--radius-md); overflow: hidden;
             box-shadow: var(--shadow-sm); transition: all 0.3s ease; border: 1px solid #f1f5f9;
@@ -271,7 +252,7 @@
         }
         .card-btn:hover { background: var(--primary); color: white; }
 
-        /* --- 5. FORM PEMESANAN --- */
+        /* --- FORM PEMESANAN --- */
         #pesan { scroll-margin-top: 90px; }
         .order-layout { display: grid; grid-template-columns: 2fr 1.1fr; gap: 2.5rem; align-items: start; }
         
@@ -280,96 +261,53 @@
             box-shadow: var(--shadow-sm); border: 1px solid #e2e8f0; 
         }
         
-        /* PERBAIKAN: Helper Class untuk Grid di HP (stacking/menumpuk) */
-        .grid-responsive {
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 1rem;
-        }
-
+        .grid-responsive { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         .form-group { margin-bottom: 1.5rem; position: relative; width: 100%; }
         .form-group label { display: block; font-weight: 600; margin-bottom: 0.6rem; font-size: 0.9rem; color: #334155; }
         
         .form-control {
             width: 100%; padding: 14px; border: 1px solid #cbd5e1; border-radius: 10px;
-            font-size: 1rem; transition: 0.3s; background: #f8fafc; color: var(--text-dark);
-            /* Prevent zoom on iOS */
-            appearance: none;
+            font-size: 1rem; transition: 0.3s; background: #f8fafc; color: var(--text-dark); appearance: none;
         }
-        .form-control:focus { 
-            border-color: var(--primary); background: #fff; outline: none; 
-            box-shadow: 0 0 0 4px rgba(10, 77, 152, 0.1); 
-        }
-        
-        .form-control[readonly] {
-            cursor: not-allowed;
-            user-select: none;
-        }
+        .form-control:focus { border-color: var(--primary); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(10, 77, 152, 0.1); }
+        .form-control[readonly] { cursor: not-allowed; user-select: none; }
 
-        /* --- MODIFIED INPUT GROUP FOR CHECK BUTTON --- */
         .input-group { display: flex; align-items: stretch; position: relative; flex-wrap: wrap; }
         .input-group-text {
-            background: #e2e8f0; border: 1px solid #cbd5e1; 
-            padding: 0 15px; display: flex; align-items: center;
-            font-size: 0.9rem; color: #64748b; font-weight: 600;
-            flex-shrink: 0;
+            background: #e2e8f0; border: 1px solid #cbd5e1; padding: 0 15px; display: flex; align-items: center;
+            font-size: 0.9rem; color: #64748b; font-weight: 600; flex-shrink: 0;
         }
-        
-        /* Prefix (kiri) */
-        .input-group .input-group-text:first-child {
-            border-right: none;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
+        .input-group .input-group-text:first-child { border-right: none; border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+        .input-group .form-control { border-radius: 0; z-index: 2; flex: 1; min-width: 100px; }
+        .input-group .input-group-text:nth-child(3) { border-left: none; border-right: none; }
 
-        /* Input Tengah */
-        .input-group .form-control {
-            border-radius: 0;
-            z-index: 2;
-            flex: 1;
-            min-width: 100px;
-        }
-
-        /* Suffix (Jika ada) */
-        .input-group .input-group-text:nth-child(3) {
-            border-left: none;
-            border-right: none; 
-        }
-
-        /* TOMBOL CEK DOMAIN */
         .btn-check-domain {
             background: var(--text-dark); color: white; border: none;
             padding: 0 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer;
             border-top-right-radius: 10px; border-bottom-right-radius: 10px;
-            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px;
-            white-space: nowrap;
+            transition: all 0.3s ease; display: flex; align-items: center; gap: 8px; white-space: nowrap;
         }
         .btn-check-domain:hover { background: black; }
         .btn-check-domain:disabled { background: #94a3b8; cursor: not-allowed; }
-
         .form-control.is-valid { border-color: var(--success); background-color: #f0fdf4; }
         .form-control.is-invalid { border-color: var(--danger); background-color: #fef2f2; }
 
         .domain-msg {
             margin-top: 10px; font-size: 0.85rem; padding: 12px; border-radius: 8px;
-            display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
-            animation: fadeIn 0.4s ease;
+            display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; animation: fadeIn 0.4s ease;
         }
         .domain-msg.success { background: #ecfdf5; color: #065f46; border: 1px solid #10b981; }
         .domain-msg.error { background: #fef2f2; color: #991b1b; border: 1px solid #f87171; }
         .domain-msg.info { background: #eff6ff; color: #1e40af; border: 1px solid #60a5fa; }
         
         .sub-option-container {
-            background: #eff6ff; border: 1px dashed #93c5fd;
-            padding: 20px; border-radius: 10px; margin-bottom: 2rem;
-            animation: fadeIn 0.4s ease;
+            background: #eff6ff; border: 1px dashed #93c5fd; padding: 20px; border-radius: 10px; margin-bottom: 2rem; animation: fadeIn 0.4s ease;
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         .summary-panel {
             background: var(--white); padding: 2rem; border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-card); position: sticky; top: 100px;
-            border: 1px solid #e2e8f0; z-index: 100;
+            box-shadow: var(--shadow-card); position: sticky; top: 100px; border: 1px solid #e2e8f0; z-index: 100;
         }
         .summary-title { 
             font-weight: 700; border-bottom: 2px solid #f1f5f9; padding-bottom: 1rem; 
@@ -377,13 +315,11 @@
         }
         .summary-row { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.95rem; color: var(--text-gray); }
         .summary-row span:last-child { font-weight: 600; color: var(--text-dark); text-align: right; padding-left: 10px; }
-        
         .summary-total { 
             display: flex; justify-content: space-between; margin-top: 1.5rem; padding-top: 1.5rem; 
             border-top: 2px dashed #cbd5e1; font-weight: 800; font-size: 1.4rem; color: var(--primary); 
         }
 
-        /* --- PAYMENT SECTION STYLE --- */
         .payment-section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 2px dashed #e2e8f0; }
         .payment-img { width: 100%; border-radius: 10px; border: 1px solid #cbd5e1; margin-bottom: 1rem; display: block; }
         .payment-warning {
@@ -394,8 +330,7 @@
         .invoice-code-display {
             background: #f1f5f9; color: var(--text-dark); padding: 8px; text-align: center;
             border-radius: 6px; font-family: monospace; font-weight: 700; font-size: 1.1rem;
-            letter-spacing: 1px; margin: 10px 0; border: 1px solid #e2e8f0;
-            word-break: break-all;
+            letter-spacing: 1px; margin: 10px 0; border: 1px solid #e2e8f0; word-break: break-all;
         }
         
         .btn-checkout { 
@@ -412,16 +347,14 @@
             max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
-        /* --- 6. INVOICE MODAL (UI SCREEN) --- */
+        /* --- MODAL INVOICE --- */
         .modal-overlay {
             position: fixed; top:0; left:0; width:100%; height:100%; 
             background: rgba(15, 23, 42, 0.8); z-index: 2000; 
             display: flex; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden; transition: 0.3s; backdrop-filter: blur(8px);
-            padding: 1rem;
+            opacity: 0; visibility: hidden; transition: 0.3s; backdrop-filter: blur(8px); padding: 1rem;
         }
         .modal-overlay.active { opacity: 1; visibility: visible; }
-
         .invoice-card-wrapper {
             background: white; width: 100%; max-width: 450px; border-radius: 20px; overflow: hidden;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
@@ -429,11 +362,8 @@
             display: flex; flex-direction: column; max-height: 90vh;
         }
         .modal-overlay.active .invoice-card-wrapper { transform: scale(1) translateY(0); }
-
-        .inv-header {
-            background: var(--primary); color: white; padding: 1.5rem;
-            text-align: center; position: relative; flex-shrink: 0;
-        }
+        
+        .inv-header { background: var(--primary); color: white; padding: 1.5rem; text-align: center; position: relative; flex-shrink: 0; }
         .inv-header h3 { margin: 0; font-size: 1.4rem; font-weight: 700; letter-spacing: 0.5px; }
         .inv-header p { opacity: 0.8; font-size: 0.9rem; margin-top: 5px; }
         .inv-logo-icon {
@@ -441,46 +371,29 @@
             display: flex; align-items: center; justify-content: center; margin: 0 auto 10px auto;
             border: 1px solid rgba(255,255,255,0.2);
         }
-
-        .inv-body {
-            background: white; border-radius: 20px 20px 0 0; margin-top: -15px;
-            padding: 1.5rem; position: relative; overflow-y: auto; flex-grow: 1;
-        }
+        .inv-body { background: white; border-radius: 20px 20px 0 0; margin-top: -15px; padding: 1.5rem; position: relative; overflow-y: auto; flex-grow: 1; }
         .inv-badge {
             background: #fff7ed; color: #c2410c; border: 1px solid #ffedd5;
             padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;
-            text-align: center; width: fit-content; margin: 0 auto 20px auto;
-            display: block; letter-spacing: 1px; text-transform: uppercase;
+            text-align: center; width: fit-content; margin: 0 auto 20px auto; display: block; letter-spacing: 1px; text-transform: uppercase;
         }
-        .inv-row {
-            display: flex; justify-content: space-between; align-items: flex-start;
-            margin-bottom: 14px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px;
-        }
+        .inv-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; border-bottom: 1px solid #f1f5f9; padding-bottom: 14px; }
         .inv-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .inv-label { font-size: 0.85rem; color: #64748b; font-weight: 500; }
         .inv-value { font-size: 0.95rem; color: #0f172a; font-weight: 600; text-align: right; max-width: 60%; }
-
-        .inv-product-box {
-            background: #f8fafc; border-radius: 12px; padding: 15px;
-            margin: 10px 0 20px 0; border: 1px solid #e2e8f0;
-        }
+        
+        .inv-product-box { background: #f8fafc; border-radius: 12px; padding: 15px; margin: 10px 0 20px 0; border: 1px solid #e2e8f0; }
         .inv-product-title { color: var(--primary); font-weight: 700; margin-bottom: 5px; font-size: 1rem; }
         .inv-product-spec { font-size: 0.85rem; color: #64748b; line-height: 1.4; }
-
+        
         .inv-total-area {
-            background: #ecfeff; border: 1px dashed #22d3ee;
-            border-radius: 12px; padding: 15px; margin-top: 15px;
+            background: #ecfeff; border: 1px dashed #22d3ee; border-radius: 12px; padding: 15px; margin-top: 15px;
             display: flex; justify-content: space-between; align-items: center;
         }
         .inv-total-label { color: #0891b2; font-weight: 600; font-size: 0.9rem; }
         .inv-total-value { color: var(--primary); font-weight: 800; font-size: 1.3rem; }
-
-        .inv-footer {
-            padding: 1.5rem; border-top: 1px solid #f1f5f9;
-            display: flex; flex-direction: column; gap: 12px; background: white;
-            flex-shrink: 0;
-        }
         
+        .inv-footer { padding: 1.5rem; border-top: 1px solid #f1f5f9; display: flex; flex-direction: column; gap: 12px; background: white; flex-shrink: 0; }
         .btn-action-primary {
             background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white; border: none; padding: 14px; border-radius: 12px;
@@ -490,45 +403,22 @@
         }
         .btn-action-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4); }
         .btn-group-secondary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        .btn-action-secondary {
-            background: #f1f5f9; color: #475569; border: none; padding: 12px;
-            border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.9rem;
-        }
+        .btn-action-secondary { background: #f1f5f9; color: #475569; border: none; padding: 12px; border-radius: 10px; font-weight: 600; cursor: pointer; transition: 0.2s; font-size: 0.9rem; }
         .btn-action-secondary:hover { background: #e2e8f0; color: #1e293b; }
 
-        /* --- 7. FOOTER --- */
+        /* --- FOOTER --- */
         .footer-wave { width: 100%; line-height: 0; background-color: var(--bg-light); margin-top: 3rem; }
         .footer-wave svg { display: block; width: 100%; height: 80px; fill: #022a5c; } 
-        
         footer { background: #022a5c; color: #e2e8f0; padding-bottom: 2rem; font-size: 0.95rem; }
-        .footer-content { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-            gap: 3rem; 
-            padding: 3rem 0; 
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-        }
-        .footer-brand, .footer-nav, .footer-contact { 
-            display: flex; 
-            flex-direction: column; 
-        }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; padding: 3rem 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .footer-brand, .footer-nav, .footer-contact { display: flex; flex-direction: column; }
         .footer-brand h3 { color: white; font-size: 1.8rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
         .footer-nav h4, .footer-contact h4 { color: white; margin-bottom: 1rem; font-size: 1.1rem; }
         .footer-links { display: flex; flex-direction: column; gap: 10px; }
-        .footer-links a { 
-            color: #cbd5e1; 
-            text-decoration: none; 
-            transition: 0.3s; 
-            display: block;
-        }
+        .footer-links a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: block; }
         .footer-links a:hover { color: var(--accent); }
-        
-        .contact-item {
-            display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start;
-        }
-        .contact-icon {
-            background: rgba(255,255,255,0.1); padding: 8px; border-radius: 50%; flex-shrink: 0;
-        }
+        .contact-item { display: flex; gap: 10px; margin-bottom: 15px; align-items: flex-start; }
+        .contact-icon { background: rgba(255,255,255,0.1); padding: 8px; border-radius: 50%; flex-shrink: 0; }
         .contact-text { flex: 1; }
         .contact-title { font-weight: 700; color: white; }
         .contact-desc { opacity: 0.8; font-size: 0.9rem; margin-top: 3px; }
@@ -541,35 +431,27 @@
         }
         @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
 
-        /* --- 8. MEDIA QUERIES (PENYEMPURNAAN) --- */
+        /* --- RESPONSIVE --- */
         @media (max-width: 1024px) {
-             /* Tablet Adjustment */
             .hero-wrapper { gap: 2rem; }
             .hero-title { font-size: 2.8rem; }
         }
-
         @media (max-width: 900px) {
-            /* Mobile Layout Trigger */
             .hero-wrapper { flex-direction: column-reverse; text-align: center; padding-top: 0; }
             .hero-title { font-size: 2.5rem; margin-bottom: 1rem; }
             .hero-img { width: 100%; max-width: 500px; margin: 0 auto; }
             .hero-btn-group { justify-content: center; }
             .hero-desc { margin-left: auto; margin-right: auto; }
-            
             .web-wrapper { flex-direction: column-reverse; padding: 1.5rem; gap: 2rem; }
             .web-content { text-align: center; }
             .feature-list { text-align: left; justify-content: center; }
-            
             .order-layout { grid-template-columns: 1fr; gap: 1.5rem; }
             .summary-panel { position: relative; top: 0; order: 2; background: #f8fafc; border: 2px dashed #cbd5e1; box-shadow: none; }
             .form-panel { order: 1; padding: 1.5rem; }
         }
-
         @media (max-width: 768px) {
             .container { width: 92%; padding: 0 15px; }
             .section-title h2 { font-size: 2rem; }
-            
-            /* Navigation */
             .hamburger { display: block; }
             nav ul { 
                 position: fixed; top: 60px; left: -100%; width: 100%; height: calc(100vh - 60px);
@@ -579,147 +461,26 @@
             nav ul.active { left: 0; }
             nav ul li { width: 100%; text-align: center; }
             nav a { display: block; padding: 12px; font-size: 1.1rem; }
-            
-            /* Modal Responsive */
             .invoice-card-wrapper { width: 95%; max-height: 95vh; }
-            .inv-header { padding: 1.2rem; }
-            .inv-body { padding: 1.2rem; }
         }
-
         @media (max-width: 640px) {
-            /* Small Mobile Adjustments */
             .hero-title { font-size: 2rem; }
-            .btn-market { width: 100%; padding: 12px 20px; font-size: 0.95rem; }
-            .btn-secondary-outline { width: 100%; }
-            
-            /* Make inner form grid stack on mobile */
+            .btn-market, .btn-secondary-outline { width: 100%; }
             .grid-responsive { grid-template-columns: 1fr; }
-            
-            /* PERBAIKAN: Domain Checker Fix untuk Layar Kecil - Lebih Responsif */
             .input-group { flex-direction: column; gap: 0; }
             .input-group .input-group-text:first-child { 
-                width: 100%; border-right: 1px solid #cbd5e1; 
-                border-radius: 10px 10px 0 0; justify-content: center;
-                padding: 12px;
+                width: 100%; border-right: 1px solid #cbd5e1; border-radius: 10px 10px 0 0; justify-content: center; padding: 12px;
             }
-            .input-group .form-control { 
-                width: 100%; border-radius: 0 !important; border-top: none; 
-                text-align: center; padding: 14px;
-            }
-            .input-group .input-group-text:nth-child(3) {
-                 width: 100%; justify-content: center; border-left: 1px solid #cbd5e1;
-                 border-radius: 0;
-            }
-            .btn-check-domain { 
-                width: 100%; border-radius: 0 0 10px 10px; margin-top: -1px; 
-                justify-content: center; padding: 14px; font-size: 1rem;
-            }
-
-            /* PERBAIKAN: Domain Message Responsif */
-            .domain-msg {
-                margin-top: 15px; font-size: 0.8rem; padding: 10px;
-                flex-direction: column; align-items: flex-start;
-            }
-            .domain-msg svg {
-                align-self: center;
-            }
-
-            /* PERBAIKAN: Form dan Ringkasan Pesanan di HP */
-            .form-panel, .summary-panel {
-                padding: 1.5rem;
-                margin: 0 auto;
-                width: 100%;
-            }
-            
-            .order-layout {
-                gap: 1.5rem;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            /* PERBAIKAN: Footer di HP - PENINGKATAN UTAMA */
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-            
-            .footer-brand, .footer-nav, .footer-contact {
-                align-items: center;
-                text-align: center;
-            }
-            
-            .footer-links {
-                align-items: center;
-            }
-            
-            .footer-links a {
-                text-align: center;
-            }
-            
-            .contact-item {
-                justify-content: center;
-                text-align: center;
-            }
-            
-            /* PERBAIKAN: Kontak Footer di HP */
-            .footer-contact > div {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
-            
-            /* PERBAIKAN: Tombol Proses Pesanan di HP */
-            .btn-checkout {
-                padding: 14px;
-                font-size: 1rem;
-            }
-            
-            /* PERBAIKAN: Section Pesanan di HP */
-            #pesan {
-                padding: 3rem 0 4rem;
-            }
-            
-            /* PERBAIKAN: Ringkasan Pesanan di HP */
-            .summary-panel {
-                margin-bottom: 2rem;
-                width: 100%;
-            }
-            
-            /* PERBAIKAN: Form Control di HP */
-            .form-control {
-                font-size: 16px; /* Mencegah zoom di iOS */
-            }
-            
-            /* PERBAIKAN: Ringkasan Pesanan Teks di HP */
-            .summary-row, .summary-total {
-                font-size: 0.9rem;
-            }
-            
-            /* PERBAIKAN: Footer Teks di HP */
-            footer {
-                font-size: 0.9rem;
-            }
-            
-            /* PERBAIKAN: Product Grid di HP */
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            /* PERBAIKAN: Web Wrapper di HP */
-            .web-wrapper {
-                padding: 1rem;
-            }
-            
-            /* PERBAIKAN: Event Fields di HP */
-            .event-fields .grid-responsive {
-                grid-template-columns: 1fr;
-            }
+            .input-group .form-control { width: 100%; border-radius: 0 !important; border-top: none; text-align: center; padding: 14px; font-size: 16px; }
+            .input-group .input-group-text:nth-child(3) { width: 100%; justify-content: center; border-left: 1px solid #cbd5e1; border-radius: 0; }
+            .btn-check-domain { width: 100%; border-radius: 0 0 10px 10px; margin-top: -1px; justify-content: center; padding: 14px; font-size: 1rem; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+            .footer-brand, .footer-nav, .footer-contact, .footer-links, .footer-contact > div { align-items: center; width: 100%; }
+            .footer-links a, .contact-item { text-align: center; justify-content: center; }
+            .product-grid { grid-template-columns: 1fr; }
         }
 
-        /* --- 9. PRINT STYLE --- */
+        /* --- PRINT STYLE --- */
         #print-container { display: none; }
         @media print {
             body > * { display: none !important; }
@@ -741,11 +502,18 @@
     <header id="main-header">
         <div class="container">
             <a href="#" class="logo">
-                <!-- Icon Baru: Tumpukan Layer -->
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V18C22 19.6569 20.6569 21 19 21H5C3.34315 21 2 19.6569 2 18V6Z" fill="#0A4D98"/>
-                    <path d="M4 8C4 6.89543 4.89543 6 6 6H18C19.1046 6 20 6.89543 20 8V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V8Z" fill="#FF7F00"/>
-                    <path d="M6 10C6 9.44772 6.44772 9 7 9H17C17.5523 9 18 9.44772 18 10V18C18 18.5523 17.5523 19 17 19H7C6.44772 19 6 18.5523 6 18V10Z" fill="#FFFFFF"/>
+                <svg class="logo-icon" width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 34L6 26V14L20 22L34 14V26L20 34Z" fill="#0A4D98" fill-opacity="0.1"/>
+                    <path d="M20 34L6 26V14L20 22L34 14V26L20 34Z" stroke="#0A4D98" stroke-width="2.5" stroke-linejoin="round"/>
+                    
+                    <path d="M20 26L10 20.5" stroke="#0A4D98" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M20 26L30 20.5" stroke="#0A4D98" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M20 26V34" stroke="#0A4D98" stroke-width="2" stroke-linecap="round"/>
+                    
+                    <path d="M20 6L32 12L20 18L8 12L20 6Z" fill="#FF7F00" stroke="#FF7F00" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M20 18V26" stroke="#0A4D98" stroke-width="2.5" stroke-linecap="round"/>
+                    
+                    <circle cx="20" cy="12" r="2" fill="white"/>
                 </svg>
                 Aneka<span>Digital</span>
             </a>
@@ -771,7 +539,7 @@
                 <div class="hero-text" data-aos="fade-right">
                     <div class="modern-badge">🚀 Marketplace, Printing & Web Developer Solution</div>
                     <h1 class="hero-title">Solusi Cetak & Digital <br><span class="text-gradient">Terintegrasi Untuk Bisnis</span></h1>
-                    <p class="hero-desc">Platform layanan lengkap. Kami melayani <strong>Jasa Pembuatan Website Profesional</strong>, Digital Printing Modern (Undangan, ID Card), dan Marketplace Produk Digital Terpercaya. Pesan online, mudah dan aman.</p>
+                    <p class="hero-desc">Platform layanan lengkap. Kami melayani <strong>Jasa Pembuatan Website Profesional</strong>, Digital Printing Modern (Undangan, ID Card, Foto), dan Marketplace Produk Digital Terpercaya. Pesan online, mudah dan aman.</p>
                     
                     <div class="hero-btn-group">
                         <a href="https://www.anekamarket.my.id" target="_blank" class="btn-market">
@@ -947,7 +715,7 @@
                                 <label>Cek Ketersediaan Nama Website</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="url-prefix">www.aplikasiusaha.com/</span>
-                                    <input type="text" id="web-input-name" class="form-control" placeholder="namawebsite" onkeyup="resetDomainStatus()">
+                                    <input type="text" id="web-input-name" class="form-control" placeholder="namawebsite" onkeyup="resetDomainStatus()" autocomplete="off">
                                     <span class="input-group-text hidden" id="url-suffix"></span>
                                     
                                     <button type="button" class="btn-check-domain" id="btn-check-domain" onclick="checkDomainAvailability()">
@@ -1311,11 +1079,15 @@
             <div class="footer-content">
                 <div class="footer-brand">
                     <h3>
-                        <!-- Icon Baru: Tumpukan Layer -->
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 6C2 4.34315 3.34315 3 5 3H19C20.6569 3 22 4.34315 22 6V18C22 19.6569 20.6569 21 19 21H5C3.34315 21 2 19.6569 2 18V6Z" fill="#0A4D98"/>
-                            <path d="M4 8C4 6.89543 4.89543 6 6 6H18C19.1046 6 20 6.89543 20 8V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V8Z" fill="#FF7F00"/>
-                            <path d="M6 10C6 9.44772 6.44772 9 7 9H17C17.5523 9 18 9.44772 18 10V18C18 18.5523 17.5523 19 17 19H7C6.44772 19 6 18.5523 6 18V10Z" fill="#FFFFFF"/>
+                        <svg class="logo-icon" width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 10px;">
+                            <path d="M20 34L6 26V14L20 22L34 14V26L20 34Z" fill="white" fill-opacity="0.1"/>
+                            <path d="M20 34L6 26V14L20 22L34 14V26L20 34Z" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path d="M20 26L10 20.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M20 26L30 20.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M20 26V34" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M20 6L32 12L20 18L8 12L20 6Z" fill="#FF7F00" stroke="#FF7F00" stroke-width="2.5" stroke-linejoin="round"/>
+                            <path d="M20 18V26" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="20" cy="12" r="2" fill="white"/>
                         </svg>
                         Aneka<span style="color: var(--accent);">Digital</span>
                     </h3>
@@ -1384,7 +1156,6 @@
         });
 
         const formatRupiah = (angka) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(angka);
-
         let currentInvoiceCode = 'INV-' + Math.floor(100000 + Math.random() * 900000);
         document.getElementById('preview-invoice-code').innerText = currentInvoiceCode;
 
@@ -1400,7 +1171,6 @@
             hideAllSubForms();
             const val = productSelect.value;
             
-            // Logic Display Form
             if(val === 'undangan') {
                 document.getElementById('form-undangan').classList.remove('hidden');
                 eventSection.classList.remove('hidden');
@@ -1416,9 +1186,7 @@
             } else if (val === 'website') {
                 document.getElementById('form-website').classList.remove('hidden');
                 eventSection.classList.add('hidden');
-                // Auto set qty to 1 for website
                 document.getElementById('qty').value = 1;
-                // Init UI domain
                 handleWebDomainUI();
             } else {
                 document.getElementById('form-lainnya').classList.remove('hidden');
@@ -1441,30 +1209,25 @@
             }
         }
 
-        // --- 3.5. LOGIKA UI JASA WEBSITE (BARU) ---
+        // --- 3.5. LOGIKA UI JASA WEBSITE ---
         function handleWebDomainUI() {
             const domainSelect = document.getElementById('web-domain-type');
             const selectedOption = domainSelect.options[domainSelect.selectedIndex];
             const ext = selectedOption.getAttribute('data-ext');
-            
             const prefixEl = document.getElementById('url-prefix');
             const suffixEl = document.getElementById('url-suffix');
             
             if (ext === 'subdomain') {
-                // Case: Subdomain Gratis
                 prefixEl.textContent = 'www.aplikasiusaha.com/';
                 suffixEl.classList.add('hidden');
                 suffixEl.textContent = '';
             } else {
-                // Case: TLD (.com, .id, dll)
                 prefixEl.textContent = 'www.';
                 suffixEl.classList.remove('hidden');
                 suffixEl.textContent = ext;
             }
-            
             updateUrlPreview();
             updateCalculator();
-            // Reset status saat ganti ekstensi domain
             resetDomainStatus();
         }
 
@@ -1472,19 +1235,12 @@
             const nameVal = document.getElementById('web-input-name').value.trim().toLowerCase();
             const prefix = document.getElementById('url-prefix').textContent;
             const suffix = document.getElementById('url-suffix').textContent;
-            
             let finalUrl = '';
-            
-            if (nameVal) {
-                finalUrl = prefix + nameVal + suffix;
-            }
-            
+            if (nameVal) finalUrl = prefix + nameVal + suffix;
             document.getElementById('web-final-link').value = finalUrl;
         }
 
-        // --- FITUR BARU: DOMAIN CHECKER CERDAS (SUPERIOR) ---
         function resetDomainStatus() {
-            // Ketika user mengetik, hilangkan status valid/invalid agar dia harus cek lagi
             const input = document.getElementById('web-input-name');
             const msgContainer = document.getElementById('domain-status-msg');
             const btn = document.getElementById('btn-check-domain');
@@ -1492,69 +1248,35 @@
             input.classList.remove('is-valid', 'is-invalid');
             msgContainer.className = 'domain-msg hidden';
             msgContainer.innerHTML = '';
-            
-            // Re-enable tombol
             btn.innerHTML = '🔍 Cek Ketersediaan';
             btn.disabled = false;
-            
             updateUrlPreview();
         }
 
-        // HELPER: UI Error Message Display
         function showDomainError(input, msgContainer, btn, finalUrl, customMessage = null) {
             input.classList.add('is-invalid');
             input.classList.remove('is-valid');
-            
             msgContainer.classList.remove('hidden', 'success', 'info');
             msgContainer.classList.add('domain-msg', 'error');
-            
-            const message = customMessage || `Mohon maaf, domain <b>${finalUrl}</b> tidak tersedia atau sudah digunakan. Silakan pilih variasi nama lain.`;
-
-            msgContainer.innerHTML = `
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <div>
-                    <strong>Tidak Tersedia</strong><br>
-                    ${message}
-                </div>
-            `;
+            const message = customMessage || `Mohon maaf, domain <b>${finalUrl}</b> tidak tersedia atau sudah digunakan.`;
+            msgContainer.innerHTML = `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><div><strong>Tidak Tersedia</strong><br>${message}</div>`;
             btn.innerHTML = '❌ Ganti Nama';
             btn.disabled = false;
         }
 
-        // HELPER: UI Success Message Display
         function showDomainSuccess(input, msgContainer, btn, finalUrl) {
             input.classList.add('is-valid');
             input.classList.remove('is-invalid');
-            
-            // Kunci final link agar makin hijau
             document.getElementById('web-final-link').style.backgroundColor = '#ecfdf5';
             document.getElementById('web-final-link').style.color = '#047857';
             document.getElementById('web-final-link').style.borderColor = '#10b981';
-
             msgContainer.classList.remove('hidden', 'error', 'info');
             msgContainer.classList.add('domain-msg', 'success');
-            msgContainer.innerHTML = `
-                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                <div>
-                    <strong>Domain Tersedia!</strong><br>
-                    Kabar baik! Domain <b>${finalUrl}</b> tersedia. Segera klaim dan selesaikan pemesanan sekarang sebelum diambil orang lain!
-                </div>
-            `;
+            msgContainer.innerHTML = `<svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><div><strong>Domain Tersedia!</strong><br>Kabar baik! Domain <b>${finalUrl}</b> tersedia.</div>`;
             btn.innerHTML = '✅ Terverifikasi';
         }
 
-        // Database subdomain yang sudah terpakai
-        const usedSubdomains = [
-            'admin', 'www', 'mail', 'ftp', 'cpanel', 'webmail', 'blog', 'shop', 'store',
-            'support', 'help', 'api', 'dev', 'test', 'staging', 'demo', 'app', 'mobile',
-            'login', 'signin', 'register', 'account', 'user', 'dashboard', 'panel',
-            'aneka', 'anekadigital', 'anekamarket', 'aplikasiusaha', 'jasa', 'service',
-            'info', 'contact', 'about', 'team', 'career', 'jobs', 'news', 'blog',
-            'forum', 'community', 'chat', 'support', 'helpdesk', 'docs', 'wiki',
-            'files', 'download', 'upload', 'media', 'image', 'video', 'audio',
-            'cdn', 'static', 'assets', 'img', 'js', 'css', 'font', 'lib',
-            'backup', 'archive', 'old', 'legacy', 'temp', 'tmp', 'cache'
-        ];
+        const usedSubdomains = ['admin', 'www', 'mail', 'blog', 'shop', 'store', 'test', 'demo', 'app', 'login', 'anekadigital', 'anekamarket', 'aplikasiusaha'];
 
         async function checkDomainAvailability() {
             const input = document.getElementById('web-input-name');
@@ -1562,94 +1284,46 @@
             const btn = document.getElementById('btn-check-domain');
             const msgContainer = document.getElementById('domain-status-msg');
             const finalUrl = document.getElementById('web-final-link').value;
-            
             const domainSelect = document.getElementById('web-domain-type');
             const isSubdomain = domainSelect.options[domainSelect.selectedIndex].getAttribute('data-ext') === 'subdomain';
             const tldExt = domainSelect.options[domainSelect.selectedIndex].getAttribute('data-ext');
 
-            // --- FILTER 1: Validasi Input Dasar ---
             if(rawName === "" || rawName.length < 3) {
-                alert("Mohon masukkan nama website minimal 3 karakter.");
-                input.focus();
-                return;
+                alert("Mohon masukkan nama website minimal 3 karakter."); input.focus(); return;
             }
-            
-            // Cek karakter ilegal (Hanya huruf, angka, dan dash)
             if (!/^[a-z0-9-]+$/.test(rawName)) {
-                 showDomainError(input, msgContainer, btn, finalUrl, "Nama domain hanya boleh mengandung huruf kecil, angka, dan tanda hubung (-). Tanpa spasi.");
-                 return;
+                 showDomainError(input, msgContainer, btn, finalUrl, "Nama domain hanya boleh huruf kecil, angka, dan (-)."); return;
             }
 
-            // --- LOADING STATE ---
             btn.innerHTML = '⏳ Mengecek Server...';
             btn.disabled = true;
 
-            // --- FILTER 2: STATIC BLOCKLIST (Database Brand Populer & Reserved Words) ---
-            const takenDomains = [
-                // Top Tech & Indo
-                'google', 'facebook', 'youtube', 'twitter', 'instagram', 'tiktok', 'linkedin', 'whatsapp',
-                'amazon', 'apple', 'microsoft', 'netflix', 'spotify', 'zoom', 'gojek', 'grab', 'shopee',
-                'tokopedia', 'bukalapak', 'lazada', 'blibli', 'traveloka', 'tiket', 'dana', 'ovo', 'gopay',
-                'kompas', 'detik', 'tribun', 'cnn', 'bca', 'bri', 'mandiri', 'bni', 'telkomsel', 'indosat',
-                // Common Names & Brands
-                'admin', 'administrator', 'root', 'support', 'info', 'contact', 'help', 'api', 'dev', 'test',
-                'demo', 'beta', 'staging', 'mail', 'webmail', 'server', 'system', 'cpanel', 'plesk',
-                'indonesia', 'jakarta', 'surabaya', 'bandung', 'bali', 'jawa', 'news', 'berita',
-                'anekadigital', 'anekamarket', 'aplikasiusaha', 'jember', 'situbondo', 'login', 'signin',
-                // Generic High Value
-                'shop', 'store', 'market', 'online', 'digital', 'tech', 'net', 'com', 'org', 'gov', 'edu',
-                'bank', 'money', 'crypto', 'bitcoin', 'game', 'play', 'movie', 'music', 'video'
-            ];
-
+            const takenDomains = ['google', 'facebook', 'youtube', 'admin', 'bank', 'shop', 'store', 'online'];
             if (takenDomains.includes(rawName)) {
-                setTimeout(() => {
-                    showDomainError(input, msgContainer, btn, finalUrl, "Nama ini termasuk 'Premium' atau 'Reserved Brand' yang tidak dapat digunakan.");
-                }, 600);
+                setTimeout(() => showDomainError(input, msgContainer, btn, finalUrl, "Nama ini termasuk 'Premium' atau 'Reserved'."), 600);
                 return;
             }
 
-            // --- FILTER 3: REAL CHECK VIA GOOGLE DNS API (Khusus TLD) ---
             if (isSubdomain) {
-                // Untuk subdomain, kita cek apakah sudah ada di database kita
                 setTimeout(() => {
-                    if (usedSubdomains.includes(rawName)) {
-                        showDomainError(input, msgContainer, btn, finalUrl, "Subdomain ini sudah digunakan di sistem kami. Silakan pilih nama lain.");
-                    } else {
-                        showDomainSuccess(input, msgContainer, btn, finalUrl);
-                    }
+                    if (usedSubdomains.includes(rawName)) showDomainError(input, msgContainer, btn, finalUrl, "Subdomain sudah digunakan.");
+                    else showDomainSuccess(input, msgContainer, btn, finalUrl);
                 }, 800);
             } else {
                 try {
-                    // CHECK 1: Cek apakah ada A record (Website aktif)
                     const checkUrlA = `https://dns.google/resolve?name=${rawName}${tldExt}&type=A`;
                     const responseA = await fetch(checkUrlA);
                     const dataA = await responseA.json();
-
-                    // CHECK 2: Cek apakah ada NS record (Domain terdaftar tapi mungkin belum ada hosting/A record)
-                    // Ini penting untuk domain yg "Parked"
-                    const checkUrlNS = `https://dns.google/resolve?name=${rawName}${tldExt}&type=NS`;
-                    const responseNS = await fetch(checkUrlNS);
-                    const dataNS = await responseNS.json();
-
-                    // LOGIKA: Jika (Status 0 DAN ada Answer di A) ATAU (Status 0 DAN ada Answer di NS) => TAKEN
-                    const isTakenA = (dataA.Status === 0 && dataA.Answer);
-                    const isTakenNS = (dataNS.Status === 0 && dataNS.Answer);
-
-                    if (isTakenA || isTakenNS) {
-                        showDomainError(input, msgContainer, btn, finalUrl, `Domain <b>${rawName}${tldExt}</b> sudah terdaftar dan aktif di internet. Milik orang lain.`);
-                    } else {
-                        // Jika NXDOMAIN atau tidak ada record => Available
-                        showDomainSuccess(input, msgContainer, btn, finalUrl);
-                    }
+                    const isTaken = (dataA.Status === 0 && dataA.Answer);
+                    if (isTaken) showDomainError(input, msgContainer, btn, finalUrl, `Domain <b>${rawName}${tldExt}</b> sudah terdaftar.`);
+                    else showDomainSuccess(input, msgContainer, btn, finalUrl);
                 } catch (error) {
-                    console.error("DNS Check Error", error);
-                    // Fallback jika API Google error, kita anggap available agar user bisa lanjut order (nanti admin cek manual)
                     showDomainSuccess(input, msgContainer, btn, finalUrl);
                 }
             }
         }
 
-        // --- 4. KALKULATOR HARGA KOMPLEKS ---
+        // --- 4. KALKULATOR HARGA ---
         function updateCalculator() {
             const produk = productSelect.value;
             const qty = parseInt(document.getElementById('qty').value) || 0;
@@ -1661,50 +1335,36 @@
                 const teksturHarga = parseInt(document.getElementById('undangan-tekstur').value);
                 const halamanTxt = document.getElementById('undangan-halaman').value;
                 const tipeTxt = document.getElementById('undangan-tipe').options[document.getElementById('undangan-tipe').selectedIndex].text.split('(')[0];
-                
                 unitPrice = tipeHarga + teksturHarga;
                 specText = `${tipeTxt}, ${halamanTxt}` + (teksturHarga > 0 ? " + Tekstur" : "");
-
             } else if (produk === 'cetak-foto') {
                 const sizeEl = document.getElementById('foto-ukuran');
                 const sizeHarga = parseInt(sizeEl.value);
                 const sizeName = sizeEl.options[sizeEl.selectedIndex].getAttribute('data-name');
                 const editHarga = parseInt(document.getElementById('foto-edit').value);
-                const editName = document.getElementById('foto-edit').options[document.getElementById('foto-edit').selectedIndex].text.split('(')[0];
                 const kertas = document.getElementById('foto-kertas').value;
-
                 unitPrice = sizeHarga + editHarga;
-                specText = `Ukuran ${sizeName}, Kertas ${kertas}, ${editName}`;
-
+                specText = `Ukuran ${sizeName}, Kertas ${kertas}`;
             } else if (produk === 'id-card') {
                 unitPrice = parseInt(document.getElementById('idcard-tipe').value);
                 specText = document.getElementById('idcard-tipe').options[document.getElementById('idcard-tipe').selectedIndex].text.split('(')[0];
-            
             } else if (produk === 'cetak-cd') {
                 unitPrice = parseInt(document.getElementById('cd-tipe').value);
                 specText = document.getElementById('cd-tipe').options[document.getElementById('cd-tipe').selectedIndex].text.split('(')[0];
-            
             } else if (produk === 'website') {
                 const jasaPembuatan = 100000;
                 const domainSelect = document.getElementById('web-domain-type');
                 const domainPrice = parseInt(domainSelect.value);
                 const domainTypeTxt = domainSelect.options[domainSelect.selectedIndex].text.split(' - ')[0];
-
                 unitPrice = jasaPembuatan + domainPrice;
                 specText = `Jasa Web Custom + ${domainTypeTxt}`;
-
             } else {
-                unitPrice = 0;
-                specText = "Custom / Other";
+                unitPrice = 0; specText = "Custom / Other";
             }
 
             const subtotal = unitPrice * qty;
-            
-            // Diskon: Potongan 5rb setiap kelipatan 100rb
             let discountAmount = 0;
-            if (subtotal >= 100000) {
-                discountAmount = Math.floor(subtotal / 100000) * 5000;
-            }
+            if (subtotal >= 100000) discountAmount = Math.floor(subtotal / 100000) * 5000;
             
             const grandTotal = subtotal - discountAmount;
             const dpValue = Math.floor(grandTotal * 0.5);
@@ -1718,22 +1378,17 @@
             if(discountAmount > 0) {
                 discountRow.style.display = 'flex';
                 document.getElementById('summary-discount').textContent = "-" + formatRupiah(discountAmount);
-            } else {
-                discountRow.style.display = 'none';
-            }
+            } else { discountRow.style.display = 'none'; }
 
             document.getElementById('total-display').textContent = grandTotal > 0 ? formatRupiah(grandTotal) : 'Rp 0';
             document.getElementById('dp-amount').textContent = formatRupiah(dpValue);
             document.getElementById('warning-dp-val').textContent = formatRupiah(dpValue);
             
             const specRow = document.getElementById('row-detail-specs');
-            const specVal = document.getElementById('summary-specs');
             if(specText && produk) {
                 specRow.style.display = 'flex';
-                specVal.textContent = specText;
-            } else {
-                specRow.style.display = 'none';
-            }
+                document.getElementById('summary-specs').textContent = specText;
+            } else { specRow.style.display = 'none'; }
         }
 
         window.selectProduct = function(value) {
@@ -1753,31 +1408,24 @@
                     document.getElementById('lokasi').value = `http://maps.google.com/?q=${lat},${long}`;
                     btn.textContent = "✅ Lokasi Terisi";
                     setTimeout(() => btn.textContent = "📍 Ambil Lokasi", 3000);
-                }, function() { 
-                    alert("Gagal mengambil lokasi. Pastikan GPS aktif."); 
-                    btn.textContent = "📍 Ambil Lokasi"; 
-                });
+                }, function() { alert("Gagal mengambil lokasi. Pastikan GPS aktif."); btn.textContent = "📍 Ambil Lokasi"; });
             } else { alert("Browser tidak support GPS."); }
         });
 
-        // --- 6. PROSES PESANAN & INVOICE ---
+        // --- 6. PROSES PESANAN ---
         let orderData = {};
         const modal = document.getElementById('invoiceModal');
 
         document.getElementById('btn-process').addEventListener('click', () => {
             if (!document.getElementById('nama').value || !document.getElementById('wa').value) {
-                alert("Mohon lengkapi Nama dan Nomor HP/WA (Wajib) untuk melanjutkan."); 
-                document.getElementById('nama').focus();
-                return;
+                alert("Mohon lengkapi Nama dan Nomor HP/WA (Wajib)."); 
+                document.getElementById('nama').focus(); return;
             }
-            
             if(productSelect.value === "") {
                 alert("Silakan pilih produk terlebih dahulu.");
-                document.getElementById('jenis-produk').focus();
-                return;
+                document.getElementById('jenis-produk').focus(); return;
             }
 
-            // Ambil Data Umum
             const produk = productSelect.options[productSelect.selectedIndex].text;
             let specs = document.getElementById('summary-specs').textContent;
             const priceUnit = document.getElementById('summary-price').textContent;
@@ -1786,64 +1434,39 @@
             const discount = document.getElementById('summary-discount').textContent;
             const total = document.getElementById('total-display').textContent;
             const dp = document.getElementById('dp-amount').textContent;
+            const sisa = parseInt(total.replace(/[^0-9]/g, '')) - parseInt(dp.replace(/[^0-9]/g, ''));
             
-            const totalNum = parseInt(total.replace(/[^0-9]/g, ''));
-            const dpNum = parseInt(dp.replace(/[^0-9]/g, ''));
-            const sisa = totalNum - dpNum;
-            const sisaFormatted = formatRupiah(sisa);
-
-            const kode = currentInvoiceCode;
             const nama = document.getElementById('nama').value;
             const wa = document.getElementById('wa').value;
             const email = document.getElementById('email').value || "-";
             const noteRaw = document.getElementById('catatan').value;
-            const deadlineVal = document.getElementById('deadline').value || "Secepatnya";
-
-            // LOGIKA DETAIL PER PRODUK
             let extraDetail = "";
             
             if (productSelect.value === 'undangan') {
                 const jenisAcara = document.getElementById('jenis-acara').value;
-                if(jenisAcara === 'Pernikahan') {
-                    extraDetail = `[Acara Nikah: ${document.getElementById('nama-pria').value} & ${document.getElementById('nama-wanita').value}]`;
-                } else if (jenisAcara === 'Khitanan') {
-                    extraDetail = `[Acara Khitan: ${document.getElementById('nama-anak').value}]`;
-                } else {
-                    extraDetail = `[Acara ${jenisAcara}: ${document.getElementById('nama-hajat').value}]`;
-                }
+                if(jenisAcara === 'Pernikahan') extraDetail = `[Acara Nikah: ${document.getElementById('nama-pria').value} & ${document.getElementById('nama-wanita').value}]`;
+                else if (jenisAcara === 'Khitanan') extraDetail = `[Acara Khitan: ${document.getElementById('nama-anak').value}]`;
+                else extraDetail = `[Acara ${jenisAcara}: ${document.getElementById('nama-hajat').value}]`;
             } else if (productSelect.value === 'website') {
-                // Ambil data detail website
-                const tema = document.getElementById('web-tema').value || "Default";
-                const warna = document.getElementById('web-warna').value || "Default";
-                const deskripsi = document.getElementById('web-deskripsi').value || "-";
-                const finalLink = document.getElementById('web-final-link').value || "(Belum Diisi)";
-                
-                const domainSelect = document.getElementById('web-domain-type');
-                const domainTypeLabel = domainSelect.options[domainSelect.selectedIndex].text.split(' - ')[0]; 
-
                 extraDetail = `
-                • Tema: ${tema}
-                • Warna: ${warna}
-                • Tipe Domain: ${domainTypeLabel}
-                • Link/Nama: ${finalLink}
-                • Konten: ${deskripsi}`;
+                • Tema: ${document.getElementById('web-tema').value}
+                • Warna: ${document.getElementById('web-warna').value}
+                • Link: ${document.getElementById('web-final-link').value}
+                • Konten: ${document.getElementById('web-deskripsi').value}`;
             }
 
             const fullNote = (extraDetail ? extraDetail + "\n" : "") + (noteRaw ? "Catatan Lain: " + noteRaw : "");
             
-            // Set Global Object
             orderData = { 
-                kode, nama, wa, email, produk, specs, priceUnit, qty, 
-                subtotal, discount, total, dp, sisa: sisaFormatted, 
-                fullNote, deadlineVal, 
+                kode: currentInvoiceCode, nama, wa, email, produk, specs, priceUnit, qty, 
+                subtotal, discount, total, dp, sisa: formatRupiah(sisa), 
+                fullNote, 
                 today: new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) 
             };
 
-            // Render ke Modal
-            document.getElementById('inv-code').textContent = "#" + kode;
+            document.getElementById('inv-code').textContent = "#" + orderData.kode;
             document.getElementById('inv-date').textContent = orderData.today;
             document.getElementById('inv-name').textContent = nama;
-            
             document.getElementById('inv-product').textContent = produk;
             document.getElementById('inv-specs').textContent = specs;
             document.getElementById('inv-price-unit').textContent = priceUnit;
@@ -1852,15 +1475,11 @@
             if(orderData.discount !== '-Rp 0') {
                 document.getElementById('modal-discount-row').style.display = 'flex';
                 document.getElementById('inv-discount').textContent = discount;
-            } else {
-                document.getElementById('modal-discount-row').style.display = 'none';
-            }
+            } else { document.getElementById('modal-discount-row').style.display = 'none'; }
             
             document.getElementById('inv-total-final').textContent = total;
             document.getElementById('inv-dp-val').textContent = dp;
-            document.getElementById('inv-sisa-val').textContent = sisaFormatted;
-            
-            // Preview note truncate
+            document.getElementById('inv-sisa-val').textContent = formatRupiah(sisa);
             document.getElementById('inv-notes-preview').textContent = fullNote.length > 80 ? fullNote.substring(0, 80) + "..." : fullNote;
 
             modal.classList.add('active');
@@ -1869,181 +1488,13 @@
         document.getElementById('btn-close-modal').addEventListener('click', () => modal.classList.remove('active'));
 
         document.getElementById('btn-send-wa').addEventListener('click', () => {
-            const text = `Halo Admin Aneka Digital,
-
-Saya sudah melakukan pesanan di Website & Transfer DP.
-Mohon konfirmasinya.
-
-🧾 *INVOICE: ${orderData.kode}*
-👤 Nama: ${orderData.nama}
-📱 WA: ${orderData.wa}
-📧 Email: ${orderData.email}
-
-📦 *DETAIL ORDER*
-Produk: ${orderData.produk}
-Specs: ${orderData.specs}
-Qty: ${orderData.qty}
-
-📝 *DETAIL KHUSUS / NOTE*
-${orderData.fullNote}
-
-💰 *PEMBAYARAN*
-Total Tagihan: ${orderData.total}
-DP Transfer: ${orderData.dp}
-Sisa: ${orderData.sisa}
-
-Terima kasih.`;
-            
+            const text = `Halo Admin Aneka Digital,\n\nSaya sudah melakukan pesanan di Website & Transfer DP.\nMohon konfirmasinya.\n\n🧾 *INVOICE: ${orderData.kode}*\n👤 Nama: ${orderData.nama}\n📱 WA: ${orderData.wa}\n\n📦 *DETAIL ORDER*\nProduk: ${orderData.produk}\nSpecs: ${orderData.specs}\nQty: ${orderData.qty}\n\n📝 *NOTE*\n${orderData.fullNote}\n\n💰 *PEMBAYARAN*\nTotal: ${orderData.total}\nDP: ${orderData.dp}\nSisa: ${orderData.sisa}\n\nTerima kasih.`;
             window.open(`https://wa.me/6285647709114?text=${encodeURIComponent(text)}`, '_blank');
         });
 
         document.getElementById('btn-download-pdf').addEventListener('click', () => {
-            const printTime = new Date().toLocaleString('id-ID', { hour: '2-digit', minute: '2-digit' });
-            
-            // Formatting Note for HTML (replace newline with br)
             const htmlNote = orderData.fullNote.replace(/\n/g, '<br>');
-
-            const printContent = `
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>Invoice - ${orderData.kode}</title>
-                    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-                    <style>
-                        @page { margin: 0; size: A4; }
-                        :root { --i-blue: #0A4D98; --i-red: #EF4444; --i-orange: #F97316; --i-green: #10B981; --i-black: #0f172a; }
-                        body { font-family: 'Inter', sans-serif; color: var(--i-black); background: #fff; margin: 0; padding: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 14px; }
-                        h1, h2, h3, h4, th { font-family: 'Plus Jakarta Sans', sans-serif; }
-                        .invoice-box { max-width: 210mm; margin: 0 auto; padding: 40px; min-height: 297mm; position: relative; box-sizing: border-box; }
-                        .header-container { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid var(--i-blue); padding-bottom: 20px; margin-bottom: 30px; }
-                        .brand-section h1 { font-size: 28px; font-weight: 800; color: var(--i-blue); margin: 0; letter-spacing: -0.5px; }
-                        .brand-section span { color: var(--i-orange); }
-                        .brand-tagline { font-size: 11px; color: #64748b; margin-top: 4px; text-transform: uppercase; font-weight: 600; }
-                        .invoice-meta { text-align: right; }
-                        .inv-title { font-size: 36px; font-weight: 800; color: #e2e8f0; margin: 0; line-height: 1; letter-spacing: 2px; }
-                        .inv-number { font-size: 16px; font-weight: 700; color: var(--i-orange); background: #fff7ed; padding: 4px 10px; border-radius: 4px; display: inline-block; margin-top: 5px; border: 1px solid #ffedd5; }
-                        .info-grid { display: flex; justify-content: space-between; margin-bottom: 40px; }
-                        .info-box h3 { font-size: 11px; text-transform: uppercase; color: #94a3b8; margin: 0 0 8px 0; letter-spacing: 1px; }
-                        .info-value { font-size: 15px; font-weight: 600; color: var(--i-black); }
-                        .info-sub { font-size: 12px; color: #64748b; margin-top: 3px; font-weight: 400; }
-                        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-                        th { background: var(--i-blue); color: white; text-align: left; padding: 12px 15px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-                        td { padding: 15px; border-bottom: 1px solid #f1f5f9; vertical-align: top; }
-                        tr:nth-child(even) { background-color: #f8fafc; }
-                        .td-desc { width: 55%; } .td-price { width: 15%; text-align: right; } .td-qty { width: 10%; text-align: center; } .td-total { width: 20%; text-align: right; font-weight: 700; color: var(--i-blue); }
-                        .item-title { font-weight: 700; font-size: 14px; display: block; margin-bottom: 4px; color: var(--i-black); }
-                        .item-spec { font-size: 11px; color: #64748b; line-height: 1.4; display: block; }
-                        .bottom-section { display: flex; gap: 40px; }
-                        .notes-box { flex: 1.5; background: #f8fafc; border-left: 4px solid var(--i-orange); padding: 15px; border-radius: 0 8px 8px 0; }
-                        .notes-title { font-size: 11px; font-weight: 700; color: var(--i-orange); margin-bottom: 5px; text-transform: uppercase; }
-                        .notes-content { font-size: 12px; color: #475569; line-height: 1.5; }
-                        .totals-box { flex: 1; }
-                        .total-row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; color: #475569; }
-                        .total-row.discount span:last-child { color: var(--i-red); font-weight: 600; }
-                        .grand-total { border-top: 2px dashed #cbd5e1; margin-top: 10px; padding-top: 10px; font-size: 18px; font-weight: 800; color: var(--i-blue); display: flex; justify-content: space-between; align-items: center; }
-                        .payment-status { margin-top: 15px; background: #ecfdf5; border: 1px solid #10b981; padding: 10px; border-radius: 6px; }
-                        .status-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 5px; }
-                        .status-row.paid { color: var(--i-green); font-weight: 700; }
-                        .status-row.due { color: var(--i-red); font-weight: 700; border-top: 1px dashed #10b981; padding-top: 5px; margin-top: 5px; }
-                        .print-footer { position: absolute; bottom: 40px; left: 40px; right: 40px; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 20px; }
-                        .thank-you { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: var(--i-blue); font-size: 14px; margin-bottom: 5px; letter-spacing: 1px; text-transform: uppercase; }
-                        .website-link { color: var(--i-orange); text-decoration: none; font-weight: 600; font-size: 11px; }
-                        .contact-info { font-size: 11px; color: #94a3b8; margin-top: 5px; }
-                    </style>
-                </head>
-                <body>
-                    <div class="invoice-box">
-                        <div class="header-container">
-                            <div class="brand-section">
-                                <h1>Aneka<span>Digital</span></h1>
-                                <div class="brand-tagline">Web Developer & Printing Solution</div>
-                            </div>
-                            <div class="invoice-meta">
-                                <div class="inv-title">INVOICE</div>
-                                <div class="inv-number">${orderData.kode}</div>
-                            </div>
-                        </div>
-
-                        <div class="info-grid">
-                            <div class="info-box">
-                                <h3>Ditagihkan Kepada</h3>
-                                <div class="info-value">${orderData.nama}</div>
-                                <div class="info-sub">${orderData.wa} <br> ${orderData.email}</div>
-                            </div>
-                            <div class="info-box" style="text-align: right;">
-                                <h3>Tanggal Terbit</h3>
-                                <div class="info-value">${orderData.today}</div>
-                                <div class="info-sub">Waktu Cetak: ${printTime} WIB</div>
-                            </div>
-                        </div>
-
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="td-desc">Produk & Deskripsi</th>
-                                    <th class="td-price">Harga Satuan</th>
-                                    <th class="td-qty">Qty</th>
-                                    <th class="td-total">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <span class="item-title">${orderData.produk}</span>
-                                        <span class="item-spec">${orderData.specs}</span>
-                                    </td>
-                                    <td class="td-price">${orderData.priceUnit}</td>
-                                    <td class="td-qty">${orderData.qty}</td>
-                                    <td class="td-total">${orderData.subtotal}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                        <div class="bottom-section">
-                            <div class="notes-box">
-                                <div class="notes-title">Catatan & Detail Pesanan</div>
-                                <div class="notes-content">${htmlNote}</div>
-                            </div>
-
-                            <div class="totals-box">
-                                <div class="total-row">
-                                    <span>Subtotal</span>
-                                    <span>${orderData.subtotal}</span>
-                                </div>
-                                ${orderData.discount !== '-Rp 0' ? `
-                                <div class="total-row discount">
-                                    <span>Diskon Promo</span>
-                                    <span>${orderData.discount}</span>
-                                </div>
-                                ` : ''}
-                                <div class="grand-total">
-                                    <span>TOTAL TAGIHAN</span>
-                                    <span>${orderData.total}</span>
-                                </div>
-                                
-                                <div class="payment-status">
-                                    <div class="status-row paid">
-                                        <span>DP (Transfer QRIS)</span>
-                                        <span>${orderData.dp}</span>
-                                    </div>
-                                    <div class="status-row due">
-                                        <span>Sisa Pelunasan</span>
-                                        <span>${orderData.sisa}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="print-footer">
-                            <div class="thank-you">Terima Kasih Telah Berbelanja</div>
-                            <div><a href="#" class="website-link">www.anekamarket.my.id/anekadigital</a></div>
-                            <div class="contact-info">Jl. Pb. Sudirman, Panarukan, Situbondo • 0856-4770-9114</div>
-                        </div>
-                    </div>
-                </body>
-                </html>
-            `;
-
+            const printContent = `<!DOCTYPE html><html><head><title>Invoice - ${orderData.kode}</title><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet"><style>@page{margin:0;size:A4}:root{--i-blue:#0A4D98;--i-orange:#F97316;--i-black:#0f172a}body{font-family:'Inter',sans-serif;color:var(--i-black);background:#fff;margin:0;padding:0;font-size:14px}h1,h2,th{font-family:'Plus Jakarta Sans',sans-serif}.invoice-box{max-width:210mm;margin:0 auto;padding:40px;min-height:297mm;position:relative}.header-container{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid var(--i-blue);padding-bottom:20px;margin-bottom:30px}.brand-section h1{font-size:28px;font-weight:800;color:var(--i-blue);margin:0}.brand-section span{color:var(--i-orange)}.inv-title{font-size:36px;font-weight:800;color:#e2e8f0}.info-grid{display:flex;justify-content:space-between;margin-bottom:40px}table{width:100%;border-collapse:collapse;margin-bottom:30px}th{background:var(--i-blue);color:white;text-align:left;padding:12px 15px;text-transform:uppercase}td{padding:15px;border-bottom:1px solid #f1f5f9}.bottom-section{display:flex;gap:40px}.notes-box{flex:1.5;background:#f8fafc;border-left:4px solid var(--i-orange);padding:15px}.totals-box{flex:1}.grand-total{font-size:18px;font-weight:800;color:var(--i-blue);display:flex;justify-content:space-between;margin-top:10px}</style></head><body><div class="invoice-box"><div class="header-container"><div class="brand-section"><h1>Aneka<span>Digital</span></h1></div><div class="invoice-meta"><div class="inv-title">INVOICE</div><div>${orderData.kode}</div></div></div><div class="info-grid"><div><h3>Kepada</h3><div>${orderData.nama}</div><div>${orderData.wa}</div></div><div style="text-align:right"><h3>Tanggal</h3><div>${orderData.today}</div></div></div><table><thead><tr><th>Deskripsi</th><th>Harga</th><th>Qty</th><th>Total</th></tr></thead><tbody><tr><td>${orderData.produk}<br><small>${orderData.specs}</small></td><td>${orderData.priceUnit}</td><td>${orderData.qty}</td><td>${orderData.subtotal}</td></tr></tbody></table><div class="bottom-section"><div class="notes-box"><b>Catatan:</b><br>${htmlNote}</div><div class="totals-box"><div class="grand-total"><span>TOTAL</span><span>${orderData.total}</span></div><div style="margin-top:10px">DP: ${orderData.dp}<br>Sisa: ${orderData.sisa}</div></div></div></div></body></html>`;
             const printContainer = document.getElementById('print-container');
             printContainer.innerHTML = printContent;
             setTimeout(() => { window.print(); }, 800);
